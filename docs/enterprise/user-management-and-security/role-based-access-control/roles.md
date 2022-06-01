@@ -40,25 +40,45 @@ Below are the access levels which Botpress can configure for a user.
 
 Below are the resources and interfaces to which you can give your chatbot studio users access.
 
-| res               | description                                  |
-| ----------------- | -------------------------------------------- |
-| `\_`                | \_                                           |
-| `bot.\* `           | All bots inside the workspace                |
-| `bot.logs `         | The runtime logs                             |
-| `bot.notifications` | Notifications                                |
-| `bot.skills`        | The flow skills                              |
-| `bot.media`         | File uploads (via the CMS)                   |
-| `bot.content`       | The CMS elements (what the bot says)         |
-| `bot.flows`         | The flow editor                              |
-| `bot.information`   | Information about the bot                    |
-| `\_`                | \_                                           |
-| `admin.\*`          | The admin dashboard (/admin)                 |
-| `admin.users `      | Admin collaborators                          |
-| `admin.roles`       | Assigning roles ro collaborators             |
-| `admin.bots`        | Creating bots and changing their information |
-| `\_`                | \_                                           |
-| `module.\*`         | Global access to all modules                 |
-| `module.MODULE_ID`  |                                              |
+| res                       | description                                  |
+| ------------------------- | -------------------------------------------- |
+| `\_`                      | \_                                           |
+| `bot.\* `                 | All bots inside the workspace                |
+| `bot.content`             | The CMS elements (what the bot says)         |
+| `bot.flows`               | The flow editor                              |
+| `bot.ghost_content`       | Access using `bp.ghost` SDK method           |
+| `bot.information`         | Information about the bot                    |
+| `bot.information.license` | Enterprise licsense key                      |
+| `bot.logs `               | The runtime logs                             |
+| `bot.logs.archive `       | Package and export logs                      |
+| `bot.media`               | File uploads (via the CMS)                   |
+| `bot.notifications`       | Notifications                                |
+| `bot.skills`              | The flow skills                              |
+| `\_`                      | \_                                           |
+| `admin.\*`                | The admin dashboard (/admin)                 |
+| `admin.bots`              | Creating bots and changing their information |
+| `admin.bots.archive`      | Package and export bots                      |
+| `admin.collaborators`     | Add new collaborators                        |
+| `admin.logs`              | Access server logs                           |
+| `admin.roles`             | Assign roles to collaborators                |
+| `\_`                      | \_                                           |
+| `module.\*`               | Global access to all modules                 |
+| `module.analytics`        | Access to the analytics module               |
+| `module.basic-skills`     | Access basic skills- choice, API, etc        |
+| `module.builtin`          | Access basic content types- text, card, etc  |
+| `module.channel-messenger`| Access Messenger config                      |
+| `module.channel-slack`    | Access Slack config                          |
+| `module.channel-smooch`   | Access Smooch config                         |
+| `module.channel-teams`    | Access MS Teams config                       |
+| `module.channel-telegram` | Access Telegram config                       |
+| `module.channel-web`      | Access Web widget config                     |
+| `module.examples`         | Access to the builtin bot templates          |
+| `module.hitl`             | Access to the hitl module                    |
+| `module.hitlnext`         | Access to the hitl-next module               |
+| `module.misunderstood`    | Access to the misunderstood module           |
+| `module.nlu`              | Access to Botpress NLU                       |
+| `module.qna`              | Access to Botpress QnAs                      |
+| `module.MODULE_ID`        | Access any other or custom modules           |
 
 Modules only support a single top-level resource and one operation: `write`. Define as `module.MODULE_ID`, for example, `module.hitl` or `module.code-editor`.
 
