@@ -118,3 +118,11 @@ Location: `data/global/hooks/before_suggestions_election`
 Parameters: `bp`, `event`, `suggestions`, `sessionId`
 
 A typical operation here is to add a new (elected) suggestion when there is no elected winner.
+
+### After event Processed
+
+This hook is called after the sending event(message, payload, content-type) to the user. It's called after the conversation.
+
+Location: `data/global/hooks/after_event_processed`
+
+Parameters: `event`: IncomingEvent
