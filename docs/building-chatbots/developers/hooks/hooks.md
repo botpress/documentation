@@ -33,8 +33,8 @@ Parameters: `bp`
 
 ### After Bot Mount
 
-This event is called every time a bot is mounted, be it when the server starts up or when adding new bots at runtime.
-
+This event is called every time a bot is mounted, be it when the server starts up or when adding new bots at runtime. You can trigger it by going to the settings page of your bot, then setting your bot to "Unmounted", and then back to "Published".
+ 
 Location: `data/global/hooks/after_bot_mount`
 
 Parameters: `bp`, `botId`
