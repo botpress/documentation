@@ -131,6 +131,18 @@ The text content type denotes a regular text message with optional typing indica
 
 You can write HTML in the text content on the web channel, and your chatbot will render it correctly. This opens up the possibility of including iFrames and constructing miniature web pages (commonly known as web views) in your content without creating custom components.
 
+:::tip
+The reason we use triple bracket (`{{{ ... }}}`) is to prevent Botpress from escaping the special characters.
+
+For example
+
+```
+{{{https://example.com}}}
+```
+
+will not be escaped
+:::
+
 ### Video
 
 The video content type presents a message showing a video file with an optional title. You can either upload the video or link to a video file that will be fetched when the content element is invoked. When loading a video from a variable url, you may need to use triple braces to unescape the url i.e., ```{{{temp.videoUrl}}}```.
