@@ -3,7 +3,7 @@ id: docker-compose
 title: Docker Compose
 ---
 
---------------------
+---
 
 Docker is a set of platform-as-a-service products that use OS-level virtualization to deliver software in packages called containers.
 
@@ -13,7 +13,7 @@ For an optimized Docker experience, download [Docker Desktop](https://www.docker
 
 ## Latest tags
 
-The latest tags are updated every time a new release is created. Each release has a tag associated with it. 
+The latest tags are updated every time a new release is created. Each release has a tag associated with it.
 
 :::tip
 Use the fix tag for production.
@@ -94,7 +94,7 @@ docker run -d \
 -e BP_MODULE_NLU_DUCKLINGURL=http://localhost:8000 \
 -e BP_MODULE_NLU_LANGUAGESOURCES='[{ "endpoint": "http://localhost:3100" }]' \
 botpress/server:$TAG \
-bash -c "./duckling & ./bp lang --langDir /botpress/data/embeddings & ./bp"
+su - botpress -c "./duckling & ./bp lang --langDir /botpress/data/embeddings & ./bp"
 ```
 
 **Offline Server**: Follow the Offline Server [instructions](#offline-servers) if you're running a server without Internet access.
@@ -109,7 +109,7 @@ docker run -d \
 -p 3100:3100 \
 -v botpress_data:/botpress/data \
 botpress/server:$TAG \
-bash -c "./bp lang --langDir /botpress/data/embeddings"
+su - botpress -c "./bp lang --langDir /botpress/data/embeddings"
 ```
 
 2. Run Botpress Server and Duckling within the same container. Duckling's usage is very light here, so we can justify using it in the same container as Botpress Server.
@@ -121,7 +121,7 @@ docker run -d \
 -v botpress_data:/botpress/data \
 -e BP_MODULE_NLU_LANGUAGESOURCES='[{ "endpoint": "http://localhost:3100" }]' \
 botpress/server:$TAG \
-bash -c "./duckling & ./bp"
+su - botpress -c "./duckling & ./bp"
 ```
 
 **Offline Server**: Follow the Offline Server [instructions](#offline-servers) if you're running a server without Internet access.
@@ -158,7 +158,7 @@ services:
 
   botpress_lang:
     image: botpress-lang
-    command: bash -c "./duckling -p 8000 & ./bp lang --langDir /botpress/lang --port 3100"
+    command: su - botpress -c "./duckling -p 8000 & ./bp lang --langDir /botpress/lang --port 3100"
     expose:
       - 3100
       - 8000
@@ -200,4 +200,3 @@ You can restart the server from Botpress UI. To achieve this, edit the `botpress
 After you have edited the `botpress.config.json` file, save it. You will now see an orange cog at the bottom right corner of the screen:
 
 ![Orange Restart Icon](/assets/restart-cog.png)
-

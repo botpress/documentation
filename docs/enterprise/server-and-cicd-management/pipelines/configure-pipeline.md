@@ -3,7 +3,7 @@ id: configure-pipeline
 title: Configure Pipeline
 ---
 
---------------------
+---
 
 ## Git Syncing – Source Control Management
 
@@ -15,8 +15,9 @@ Let's suppose that you have a more complex deployment pipeline with one or multi
 
 1. [Download Botpress](https://botpress.com/download).
 2. Open your terminal.
-1. Type `cd [PATH]/botpress-[VERSION]`.
-3. Set up GitHub remote tracking:
+3. Type `cd [PATH]/botpress-[VERSION]`.
+4. Set up GitHub remote tracking:
+
 ```
 git init
 git add README.md
@@ -25,6 +26,7 @@ git branch -M main
 git remote add origin git@github.com:[GH_USERNAME]/bp-project.git
 git push -u origin main
 ```
+
 4. You can add a develop and staging branch to fit your workflow, if needed.
 5. Everytime you make a change in the Conversation Studio or in your preferred code editor, you can commit that change to track changes.
 6. When you are ready to send you chatbot to production, you can type `git merge` in your terminal.
@@ -96,7 +98,7 @@ Please note that `targetDir` and `sourceDir` uses relative paths.
 **Docker:**
 
 ```bash
-docker exec -it <container> bash -c "./bp pull --url <url> --token <auth_token> --targetDir <remote_data_path>"
+docker exec -it <container> su - botpress -c "./bp pull --url <url> --token <auth_token> --targetDir <remote_data_path>"
 ```
 
 #### Push
@@ -110,5 +112,5 @@ docker exec -it <container> bash -c "./bp pull --url <url> --token <auth_token> 
 **Docker:**
 
 ```bash
-docker exec -it <container> bash -c "./bp push --url <url> --token <auth_token> --sourceDir <local_data_path>"
+docker exec -it <container> su - botpress -c "./bp push --url <url> --token <auth_token> --sourceDir <local_data_path>"
 ```

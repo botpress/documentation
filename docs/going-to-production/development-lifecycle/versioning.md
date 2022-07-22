@@ -3,7 +3,7 @@ id: versioning
 title: Versioning
 ---
 
---------------------
+---
 
 Once your bot is deployed, the good part is that you (and non-technical team members) can still make changes to your bots from Botpress Conversation Studio. This is one major advantage of using Botpress. This is made possible by our built-in versioning system.
 
@@ -36,7 +36,7 @@ Please note that `targetDir` and `sourceDir` uses relative paths:
 **Docker:**
 
 ```bash
-docker exec -it <container> bash -c "./bp pull --url <url> --token <auth_token> --targetDir <remote_data_path>"
+docker exec -it <container> su - botpress -c "./bp pull --url <url> --token <auth_token> --targetDir <remote_data_path>"
 ```
 
 ### Push
@@ -50,5 +50,5 @@ docker exec -it <container> bash -c "./bp pull --url <url> --token <auth_token> 
 **Docker:**
 
 ```bash
-docker exec -it <container> bash -c "./bp push --url <url> --token <auth_token> --sourceDir <local_data_path>"
+docker exec -it <container> su - botpress -c "./bp push --url <url> --token <auth_token> --sourceDir <local_data_path>"
 ```
