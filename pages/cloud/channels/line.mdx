@@ -1,0 +1,77 @@
+---
+title: "Line"
+section:
+  name: "Messaging Channels"
+  slot: H
+slot: 93
+slug: "channels/line"
+---
+
+![LINE](/line-banner.png)
+
+## Requirements
+
+You will need to create a channel on the LINE Developers Console, and then add that channel to your LINE official account.
+
+### Create a Meta App & Business Account
+
+To create a channel and add it to your official account, you can read the [Getting started with the Messaging API](https://developers.line.biz/en/docs/messaging-api/getting-started/). The next step is configuring the Messaging API [Webhook Settings](https://developers.line.biz/en/docs/messaging-api/building-bot).
+
+When you have created everything and are ready for the next step, go to the next section.
+
+## Channel Configuration
+
+To add LINE integration configuration, go to your bot's configuration screen. Then go to the channel tab, and click on LINE.
+
+A screen will pop up asking for the following details:
+
+### 1. Channel Access Token
+
+The **Channel Access Token** is the means of authentication for the channel. You are deemed to have permission to use the channel if the Access Token is correct.
+
+To get the **Channel Access Token**: in your channel configuration, open the **Messaging API** tab, scroll to the bottom to the **Channel Access Token** section, and then generate a new one or copy it if the Channel access token was already issued.
+
+For Long-Lived Channel Access Token: read this [LINE documentation](https://developers.line.biz/en/docs/messaging-api/channel-access-tokens/#long-lived-channel-access-tokens).
+
+### 2. Channel Secret
+
+The **Channel Secret** is used to [verify the signature](https://developers.line.biz/en/docs/messaging-api/receiving-messages/#verifying-signatures) between LINE and Botpress.
+
+To get the **Channel Secret**: in your channel configuration, open the **Basic settings** tab, scroll to the bottom to the **Channel Secret** section, and then copy the secret.
+
+## Finalizing Channel Configuration
+
+The next step is to **Enable** the channel from the top of the screen and copy the webhook URL from the button below the webhook URL. Then click **Save**.
+
+Now, we proceed to the last step by [setting your webhook URL](https://developers.line.biz/en/docs/messaging-api/building-bot/#setting-webhook-url) in LINE.
+
+## Content Types Mapping
+
+### From Botpress to LINE
+
+- **Text** is mapped to [Text Object](https://developers.line.biz/en/docs/messaging-api/message-types/#text-messages)
+
+- Text with **Markdown** is mapped to [Text Object](https://developers.line.biz/en/docs/messaging-api/message-types/#text-messages)
+
+- **Image** is mapped to [Image Object](https://developers.line.biz/en/docs/messaging-api/message-types/#image-messages)
+
+- **Audio** is mapped to [Audio Object](https://developers.line.biz/en/docs/messaging-api/message-types/#audio-messages)
+
+- **Video** is mapped to [Video Object](https://developers.line.biz/en/docs/messaging-api/message-types/#video-messages)
+
+- **File** is **NOT** supported in LINE [Message Types](https://developers.line.biz/en/docs/messaging-api/message-types/)
+
+- **Location** is mapped to [Location Object](https://developers.line.biz/en/docs/messaging-api/message-types/#location-messages)
+
+- **Carousel** is mapped to [Flex Object](https://developers.line.biz/en/docs/messaging-api/message-types/#flex-messages)
+
+- **Card** is mapped to [Flex Object](https://developers.line.biz/en/docs/messaging-api/message-types/#flex-messages)
+
+- **Dropdown** is mapped to [Flex Object](https://developers.line.biz/en/docs/messaging-api/message-types/#flex-messages)
+
+- **Choice** is mapped to [Flex Object](https://developers.line.biz/en/docs/messaging-api/message-types/#flex-messages)
+
+### From LINE to Botpress
+
+- **Text** is mapped to **Text Object**
+- The rest of the types are not currently processed by Botpress

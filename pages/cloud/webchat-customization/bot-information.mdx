@@ -1,0 +1,154 @@
+---
+title: "Show Bot Info"
+section:
+  name: "Webchat Customization"
+  slot: G
+slot: 6
+slug: "webchat-customization/bot-information"
+---
+
+![Styling Webchat](/chat-info-cover.png)
+
+You can Customize the Chatbot's Information Page using below CSS
+
+<br />
+To show bot information page, you will need to add **showBotInfoPage : true** in
+your webchat init object
+
+<br />
+```typescript
+
+/_ Styling for the bot summary section _/
+.bpw-botinfo-summary {
+margin-top: -32px; /_ Move the section up by 32px _/
+border-bottom: solid 1px rgba(0, 0, 0, 0.1); /_ Add a 1px solid border to the bottom _/
+box-shadow: 0px 4px 5px -5px var(--gray); /_ Add a box shadow effect _/
+text-align: center; /_ Center align the text _/
+}
+
+/_ Styling for the bot avatar _/
+.bpw-botinfo-summary .bpw-bot-avatar.default {
+margin: 0 auto var(--spacing-medium); /_ Center the avatar image and add some margin at the bottom _/
+}
+
+/_ Styling for the bot information container _/
+.bpw-botinfo-container {
+margin: 0 auto; /_ Center the container _/
+max-width: 800px; /_ Set a maximum width of 800px _/
+width: 100%; /_ Set the width to 100% _/
+text-align: center; /_ Center align the text _/
+color: #1e1e1e; /_ Set the font color to a dark gray _/
+overflow-y: auto; /_ Add a vertical scroll bar if the content overflows _/
+height: 100%; /_ Set the height to 100% _/
+}
+
+/_ Styling for the bot cover picture wrapper _/
+.bpw-botinfo-cover-picture-wrapper {
+height: 50%; /_ Set the height to 50% _/
+overflow: hidden; /_ Hide any content that overflows the container _/
+}
+
+/_ Styling for the bot cover picture _/
+.bpw-botinfo-cover-picture {
+width: 100%; /_ Set the width to 100% _/
+object-fit: cover; /_ Scale the image to fit the container and maintain its aspect ratio _/
+}
+
+/_ Styling for buttons and links _/
+.bpw-botinfo-container button,
+.bpw-botinfo-container a {
+font-size: 0.9em; /_ Set the font size to 0.9em _/
+color: rgb(102, 102, 102); /_ Set the font color to a light gray _/
+text-decoration: none; /_ Remove any text decoration _/
+}
+
+/_ Styling for the bot description section _/
+.bpw-botinfo-description {
+margin-top: 0.4em; /_ Add some margin at the top _/
+margin-bottom: 1em; /_ Add some margin at the bottom _/
+}
+
+/_ Styling for the bot summary header _/
+.bpw-botinfo-summary h3 {
+margin: 0; /_ Remove any margin _/
+}
+
+/_ Styling for the bot links section _/
+.bpw-botinfo-links {
+border-bottom: solid 1px rgba(0, 0, 0, 0.1); /_ Add a 1px solid border to the bottom _/
+}
+
+/_ Styling for each bot link _/
+.bpw-botinfo-link {
+padding-left: 25%; /_ Add some padding to the left _/
+display: flex; /_ Use flexbox to align the content _/
+margin: 20px 0; /_ Add some margin at the top and bottom _/
+}
+
+/_ Styling for the bot link icon _/
+.bpw-botinfo-link i {
+margin-right: 10px; /_ Add some margin to the right _/
+}
+
+/_ Styling for the preferred language section _/
+.bpw-botinfo-preferred-language {
+margin: 20px 0; /_ Add some margin at the top and bottom _/
+}
+/_ This section defines the styling for the user's preferred language dropdown select box _/
+.bpw-botinfo-preferred-language select {
+/_ Adds 10 pixels of margin to the left of the select element _/
+margin-left: 10px;
+}
+
+/_ This section defines the styling for the terms and conditions link _/
+.bpw-botinfo-terms {
+/_ Adds 0 pixels of padding to the top and bottom, and 20 pixels of padding to the left and right _/
+padding: 0px 20px;
+/_ Aligns the text to the left _/
+text-align: left;
+}
+
+.bpw-botinfo-terms a {
+/_ Makes the anchor element a block-level element that is inline with the rest of the text _/
+display: inline-block;
+/_ Sets the width of the anchor element to 100% _/
+width: 100%;
+/_ Sets the height of each line of text within the anchor element to 2.5 times the font size _/
+line-height: 2.5;
+/_ Adds a solid 1 pixel border to the bottom of the anchor element with a slightly transparent black color _/
+border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+/_ This section defines the styling for the start button _/
+.bpw-botinfo-start-button {
+/_ Sets the font of the element to inherit from the parent element _/
+font: inherit;
+/_ Sets the text color of the element to inherit from the parent element _/
+color: inherit;
+/_ Sets the background color of the element to be transparent _/
+background-color: transparent;
+/_ Changes the mouse cursor to a pointer when hovering over the element _/
+cursor: pointer;
+/_ Adds a 20 pixel border radius to the corners of the element _/
+border-radius: 20px;
+/_ Sets the height of each line of text within the element to 24 pixels _/
+line-height: 24px;
+/_ Adds 5 pixels of padding to the top and bottom, and 10 pixels of padding to the left and right of the element _/
+padding: 5px 10px;
+/_ Adds 25 pixels of margin to the top of the element _/
+margin-top: 25px;
+/_ Adds a solid 1 pixel border to the element with a gray color _/
+border: 1px solid rgb(100, 100, 100);
+}
+
+/_ This section defines the styling for the start button when it has focus _/
+.bpw-botinfo-start-button:focus {
+/_ Changes the border color of the element to black when it has focus _/
+border: 1px solid black;
+/_ Changes the text color of the element to black when it has focus _/
+color: black;
+}
+
+```
+
+```

@@ -1,0 +1,71 @@
+---
+title: "CLI"
+---
+
+# Installation
+
+The CLI is available as an npm package. It can be installed globally or locally.
+
+```bash
+npm install -g @botpress/cli # for npm
+yarn global add @botpress/cli # for yarn
+pnpm install -g @botpress/cli # for pnpm
+```
+
+# Usage
+
+Here's the result of running `bp --help`:
+
+```bash
+bp <command>
+
+Commands:
+  bp login                 Login to Botpress Cloud
+  bp logout                Logout of Botpress Cloud
+  bp bots                  Bot related commands
+  bp integrations          Integration related commands
+  bp init                  Initialize a new project
+  bp generate              Generate typings for intellisense      [aliases: gen]
+  bp bundle                Bundle a botpress project
+  bp build                 Generate typings and bundle a botpress project
+  bp serve                 Serve your project locally
+  bp deploy                Deploy your project to the cloud
+  bp add <integrationRef>  Install an integration in your bot
+  bp dev                   Run your project in dev mode
+
+Options:
+  --help  Show help                                                    [boolean]
+```
+
+Since the `bp bots` and `bp integrations` commands are nested, you can run `bp bots --help` and `bp integrations --help` to see their respective subcommands.
+
+This is the result of running `bp bots --help`:
+
+```
+Bot related commands
+
+Commands:
+  bp bots create           Create new bot                         [aliases: new]
+  bp bots get <botRef>     Get bot
+  bp bots delete <botRef>  Delete bot
+  bp bots list             List bots                               [aliases: ls]
+
+Options:
+  --help  Show help                                                    [boolean]
+```
+
+This is the result of running `bp integrations --help`:
+
+```
+bp integrations
+
+Integration related commands
+
+Commands:
+  bp integrations get <integrationRef>     Get integration
+  bp integrations delete <integrationRef>  Delete integration
+  bp integrations list                     List integrations       [aliases: ls]
+
+Options:
+  --help  Show help                                                    [boolean]
+```

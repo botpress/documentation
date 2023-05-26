@@ -1,0 +1,153 @@
+---
+title: "Tips & Tricks"
+section:
+  name: "Getting Started"
+  slot: A
+slot: 6
+slug: "getting-started/tips-and-tricks"
+---
+
+![Tips and Tricks](/tips-cover.png)
+
+## Send an API Request
+
+These are guides on using the Execute Code Card in Botpress to access APIs to read and update data. Following the guide, you'll be able to send emails (using the SendGrid API), and read data from an api (the Bored API, which gives interesting todo suggestions).
+
+<br />
+The API calls will be performed using the Botpress built-in axios client, and the
+code will run in the Execute Code Card.
+
+### The Axios Library
+
+Botpress comes with a built-in reference to the axios NPM library which allows you to easily do calls to APIs. Whenever you want to call an API, you can just reference `axios` in the code editor. There is no need to `require` or `import` it!
+For more information about how to use axiosNPM: [https://www.npmjs.com/package/axios](https://www.npmjs.com/package/axios)
+
+### The SendGrid Service
+
+We will be using SendGrid as an example of how to send emails. You can choose any other provider, like Gmail, Microsoft, etc. But you will need to change the code based on the provider you want to integrate with.
+For more information about SendGrid: [https://sendgrid.com/](https://sendgrid.com/)
+
+### The Bored API
+
+The Bored API's motto is : Let's find you something to do! We will be using Bored API as an example of how to call APIs to fetch information.
+For more information about Bored API: https://www.boredapi.com/
+
+### Getting Started - Update Information
+
+1.  First, we need to create an account: Create a SendGrid [account](https://sendgrid.com/pricing/ "account"). You can choose **Free** for trial purposes.
+2.  As soon as you land in your newly created account, on the left-hand side menu, there is a menu item named **Email API** expand it and click on **Integration Guide**.
+3.  Next, you will be prompted to **Create an Identity**.
+    Enter the needed details and click **Create**, then you will receive a verification email. Open it and click Verify.
+4.  Now, your sender is created and ready to be used. Let's create the API key we will be using when doing our API calls: Create an [API Key](https://app.sendgrid.com/settings/api_keys "API Key").
+    On the top right of the screen, click on **Create API Key**. Create a name for your key - this is irrelevant to Botpress; it is more for your sake to know what this API key is used for.
+5.  After the key is created, copy the key value - keep it safe - we are going to use it soon.
+6.  Then we go to Botpress, open our bot, and add an **Execute Code** card. Then in the card, make sure to disable the generative AI by clicking on the button.
+7.  Then paste the below code in it after changing the variables `[sendgrid_api_key]`, `[from_email]`, and `[to_email]`.
+
+- `sendgrid_api_key` is the API key generated in the Send Grid [API Key](https://app.sendgrid.com/settings/api_keys "API Key").
+- `from_email` is the email configured as a sender.
+- `to_email` is the email we are sending to.
+
+<br />
+
+```typescript
+const sendgrid_api_key = *********
+const from_email = '**************'
+const to_email = '*****************'
+
+const response = await axios.post(
+  'https://api.sendgrid.com/v3/mail/send',
+  {
+    personalizations: [
+      {
+        to: [
+          {
+            email: to_email
+          }
+        ]
+      }
+    ],
+    from: {
+      email: from_email
+    },
+    subject: 'Sending with SendGrid is Fun',
+    content: [
+      {
+        type: 'text/plain',
+        value: 'and easy to do anywhere, even with cURL'
+      }
+    ]
+  },
+  {
+    headers: {
+      Authorization: 'Bearer ' + SENDGRID_API_KEY,
+      'Content-Type': 'application/json'
+    }
+  }
+)
+```
+
+After successfully integrating the SendGrid API into Botpress, it's time to test it.
+
+For more information: [https://docs.sendgrid.com/for-developers/sending-email/api-getting-started](https://docs.sendgrid.com/for-developers/sending-email/api-getting-started)
+
+### Getting Started - Get Information
+
+Go to Botpress, open our bot, and add an **Execute Code** card. Then in the card, make sure to disable the generative AI by clicking on the [button image] button.
+
+Then paste the below code in it. The code calls Bored Panda API to retrieve information about random activities:
+
+```typescript
+const response = await axios.get(
+  "https://www.boredapi.com/api/activity?participants=1"
+);
+```
+
+The response will look something like that:
+
+```typescript
+    {
+      "activity": "Go stargazing",
+      "type": "relaxation",
+      "participants": 1,
+      "price": 0,
+      "link": "",
+      "key": "8832605",
+      "accessibility": 0.1
+    }
+```
+
+To access the information in the response, use `response.data.type`. You can also pass this information back into your workflow by adding the retrieved information into a workflow variable: `workflow.participantType = response.data.type`.
+
+### Conclusion
+
+Integrating with a system or platform that has APIs may require some technical experience, but it is easy to acquire. Following the steps outlined in this guide, you can easily call APIs and retrieve information to enhance your application.
+
+## Use ChatGPT API in Execute Code
+
+If you are using Botpress and want to integrate the ChatGPT API to generate AI-powered responses for your chatbot, follow these simple steps:
+
+Step 1: Create a variable in your Botpress workflow to store the ChatGPT API's response.
+
+Step 2: Add the **Execute Code** card to your Botpress flow and paste the code below:
+
+```typescript
+const apiKey = '<OpenAI's APIKey>';
+const {data} = await axios.post("https://api.openai.com/v1/chat/completions", {
+  "model": "gpt-3.5-turbo-0301",
+  "messages": [{"role": "user", "content": event.preview}]
+}, { headers: {'Authorization': `Bearer ${apiKey}`}});
+
+workflow.variableName = data.choices[0].message.content;
+```
+
+Make sure to replace **`<OpenAI's APIKey>`** with your actual OpenAI API key, and **variableName** with the name of the variable you created in Step 1.
+
+Step 3: Test your chatbot in the Botpress Emulator to see if it's generating AI-powered responses.
+
+<Callout variant="info" title="Note">
+  It's important to note that using this method, ChatGPT does not preserve the
+  context of the messages that you've sent. However, it's a great way to get
+  started with integrating AI-powered responses into your chatbot without
+  needing any technical knowledge.
+</Callout>

@@ -1,0 +1,98 @@
+---
+title: "Managing Workspaces"
+section:
+  name: "Admin Dashboard"
+  slot: B
+slot: 8
+slug: "admin-dashboard/managing-workspaces"
+---
+
+![Misunderstood](/chatbot-workspaces.png)
+
+A Workspace is a collaborative environment where users can create, manage, and deploy chatbots. It provides a centralized location for managing all aspects of a chatbot project.
+
+## Collaborators
+
+You can manage users in a workspace by accessing the Collaborators tab on the dashboard. From there, you can add new users to the workspace using their email addresses. The following are the six roles available for users in a workspace:
+
+1. **Viewer**: This role allows users to view the chatbots in the workspace but not make any changes to them.
+2. **Billing Manager**: Users with this role can view and modify the billing information of the workspace.
+3. **Developer**: This role allows users to create, view, and update chatbots in the workspace. They can only delete the chatbots they created.
+4. **Manager**: Users with this role can create, view, update, and delete all chatbots in the workspace. They can also view audit records and view/change billing information.
+5. **Administrator**: This role allows users to add/remove workspace collaborators, create and manage all chatbots in the workspace, view audit records, and view/change billing information.
+6. **Owner**: The user who creates a workspace automatically becomes the owner of the workspace. The owner has all the privileges of Administrator and is the only one who can delete the workspace.
+
+The user who creates a workspace automatically becomes the owner of the workspace.
+
+## Billing in Botpress
+
+Botpress offers both Community and Business plans, and you can view your billing details by accessing the billing section on the dashboard.
+
+### Current Plan
+
+In the billing section, you can see your current plan, whether it is the Community or Business plan. If you are on the Business plan, you will also see the pricing for it. You can find more information about the pricing plans on the Botpress website: [https://botpress.com/pricing](https://botpress.com/pricing).
+
+### Current Monthly Bill and Next Payment Date
+
+You can view your current monthly bill and the next payment date in the billing section. The current monthly bill is the amount that you will be charged on the next payment date.
+
+### Payment Information
+
+In the billing section, you can also view the payment method that you are using for your Botpress account.
+
+### Messages
+
+The Messages section displays the number of incoming messages you have received, as well as how far you are from reaching your limit.
+
+### Monthly Budget
+
+The monthly budget allows you to set a limit on your billing amount to ensure that you are not charged more than the amount you pre-establish.
+
+### Invoice
+
+Finally, you can view your past payments in the Invoice section of the billing page.
+
+In summary, the billing section of Botpress allows you to keep track of your current plan, current monthly bill, payment information, incoming messages, monthly budget, and past payments.
+
+## Audits
+
+Audits show the history of important events in a Workspace, such as changes to bots, collaborators, and configuration. They provide a way to track and review the changes made to a Workspace. They are useful for understanding who did what and when, especially in collaborative environments where multiple people work in the same Workspace.
+
+Audits capture events related to bots, collaborators, and configuration changes. Each audit event has a timestamp, an action type (added, removed, published, updated, deleted, downloaded), and the email address of the user who performed the action.
+
+You will see a list of audit events, with the most recent ones at the top. You can use the search box to filter the events by email address, action type, or date range.
+
+By reviewing audits, you can understand who did what and when, which is useful for accountability, troubleshooting, and collaboration.
+
+## Workspace Settings
+
+Here, you can view and update information such as the Workspace name, Owner, and Billing plan.
+
+### Workspace Name
+
+The Workspace Name section displays the name of your Workspace. To update the Workspace name, click on the **Edit** button next to the current name, make your changes, and click **Save**.
+
+### Workspace Owner
+
+The Workspace Owner section displays the email address of the user who created the workspace.
+
+### Billing Plan
+
+The Billing Plan section displays the current billing plan of your workspace. To upgrade to a higher plan, click the **Upgrade to Business Plan** button and follow the instructions.
+
+### Delete Workspace
+
+The Delete Workspace section allows you to delete your workspace permanently. You must be the owner of the Workspace to do so.
+
+<Callout variant="danger" title="Deleting a Workspace">
+  This is an irreversible process and will permanently erase all data associated
+  with your workspace, including bots, conversations, and analytics.
+</Callout>
+
+To proceed with the deletion, click on the **Delete Workspace** button and confirm your decision.
+
+Before deleting your workspace, we recommend downloading your invoices from the Billing section to ensure you have a record of all charges and payments associated with your workspace.
+
+## Leaving a Workspace
+
+If you want to leave a workspace, you can access the workspace settings and click **Leave Workspace**. This will remove you from the list of collaborators for the workspace. Note that if you are the owner of the workspace, you cannot leave your workspace.

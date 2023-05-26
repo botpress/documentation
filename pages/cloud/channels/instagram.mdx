@@ -1,0 +1,92 @@
+---
+title: "Instagram"
+section:
+  name: "Messaging Channels"
+  slot: H
+slot: 94
+slug: "channels/instagram"
+---
+
+![Messaging channels](/instagram-banner.png)
+
+## Requirements
+
+You will need a Facebook app and a Facebook page to connect you bot to messenger.
+
+## Enabling Instagram in Botpress Cloud Dashboard
+
+Go to the chatbot settings in your cloud dashboard and enable Instagram. We will get the APP ID, App Secret, Verify Token, Page ID and Access Token from the following steps.
+
+### Create a Facebook App
+
+To create a Facebook App,
+
+1. log in to your Facebook account and go to the [Facebook for Developers website](https://developers.facebook.com/).
+2. Select **My Apps** from the top menu, and create a new app.
+3. Select **Business** as App Type.
+4. Give a name to your App.
+5. Add **Instagram Graph API** to your App.
+   For more details and assistance, visit the [Facebook developer documentation](https://developers.facebook.com/docs/development).
+
+### Create a Facebook Page
+
+If you do not already have a Facebook page you will need to create one. [You can find details on how to create a new Facebook page here](https://www.facebook.com/pages/creation/). To link your chatbot to a pre-existing page, you must have an administrator or developer role.
+
+1. Give a name to your Facebook Page.
+2. Pick a Category.
+
+## Channel Configuration
+
+### API version
+
+The messenger channel is made to interact with version 12.0 or higher of the Messenger API. It is not the default version so it must be changed in your app's settings
+
+1. Go to your Facebook App.
+1. In the left sidebar, expand the **Settings** menu and select **Advanced**.
+1. In the **Upgrade API version** section, select v12.0 or higher as the API version.
+1. Click on **Save Changes**.
+
+### Add Messenger Product
+
+Messenger is not added by default in your Facebook App, so it must be added manually.
+
+1. In the left sidebar, click on **Add Product**.
+1. In the Facebook Messenger section click **Set Up**.
+
+### App ID and Secret
+
+The App ID and Secret are used to validate webhook requests.
+
+1. In the left sidebar, expand the **Settings** menu and select **Basic**. Here you can find the App ID and App Secret.
+1. Click on the **Show** button in the **App Secret** text box. Copy the App Id and App Secret to your channel configuration.
+
+### Page ID and Access Token
+
+The page ID and Access Token are used to send messages to the Messenger API.
+
+1. In the left sidebar, expand the **Messenger** menu and select **Instagram Settings**
+1. In the **Access Tokens** section, click **Add or Remove Pages** and add you Facebook page.
+1. Copy the number under you page name and paste it in you **Page ID** channel configuration.
+1. Click on **Generate Token**. Copy this token and paste it in the **Access Token** channel configuration.
+
+### Verify Token
+
+The Verify Token is used by Facebook to verify that you are the real owner of the provided webhook.
+
+You can generate any random alphanumerical string for this configuration. Paste it in your **Verify Token** channel configuration.
+
+### Save Configuration
+
+Channel configuration is completed, you can now click **Save**. It is important you save your configuration before configuring the webhook, otherwise Messenger will be unable to validate the webhook URL.
+
+## Webhook Configuration
+
+To receive messages from Messenger, you will need to setup a webhook.
+
+1. Go to your Facebook App.
+1. In the left sidebar, expand the **Messenger** menu and select **Settings**.
+1. In the **Webhooks** section, click **Add Callback URL**.
+1. Copy and paste the webhook URL provided in the channel configuration UI.
+1. Copy and paste the Verify Token you generated earlier.
+1. Click on **Verify and Save**. Make sure your channel configuration was saved before doing this step, otherwise the webhook validation will fail.
+1. Click on **Add subscriptions** and add `messages`, `instagram_manage_messages` and `messaging_postbacks` to your webhook.

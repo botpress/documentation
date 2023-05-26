@@ -1,0 +1,80 @@
+---
+title: 'Transition to'
+section:
+  name: 'Toolbox'
+  slot: F
+slot: 4
+slug: 'toolbox/transition-to'
+---
+
+A Transition is like a "decision point" in a conversation with a chatbot, where the bot has to decide what to do next based on what the user has said or done. It's like a set of instructions that the bot follows to determine which "path" to take in the conversation.
+
+<br />
+For example, if the user says something specific, the bot may need to ask a follow-up question or provide a certain response.
+
+The transition statement is what tells the bot which response or question to provide based on what the user has said or done.
+
+## Expression
+
+An Expression transition is a conditional statement that tells the bot which node should be processed next if the condition is met. It uses generative AI to generate the conditions using plain text.
+
+<br />
+This type of transition allows you to check user input, user variables, workflow variables, and even create advanced JavaScript
+expressions to determine which node the bot should transition to next.
+<br />
+You can use a combination of these checks to create complex conditions that will determine which node the bot will transition
+to next.
+
+<Callout variant="gai" title="Generative AI Transitions">
+  You can use generative AI to generate your conditions using plain text. In order to achieve what you exactly want,
+  here are some examples that should guide you, but you are not limited to it:
+</Callout>
+
+<Table>
+  <Tr>
+    <Td>**Example**</Td>
+    <Td>**Description**</Td>
+  </Tr>
+  <Tr>
+    <Td>User Input</Td>
+    <Td>
+      To check if the user entered a value between 1 and 10, you can use **User Input** <br/>Example: *user input is between 1 & 10*
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>User Variable</Td>
+    <Td>
+To retrieve a value from the user variable, you can use **`user.{variable name}`** <br/>
+Example: *user language is <u>English</u>*
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>Workflow Variable</Td>
+    <Td>To check a workflows variable, you can use **`workflow.{variable name}`**<br/>
+    Example: *workflow variable supportEmail contains Botpress*</Td>
+  </Tr>
+  <Tr>
+    <Td>Intents</Td>
+    <Td>You can combine multiple checks together, for example you can check if an intent is of type "affirmative", and its confidence is more than 50%. <br/>
+      Example: *intent is affirmative and intent confidence is 50%* </Td>
+  </Tr>
+  <Tr>
+    <Td>Advanced</Td>
+    <Td>
+      You can use an advanced javascript expression to move from one node to the next when the expression satisfies the condition.
+    </Td>
+</Tr>
+
+</Table>
+<br/>
+
+## Intent
+
+An Intent transition allows you to create an inline intent (or node-specific intent). Only if this intent is elected will the condition be met.
+
+<br />
+This type of transition is useful when you want to create a specific response for a particular intent. You can create an
+intent for a specific node, and the bot will transition to that node only if that intent is detected in the user's message.
+<br />
+For example, if a user says "I want to book a hotel room," the bot can transition to a node that is specific to handling
+hotel room bookings.

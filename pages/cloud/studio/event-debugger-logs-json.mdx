@@ -1,0 +1,149 @@
+---
+title: "Debugger, Logs & JSON"
+section:
+  name: "Studio Interface"
+  slot: D
+slot: 6
+slug: "studio/event-debugger-logs-json"
+---
+
+![Debugger](/debugger-cover.png)
+
+## Event Debugger
+
+The Event Debugger provides information on how your bot understood the user's message and why it made specific decisions. It also displays the complete event payload, including NLU metadata, state, and raw responses.
+
+<br />
+To open or close the Debugger, you can use the keyboard shortcut **cmd/ctrl + j**.
+This will toggle the Debugger on and off and allow you to access the information
+it provides.
+
+## Logs
+
+By using logs, you can see what happened step-by-step before an error occurred. This can help you understand what went wrong and how to fix it.
+
+<br />
+It's important to include enough logging in your bot to ensure that you have enough
+information to find and fix issues. By analyzing the Botpress Logs, you can pinpoint
+exactly where the problem occurred and take the necessary steps to resolve it.
+
+## State
+
+In a bot conversation, each session has an associated state which is created at the beginning of the conversation just before the Entry Node is processed. The state persists throughout the conversation and is used to keep track of information related to the ongoing interaction with the user.
+
+The state is global to the conversation, which means that if the conversation spans multiple flows, all the flows will share the same state. This allows information to be passed between flows and ensures that the bot has a consistent view of the conversation history.
+
+The state can be used to store variables, such as the user's name, preferences, or history of interactions, that are needed throughout the conversation. It can also be used to keep track of the bot's progress through the conversation, such as which questions have been asked and which tasks have been completed.
+
+By using the state effectively, you can create more personalized and engaging bot experiences for your users.
+
+## JSON
+
+This tab displays the raw information that is processed during each conversation exchange in the Botpress Emulator. The information can be accessed through **event.property**, where "property" refers to one of the properties listed in the table below.
+
+<br />
+Here is a table that describes each property in detail:
+<Table>
+  <Tr>
+    <Td>**Property**</Td>
+    <Td>**Description**</Td>
+  </Tr>
+  <Tr>
+    <Td>Type</Td>
+    <Td>
+      A string property that indicates the type of the message, e.g., text,
+      audio, video, etc.
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>Channel</Td>
+    <Td>
+      A string property that specifies the channel or platform through which the
+      message was received. For example, the channel can be an emulator,
+      Facebook Messenger, WhatsApp, etc.
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>Direction</Td>
+    <Td>
+      A string property that specifies the direction of the message, i.e.,
+      whether the message is incoming or outgoing.
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>Payload</Td>
+    <Td>
+      A JSON object that encapsulates the message data. The structure of the
+      payload object depends on the type of message.
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>UserId</Td>
+    <Td>A string property that identifies the user who sent the message.</Td>
+  </Tr>
+  <Tr>
+    <Td>BotId</Td>
+    <Td>
+      A string property that identifies the bot or conversational AI system that
+      received the message.
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>CreatedOn</Td>
+    <Td>
+      A timestamp that specifies the date and time when the message was
+      received.
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>ConversationId</Td>
+    <Td>
+      A string property that identifies the conversation thread to which the
+      message belongs.
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>Id</Td>
+    <Td>A unique identifier for the message.</Td>
+  </Tr>
+  <Tr>
+    <Td>Preview</Td>
+    <Td>A preview or summary of the message.</Td>
+  </Tr>
+  <Tr>
+    <Td>MessageId</Td>
+    <Td>A string property that identifies the ID of the message.</Td>
+  </Tr>
+  <Tr>
+    <Td>Tags</Td>
+    <Td>An object that contains tags associated with the message.</Td>
+  </Tr>
+  <Tr>
+    <Td>Flags</Td>
+    <Td>An object that contains flags associated with the message.</Td>
+  </Tr>
+  <Tr>
+    <Td>State</Td>
+    <Td>An object that contains the state of the conversation.</Td>
+  </Tr>
+  <Tr>
+    <Td>Suggestions</Td>
+    <Td>
+      An array of suggested responses or actions that the bot can take based on
+      the message.
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>NLU</Td>
+    <Td>
+      An object that encapsulates the results of the natural language
+      understanding (NLU) process for the message.
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>Decision</Td>
+    <Td>
+      An object that encapsulates the decision-making process for the message.
+    </Td>
+  </Tr>
+</Table>

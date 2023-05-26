@@ -1,0 +1,37 @@
+---
+title: 'Hooks'
+section:
+  name: 'Studio Interface'
+  slot: D
+slot: 13
+slug: 'studio/hooks'
+---
+
+The Hooks Tab of the Explorer panel allows you to create Hooks. Hooks are event-driven custom code snippets.
+
+Hooks are a handy way to execute JavaScript code when specific events occur. (similar to Execute Code cards and Validation fields)
+
+<Callout variant="info" title="Note">
+  Editing a hook takes immediate effect, which means it will execute with the changes on the next event. This makes
+  development a lot faster.
+</Callout>
+
+Hooks are differentiated using the point in the event engine when they are executed. The following are instances where you can inject hooks into your code.
+
+## After Incoming Message
+
+This hook is called right after all incoming middlewares have processed the event but before the Dialogue Engine starts processing it. You can access all the required data (including NLU intent) for special processing and decide what happens to the event.
+Parameters: bp, event
+A typical operation here is to tell Botpress to ignore the event and not process it (e.g., not send it to the dialogue engine).
+
+## Before Incoming Message
+
+Botpress calls this hook after receiving an event but before processing any middleware. It is possible to change event properties.
+Parameters: bp, event
+Botpress often uses this hook to set flags to skip some processing, for example, to prevent the QnA from processing it when it's a quick reply.
+
+## Before Outgoing Middleware
+
+The Dialogue Manager calls this hook before the bot's reply is sent to the user.
+Parameters: bp, event
+Here you can save the bot's complete response.

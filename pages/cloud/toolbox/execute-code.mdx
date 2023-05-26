@@ -1,0 +1,70 @@
+---
+title: 'Execute Code'
+section:
+  name: 'Toolbox'
+  slot: F
+slot: 2
+slug: 'toolbox/execute-code'
+---
+
+This instruction is to execute custom code in a node. For example, fetching and displaying a user-submitted city’s weather information using an API.
+
+<Callout variant="gai" title="Generative AI">
+  Using natural language you can instruct AI to generate the needed code for your bot.
+</Callout>
+
+Example 1:
+
+**"I want to find the difference between the variables startDate and the endDate"**
+
+Generated Output:
+
+```typescript
+const startDate = luxon.fromISO(workflow.startDate) // convert the startDate string to a luxon DateTime object
+const endDate = luxon.fromISO(workflow.endDate) // convert the endDate string to a luxon DateTime object
+const diffInDays = endDate.diff(startDate, 'days').toObject().days // find the difference between the two dates in days
+// store the difference in days in the workflow variable 'dateDiff' as requested
+workflow.dateDiff = diffInDays
+```
+
+<br />
+Example 2:
+
+**"I want to get all my issues from Jira filtered by what is not done"**<br/>
+
+Generated Output:
+
+```typescript
+const jiraUrl = 'https://your-jira-url.com'
+const jiraUsername = 'your-jira-username'
+const jiraPassword = 'your-jira-password'
+
+// get the current date and time in ISO format
+const now = luxon.local().toISO()
+
+// create the JQL query to get all issues that are not done
+const jql = `status != Done AND updated >= "${now}" ORDER BY updated DESC`
+
+// set the request headers for Jira API
+const headers = {
+  'Content-Type': 'application/json',
+  Authorization: `Basic ${Buffer.from(`${jiraUsername}:${jiraPassword}`).toString('base64')}`,
+}
+
+// make the request to Jira API to get all issues that are not done
+const response = await axios.get(`${jiraUrl}/rest/api/2/search?jql=${jql}`, { headers })
+
+// filter the response to only keep the issues that are not done
+const issues = _.filter(response.data.issues, (issue) => issue.fields.status.name !== 'Done')
+```
+
+<br />
+#### Advanced
+
+You can build your own code here, using below node packages:
+
+- [Axios](https://axios-http.com/docs/api_intro)
+- [Lodash](https://lodash.com/docs/4.17.15)
+- [Moment Luxon](https://moment.github.io/luxon/#/?id=luxon)
+
+Using the above packages, you will be able fetch and display the user-submitted city's weather information using an API.

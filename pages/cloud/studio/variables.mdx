@@ -1,0 +1,132 @@
+---
+title: 'Variables'
+section:
+  name: 'Studio Interface'
+  slot: D
+slot: 3
+slug: 'studio/variables'
+---
+
+Botpress variables are variables that you can create within a Botpress chatbot to store information and use it in different parts of the bot's flow. 
+
+These variables are similar to the types of variables you'd find in other programming languages and can be used to store data like text, numbers, boolean values, dates, objects, arrays, enums, and patterns. With Botpress variables, you can personalize the user's experience by storing information like their name, preferences, and past interactions with the bot.
+
+## Types of Variables
+
+You can create variables that can be used at different times in your flow.
+
+<Table>
+  <Tr>
+    <Td>**Type**</Td>
+    <Td>**Description**</Td>
+  </Tr>
+  <Tr>
+    <Td>String</Td>
+    <Td>
+      Values that are treated as text. This means that the values of string variables may include numbers, letters, or
+      symbols. E.g. useful to store the name of the user.
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>Boolean</Td>
+    <Td>
+      Variables can either be True or False. E.g. isGreeted boolean variable checks if the user has been greeted or not
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>Number</Td>
+    <Td>To store value in number format for storing numeric values such as phone numbers and Pincode.</Td>
+  </Tr>
+  <Tr>
+    <Td>Date</Td>
+    <Td>
+      Simple integers representing the number of days, weeks, hours, and so on from a user-specified starting point.
+      E.g. Storing the user's order date for a product.
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>Object</Td>
+    <Td>Collection of key-value pairs, each key is mapped to a value. E.g. </Td>
+  </Tr>
+  <Tr>
+    <Td>Array</Td>
+    <Td>
+      Collection of similar types of data. There are two types of Arrays. 1. String Storing a list of strings. E.g
+      [Apple, Mango, Banana] 2. Object Storing a list of objects.
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>Enum</Td>
+    <Td>
+      Unique set of data. An example of an enum type might be the days of the week or a set of status values for a piece
+      of data.
+    </Td>
+  </Tr>
+  <Tr>
+    <Td>Pattern</Td>
+    <Td>Value that follows a predefined pattern using regex.</Td>
+  </Tr>
+</Table>
+
+## Workflow Variables
+
+Workflow Variables are temporary variables that are used to store information during a conversation between the user and the bot. They are created and used within the scope of a single workflow and are not persisted across sessions or conversations.
+
+These variables are often used to capture data that is collected during a conversation and used to drive the flow of the conversation. For example, if a user is asked a series of questions, the answers provided by the user can be stored in Workflow Variables and used to determine the next set of questions to ask or actions to take.
+
+They can be created and accessed by the bot's programming code, and they are typically used to pass data between different nodes in a workflow or between different workflows. They can also be used to store temporary data such as flags or status indicators that are used to track the progress of a conversation.
+
+Since Workflow Variables are temporary and are not persisted between sessions, they are not suitable for storing data that needs to be retained across multiple conversations or for personalizing the user's experience. For that, User Variables would be more appropriate.
+
+To create a Variable in your bot's workflow, you can follow these steps:
+
+1. Select the appropriate workflow from the Explorer menu.
+2. Double-click on the empty space in the workflow editor to open the Inspector panel.
+3. In the Inspector panel, navigate to the flow properties section.
+4. Give your variable a name, pick a type and click "Add" to create the variable.
+5. You can also add default(initial) value for a variable from the **Additional Settings**.
+6. (Optional) You can use **`{{workflow.variablename}}`** or **`@variablename`** to display it in your send message card.
+
+## User Variables
+
+User Variables are associated with a specific user and are persisted across multiple sessions. This means that if a user interacts with the chatbot multiple times, their User Variables will still be available and can be used to personalize the conversation. Examples of User Variables include user's name, preferences, or history of interactions.
+
+You can simply go to [Chatbot Settings](../../studio/chatbot-settings/#user-variables) and add user variables. You can use **`{{user.variablename}}`** or **`@variablename`** to display it in your send message card.
+
+## Bot Variables
+
+Bot Variables, on the other hand, are the same for all users of the bot. They are typically used to store information that is relevant to the entire chatbot, such as configuration settings or data that is used across multiple conversations. Examples of Bot Variables include the bot's name, version, or any static data that the bot may need to function properly.
+
+You can simply go to [Chatbot Settings](../../studio/chatbot-settings/#bot-variables) and add bot variables. You can use **`{{bot.variablename}}`** or **`@variablename`** to display it in your send message card.
+
+<br />
+
+Both User Variables and Bot Variables can be used throughout a chatbot's workflow to provide personalized experiences, make decisions, or trigger specific actions. By properly defining and utilizing these variables, chatbots can become more intelligent, engaging, and effective in their interactions with users.
+
+
+Remember that the scope of your variable will depend on the type of variable you create (User, Bot, or Workflow), and that variables can be used and passed down from one workflow to the next as inputs and outputs of your workflows.
+
+## Configuration Variables
+
+1. On the Left Panel in your Botpress Studio, Click the ⚙️ icon to open up **Chatbot Settings** and go to **Variables**. You will see an option to add [Configuration Variables]()
+2. Create a new Key and add the value that you want to use in your **Development** environment. Note that this value will should only be used while testing.
+3. Click **save** and publish your chatbot.
+
+You can use **`{{env.key}}`** to get the value of the Configuration Variable Key that you've created in step 1.
+
+To use it in an Execute Code Card, you can write **`env.key`** to access it's value.
+
+Learn more on using [configuration variables in production](../../admin-dashboard/config-variables/#3-env-keys-in-production).
+
+## Setting Value to a Variable
+
+To assign a value to your variable, you can use the **Execute Code** card and assign the value. From the Inspector, type in the statement **workflow.variableName = value** where value is the value you want to assign.
+
+For example, if you created the boolean variable **greeted**, you might want to assign the value **true** to this variable. In this case, you can use **Execute code**, and write **workflow.greeted = true** to give it the **true** value.
+
+Later, you will be able to use this as a transition condition if the user is returning and was already greeted.
+
+## Displaying Value of a Variable
+
+You can either use **`{{workflow.variablename}}`** or **`@variablename`** in a text field to display value of a variable.
+

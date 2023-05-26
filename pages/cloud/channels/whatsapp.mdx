@@ -1,0 +1,96 @@
+---
+title: "WhatsApp"
+section:
+  name: "Messaging Channels"
+  slot: H
+slot: 10
+slug: "channels/whatsapp"
+---
+
+![Messaging channels](/whatsapp-banner.png)
+
+<iframe
+  width="720"
+  height="360"
+  src="https://www.youtube.com/embed/LQd1iGJLj58"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+## Requirements
+
+You will need a Meta app and a WhatsApp Business Account to connect your bot to WhatsApp
+
+### Create a Meta App & Business Account
+
+To create a Meta App, log in to your Meta account and follow Step (1) & Step (2) in this [article](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started#set-up-developer-assets).
+
+Before going to Step (3), we will configure the WhatsApp channel on Botpress.
+
+## Channel Configuration
+
+To add **WhatsApp** integration configuration, go to your bot’s configuration screen, then go to the channel tab, and click on **WhatsApp**.
+
+A screen will pop up asking for the following details:
+
+### 1. Verify Token
+
+The Verify Token is used by Meta to verify that you are the real owner of the provided webhook.
+
+You can generate any random alphanumeric string for this configuration. Paste it in your **Verify Token** channel configuration.
+
+### 2. Access Token
+
+The **Phone Number ID** and **Access Token** are used to send and receive messages to/from the WhatsApp API.
+
+In your Meta App:
+
+1.  In the left sidebar, expand the **WhatsApp** menu and select **Getting Started**
+2.  In the **Temporary access token** section, click **Copy** and then paste it in the **Access Token** field in Botpress
+
+For a permanent Access Token: [https://developers.facebook.com/blog/post/2022/12/05/auth-tokens/](https://developers.facebook.com/blog/post/2022/12/05/auth-tokens/)
+
+### 3. Phone Number ID
+
+In your Meta App:
+
+1.  In the left sidebar, expand the **WhatsApp** menu and select **Getting Started**
+2.  In the **Send and receive messages** section, beside the label **Phone Number ID** click **Copy** then paste it in the **Phone Number ID** field in Botpress
+
+## Finalizing Channel Configuration
+
+The next step is to Enable the channel from the top of the screen and then copy the webhook URL from the button below the webhook URL.
+
+In the last step, click **Save**.
+
+Now we can go back to Step (3) & Step (4) in this [article](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started#set-up-developer-assets).
+
+## Webhook Fields
+
+#### We need to subscribe to the webhook fields below
+
+- Messages: For the chat to work properly, you need to subscribe to the **messages** webhook field.
+
+## Content Types Mapping
+
+### From Botpress to WhatsApp
+
+- Text is mapped to [Text Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#text-object)
+- Text with Markdown is mapped to [Text Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#text-object)
+- Image is mapped to [Media Image Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#media-object)
+- Audio is mapped to [Media Audio Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#media-object)
+- Video is mapped to [Media Video Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#media-object)
+- File is mapped to [Media File Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#media-object)
+- Location is mapped to [Location Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#location-object)
+- Carousel is mapped to [Interactive List Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#interactive-object)
+- Card is mapped to [Interactive List Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#interactive-object)
+- Dropdown is mapped to [Interactive List Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#interactive-object)
+- Choice is mapped to [Interactive Button Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#interactive-object)
+
+### From WhatsApp to Botpress
+
+- Text is mapped to Text Object
+- Interactive feedbacks are mapped to Text Object.
+- The rest of the types are not currently processed by Botpress
