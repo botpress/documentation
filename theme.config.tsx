@@ -1,5 +1,5 @@
 import { Footer } from '@components/Footer'
-import type { DocsThemeConfig } from 'nextra-theme-docs'
+import { useConfig, type DocsThemeConfig } from 'nextra-theme-docs'
 import React from 'react'
 
 const logo = (
@@ -83,10 +83,25 @@ const config: DocsThemeConfig = {
   },
   feedback: { content: '' },
   project: {
-    link: 'https://github.com/botpress',
+    link: undefined,
   },
   logo,
+  faviconGlyph: 'B',
   primaryHue: { dark: 217, light: 217 },
+  head: function useHead() {
+    const { title } = useConfig()
+
+    return (
+      <>
+        <meta name="theme-color" content="#fff" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="Content-Language" content="en" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <title>{title || ''} - Botpress Documentation</title>
+      </>
+    )
+  },
   sidebar: {
     titleComponent({ title, type }) {
       if (type === 'separator') {
