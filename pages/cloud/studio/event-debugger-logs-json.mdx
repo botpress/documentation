@@ -1,13 +1,6 @@
----
-title: "Debugger, Logs & JSON"
-section:
-  name: "Studio Interface"
-  slot: D
-slot: 6
-slug: "studio/event-debugger-logs-json"
----
+# Debugger, Logs & JSON
 
-![Debugger](/debugger-cover.png)
+![Debugger](/docs/debugger-cover.png)
 
 ## Event Debugger
 
@@ -43,107 +36,22 @@ This tab displays the raw information that is processed during each conversation
 
 <br />
 Here is a table that describes each property in detail:
-<Table>
-  <Tr>
-    <Td>**Property**</Td>
-    <Td>**Description**</Td>
-  </Tr>
-  <Tr>
-    <Td>Type</Td>
-    <Td>
-      A string property that indicates the type of the message, e.g., text,
-      audio, video, etc.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Channel</Td>
-    <Td>
-      A string property that specifies the channel or platform through which the
-      message was received. For example, the channel can be an emulator,
-      Facebook Messenger, WhatsApp, etc.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Direction</Td>
-    <Td>
-      A string property that specifies the direction of the message, i.e.,
-      whether the message is incoming or outgoing.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Payload</Td>
-    <Td>
-      A JSON object that encapsulates the message data. The structure of the
-      payload object depends on the type of message.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>UserId</Td>
-    <Td>A string property that identifies the user who sent the message.</Td>
-  </Tr>
-  <Tr>
-    <Td>BotId</Td>
-    <Td>
-      A string property that identifies the bot or conversational AI system that
-      received the message.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>CreatedOn</Td>
-    <Td>
-      A timestamp that specifies the date and time when the message was
-      received.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>ConversationId</Td>
-    <Td>
-      A string property that identifies the conversation thread to which the
-      message belongs.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Id</Td>
-    <Td>A unique identifier for the message.</Td>
-  </Tr>
-  <Tr>
-    <Td>Preview</Td>
-    <Td>A preview or summary of the message.</Td>
-  </Tr>
-  <Tr>
-    <Td>MessageId</Td>
-    <Td>A string property that identifies the ID of the message.</Td>
-  </Tr>
-  <Tr>
-    <Td>Tags</Td>
-    <Td>An object that contains tags associated with the message.</Td>
-  </Tr>
-  <Tr>
-    <Td>Flags</Td>
-    <Td>An object that contains flags associated with the message.</Td>
-  </Tr>
-  <Tr>
-    <Td>State</Td>
-    <Td>An object that contains the state of the conversation.</Td>
-  </Tr>
-  <Tr>
-    <Td>Suggestions</Td>
-    <Td>
-      An array of suggested responses or actions that the bot can take based on
-      the message.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>NLU</Td>
-    <Td>
-      An object that encapsulates the results of the natural language
-      understanding (NLU) process for the message.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Decision</Td>
-    <Td>
-      An object that encapsulates the decision-making process for the message.
-    </Td>
-  </Tr>
-</Table>
+| Property | Description |
+| :--- | :--- |
+| Type | A string property that indicates the type of the message, e.g., text, audio, video, etc. |
+| Channel | A string property that specifies the channel or platform through which the message was received. For example, the channel can be an emulator, Facebook Messenger, WhatsApp, etc. |
+| Direction | A string property that specifies the direction of the message, i.e., whether the message is incoming or outgoing. |
+| Payload | A JSON object that encapsulates the message data. The structure of the payload object depends on the type of message. |
+| UserId | A string property that identifies the user who sent the message. |
+| BotId | A string property that identifies the bot or conversational AI system that received the message. |
+| CreatedOn | A timestamp that specifies the date and time when the message was received. |
+| ConversationId | A string property that identifies the conversation thread to which the message belongs. |
+| Id | A unique identifier for the message. |
+| Preview | A preview or summary of the message. |
+| MessageId | A string property that identifies the ID of the message. |
+| Tags | An object that contains tags associated with the message. |
+| Flags | An object that contains flags associated with the message. |
+| State | An object that contains the state of the conversation. |
+| Suggestions | An array of suggested responses or actions that the bot can take based on the message. |
+| NLU |   An object that encapsulates the results of the natural language understanding (NLU) process for the message. |
+| Decision | An object that encapsulates the decision-making process for the message. |

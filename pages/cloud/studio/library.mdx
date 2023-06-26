@@ -1,11 +1,6 @@
----
-title: 'Library'
-section:
-  name: 'Studio Interface'
-  slot: D
-slot: 12
-slug: 'studio/library'
----
+import { Callout } from 'nextra/components'
+
+# Library
 
 Part of the Botpress NLU (Natural Language Understanding)
 
@@ -28,28 +23,12 @@ For example, we can add the following utterances to the “Ordering a coffee” 
 
 You can add these different utterances to train your chatbot to answer an intent instead of a specific word. The user statements are compared and matched with the most appropriate intent with the highest confidence score.
 
-<Table>
-  <Tr>
-    <Td>**User Message**</Td>
-    <Td>**Intent Matched**</Td>
-    <Td>**Confidence**</Td>
-  </Tr>
-  <Tr>
-    <Td>"I would like to order a coffee."</Td>
-    <Td>place-order</Td>
-    <Td>0.97</Td>
-  </Tr>
-  <Tr>
-    <Td>"An espresso, please"</Td>
-    <Td>place-order</Td>
-    <Td>0.91</Td>
-  </Tr>
-  <Tr>
-    <Td>"Can you please give me a double cappuccino?"</Td>
-    <Td>place-order</Td>
-    <Td>0.96</Td>
-  </Tr>
-</Table>
+| User Message | Intent Matched | Confidence |
+| :--- | :---: | ---: |
+| I would like to order a coffee. | place-order | 0.97 |
+| An espresso, please | place-order | 0.91 |
+| Can you please give me a double cappuccino? | place-order | 0.96 |
+
 
 ### Adding an Intent
 
@@ -61,7 +40,8 @@ To create a new intent,
 4. Click Submit.
 5. Write your utterances next to the number (where you can see type a sentence).
 
-<Callout variant="info" title="Note">
+<Callout type="info">
+  **Note** <br/>
   Utterances currently have a maximum of 280 characters.
 </Callout>
 

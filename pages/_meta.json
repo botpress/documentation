@@ -1,0 +1,20 @@
+{
+  "index": {
+    "display": "hidden",
+    "theme": {
+      "layout": "raw"
+    }
+  },
+  "cloud": {
+    "type": "page",
+    "title": "Cloud"
+  },
+  "api-documentation": {
+    "type": "page",
+    "title": "API Documentation"
+  },
+  "integration": {
+    "type": "page",
+    "title": "For Developers"
+  }
+}

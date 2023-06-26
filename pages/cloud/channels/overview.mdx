@@ -1,13 +1,6 @@
----
-title: "Overview"
-section:
-  name: "Messaging Channels"
-  slot: H
-slot: 1
-slug: "channels/overview"
----
+# Overview
 
-![Chatbot Messaging](/messaging-overview-banner.png)
+![Chatbot Messaging](/docs/messaging-overview-banner.png)
 
 Once you've published your chatbot, your next step might be to integrate it various messaging channels.
 
@@ -17,240 +10,35 @@ Once you've published your chatbot, your next step might be to integrate it vari
 
 This is the list of content types we support sending to each channel.
 
-<Table>
-  <Thead>
-    <Tr>
-      <Th></Th>
-      <Th align="center">Messenger</Th>
-      <Th align="center">Microsoft Teams</Th>
-      <Th align="center">Slack</Th>
-      <Th align="center">Telegram</Th>
-      <Th align="center">Twilio</Th>
-      <Th align="center">Vonage</Th>
-      <Th align="center">Smooch</Th>
-    </Tr>
-  </Thead>
-  <Tbody>
-    <Tr>
-      <Td>Text</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-    </Tr>
-    <Tr>
-      <Td>Image</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-    </Tr>
-    <Tr>
-      <Td>Choice</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔ (choices down rendered)</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-    </Tr>
-    <Tr>
-      <Td>Dropdown</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔ (choices down rendered)</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-    </Tr>
-    <Tr>
-      <Td>Card</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔ (buttons down rendered)</Td>
-      <Td align="center">✔ (buttons down rendered)</Td>
-      <Td align="center">✔</Td>
-    </Tr>
-    <Tr>
-      <Td>Carousel</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔ (buttons down rendered)</Td>
-      <Td align="center">✔ (buttons down rendered)</Td>
-      <Td align="center">✔</Td>
-    </Tr>
-    <Tr>
-      <Td>File</Td>
-      <Td align="center">✔ as URL)</Td>
-      <Td align="center">✔ (as URL)</Td>
-      <Td align="center">✔ (as URL)</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔ (as URL)</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-    </Tr>
-    <Tr>
-      <Td>Audio</Td>
-      <Td align="center">✔ (as URL)</Td>
-      <Td align="center">✔ (as URL)</Td>
-      <Td align="center">✔ (as URL)</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-    </Tr>
-    <Tr>
-      <Td>Video</Td>
-      <Td align="center">✔ (as URL)</Td>
-      <Td align="center">✔ (as URL)</Td>
-      <Td align="center">✔ (as URL)</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔ (as URL)</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-    </Tr>
-    <Tr>
-      <Td>Location</Td>
-      <Td align="center">✔ (as Google Maps links)</Td>
-      <Td align="center">✔ (as Google Maps links)</Td>
-      <Td align="center">✔ (as Google Maps links)</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔ (as Google Maps links)</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-    </Tr>
-  </Tbody>
-</Table>
+
+|  | Messenger | Microsoft Teams | Slack | Telegram | Twilio | Vonage | Smooch |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Text |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |    
+| Image |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |    
+| Choice |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ (choices down rendered) |   ✔ |   ✔ |    
+| Dropdown |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ (choices down rendered) |   ✔ |   ✔ |    
+| Card |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ (buttons down rendered) |   ✔ (buttons down rendered) |   ✔ |    
+| Carousel |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ (buttons down rendered) |   ✔ (buttons down rendered) |   ✔ |    
+| File |   ✔ (as URL) |   ✔ (as URL) |   ✔ (as URL) |   ✔ |   ✔ (as URL) |   ✔ |   ✔ |    
+| Audio |   ✔ (as URL) |   ✔ (as URL) |   ✔ (as URL) |   ✔ |   ✔ |   ✔ |   ✔ |    
+| Video |   ✔ (as URL) |   ✔ (as URL) |   ✔ (as URL) |   ✔ |   ✔ (as URL) |   ✔ |   ✔ |    
+| Location |   ✔ (as Google Maps links) |   ✔ (as Google Maps links) |   ✔ (as Google Maps links) |   ✔ |   ✔ (as Google Maps links) |   ✔ |   ✔ |    
+
 
 ### Receiving
 
 This is the list of content-types we support receiving from each channel.
 
-<Table>
-  <Thead>
-    <Tr>
-      <Th></Th>
-      <Th align="center">Messenger</Th>
-      <Th align="center">Microsoft Teams</Th>
-      <Th align="center">Slack</Th>
-      <Th align="center">Telegram</Th>
-      <Th align="center">Twilio</Th>
-      <Th align="center">Vonage</Th>
-      <Th align="center">Smooch</Th>
-    </Tr>
-  </Thead>
-  <Tbody>
-    <Tr>
-      <Td>Text</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-    </Tr>
-    <Tr>
-      <Td>Quick Reply</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">N/A</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">N/A</Td>
-    </Tr>
-    <Tr>
-      <Td>Postback</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-    </Tr>
-    <Tr>
-      <Td>Say Something</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-      <Td align="center">✔</Td>
-    </Tr>
-    <Tr>
-      <Td>Voice</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-    </Tr>
-    <Tr>
-      <Td>Image</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-    </Tr>
-    <Tr>
-      <Td>File</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-    </Tr>
-    <Tr>
-      <Td>Audio</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-    </Tr>
-    <Tr>
-      <Td>Video</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-    </Tr>
-    <Tr>
-      <Td>Location</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-      <Td align="center">-</Td>
-    </Tr>
-  </Tbody>
-</Table>
+|  |      Messenger |      Microsoft Teams |      Slack |      Telegram |      Twilio |      Vonage |      Smooch |   
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Text |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |
+| Quick Reply |   ✔ |   ✔ |   ✔ |   N/A |   ✔ |   ✔ |   N/A |
+| Postback |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |
+| Say Something |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |   ✔ |
+| Voice |   - |   - |   - |   - |   - |   - |   - |
+| Image |   - |   - |   - |   - |   - |   - |   - |
+| File |   - |   - |   - |   - |   - |   - |   - |
+| Audio |   - |   - |   - |   - |   - |   - |   - |
+| Video |   - |   - |   - |   - |   - |   - |   - |
+| Location |   - |   - |   - |   - |   - |   - |   - |     
+

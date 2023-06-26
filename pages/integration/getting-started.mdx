@@ -1,6 +1,6 @@
----
-title: "Getting Started"
----
+import { Callout } from "nextra/components"
+
+# Getting Started
 
 In this section, we'll create a simple integration that can send text messages to Telegram and a bot to try it out. This tutorial make use of both the Botpress CLI and the Botpress SDK.
 
@@ -61,10 +61,12 @@ There is a lot going on there, so let's break it down.
 
 The name and version are used to identify the integration. The name is used to generate the integration ID, which is a unique identifier for the integration. The version is used to identify the version of the integration. For now, only one version of an integration can be deployed at a time and `0.0.1` is enforced.
 
-<Callout variant="warning" className="mb-4">
+<Callout type="warning">
+  **Integration Names** <br/>
   The integration names are unique. If you try to create an integration with the
   same name as an existing one, the CLI will throw an error.
 </Callout>
+<br/>
 
 ### Configuration
 

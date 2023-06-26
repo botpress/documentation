@@ -1,13 +1,10 @@
----
-title: "Capture Information"
-section:
-  name: "Toolbox"
-  slot: F
-slot: 3
-slug: "toolbox/capture-information"
----
+import { Callout } from 'nextra/components'
+import { Table, Td, Tr } from '@components/WrapperElements'
 
-![Shortcuts](/capture-info-banner.png)
+
+# Capture Information"
+
+![Shortcuts](/docs/capture-info-banner.png)
 
 **Capture Information** Card is part of the Toolbox that allows the bot to stop processing and wait for the user's response while capturing a specific piece of information from the user's input.
 
@@ -1185,7 +1182,8 @@ If you turn on the **Confirm before cancelling** option, the bot will ask the us
 
 The **Choices** setting is used to offer a list of predefined options to the user as a response to a Capture Information card. This can be useful when you want to restrict the user's input to a specific set of values.
 
-<Callout variant="info" title="Tip">
+<Callout>
+  **Tip** <br/>
   Choices are only available for **Single Choice** & **Multi Choice** Prompt
   types.
 </Callout>

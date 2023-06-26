@@ -1,23 +1,48 @@
 {
-	"scripts": {
-		"start": "next serve",
-		"build": "next build",
-		"watch": "next dev"
-	},
-	"dependencies": {
-		"clsx": "^1.2.1",
-		"next": "^13.4.4",
-		"nextra": "^2.6.1",
-		"nextra-theme-docs": "^2.6.1",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"sharp": "^0.32.1"
-	},
-	"devDependencies": {
-		"@types/node": "20.2.5",
-		"autoprefixer": "^10.4.14",
-		"postcss": "^8.4.23",
-		"tailwindcss": "^3.3.2",
-		"typescript": "5.0.4"
-	}
+  "name": "documentation",
+  "version": "1.0.0",
+  "description": "documentation",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "dev": "pnpm clean && gatsby develop -H 0.0.0.0",
+    "develop": "pnpm dev",
+    "build": "pnpm generate && gatsby build --prefix-paths",
+    "start": "pnpm generate && gatsby serve --prefix-paths",
+    "generate": "esbuild --bundle --platform=node --target=esnext --outfile=dist/generateApi.js scripts/generateApi.ts && node dist/generateApi.js",
+    "generate-api-docs": "esbuild --bundle --platform=node --target=esnext --outfile=dist/generateApiDocumentationPage.js scripts/generateApiDocumentationPage.ts && node dist/generateApiDocumentationPage.js",
+    "serve": "pnpm start",
+    "analyse": "lhci autorun --url http://localhost:8000",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vercel/og": "^0.5.0",
+    "classnames": "^2.3.2",
+    "lodash": "^4.17.21",
+    "next": "^13.4.6",
+    "nextra": "^2.7.1",
+    "nextra-theme-docs": "^2.7.1",
+    "prism-react-renderer": "^1.3.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.63.4",
+    "unleash-proxy-client": "^2.4.2",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@readme/openapi-parser": "^2.5.0",
+    "@svgr/webpack": "^8.0.1",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.26",
+    "autoprefixer": "^10.4.13",
+    "eslint": "^8.30.0",
+    "openapi-types": "^12.1.3",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.4",
+    "prettier": "^2.8.4",
+    "typescript": "^5.0.0",
+    "prettier-plugin-tailwindcss": "^0.2.4"
+  }
 }
