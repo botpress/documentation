@@ -62,8 +62,8 @@ export function useFeature<featureToggles extends string, featureName extends fe
 }
 
 export const toggler = new FeatureToggler({
-  url: process.env.GATSBY_UNLEASH_URL ?? '',
-  clientKey: process.env.GATSBY_UNLEASH_CLIENT_KEY ?? '',
-  appName: process.env.GATSBY_UNLEASH_APP_NAME ?? '',
+  url: process.env.NEXT_PUBLIC_UNLEASH_URL ?? '',
+  clientKey: process.env.NEXT_PUBLIC_UNLEASH_CLIENT_KEY ?? '',
+  appName: process.env.NEXT_PUBLIC_UNLEASH_APP_NAME ?? '',
   features,
 })
