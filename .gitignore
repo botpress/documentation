@@ -4,3 +4,4 @@ src/gatsby-types.d.ts
 static/openApi
 .next
 dist
+.env.local
