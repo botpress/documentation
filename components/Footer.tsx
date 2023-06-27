@@ -2,75 +2,94 @@ import Link from 'next/link'
 import * as React from 'react'
 import BpLogo from '../assets/bp-logo.inline.svg'
 import Linkedin from '../assets/linkedin.inline.svg'
+import Github from '../assets/github.inline.svg'
+import Discord from '../assets/discord.inline.svg'
 import Twitter from '../assets/twitter.inline.svg'
 import Youtube from '../assets/youtube.inline.svg'
 
 export function Footer() {
   return (
-    <footer className='w-full' >
-      <div className=" flex w-full max-w-5xl flex-col px-4 py-14">
-        <div className="w-full">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
-            <div className="grid grid-rows-5 gap-2 md:gap-6">
-              <Link href="https://botpress.com" className="flex items-center ">
-                <BpLogo className="dark:invert" />
-              </Link>
-              <Link href="https://www.youtube.com/botpress" target="_blank" className="ml-1 flex items-center">
-                <Youtube className="mr-3 h-6 w-6 dark:invert dark:opacity-50" />
-                YouTube
-              </Link>
-              <Link
-                href="https://www.linkedin.com/company/botpress/"
-                target="_blank"
-                className="ml-1 flex items-center"
-              >
-                <Linkedin className="mr-3 h-6 w-6 dark:invert dark:opacity-50" />
-                LinkedIn
-              </Link>
-              <Link href="https://twitter.com/getbotpress/" target="_blank" className="ml-1 flex items-center">
-                <Twitter className="mr-3 h-6 w-6 dark:invert dark:opacity-50" />
-                Twitter
-              </Link>
-            </div>
-            <div className="grid grid-rows-5 gap-2 md:gap-6">
-              <div className="font-bold">Learn</div>
-              <Link href="https://botpress.com/features/overview" target="_blank">
-                Quickstart
-              </Link>
-              <Link href="https://botpress.com/features/supported-platforms" target="_blank">
-                Messaging Channels
-              </Link>
-              <Link href="https://v12.botpress.com/" target="_blank">
-                v12 Docs
-              </Link>
-            </div>
-            <div className="grid grid-rows-5 gap-2 md:gap-6">
-              <div className="font-bold">Community</div>
-              <Link href="https://community.botpress.com/" target="_blank">
-                Botpress Community
-              </Link>
-              <Link href="https://botpress.com/blog" target="_blank">
-                Blog
-              </Link>
-            </div>
-            <div className="grid grid-rows-5 gap-2 md:gap-6">
-              <div className="font-bold">Company</div>
-              <Link href="https://botpress.com/company/about" target="_blank">
-                About
-              </Link>
-              <Link href="https://botpress.com/news" target="_blank">
-                News & Press
-              </Link>
-              <Link href="https://botpress.com/privacy" target="_blank">
-                Privacy
-              </Link>
-              <Link href="https://botpress.com/company/terms" target="_blank">
-                Terms
-              </Link>
+    <footer className="w-full">
+      <div className=" flex w-full flex-col px-4 py-14">
+        <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-3 md:grid-cols-5">
+          <div className="flex flex-col gap-2">
+            <Link href="https://botpress.com" className="mb-5">
+              <BpLogo className="dark:invert dark:opacity-50" />
+            </Link>
+            <div className="flex gap-2">
+              {[
+                [Github, 'https://github.com/botpress'],
+                [Youtube, 'https://www.youtube.com/botpress'],
+                [Linkedin, 'https://www.linkedin.com/company/botpress/'],
+                [Twitter, 'https://twitter.com/getbotpress/'],
+                [Discord, 'https://discord.gg/botpress'],
+              ].map(([Icon, href]) => (
+                <Link href={href} target="_blank" className="ml-1 flex items-center">
+                  <Icon className="h-6 w-6 dark:opacity-50 dark:invert" />
+                </Link>
+              ))}
             </div>
           </div>
-          <div className="mt-20">Copyright &copy; {new Date().getFullYear()} Botpress, Inc.</div>
+          <div className="flex flex-col gap-2">
+            <div className="font-bold">Product</div>
+            {[
+              ['https://botpress.com/pricing', 'Pricing'],
+              ['https://botpress.com/features/gpt-native-engine', 'NLU'],
+              ['https://botpress.com/features/conversation-studio', 'Studio'],
+              ['https://botpress.com/hub', 'Hub'],
+            ].map(([href, text]) => (
+              <Link href={href} target="_blank" className="link">
+                {text}
+              </Link>
+            ))}
+          </div>
+          <div className="flex flex-col gap-2">
+            <div className="font-bold">Hub</div>
+            {[
+              ['https://botpress.com/hub', 'Channels'],
+              ['https://botpress.com/hub', 'Integrations'],
+              ['https://botpress.com/hub', 'Languages'],
+              ['https://botpress.com/hub', 'Templates'],
+            ].map(([href, text]) => (
+              <Link href={href} target="_blank" className="link">
+                {text}
+              </Link>
+            ))}
+          </div>
+          <div className="flex flex-col gap-2">
+            <div className="font-bold">Resources</div>
+            {[
+              ['https://botpress.com/docs/', 'Documentation'],
+              ['https://botpress.com/contact-us', 'Talk to Sales'],
+              ['https://discord.gg/botpress', 'Discord Community'],
+              ['https://botpress.com/find-a-partner', 'Find a Partner'],
+              ['https://botpress.com/experts', 'Become a Partner'],
+              ['https://botpress.com/docs/api/', 'API Reference'],
+              ['https://www.youtube.com/botpress', 'Videos'],
+              ['https://status.botpress.com/', 'Status'],
+              ['https://v12.botpress.com/', 'v12 Resources'],
+            ].map(([href, text]) => (
+              <Link href={href} target="_blank" className="link">
+                {text}
+              </Link>
+            ))}
+          </div>
+          <div className="flex flex-col gap-2">
+            <div className="font-bold">Company</div>
+            {[
+              ['https://botpress.com/company/about', 'About'],
+              ['https://botpress.com/careers', 'Careers'],
+              ['https://botpress.com/news', 'News & Press'],
+              ['https://botpress.com/company/terms', 'Terms'],
+              ['https://botpress.com/privacy', 'Privacy'],
+            ].map(([href, text]) => (
+              <Link href={href} target="_blank" className="link">
+                {text}
+              </Link>
+            ))}
+          </div>
         </div>
+        <div className="mt-20">Copyright &copy; {new Date().getFullYear()} Botpress, Inc.</div>
       </div>
     </footer>
   )
