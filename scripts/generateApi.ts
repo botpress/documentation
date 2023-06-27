@@ -1,4 +1,3 @@
-import { createOpenApi } from '@botpress/api/openapi'
+import { api } from '@botpress/api'
 
-const api = createOpenApi()
-void api.exportOpenapi('./public/static/openApi')
+api.exportOpenapi('./public/static/openApi')
