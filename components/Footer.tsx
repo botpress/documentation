@@ -14,7 +14,7 @@ export function Footer() {
         <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-3 md:grid-cols-5">
           <div className="flex flex-col gap-2">
             <Link href="https://botpress.com" className="mb-5">
-              <BpLogo className="dark:invert dark:opacity-50" />
+              <BpLogo className="hover:opacity-75 dark:opacity-50 dark:invert dark:hover:opacity-100" />
             </Link>
             <div className="flex gap-2">
               {[
@@ -25,69 +25,64 @@ export function Footer() {
                 [Discord, 'https://discord.gg/botpress'],
               ].map(([Icon, href]) => (
                 <Link href={href} target="_blank" className="ml-1 flex items-center">
-                  <Icon className="h-6 w-6 dark:opacity-50 dark:invert" />
+                  <Icon className="h-6 w-6 hover:opacity-75 dark:opacity-50 dark:invert dark:hover:opacity-100" />
                 </Link>
               ))}
             </div>
           </div>
-          <div className="flex flex-col gap-2">
-            <div className="font-bold">Product</div>
-            {[
-              ['https://botpress.com/pricing', 'Pricing'],
-              ['https://botpress.com/features/gpt-native-engine', 'NLU'],
-              ['https://botpress.com/features/conversation-studio', 'Studio'],
-              ['https://botpress.com/hub', 'Hub'],
-            ].map(([href, text]) => (
-              <Link href={href} target="_blank" className="link">
-                {text}
-              </Link>
-            ))}
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="font-bold">Hub</div>
-            {[
-              ['https://botpress.com/hub', 'Channels'],
-              ['https://botpress.com/hub', 'Integrations'],
-              ['https://botpress.com/hub', 'Languages'],
-              ['https://botpress.com/hub', 'Templates'],
-            ].map(([href, text]) => (
-              <Link href={href} target="_blank" className="link">
-                {text}
-              </Link>
-            ))}
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="font-bold">Resources</div>
-            {[
-              ['https://botpress.com/docs/', 'Documentation'],
-              ['https://botpress.com/contact-us', 'Talk to Sales'],
-              ['https://discord.gg/botpress', 'Discord Community'],
-              ['https://botpress.com/find-a-partner', 'Find a Partner'],
-              ['https://botpress.com/experts', 'Become a Partner'],
-              ['https://botpress.com/docs/api/', 'API Reference'],
-              ['https://www.youtube.com/botpress', 'Videos'],
-              ['https://status.botpress.com/', 'Status'],
-              ['https://v12.botpress.com/', 'v12 Resources'],
-            ].map(([href, text]) => (
-              <Link href={href} target="_blank" className="link">
-                {text}
-              </Link>
-            ))}
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="font-bold">Company</div>
-            {[
-              ['https://botpress.com/company/about', 'About'],
-              ['https://botpress.com/careers', 'Careers'],
-              ['https://botpress.com/news', 'News & Press'],
-              ['https://botpress.com/company/terms', 'Terms'],
-              ['https://botpress.com/privacy', 'Privacy'],
-            ].map(([href, text]) => (
-              <Link href={href} target="_blank" className="link">
-                {text}
-              </Link>
-            ))}
-          </div>
+          {[
+            [
+              'Product',
+              [
+                ['https://botpress.com/pricing', 'Pricing'],
+                ['https://botpress.com/features/gpt-native-engine', 'NLU'],
+                ['https://botpress.com/features/conversation-studio', 'Studio'],
+                ['https://botpress.com/hub', 'Hub'],
+              ],
+            ],
+            [
+              'Hub',
+              [
+                ['https://botpress.com/hub', 'Channels'],
+                ['https://botpress.com/hub', 'Integrations'],
+                ['https://botpress.com/hub', 'Languages'],
+                ['https://botpress.com/hub', 'Templates'],
+              ],
+            ],
+            [
+              'Resources',
+              [
+                ['https://botpress.com/docs/', 'Documentation'],
+                ['https://botpress.com/contact-us', 'Talk to Sales'],
+                ['https://discord.gg/botpress', 'Discord Community'],
+                ['https://botpress.com/find-a-partner', 'Find a Partner'],
+                ['https://botpress.com/experts', 'Become a Partner'],
+                ['https://botpress.com/docs/api/', 'API Reference'],
+                ['https://www.youtube.com/botpress', 'Videos'],
+                ['https://status.botpress.com/', 'Status'],
+                ['https://v12.botpress.com/', 'v12 Resources'],
+              ],
+            ],
+            [
+              'Company',
+              [
+                ['https://botpress.com/company/about', 'About'],
+                ['https://botpress.com/careers', 'Careers'],
+                ['https://botpress.com/news', 'News & Press'],
+                ['https://botpress.com/company/terms', 'Terms'],
+                ['https://botpress.com/privacy', 'Privacy'],
+              ],
+            ],
+          ].map(([title, links]) => (
+            <div className="flex flex-col gap-3">
+              <div className="font-bold">{title}</div>
+              {(links as string[][]).map(([href, text]) => (
+                <Link href={href} target="_blank" className="link">
+                  {text}
+                </Link>
+              ))}
+            </div>
+          ))}
         </div>
         <div className="mt-20">Copyright &copy; {new Date().getFullYear()} Botpress, Inc.</div>
       </div>
