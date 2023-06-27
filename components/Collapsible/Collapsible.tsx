@@ -21,8 +21,8 @@ export function Collapsible({ isCollapsible = false, ...props }: CollapsibleProp
       <div
         onClick={() => isCollapsible && setIsCollapsed(!isCollapsed)}
         className={classNames(
-          'group flex items-center justify-between border-b border-zinc-200 p-2 group-hover:bg-indigo-100 dark:border-zinc-700',
-          { 'border-hidden': isCollapsed, 'cursor-pointer': isCollapsible }
+          'group flex items-center justify-between border-zinc-200 p-2 group-hover:bg-indigo-100 dark:border-zinc-700',
+          { 'border-hidden': isCollapsed, 'cursor-pointer': isCollapsible, 'border-b': Boolean(contentChild) }
         )}
       >
         <div className="[&>*]:m-0">{heading}</div>
