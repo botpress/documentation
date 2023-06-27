@@ -43,13 +43,13 @@ To create a Variable in your bot's workflow, you can follow these steps:
 
 User Variables are associated with a specific user and are persisted across multiple sessions. This means that if a user interacts with the chatbot multiple times, their User Variables will still be available and can be used to personalize the conversation. Examples of User Variables include user's name, preferences, or history of interactions.
 
-You can simply go to [Chatbot Settings](../../studio/chatbot-settings/#user-variables) and add user variables. You can use **`{{user.variablename}}`** or **`@variablename`** to display it in your send message card.
+You can simply go to [Chatbot Settings](./chatbot-settings/#user-variables) and add user variables. You can use **`{{user.variablename}}`** or **`@variablename`** to display it in your send message card.
 
 ## Bot Variables
 
 Bot Variables, on the other hand, are the same for all users of the bot. They are typically used to store information that is relevant to the entire chatbot, such as configuration settings or data that is used across multiple conversations. Examples of Bot Variables include the bot's name, version, or any static data that the bot may need to function properly.
 
-You can simply go to [Chatbot Settings](../../studio/chatbot-settings/#bot-variables) and add bot variables. You can use **`{{bot.variablename}}`** or **`@variablename`** to display it in your send message card.
+You can simply go to [Chatbot Settings](./chatbot-settings/#bot-variables) and add bot variables. You can use **`{{bot.variablename}}`** or **`@variablename`** to display it in your send message card.
 
 <br />
 
@@ -68,7 +68,7 @@ You can use **`{{env.key}}`** to get the value of the Configuration Variable Key
 
 To use it in an Execute Code Card, you can write **`env.key`** to access it's value.
 
-Learn more on using [configuration variables in production](../../admin-dashboard/config-variables/#3-env-keys-in-production).
+Learn more on using [configuration variables in production](../admin-dashboard/config-variables/#3-env-keys-in-production).
 
 ## Setting Value to a Variable
 
