@@ -12,6 +12,7 @@ const withNextra = nextra({
 })
 
 export default withNextra({
+  basePath: '/docs',
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
