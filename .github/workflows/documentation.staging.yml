@@ -31,11 +31,11 @@ jobs:
           check-latest: true
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm i --frozen-lockfile
+        run: pnpm i
 
       - name: Generate "API Documentation" page
         run: pnpm i -g esbuild; pnpm generate; pnpm run generate-api-docs
-        
+
       - name: Build
         run: pnpm build
         
