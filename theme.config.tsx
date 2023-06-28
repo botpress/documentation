@@ -58,7 +58,7 @@ const logo = (
 
       .logo-container span{
         font-weight: 600;
-        margin-bottom: 1px;
+        margin-bottom: 2px;
         margin-left: 6px;
         text-transform: uppercase;
         font-size: 16px;
@@ -86,7 +86,6 @@ const config: DocsThemeConfig = {
     link: undefined,
   },
   logo,
-  faviconGlyph: 'B',
   primaryHue: { dark: 217, light: 217 },
   head: function useHead() {
     const { title } = useConfig()
