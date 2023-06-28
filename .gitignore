@@ -1,3 +1,7 @@
+node_modules/
+.cache/
+src/gatsby-types.d.ts
+static/openApi
 .next
-node_modules
-.DS_Store
+dist
+.env.local

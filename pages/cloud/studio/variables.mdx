@@ -1,11 +1,4 @@
----
-title: 'Variables'
-section:
-  name: 'Studio Interface'
-  slot: D
-slot: 3
-slug: 'studio/variables'
----
+# Variables
 
 Botpress variables are variables that you can create within a Botpress chatbot to store information and use it in different parts of the bot's flow. 
 
@@ -15,58 +8,17 @@ These variables are similar to the types of variables you'd find in other progra
 
 You can create variables that can be used at different times in your flow.
 
-<Table>
-  <Tr>
-    <Td>**Type**</Td>
-    <Td>**Description**</Td>
-  </Tr>
-  <Tr>
-    <Td>String</Td>
-    <Td>
-      Values that are treated as text. This means that the values of string variables may include numbers, letters, or
-      symbols. E.g. useful to store the name of the user.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Boolean</Td>
-    <Td>
-      Variables can either be True or False. E.g. isGreeted boolean variable checks if the user has been greeted or not
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Number</Td>
-    <Td>To store value in number format for storing numeric values such as phone numbers and Pincode.</Td>
-  </Tr>
-  <Tr>
-    <Td>Date</Td>
-    <Td>
-      Simple integers representing the number of days, weeks, hours, and so on from a user-specified starting point.
-      E.g. Storing the user's order date for a product.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Object</Td>
-    <Td>Collection of key-value pairs, each key is mapped to a value. E.g. </Td>
-  </Tr>
-  <Tr>
-    <Td>Array</Td>
-    <Td>
-      Collection of similar types of data. There are two types of Arrays. 1. String Storing a list of strings. E.g
-      [Apple, Mango, Banana] 2. Object Storing a list of objects.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Enum</Td>
-    <Td>
-      Unique set of data. An example of an enum type might be the days of the week or a set of status values for a piece
-      of data.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Pattern</Td>
-    <Td>Value that follows a predefined pattern using regex.</Td>
-  </Tr>
-</Table>
+| Type | Description |
+| ---- | ----------- |
+| String | Values that are treated as text. This means that the values of string variables may include numbers, letters, or symbols. E.g. useful to store the name of the user. |
+| Boolean | Variables can either be True or False. E.g. isGreeted boolean variable checks if the user has been greeted or not |
+| Number | To store value in number format for storing numeric values such as phone numbers and Pincode. |
+| Date | Simple integers representing the number of days, weeks, hours, and so on from a user-specified starting point. E.g. Storing the user's order date for a product. |
+| Object | Collection of key-value pairs, each key is mapped to a value. E.g. |
+| Array | Collection of similar types of data. There are two types of Arrays. 1. String Storing a list of strings. E.g [Apple, Mango, Banana] 2. Object Storing a list of objects. |
+| Enum | Unique set of data. An example of an enum type might be the days of the week or a set of status values for a piece of data. |
+| Pattern | Value that follows a predefined pattern using regex. |
+
 
 ## Workflow Variables
 
@@ -91,13 +43,13 @@ To create a Variable in your bot's workflow, you can follow these steps:
 
 User Variables are associated with a specific user and are persisted across multiple sessions. This means that if a user interacts with the chatbot multiple times, their User Variables will still be available and can be used to personalize the conversation. Examples of User Variables include user's name, preferences, or history of interactions.
 
-You can simply go to [Chatbot Settings](../../studio/chatbot-settings/#user-variables) and add user variables. You can use **`{{user.variablename}}`** or **`@variablename`** to display it in your send message card.
+You can simply go to [Chatbot Settings](./chatbot-settings/#user-variables) and add user variables. You can use **`{{user.variablename}}`** or **`@variablename`** to display it in your send message card.
 
 ## Bot Variables
 
 Bot Variables, on the other hand, are the same for all users of the bot. They are typically used to store information that is relevant to the entire chatbot, such as configuration settings or data that is used across multiple conversations. Examples of Bot Variables include the bot's name, version, or any static data that the bot may need to function properly.
 
-You can simply go to [Chatbot Settings](../../studio/chatbot-settings/#bot-variables) and add bot variables. You can use **`{{bot.variablename}}`** or **`@variablename`** to display it in your send message card.
+You can simply go to [Chatbot Settings](./chatbot-settings/#bot-variables) and add bot variables. You can use **`{{bot.variablename}}`** or **`@variablename`** to display it in your send message card.
 
 <br />
 
@@ -116,7 +68,7 @@ You can use **`{{env.key}}`** to get the value of the Configuration Variable Key
 
 To use it in an Execute Code Card, you can write **`env.key`** to access it's value.
 
-Learn more on using [configuration variables in production](../../admin-dashboard/config-variables/#3-env-keys-in-production).
+Learn more on using [configuration variables in production](../admin-dashboard/config-variables/#3-env-keys-in-production).
 
 ## Setting Value to a Variable
 

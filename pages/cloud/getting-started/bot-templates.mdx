@@ -1,13 +1,8 @@
----
-title: "Bot Templates"
-section:
-  name: "Getting Started"
-  slot: A
-slot: 12
-slug: "getting-started/bot-templates"
----
+import {Callout} from 'nextra/components'
 
-![Create & Publish](/bot-templates.png)
+# Bot Templates
+
+![Create & Publish](/docs/content/bot-templates.png)
 
 Bot templates are pre-configured bot projects that contain predefined conversational flows, Knowledge Bases, and responses.
 
@@ -30,7 +25,8 @@ Using bot templates in Botpress offers several advantages:
 - Choose the template you would like to start with and click on Use Template. If you wish to start your bot building from scratch, you can select the **Basic (empty)** Bot Template.
 - You can publish the bot to use the template as it is, or customize it to meet your specific requirements. This includes modifying the predefined conversational flows, adding or removing knowledge bases, and updating responses. Botpress provides a visual flow editor that simplifies the customization process, enabling you to define the bot's behavior using a drag-and-drop interface.
 
-<Callout variant="danger" title="Overriding Template">
+<Callout type="error">
+**Overriding Template** <br/>
 If you override an existing bot with a bot template, all the previous content and configurations of your bot will be erased and replaced with the new template. <br/>
 
 It's important to note that overriding a bot with a template should be done with caution, as it will result in the loss of any existing data and configurations associated with the original bot.

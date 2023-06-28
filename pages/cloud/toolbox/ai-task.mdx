@@ -1,13 +1,10 @@
----
-title: "AI Task"
-section:
-  name: "Toolbox"
-  slot: F
-slot: 5
-slug: "toolbox/ai-task"
----
+import { Callout } from 'nextra/components'
+import { Table, Td, Tr } from '@components/WrapperElements'
 
-<Callout variant="gai" title="Generative AI Task">
+# AI Task
+
+<Callout>
+ **Generative AI Task** <br/>
   The **AI Task Card** in Botpress is designed to enable users to perform tasks
   using generative artificial intelligence.
 </Callout>
@@ -15,12 +12,12 @@ slug: "toolbox/ai-task"
 It is a tool for generating content using Artificial Intelligence and can be used to automate a wide range of tasks. By providing clear instructions, specific inputs, and well-named variables, users can leverage the full capabilities of this tool to improve their workflows and boost their productivity.
 
 <br />
-![Generative AI Task](/generative-ai.png)
+![Generative AI Task](/docs/content/generative-ai.png)
 
 ## Task Instructions
 
 <br />
-![Generative AI Task instructions](/task-instructions.png)
+![Generative AI Task instructions](/docs/content/task-instructions.png)
 
 To accomplish a generative task using the **AI Task Card**, users will need to provide specific instructions in natural language
 on what they want the AI engine to generate. This can be done using the **Task Instructions** parameter.
@@ -33,7 +30,7 @@ followed.
 
 ## AI Task Input
 
-![Generative AI Task instructions](/gai-input-variables.png)
+![Generative AI Task instructions](/docs/content/gai-input-variables.png)
 
 This is the input that will be sent to the Generative AI Engine. Think of it as the problem subject. Users should be as specific as possible when providing the AI task input, as this will help the AI engine generate more accurate and relevant content.
 You can use multiple variants as an input - not limited to:
@@ -69,7 +66,7 @@ This allows users to specify the variables where the extracted information will 
 
 ## Task Example
 
-![Generative AI Task example](/task-example.png)
+![Generative AI Task example](/docs/content/task-example.png)
 
 ### Example Input
 
@@ -85,7 +82,7 @@ that was provided to it as well as its output format.
 
 ## Displaying result (optional)
 
-![Generative AI Task example](/last-step-gai.png)
+![Generative AI Task example](/docs/content/last-step-gai.png)
 
 You still need a content-type card to display the output of the AI Task Card if you want to.
 

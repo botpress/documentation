@@ -1,271 +1,31 @@
----
-title: "Botpress Features"
-section:
-  name: "Getting Started"
-  slot: A
-slot: 3
-slug: "getting-started/features"
----
+import { Table, Td, Tr, Ul, Li } from '@components/WrapperElements'
 
-![Features](/features-cover.png)
+# Botpress Features
 
-## Overall Product Specifications​
+![Features](/docs/content/features-cover.png)
 
-<Table>
-  <Tr>
-    <Td>**Feature**</Td>
-    <Td>**Description**</Td>
-  </Tr>
-  <Tr>
-    <Td>SDK</Td>
-    <Td>
-      The utility functions that can be used as arguments in user custom code.
-      You can find the NPM [here](https://www.npmjs.com/package/@botpress/sdk),
-      and API documentation [here](https://botpress.com/docs/api/)
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Security</Td>
-    <Td>
-      <Ul>
-        <Li>Audit logs for all activities in your workspace</Li>
-        <Li>Encryption at rest and in transit</Li>
-        <Li>Rate limits & various HTTP-server limits</Li>
-        <Li>
-          SSO - [talk to our sales
-          representatives](https://botpress.com/contact-us)
-        </Li>
-      </Ul>
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>CI/CD</Td>
-    <Td>One-click publish to production</Td>
-  </Tr>
-  <Tr>
-    <Td>Multi-Channel Support</Td>
-    <Td>
-      Instantly deliver your bots on all the major messaging channels
-      <br />
-      <Ul>
-        <Li>Botpress Webchat</Li>
-        <Li>Facebook Messenger</Li>
-        <Li>Microsoft Teams</Li>
-        <Li>SMS via Twilio</Li>
-        <Li>WhatsApp</Li>
-        <Li>Line</Li>
-        <Li>Viber</Li>
-        <Li>Instagram</Li>
-        <Li>Coming Soon: Intercom, Webhook, Gmail, Rocketchat and more.</Li>
-      </Ul>
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Botpress Webchat</Td>
-    <Td>
-      <Ul>
-        **Create custom message widgets**
-        <Li>Create your own GUI messages using React</Li>
-        <Li>Customizable with CSS</Li>
-        <br />
-        **Flexibility for users**<Li>
-          Multiple simultaneous conversations with the same bot
-        </Li>
-        <Li>Reset & delete conversation (for privacy purposes)</Li>
-        <Li>File-sharing using Shareable link</Li>
-        <Li>Hosted on AWS S3 or BPFS</Li>
-      </Ul>
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Custom Chatbot Branding</Td>
-    <Td>
-      [Rebrand the Botpress webchat
-      interface](https://botpress.com/docs/cloud/webchat-customization/overview)
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Community Support</Td>
-    <Td>
-      <Ul>
-        <Li>[Botpress forum & community](https://community.botpress.com/)</Li>
-        <Li>Intercom live support</Li>
-      </Ul>
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Multilingual Support</Td>
-    <Td>
-      <Ul>
-        <Li>
-          Supported Languages: you can use Botpress to make bots in 100+
-          languages. However during the early preview of the new Botpress, only
-          English is supported for natural language understanding.
-        </Li>
-        <Li>
-          Learn more about languages:
-          [here](https://botpress.com/docs/cloud/getting-started/languages)
-        </Li>
-      </Ul>
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Conversational AI Management</Td>
-    <Td>
-      Managed Natural Language Understanding (NLU) Engine - an industrial-grade
-      native NLU engine, from domain specific natural language to structured
-      data
-      <Ul>
-        <Li>
-          **Intent classification** - understand the type of action or out of
-          scope conveyed in the sentences and all its participating parts (e.g.
-          book a flight, order dinner, buy a product, etc.)
-        </Li>
-        <Li>
-          **Entity extraction** - locate and classify named entities into
-          predefined categories such as person names, organizations, locations,
-          product SKUs, etc. Regex/pattern entities, List entities, Fuzzy
-          matching, pre-built entities
-        </Li>
-        <Li>
-          **Slot tagging** - tag the words which carry meaning to the sentences
-          (e.g. landing city, type of meal, etc.)
-        </Li>
-        <Li>
-          **Language identification** - determining the natural language that a
-          document or part thereof is written in (e.g. English, French, etc.)
-        </Li>
-        <Li>
-          **Natural Language Understanding**: any number of languages within the
-          same chatbot; the bot is able to detect the user's language and then
-          answer in kind
-        </Li>
-        <Li>
-          **Spell checking** - check for misspellings and automatically fix the
-          spelling mistakes so that the downstream NLU performs more accurately
-        </Li>
-      </Ul>
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Built-in content types across all channels</Td>
-    <Td>
-      Read more about [Supported content types for each
-      channel](https://botpress.com/docs/cloud/channels/overview/#supported-content-types)
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Visual conversation / dialog management</Td>
-    <Td>
-      Visual developer interface to create and management dialog states and
-      topic
-      <Ul>
-        <Li>Low-code drag and drop user interface</Li>
-        <Li>
-          Multiple visual flows and subflows with conditions divided by topics
-        </Li>
-        <Li>
-          Multi-turn and the ability to jump from a topic to another seamlessly
-        </Li>
-        <Li>
-          Topic management - process that enables data elements pertaining to a
-          specific topic to be maintained within conversations (e.g. user name,
-          SKU number, etc.)
-        </Li>
-        <Li>
-          Conversational detours - while the visual flows represent the "happy
-          paths" that are desired by the conversation designers, detours are
-          about automatically and gracefully handling exceptions
-        </Li>
-        <Li>
-          Template management - use pre-made templates to get started or find
-          inspiration
-        </Li>
-        <Li>Intelligent slot filling - prompting for missing form fields</Li>
-        <Li>
-          Workflow management - group and reuse flows and subflows to embed and
-          manage domain specific knowledge
-        </Li>
-        <Li>Code autocompletion and user interface shortcuts</Li>
-      </Ul>
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>FAQ/Q&A</Td>
-    <Td>
-      Create, manage, and centrally access the most frequently asked questions
-      the users may have
-      <Ul>
-        <Li>Context management</Li>
-        <Li>Rich messages</Li>
-        <Li>
-          Message "alternatives" - the bot doesn’t always say the same thing
-        </Li>
-      </Ul>
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Human in the Loop (HITL)</Td>
-    <Td>
-      Straightforward integrations with leading third party HITL, including
-      Salesforce, Zendesk, Servicenow, Oracle, Intercom, Genesis, Twilio Flex,
-      Nuance and LiveAgent.
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Analytics & continuous chatbot training</Td>
-    <Td>
-      Dashboards and tools to capture and improve user engagement and chatbot
-      accuracy
-      <Ul>
-        <Li>
-          Misunderstood - capture everything the chatbot doesn't understand and
-          use it to improve your chatbot or expand its capabilities
-        </Li>
-        <Li>Engagement</Li>
-        <Li>Conversations</Li>
-        <Li>Interactions</Li>
-      </Ul>
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Testing, debugging, and logging</Td>
-    <Td>
-      End-to-end conversation emulation & testing
-      <br />
-      NLU tracing & testing
-      <br />
-      Bookmark states to test & set flow breakpoints
-      <br />
-      Debug streaming logs
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Chatbot privacy</Td>
-    <Td>
-      Sensitive data / conversation obfuscation
-      <br />
-      Variable time-based deletion
-      <br />
-      Selective data persistence
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>JavaScript IDE</Td>
-    <Td>
-      Easily integrate with your internal systems and any third parties
-      <br />
-      Actions & Hooks - create and edit actions within Botpress (e.g. call an
-      API). Features typing and intelligent code completion
-      <br />
-      VS Code embedded in Botpress Studio
-    </Td>
-  </Tr>
-  <Tr>
-    <Td>Terms and Conditions</Td>
-    <Td>[Terms and Conditions](https://botpress.com/company/terms)</Td>
-  </Tr>
-</Table>
+## Overall Product Specifications
+{/* Create a table of features in markdown */}
+| Feature | Description |
+| :--- | :--- |
+| SDK | The utility functions that can be used as arguments in user custom code. You can find the NPM [here](https://www.npmjs.com/package/@botpress/sdk), and API documentation [here](https://botpress.com/docs/api/) |
+| Security | <ul><li>Audit logs for all activities in your workspace</li><li>Encryption at rest and in transit</li><li>Rate limits & various HTTP-server limits</li><li>SSO - [talk to our sales representatives](https://botpress.com/contact-us)</li></ul> |
+| CI/CD | One-click publish to production |
+| Multi-Channel Support | Instantly deliver your bots on all the major messaging channels <br /><ul><li>Botpress Webchat</li><li>Facebook Messenger</li><li>Microsoft Teams</li><li>SMS via Twilio</li><li>WhatsApp</li><li>Line</li><li>Viber</li><li>Instagram</li><li>Coming Soon: Intercom, Webhook, Gmail, Rocketchat and more.</li></ul> |
+| Botpress Webchat | <ul>**Create custom message widgets**<li>Create your own GUI messages using React</li><li>Customizable with CSS</li><br />**Flexibility for users**<li>Multiple simultaneous conversations with the same bot</li><li>Reset & delete conversation (for privacy purposes)</li><li>File-sharing using Shareable link</li><li>Hosted on AWS S3 or BPFS</li></ul> |
+| Custom Chatbot Branding | [Rebrand the Botpress webchat interface](https://botpress.com/docs/cloud/webchat-customization/overview) | 
+| Community Support | <ul><li>[Botpress forum & community](https://community.botpress.com/)</li><li>Intercom live support</li></ul> |
+| Multilingual Support | <ul><li>Supported Languages: you can use Botpress to make bots in 100+ languages. However during the early preview of the new Botpress, only English is supported for natural language understanding.</li><li>Learn more about languages: [here](https://botpress.com/docs/cloud/getting-started/languages)</li></ul> |
+| Conversational AI Management | <ul><li>Managed Natural Language Understanding (NLU) Engine - an industrial-grade native NLU engine, from domain specific natural language to structured data</li><li>**Intent classification** - understand the type of action or out of scope conveyed in the sentences and all its participating parts (e.g. book a flight, order dinner, buy a product, etc.)</li><li>**Entity extraction** - locate and classify named entities into predefined categories such as person names, organizations, locations, product SKUs, etc. Regex/pattern entities, List entities, Fuzzy matching, pre-built entities</li><li>**Slot tagging** - tag the words which carry meaning to the sentences (e.g. landing city, type of meal, etc.)</li><li>**Language identification** - determining the natural language that a document or part thereof is written in (e.g. English, French, etc.)</li><li>**Natural Language Understanding**: any number of languages within the same chatbot; the bot is able to detect the user's language and then answer in kind</li><li>**Spell checking** - check for misspellings and automatically fix the spelling mistakes so that the downstream NLU performs more accurately</li></ul> |
+| Built-in Content Types | [Supported content types for each channel](https://botpress.com/docs/cloud/channels/overview/#supported-content-types) |
+| Visual conversation / dialog management | Visual developer interface to create and management dialog states and topic <br /><ul><li>Low-code drag and drop user interface</li><li>Multiple visual flows and subflows with conditions divided by topics</li><li>Multi-turn and the ability to jump from a topic to another seamlessly</li><li>Topic management - process that enables data elements pertaining to a specific topic to be maintained within conversations (e.g. user name, SKU number, etc.)</li><li>Conversational detours - while the visual flows represent the "happy paths" that are desired by the conversation designers, detours are about automatically and gracefully handling exceptions</li><li>Template management - use pre-made templates to get started or find inspiration</li><li>Intelligent slot filling - prompting for missing form fields</li><li>Workflow management - group and reuse flows and subflows to embed and manage domain specific knowledge</li><li>Code autocompletion and user interface shortcuts</li></ul> |
+| FAQ/Q&A | Create, manage, and centrally access the most frequently asked questions the users may have <br /><ul><li>Context management</li><li>Rich messages</li><li>Message "alternatives" - the bot doesn’t always say the same thing</li></ul> |
+| Human in the Loop (HITL) | Straightforward integrations with leading third party HITL, including Salesforce, Zendesk, Servicenow, Oracle, Intercom, Genesis, Twilio Flex, Nuance and LiveAgent. |
+| Analytics & continuous chatbot training | Dashboards and tools to capture and improve user engagement and chatbot accuracy <br /><ul><li>Misunderstood - capture everything the chatbot doesn't understand and use it to improve your chatbot or expand its capabilities</li><li>Engagement</li><li>Conversations</li><li>Interactions</li></ul> |
+| Testing, debugging, and logging | End-to-end conversation emulation & testing <br />NLU testing <br />Debugging tools <br />Logging |
+| Chatbot privacy | <ul><li>Sensitive data / conversation obfuscation</li><li>Variable time-based deletion</li><li>Selective data persistence</li></ul> |
+| Javascript IDE | <ul><li>Easily integrate with your internal systems and any third parties</li><li>Actions & Hooks - create and edit actions within Botpress (e.g. call an API). Features typing and intelligent code completion</li><li>VS Code embedded in Botpress Studio</li></ul> |
+| Terms and Conditions | [Terms and Conditions](https://botpress.com/company/terms) |
 
 ## Enterprise-Specific Features​
 
@@ -344,5 +104,5 @@ slug: "getting-started/features"
       based on the purpose of the chatbots or for something more granular such
       as for a specific task, etc.
     </Td>
-  </Tr>
+  </Tr> 
 </Table>

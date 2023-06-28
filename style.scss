@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@import './styles/components.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', sans-serif;
+    font-weight: 450;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Lexend', sans-serif;
+  }
+}
+
+:root {
+  --color-primary: hsl(218, 81.42%, 55.69%);
+}
+body {
+  font-feature-settings: 'rlig' 1, 'calt' 1;
+}
+
+figcaption {
+  font-size: 0.85rem;
+  line-height: 1.5rem;
+  display: block;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+code.text-\[\.9em\] {
+  font-size: 14px;
+}
+
+p {
+  margin-bottom: 6px;
+}
+
+blockquote:is([dir='ltr'] .ltr\:nx-pl-6) {
+  margin-top: 0px;
+  padding-left: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+h2 {
+  margin-bottom: 16px;
+}
+
+iframe[data-youtube-iframe] {
+  width: 100%;
+}
+
+/**
+* Override the default dark mode color
+* Ideally should be the theme.config.primaryHue but it only changes the hue, and we want to change the saturation and lightness also
+*/
+:is(html[class~='dark']) {
+  --color-primary: hsl(218, 100%, 66%);
+}
+:is(html[class~='dark'] .dark\:nx-text-primary-600),
+.dark .nx-text-primary-600 {
+  color: var(--color-primary);
+}
+
+td > ul {
+  list-style: disc;
+  padding-left: 8px;
+}

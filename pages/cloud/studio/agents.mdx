@@ -1,0 +1,102 @@
+# Agents
+
+![Studio Agents](/docs/content/studio-agents.png)
+
+Botpress offers a variety of specialized Agents to enhance your chatbot's capabilities and adaptability. These Agents are designed to perform specific tasks, each contributing to the overall performance of your chatbot. Here, we introduce four of our agents: Summary, Personality, Knowledge, and Translator Agents.
+
+## Summary Agent
+
+The Summary Agent is designed to condense lengthy user responses or extensive text into a brief, digestible summary. This feature is crucial in ensuring that the main ideas are quickly understood, thus making interactions with your bot more efficient.
+
+### Input Parameters
+
+- **Summary Max Tokens**: This defines the maximum length of the generated summary in tokens. A token can be a word or a punctuation mark. This parameter allows you to set a limit on how lengthy your summaries can be, ensuring they remain concise and manageable.
+
+### Output Parameters
+
+- **conversation.SummaryAgent.summary**: This is the generated summary of the conversation thus far. It's important to note that this parameter is only available after each conversation turn.
+
+### Usage
+
+Upon enabling the Summary Agent, the conversation summary becomes accessible through the `{{conversation.SummaryAgent.summary}}` variable. This variable can be incorporated in any place where user code is permitted. This includes Hooks, workflow Executed Code cards, AI Task cards, and Transition cards.
+
+For example, if you wish to include a conversation summary in a chatbot prompt, you could write:
+
+```js
+'Your conversation summary: {{conversation.SummaryAgent.summary}}'
+```
+
+This would then output a brief summary of the conversation so far.
+
+### Conflicts
+
+There are no known conflicts with the Summary Agent and other Botpress functionalities or agents. However, please remember that the output from the Summary Agent (`conversation.SummaryAgent.summary`) is updated after each conversation turn. Therefore, ensure that you use it in context and check the summary only when it is updated.
+
+
+## Translator Agent
+
+The Translator Agent allows your chatbot to interact with users in different languages, breaking language barriers and expanding the range of your bot's audience. This agent translates the incoming user messages to a language that your chatbot can understand and processes its responses back to the user's language.
+
+### Input Parameter
+
+- **Detect User Language**: When enabled, this option allows the Translator Agent to identify the user's language based on their input automatically. If the user's language has yet to be discovered, it can be determined if the input message is long enough to discern it. Activating this feature consequently sets the `{{user.TranslatorAgent.language}}` variable when it's not already defined.
+
+### Output Parameter
+
+- **user.TranslatorAgent.language**: This variable represents the detected language of the user. By setting this variable to null, the language detection can be reset. Alternatively, to specify a language, you can set it to any valid ISO 639-1 language code (e.g., 'en', 'fr', 'es').
+
+### Usage
+
+The Translator Agent automatically translates the chatbot's responses into the user's language once activated. If you wish to define the user's language manually, you can directly set the `{{user.TranslatorAgent.language}}` variable. This can be set to any ISO 639-1 language code, such as 'en' for English, 'fr' for French, or 'es' for Spanish.
+
+For instance, if you'd like to set the user's language to Spanish, you can use:
+
+```javascript
+{{user.TranslatorAgent.language}} = 'es';
+```
+
+If you want to reset the language detection and allow the Translator Agent to determine the user's language from their input automatically, set the variable to 'null' or 'undefined'. For example:
+
+```javascript
+{{user.TranslatorAgent.language}} = null;
+```
+
+### Conflicts
+
+It is important to note that the Translator Agent may conflict with the Personality Agent. The Personality Agent is designed to manipulate chatbot responses according to pre-set personalities and could overwrite the translations done by the Translator Agent. If both the Translator Agent and the Personality Agent are enabled, the Personality Agent will take priority. If you want the Translator Agent to take effect, you may need to adjust the settings of the Personality Agent or turn it off.
+
+
+## Personality Agent
+
+The Personality Agent enables you to provide your chatbot with a unique personality. It tailors the bot's behavior and responses according to the defined personality traits, providing a more engaging and human-like interaction for the users.
+
+### Personality Description
+
+This is where you define the personality of your chatbot. You should describe how your chatbot is meant to behave and what it is meant to do. Including specific personality traits will influence the bot's responses. For example, if you describe the bot as a "funny cowboy that likes to add emojis to some of your messages and often refers to the user as 'my friend'", the bot will mimic this behavior in its responses.
+
+The Personality Agent, once enabled, will automatically rewrite all the messages sent by your bot to align with the described personality. For instance, if your bot is described as having a humorous and friendly personality, its responses may contain light-hearted quips or friendly salutations such as "Hello, my friend!"
+
+This may add some latency to your bot's responses as it takes time to process and rewrite the messages according to the defined personality traits.
+
+For instance, if you want your bot to behave like a professional consultant, you might write:
+
+```text
+Personality Description = 'You are a professional consultant who always uses formal language.
+You avoid slang and emojis and always address the user respectfully.'
+```
+
+### Conflicts
+
+Be aware that the Personality Agent can conflict with the Translator Agent. If both are enabled, the Personality Agent has higher priority and may overwrite the translations done by the Translator Agent. Thus, if you want to ensure the effectiveness of translations, you should adjust the settings of the Personality Agent or turn it off.
+
+## Knowledge Agent
+
+This agent will make your chatbot answer questions from Knowledge Bases.
+
+It will look for questions in the user's message and try to find an answer in the context Knowledge Bases.
+
+The Knowledge Bases that are searched are the ones that are in the same folder as the current workflow, or in the parent folders.
+
+The agent will only answer when the user asks a question and the chatbot is either on the Start Node or when the workflow is on a Capture Card inside a node that has Knowledge Bases enabled.
+
+To enable Knowledge Bases on a node, click on the node in the workflow editor and then enable the **Knowledge Bases** option in the right inspector panel.
