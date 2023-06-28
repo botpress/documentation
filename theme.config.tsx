@@ -95,8 +95,8 @@ const config: DocsThemeConfig = {
         <meta name="theme-color" content="#fff" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="Content-Language" content="en" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="icon" href="/docs/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/docs/favicon.png" type="image/png" />
         <title>{title || ''} - Botpress Documentation</title>
       </>
     )
