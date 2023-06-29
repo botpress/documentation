@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/build-documentation-action.yml
+      - uses: ./actions/build-documentation
         with:
           unleash-url: ${{ vars.UNLEASH_URL }}
           unleash-app-name: ${{ vars.UNLEASH_APP_NAME }}
