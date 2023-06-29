@@ -32,9 +32,8 @@ runs:
     - name: Generate "API Documentation" page
       shell: bash
       run: |
-        pnpm i -g esbuild
         pnpm generate
-        pnpm run generate-api-docs
+        pnpm generate-api-docs
 
     - name: Build
       shell: bash
