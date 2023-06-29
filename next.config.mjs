@@ -6,13 +6,16 @@ const withNextra = nextra({
   staticImage: true,
   latex: true,
   flexsearch: {
-    codeblocks: false
+    codeblocks: false,
   },
-  defaultShowCopyCode: true
+  defaultShowCopyCode: true,
 })
 
 export default withNextra({
   basePath: '/docs',
+  images: {
+    unoptimized: true,
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,

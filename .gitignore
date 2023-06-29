@@ -5,3 +5,4 @@ static/openApi
 .next
 dist
 .env.local
+out

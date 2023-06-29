@@ -1,0 +1,43 @@
+name: Build Documentation
+description: Build Documentation
+
+inputs:
+  unleash-url:
+    description: 'Unleash URL'
+    required: true
+  unleash-app-name:
+    description: 'Unleash App Name'
+    required: true
+  unleash-client-key:
+    description: 'Unleash Client Key'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: pnpm/action-setup@v2.2.4
+      with:
+        version: 8
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+        check-latest: true
+        cache: 'pnpm'
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm i
+
+    - name: Generate "API Documentation" page
+      shell: bash
+      run: |
+        pnpm generate
+
+    - name: Build
+      shell: bash
+      run: |
+        export NEXT_PUBLIC_UNLEASH_APP_NAME="${{inputs.unleash-app-name}}"
+        export NEXT_PUBLIC_UNLEASH_CLIENT_KEY="${{inputs.unleash-client-key}}"
+        export NEXT_PUBLIC_UNLEASH_URL="${{inputs.unleash-url}}"
+        pnpm build
