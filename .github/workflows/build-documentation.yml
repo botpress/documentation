@@ -1,0 +1,21 @@
+name: Build Documentation
+on:
+  pull_request:
+    branches:
+      - master
+
+  push:
+    branches:
+      - master
+
+  workflow_dispatch: {}
+
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/build-documentation-action.yml
+        with:
+          unleash-url: ${{ vars.UNLEASH_URL }}
+          unleash-app-name: ${{ vars.UNLEASH_APP_NAME }}
+          unleash-client-key: ${{ vars.UNLEASH_CLIENT_KEY }}

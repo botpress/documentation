@@ -1,0 +1,27 @@
+name: Deploy Documentation Production
+on:
+  workflow_dispatch: {}
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: ./.github/build-documentation-action.yml
+        with:
+          unleash-url: ${{ vars.UNLEASH_URL }}
+          unleash-app-name: ${{ vars.UNLEASH_APP_NAME }}
+          unleash-client-key: ${{ vars.UNLEASH_CLIENT_KEY }}
+
+      - uses: botpress/gh-actions/deploy/s3@v2
+        if: github.ref == 'refs/heads/master'
+        with:
+          aws-role: ${{ secrets.AWS_DOCUMENTATION_UPLOAD_ROLE }}
+          destination: s3://${{ secrets.AWS_DOCUMENTATION_BUCKET_NAME }}/docs
+          cloudfront-distribution-id: ${{ secrets.AWS_DOCUMENTATION_CLOUDFRONT_DISTRIBUTION_ID  }}
+          cloudfront-invalidation-prefix: '/docs/*'
+          source: ./packages/documentation/public

@@ -1,0 +1,46 @@
+name: Build Documentation
+description: Build Documentation
+
+inputs:
+  unleash-url:
+    description: 'Unleash URL'
+    type: string
+    required: true
+  unleash-app-name:
+    description: 'Unleash App Name'
+    type: string
+    required: true
+  unleash-client-key:
+    description: 'Unleash Client Key'
+    type: string
+    required: true
+
+runs:
+  using: 'composite'
+  env:
+    NEXT_PUBLIC_UNLEASH_URL: ${{inputs.unleash-url}}
+    NEXT_PUBLIC_UNLEASH_APP_NAME: ${{inputs.unleash-app-name}}
+    NEXT_PUBLIC_UNLEASH_CLIENT_KEY: ${{inputs.unleash-client-key}}
+  steps:
+    - uses: actions/checkout@v3
+    - uses: pnpm/action-setup@v2.2.4
+      with:
+        version: 8
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+        check-latest: true
+        cache: 'pnpm'
+
+    - name: Install dependencies
+      run: pnpm i
+
+    - name: Generate "API Documentation" page
+      run: |
+        pnpm i -g esbuild
+        pnpm generate
+        pnpm run generate-api-docs
+
+    - name: Build
+      run: pnpm build
