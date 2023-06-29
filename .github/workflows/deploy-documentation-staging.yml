@@ -19,7 +19,6 @@ jobs:
           unleash-client-key: ${{ vars.UNLEASH_CLIENT_KEY }}
 
       - uses: botpress/gh-actions/deploy/s3@v2
-        if: github.ref == 'refs/heads/master'
         with:
           aws-role: ${{ secrets.AWS_DOCUMENTATION_UPLOAD_ROLE }}
           destination: s3://${{ secrets.AWS_DOCUMENTATION_BUCKET_NAME }}/docs
