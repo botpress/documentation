@@ -33,7 +33,6 @@ runs:
       shell: bash
       run: |
         pnpm generate
-        pnpm generate-api-docs
 
     - name: Build
       shell: bash

@@ -1,4 +1,4 @@
-import { Callout } from "nextra/components"
+import { Callout } from 'nextra/components'
 
 # Getting Started
 
@@ -27,12 +27,12 @@ pnpm install
 Inside the file called `integration.definition.ts` add the following code:
 
 ```ts
-import { IntegrationDefinition, messages } from "@botpress/sdk";
-import { z } from "zod";
+import { IntegrationDefinition, messages } from '@botpress/sdk'
+import { z } from 'zod'
 
 export default new IntegrationDefinition({
-  name: "<UNIQUE_INTEGRATION_NAME>",
-  version: "0.0.1",
+  name: '<UNIQUE_INTEGRATION_NAME>',
+  version: '0.0.1',
   configuration: {
     schema: z.object({
       botToken: z.string(),
@@ -43,16 +43,24 @@ export default new IntegrationDefinition({
       messages: {
         text: messages.defaults.text,
       },
-      tags: {
-        messages: ["id"],
-        conversations: ["id"],
+      message: {
+        tags: {
+          id: {},
+        },
+      },
+      conversation: {
+        tags: {
+          id: {},
+        },
       },
     },
   },
-  tags: {
-    users: ["id"],
+  user: {
+    tags: {
+      id: {},
+    },
   },
-});
+})
 ```
 
 There is a lot going on there, so let's break it down.
@@ -62,11 +70,11 @@ There is a lot going on there, so let's break it down.
 The name and version are used to identify the integration. The name is used to generate the integration ID, which is a unique identifier for the integration. The version is used to identify the version of the integration. For now, only one version of an integration can be deployed at a time and `0.0.1` is enforced.
 
 <Callout type="warning">
-  **Integration Names** <br/>
-  The integration names are unique. If you try to create an integration with the
-  same name as an existing one, the CLI will throw an error.
+  **Integration Names** <br />
+  The integration names are unique. If you try to create an integration with the same name as an existing one, the CLI will
+  throw an error.
 </Callout>
-<br/>
+<br />
 
 ### Configuration
 
@@ -93,61 +101,58 @@ bp build
 Inside the folder `src`, there is a file called `index.ts` add the following code to it:
 
 ```ts
-import { Telegraf } from "telegraf";
-import { Integration } from ".botpress";
+import { Telegraf } from 'telegraf'
+import { Integration } from '.botpress'
 
 export default new Integration({
   register: async ({ webhookUrl, ctx }) => {
-    const telegraf = new Telegraf(ctx.configuration.botToken);
-    await telegraf.telegram.setWebhook(webhookUrl);
+    const telegraf = new Telegraf(ctx.configuration.botToken)
+    await telegraf.telegram.setWebhook(webhookUrl)
   },
   unregister: async ({ ctx }) => {
-    const telegraf = new Telegraf(ctx.configuration.botToken);
-    await telegraf.telegram.deleteWebhook({ drop_pending_updates: true });
+    const telegraf = new Telegraf(ctx.configuration.botToken)
+    await telegraf.telegram.deleteWebhook({ drop_pending_updates: true })
   },
   handler: async ({ req, client }) => {
-    const data = JSON.parse(req.body);
+    const data = JSON.parse(req.body)
 
-    const conversationId = data?.message?.chat?.id;
-    const userId = data?.message?.from?.id;
-    const messageId = data?.message?.message_id;
+    const conversationId = data?.message?.chat?.id
+    const userId = data?.message?.from?.id
+    const messageId = data?.message?.message_id
 
     if (!conversationId || !userId || !messageId) {
-      throw new Error("Handler didn't receive a valid message");
+      throw new Error("Handler didn't receive a valid message")
     }
 
     const { conversation } = await client.getOrCreateConversation({
-      channel: "group",
-      tags: { "telegram:id": `${conversationId}` },
-    });
+      channel: 'group',
+      tags: { 'telegram:id': `${conversationId}` },
+    })
 
     const { user } = await client.getOrCreateUser({
-      tags: { "telegram:id": `${userId}` },
-    });
+      tags: { 'telegram:id': `${userId}` },
+    })
 
     await client.createMessage({
-      tags: { "telegram:id": `${messageId}` },
-      type: "text",
+      tags: { 'telegram:id': `${messageId}` },
+      type: 'text',
       userId: user.id,
       conversationId: conversation.id,
       payload: { text: data.message.text },
-    });
+    })
   },
   channels: {
     group: {
       messages: {
         text: async ({ payload, ctx, conversation, ack }) => {
-          const client = new Telegraf(ctx.configuration.botToken);
-          const message = await client.telegram.sendMessage(
-            conversation.tags["telegram:id"]!,
-            payload.text
-          );
-          await ack({ tags: { "telegram:id": `${message.message_id}` } });
+          const client = new Telegraf(ctx.configuration.botToken)
+          const message = await client.telegram.sendMessage(conversation.tags['telegram:id']!, payload.text)
+          await ack({ tags: { 'telegram:id': `${message.message_id}` } })
         },
       },
     },
   },
-});
+})
 ```
 
 Once again, there is a lot going on there, so let's break it down.
@@ -168,18 +173,10 @@ The channels object is used to implement the channels that the integration defin
 
 ## Run the integration in dev mode
 
-Firt, start ngrok on any available port:
+Run the integration in dev mode:
 
 ```bash
-ngrok http 3001
-```
-
-This should output a URL that looks like this: `https://<random-string>.ngrok.io`. Copy it.
-
-Then, run the integration in dev mode:
-
-```bash
-bp dev --ngrok-url <ngrok-url> --port 3001
+bp dev
 ```
 
 This command will log an integration ID. Keep it, we'll need it later.
@@ -224,35 +221,27 @@ const bot = new Bot({
 Now that the integration is configured, we can add a little bit of code to the `index.ts` file to send a message to the `group` channel every time the bot receives a message from the user.
 
 ```ts
-bot.message("", async ({ message, client, ctx }) => {
+bot.message('', async ({ message, client, ctx }) => {
   await client.createMessage({
     conversationId: message.conversationId,
     userId: ctx.botId,
     tags: {},
-    type: "text",
+    type: 'text',
     payload: {
       text: `Hello. You said: "${message.payload.text}"`,
     },
-  });
-});
+  })
+})
 ```
 
 We have a parrot bot! Now, let's test it.
 
 ### Run the bot in dev mode
 
-Firt, start ngrok on any available port:
+Run the bot in dev mode:
 
 ```bash
-ngrok http 3002
-```
-
-This should output a URL that looks like this: `https://<random-string>.ngrok.io`. Copy it.
-
-Then, run the bot in dev mode:
-
-```bash
-bp dev --ngrok-url <ngrok-url> --port 3002
+bp dev
 ```
 
 ## Iterate
