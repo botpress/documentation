@@ -22,7 +22,6 @@ runs:
     NEXT_PUBLIC_UNLEASH_APP_NAME: ${{inputs.unleash-app-name}}
     NEXT_PUBLIC_UNLEASH_CLIENT_KEY: ${{inputs.unleash-client-key}}
   steps:
-    - uses: actions/checkout@v3
     - uses: pnpm/action-setup@v2.2.4
       with:
         version: 8

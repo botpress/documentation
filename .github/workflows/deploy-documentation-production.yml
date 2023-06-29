@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
+      - uses: actions/checkout@
+
       - uses: ./.github/build-documentation-action.yml
         with:
           unleash-url: ${{ vars.UNLEASH_URL }}
