@@ -4,23 +4,21 @@ description: Build Documentation
 inputs:
   unleash-url:
     description: 'Unleash URL'
-    type: string
     required: true
   unleash-app-name:
     description: 'Unleash App Name'
-    type: string
     required: true
   unleash-client-key:
     description: 'Unleash Client Key'
-    type: string
     required: true
+
+env:
+  NEXT_PUBLIC_UNLEASH_URL: ${{inputs.unleash-url}}
+  NEXT_PUBLIC_UNLEASH_APP_NAME: ${{inputs.unleash-app-name}}
+  NEXT_PUBLIC_UNLEASH_CLIENT_KEY: ${{inputs.unleash-client-key}}
 
 runs:
   using: 'composite'
-  env:
-    NEXT_PUBLIC_UNLEASH_URL: ${{inputs.unleash-url}}
-    NEXT_PUBLIC_UNLEASH_APP_NAME: ${{inputs.unleash-app-name}}
-    NEXT_PUBLIC_UNLEASH_CLIENT_KEY: ${{inputs.unleash-client-key}}
   steps:
     - uses: pnpm/action-setup@v2.2.4
       with:
