@@ -12,11 +12,6 @@ inputs:
     description: 'Unleash Client Key'
     required: true
 
-env:
-  NEXT_PUBLIC_UNLEASH_URL: ${{inputs.unleash-url}}
-  NEXT_PUBLIC_UNLEASH_APP_NAME: ${{inputs.unleash-app-name}}
-  NEXT_PUBLIC_UNLEASH_CLIENT_KEY: ${{inputs.unleash-client-key}}
-
 runs:
   using: 'composite'
   steps:
@@ -31,13 +26,20 @@ runs:
         cache: 'pnpm'
 
     - name: Install dependencies
+      shell: bash
       run: pnpm i
 
     - name: Generate "API Documentation" page
+      shell: bash
       run: |
         pnpm i -g esbuild
         pnpm generate
         pnpm run generate-api-docs
 
     - name: Build
-      run: pnpm build
+      shell: bash
+      run: |
+        export NEXT_PUBLIC_UNLEASH_APP_NAME = ${{inputs.unleash-app-name}}
+        export NEXT_PUBLIC_UNLEASH_CLIENT_KEY = ${{inputs.unleash-client-key}}
+        export NEXT_PUBLIC_UNLEASH_URL = ${{inputs.unleash-url}}
+        pnpm build
