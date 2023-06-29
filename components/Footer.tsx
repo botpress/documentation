@@ -24,7 +24,7 @@ export function Footer() {
                 [Twitter, 'https://twitter.com/getbotpress/'],
                 [Discord, 'https://discord.gg/botpress'],
               ].map(([Icon, href]) => (
-                <Link href={href} target="_blank" className="ml-1 flex items-center">
+                <Link href={href} target="_blank" className="ml-1 flex items-center" key={href}>
                   <Icon className="h-6 w-6 hover:opacity-75 dark:opacity-50 dark:invert dark:hover:opacity-100" />
                 </Link>
               ))}
@@ -74,10 +74,10 @@ export function Footer() {
               ],
             ],
           ].map(([title, links]) => (
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3" key={title as string}>
               <div className="font-bold">{title}</div>
               {(links as string[][]).map(([href, text]) => (
-                <Link href={href} target="_blank" className="link">
+                <Link href={href} target="_blank" className="link" key={text}>
                   {text}
                 </Link>
               ))}
