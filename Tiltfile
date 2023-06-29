@@ -23,7 +23,7 @@ local_resource(
   allow_parallel=True,
   serve_cmd='pnpm dev',
   labels=['documentation'],
-  resource_deps=['pnpm-install'],
+  resource_deps=['generate-api'],
   serve_env=documentation_env
 )
 
