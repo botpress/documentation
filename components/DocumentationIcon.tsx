@@ -11,9 +11,6 @@ import Lightning from '@assets/lightning.inline.svg'
 import Prompt from '@assets/prompt.inline.svg'
 import StudioLayout from '@assets/studio-layout.inline.svg'
 
-type ImageProps = React.ComponentProps<'img'>
-type SvgProps = React.ComponentProps<'svg'>
-
 export type DocumentationIcons =
   | 'book'
   | 'chip'

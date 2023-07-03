@@ -12,7 +12,7 @@ const withNextra = nextra({
 })
 
 export default withNextra({
-  basePath: '/docs',
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? '/docs',
   swcMinify: true,
   compiler: {
     removeConsole: true,

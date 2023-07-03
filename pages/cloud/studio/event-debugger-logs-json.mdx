@@ -1,24 +1,23 @@
 # Debugger, Logs & JSON
 
-![Debugger](/docs/content/debugger-cover.png)
+![Debugger](/content/debugger-cover.png)
 
 ## Event Debugger
 
 The Event Debugger provides information on how your bot understood the user's message and why it made specific decisions. It also displays the complete event payload, including NLU metadata, state, and raw responses.
 
 <br />
-To open or close the Debugger, you can use the keyboard shortcut **cmd/ctrl + j**.
-This will toggle the Debugger on and off and allow you to access the information
-it provides.
+To open or close the Debugger, you can use the keyboard shortcut **cmd/ctrl + j**. This will toggle the Debugger on and off
+and allow you to access the information it provides.
 
 ## Logs
 
 By using logs, you can see what happened step-by-step before an error occurred. This can help you understand what went wrong and how to fix it.
 
 <br />
-It's important to include enough logging in your bot to ensure that you have enough
-information to find and fix issues. By analyzing the Botpress Logs, you can pinpoint
-exactly where the problem occurred and take the necessary steps to resolve it.
+It's important to include enough logging in your bot to ensure that you have enough information to find and fix issues. By
+analyzing the Botpress Logs, you can pinpoint exactly where the problem occurred and take the necessary steps to resolve
+it.
 
 ## State
 
@@ -35,23 +34,17 @@ By using the state effectively, you can create more personalized and engaging bo
 This tab displays the raw information that is processed during each conversation exchange in the Botpress Emulator. The information can be accessed through **event.property**, where "property" refers to one of the properties listed in the table below.
 
 <br />
-Here is a table that describes each property in detail:
-| Property | Description |
-| :--- | :--- |
-| Type | A string property that indicates the type of the message, e.g., text, audio, video, etc. |
-| Channel | A string property that specifies the channel or platform through which the message was received. For example, the channel can be an emulator, Facebook Messenger, WhatsApp, etc. |
-| Direction | A string property that specifies the direction of the message, i.e., whether the message is incoming or outgoing. |
-| Payload | A JSON object that encapsulates the message data. The structure of the payload object depends on the type of message. |
-| UserId | A string property that identifies the user who sent the message. |
-| BotId | A string property that identifies the bot or conversational AI system that received the message. |
-| CreatedOn | A timestamp that specifies the date and time when the message was received. |
-| ConversationId | A string property that identifies the conversation thread to which the message belongs. |
-| Id | A unique identifier for the message. |
-| Preview | A preview or summary of the message. |
-| MessageId | A string property that identifies the ID of the message. |
-| Tags | An object that contains tags associated with the message. |
-| Flags | An object that contains flags associated with the message. |
-| State | An object that contains the state of the conversation. |
-| Suggestions | An array of suggested responses or actions that the bot can take based on the message. |
-| NLU |   An object that encapsulates the results of the natural language understanding (NLU) process for the message. |
-| Decision | An object that encapsulates the decision-making process for the message. |
+Here is a table that describes each property in detail: | Property | Description | | :--- | :--- | | Type | A string property
+that indicates the type of the message, e.g., text, audio, video, etc. | | Channel | A string property that specifies the
+channel or platform through which the message was received. For example, the channel can be an emulator, Facebook Messenger,
+WhatsApp, etc. | | Direction | A string property that specifies the direction of the message, i.e., whether the message is
+incoming or outgoing. | | Payload | A JSON object that encapsulates the message data. The structure of the payload object
+depends on the type of message. | | UserId | A string property that identifies the user who sent the message. | | BotId |
+A string property that identifies the bot or conversational AI system that received the message. | | CreatedOn | A timestamp
+that specifies the date and time when the message was received. | | ConversationId | A string property that identifies the
+conversation thread to which the message belongs. | | Id | A unique identifier for the message. | | Preview | A preview or
+summary of the message. | | MessageId | A string property that identifies the ID of the message. | | Tags | An object that
+contains tags associated with the message. | | Flags | An object that contains flags associated with the message. | | State
+| An object that contains the state of the conversation. | | Suggestions | An array of suggested responses or actions that
+the bot can take based on the message. | | NLU | An object that encapsulates the results of the natural language understanding
+(NLU) process for the message. | | Decision | An object that encapsulates the decision-making process for the message. |

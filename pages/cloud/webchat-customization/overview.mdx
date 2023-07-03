@@ -1,10 +1,9 @@
 import { Table, Td, Tr } from '@components/WrapperElements'
 import { Callout } from 'nextra/components'
 
-
 # Overview
 
-![Styling Webchat](/docs/content/webchat-styling-cover.png)
+![Styling Webchat](/content/webchat-styling-cover.png)
 
 In this article, we will explore how to customize the behavior and appearance of the web chat. By default, the web chat comes with a set of pre-defined styles and options, but you can customize it to better suit your needs.
 
@@ -29,47 +28,48 @@ You should select the Configurable option if you want to customize the web chat 
 ```
 
 <Callout type="info">
-  **Note**<br />
-  To add your own CSS styling, you must upload your CSS file to your server and
-  add it's url to the **stylesheet** parameter.
+  **Note**
+  <br />
+  To add your own CSS styling, you must upload your CSS file to your server and add it's url to the **stylesheet**
+  parameter.
 </Callout>
 <br />
-The configuration object passed to the **`.init()`** accepts the following
-available options which you can pass to customize the behavior of the web chat:
+The configuration object passed to the **`.init()`** accepts the following available options which you can pass to
+customize the behavior of the web chat:
 
 <br />
 
-| **Customization Variable** | **Variable type** | **Default value** | **Description** |  
-| :--- | :--- | :--- | :--- |
-|    `stylesheet` |    string |    `-` |    Provide a path to a stylesheet to customize the web chat |  
-|    `showConversationsButton` |    boolean |    `true` |    If false, will hide the conversation list pane |  
-|    `showTimestamp` |    boolean |    `false` |    If true, will display a timestamp under each messages |  
-|    `enableTranscriptDownload` |    boolean |    `true` |    Allows the user to download the conversation history |  
-|    `enableConversationDeletion` |    boolean |    `false` |    Allows the user to delete its conversation history |  
-|    `closeOnEscape` |    boolean |    `true` |    Close the web chat when pressing the Esc key |  
-|    `botName` |    string |    `-` |    Displays the bot name to the right of its avatar |  
-|    `composerPlaceholder` |    string |    `'Reply to {botname}'` |    Allows to set a custom composer placeholder |  
-|    `avatarUrl` |    string |    `-` |    Allow to specify a custom URL for the bot's avatar |  
-|    `locale` |    string |    `'browser'` |     Force the display language of the web chat (en, fr, ar, ru, etc..) <br />  Defaults to the user's browser language if not set<br /> Set to 'browser' to force use the browser's language |  
-|    `botConversationDescription` |    string |    `-` |    Small description written under the bot's name |  
-|    `hideWidget` |    boolean |    `false` |    When true, the widget button to open the chat is hidden |  
-|    `disableAnimations` |    boolean |    `false` |    Disable the slide in / out animations of the web chat |  
-|    `useSessionStorage` |    boolean |    `false` |     Use sessionStorage instead of localStorage, which means the session expires when tab is closed |  
-|    `containerWidth` |    string | number |    `360` |    Sends an event to the parent container with the width provided |  
-|    `layoutWidth` |    string | number |    `360` |    Sets the width of the web chat |  
-|    `enablePersistHistory` |    boolean |    `true` |     When enabled, sent messages are persisted to local storage (recall previous messages) |  
-|    `className` |    string |    `-` |    CSS class to be applied to iframe |  
-|    `disableNotificationSound` |    boolean |    `false` |    If true, chat will no longer play the notification sound for new messages. |  
-|    `googleMapsAPIKey` |    string |    `-` |      Google Maps API Key required to display the map. It will display a link to Google Maps otherwise. |  
-|    `website` |    string |    `-` |    Displays the bot's website in the conversation page |  
-|    `phoneNumber` |    string |    `-` |    Displays the bot's contact phone number in the conversation page |  
-|    `termsConditions` |    string |    `-` |    Displays the bot's terms of service in the conversation page |  
-|    `privacyPolicy` |    string |    `-` |    Displays the bot's privacy policy in the conversation page |  
-|    `emailAddress` |    string |    `-` |    Displays the bot's email address in the conversation page. |  
-|    `coverPictureUrl` |    string |    `-` |    Displays the bot's cover picture in the conversation page |  
-|    `showBotInfoPage` |    boolean |    `false` |    Enables the bot's information page in the web chat |  
-|    `showCloseButton` |    boolean |    `true` |    Display's the web chat close button when the web chat is opened |  
-  
+| **Customization Variable**   | **Variable type** | **Default value**      | **Description**                                                                                                                                                                         |
+| :--------------------------- | :---------------- | :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `stylesheet`                 | string            | `-`                    | Provide a path to a stylesheet to customize the web chat                                                                                                                                |
+| `showConversationsButton`    | boolean           | `true`                 | If false, will hide the conversation list pane                                                                                                                                          |
+| `showTimestamp`              | boolean           | `false`                | If true, will display a timestamp under each messages                                                                                                                                   |
+| `enableTranscriptDownload`   | boolean           | `true`                 | Allows the user to download the conversation history                                                                                                                                    |
+| `enableConversationDeletion` | boolean           | `false`                | Allows the user to delete its conversation history                                                                                                                                      |
+| `closeOnEscape`              | boolean           | `true`                 | Close the web chat when pressing the Esc key                                                                                                                                            |
+| `botName`                    | string            | `-`                    | Displays the bot name to the right of its avatar                                                                                                                                        |
+| `composerPlaceholder`        | string            | `'Reply to {botname}'` | Allows to set a custom composer placeholder                                                                                                                                             |
+| `avatarUrl`                  | string            | `-`                    | Allow to specify a custom URL for the bot's avatar                                                                                                                                      |
+| `locale`                     | string            | `'browser'`            | Force the display language of the web chat (en, fr, ar, ru, etc..) <br /> Defaults to the user's browser language if not set<br /> Set to 'browser' to force use the browser's language |
+| `botConversationDescription` | string            | `-`                    | Small description written under the bot's name                                                                                                                                          |
+| `hideWidget`                 | boolean           | `false`                | When true, the widget button to open the chat is hidden                                                                                                                                 |
+| `disableAnimations`          | boolean           | `false`                | Disable the slide in / out animations of the web chat                                                                                                                                   |
+| `useSessionStorage`          | boolean           | `false`                | Use sessionStorage instead of localStorage, which means the session expires when tab is closed                                                                                          |
+| `containerWidth`             | string            | number                 | `360`                                                                                                                                                                                   | Sends an event to the parent container with the width provided |
+| `layoutWidth`                | string            | number                 | `360`                                                                                                                                                                                   | Sets the width of the web chat                                 |
+| `enablePersistHistory`       | boolean           | `true`                 | When enabled, sent messages are persisted to local storage (recall previous messages)                                                                                                   |
+| `className`                  | string            | `-`                    | CSS class to be applied to iframe                                                                                                                                                       |
+| `disableNotificationSound`   | boolean           | `false`                | If true, chat will no longer play the notification sound for new messages.                                                                                                              |
+| `googleMapsAPIKey`           | string            | `-`                    | Google Maps API Key required to display the map. It will display a link to Google Maps otherwise.                                                                                       |
+| `website`                    | string            | `-`                    | Displays the bot's website in the conversation page                                                                                                                                     |
+| `phoneNumber`                | string            | `-`                    | Displays the bot's contact phone number in the conversation page                                                                                                                        |
+| `termsConditions`            | string            | `-`                    | Displays the bot's terms of service in the conversation page                                                                                                                            |
+| `privacyPolicy`              | string            | `-`                    | Displays the bot's privacy policy in the conversation page                                                                                                                              |
+| `emailAddress`               | string            | `-`                    | Displays the bot's email address in the conversation page.                                                                                                                              |
+| `coverPictureUrl`            | string            | `-`                    | Displays the bot's cover picture in the conversation page                                                                                                                               |
+| `showBotInfoPage`            | boolean           | `false`                | Enables the bot's information page in the web chat                                                                                                                                      |
+| `showCloseButton`            | boolean           | `true`                 | Display's the web chat close button when the web chat is opened                                                                                                                         |
+
 <br />
 
 ## Styling the Web Chat
@@ -78,25 +78,25 @@ This CSS code includes styles for a chatbot widget
 
 <br />
 
-|    Class Name |    Description | 
-| :--- | :--- | 
-  |    .bpw-layout |     Sets the height, position, border, border-radius, and z-index of the chatbot widget. | 
-  |    .bpw-header-title |    Sets the font color of the chatbot header title to white. | 
-  |    .bpw-from-bot .bpw-chat-bubble .bpw-chat-bubble-content |     Sets the font color and background color of the chatbot message bubbles from the bot. | 
-  |    .bpw-header-icon |     Sets the fill color of the chatbot header icon to white when hovered over. | 
-  |    .bpw-header-container |     Sets the border, background color, and border radius of the chatbot header container. | 
-  |    .bpw-header-title-container .bpw-bot-avatar |    Hides the bot avatar in the chatbot header title container. | 
-  |    a |     Sets the font color of links in the chatbot widget to white and changes color to light gray when hovered over. | 
-  |    .bpw-from-user .bpw-chat-bubble .bpw-chat-bubble-content |     Sets the background color and border radius of the chatbot message bubbles from the user. | 
-  |    #botpress-tooltip-1, #botpress-tooltip-37 |    Hides the tooltips for the chatbot widget. | 
-  |    .bpw-send-button |    Sets the appearance and position of the chatbot send button. | 
-  |    .bpw-powered |    Hides the powered by Botpress logo in the chatbot widget. | 
-  |    .bpw-card-action |     Sets the font weight, color, and border of the action buttons in the chatbot card carousel. | 
-  |    .bpw-card-container |    Sets the border of the chatbot card carousel. | 
-  |    .bpw-keyboard-quick_reply |     Sets the background color and padding of the chatbot quick reply buttons. | 
-  |    .bpw-button |    Sets the appearance and font of the chatbot quick reply buttons. | 
-  |    .bpw-widget-btn |     Sets the appearance and background image of the chatbot widget button. | 
-  |    .bpw-floating-button |    Removes the box shadow from the chatbot widget button. | 
+| Class Name                                               | Description                                                                                                    |
+| :------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- |
+| .bpw-layout                                              | Sets the height, position, border, border-radius, and z-index of the chatbot widget.                           |
+| .bpw-header-title                                        | Sets the font color of the chatbot header title to white.                                                      |
+| .bpw-from-bot .bpw-chat-bubble .bpw-chat-bubble-content  | Sets the font color and background color of the chatbot message bubbles from the bot.                          |
+| .bpw-header-icon                                         | Sets the fill color of the chatbot header icon to white when hovered over.                                     |
+| .bpw-header-container                                    | Sets the border, background color, and border radius of the chatbot header container.                          |
+| .bpw-header-title-container .bpw-bot-avatar              | Hides the bot avatar in the chatbot header title container.                                                    |
+| a                                                        | Sets the font color of links in the chatbot widget to white and changes color to light gray when hovered over. |
+| .bpw-from-user .bpw-chat-bubble .bpw-chat-bubble-content | Sets the background color and border radius of the chatbot message bubbles from the user.                      |
+| #botpress-tooltip-1, #botpress-tooltip-37                | Hides the tooltips for the chatbot widget.                                                                     |
+| .bpw-send-button                                         | Sets the appearance and position of the chatbot send button.                                                   |
+| .bpw-powered                                             | Hides the powered by Botpress logo in the chatbot widget.                                                      |
+| .bpw-card-action                                         | Sets the font weight, color, and border of the action buttons in the chatbot card carousel.                    |
+| .bpw-card-container                                      | Sets the border of the chatbot card carousel.                                                                  |
+| .bpw-keyboard-quick_reply                                | Sets the background color and padding of the chatbot quick reply buttons.                                      |
+| .bpw-button                                              | Sets the appearance and font of the chatbot quick reply buttons.                                               |
+| .bpw-widget-btn                                          | Sets the appearance and background image of the chatbot widget button.                                         |
+| .bpw-floating-button                                     | Removes the box shadow from the chatbot widget button.                                                         |
 
 <br />
 

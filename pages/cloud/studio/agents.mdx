@@ -1,6 +1,6 @@
 # Agents
 
-![Studio Agents](/docs/content/studio-agents.png)
+![Studio Agents](/content/studio-agents.png)
 
 Botpress offers a variety of specialized Agents to enhance your chatbot's capabilities and adaptability. These Agents are designed to perform specific tasks, each contributing to the overall performance of your chatbot. Here, we introduce four of our agents: Summary, Personality, Knowledge, and Translator Agents.
 
@@ -31,7 +31,6 @@ This would then output a brief summary of the conversation so far.
 ### Conflicts
 
 There are no known conflicts with the Summary Agent and other Botpress functionalities or agents. However, please remember that the output from the Summary Agent (`conversation.SummaryAgent.summary`) is updated after each conversation turn. Therefore, ensure that you use it in context and check the summary only when it is updated.
-
 
 ## Translator Agent
 
@@ -64,7 +63,6 @@ If you want to reset the language detection and allow the Translator Agent to de
 ### Conflicts
 
 It is important to note that the Translator Agent may conflict with the Personality Agent. The Personality Agent is designed to manipulate chatbot responses according to pre-set personalities and could overwrite the translations done by the Translator Agent. If both the Translator Agent and the Personality Agent are enabled, the Personality Agent will take priority. If you want the Translator Agent to take effect, you may need to adjust the settings of the Personality Agent or turn it off.
-
 
 ## Personality Agent
 

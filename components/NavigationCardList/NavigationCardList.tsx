@@ -2,8 +2,6 @@ import DotGridBackground from '@assets/dot-grid.background.svg'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { NavigationCardListProps } from './NavigationCardList.types'
-import Image from 'next/image'
-import { Img } from '@components/WrapperElements'
 
 export function NavigationCardList(props: NavigationCardListProps) {
   return (

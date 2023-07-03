@@ -2,6 +2,8 @@ import { Footer } from '@components/Footer'
 import { useConfig, type DocsThemeConfig } from 'nextra-theme-docs'
 import React from 'react'
 
+const assetPrefix = process.env.NEXT_PUBLIC_BASE_PATH ?? '/docs'
+
 const logo = (
   <div className="logo-container">
     <svg width="143" height="32" viewBox="0 0 143 32" fill="none">
@@ -95,8 +97,8 @@ const config: DocsThemeConfig = {
         <meta name="theme-color" content="#fff" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="Content-Language" content="en" />
-        <link rel="icon" href="/docs/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/docs/favicon.png" type="image/png" />
+        <link rel="icon" href={`${assetPrefix}/favicon.svg`} type="image/svg+xml" />
+        <link rel="icon" href={`${assetPrefix}/favicon.png`} type="image/png" />
         <title>{title || ''} - Botpress Documentation</title>
       </>
     )

@@ -1,10 +1,9 @@
 import { Callout } from 'nextra/components'
 import { Table, Td, Tr } from '@components/WrapperElements'
 
-
 # Capture Information"
 
-![Shortcuts](/docs/content/capture-info-banner.png)
+![Shortcuts](/content/capture-info-banner.png)
 
 **Capture Information** Card is part of the Toolbox that allows the bot to stop processing and wait for the user's response while capturing a specific piece of information from the user's input.
 
@@ -118,19 +117,14 @@ Here's the list of all the Prompt Fields available in Capture Information Card.
     </Td>
   </Tr>
   <Tr>
+    <Td>[TimeMeasurement](#time-measurement)</Td>
     <Td>
-      [TimeMeasurement](#time-measurement)
-    </Td>
-    <Td>
-      Extracts a time measurement as (ns, mu, ms, s, min, h, d, week, month,
-      year) Units
+      Extracts a time measurement as (ns, mu, ms, s, min, h, d, week, month, year) Units
       <br /> Variable Type: Boolean
     </Td>
   </Tr>
   <Tr>
-    <Td>
-      [WeightMeasurement](#weight-measurement)
-    </Td>
+    <Td>[WeightMeasurement](#weight-measurement)</Td>
     <Td>
       Extracts a Weight Measurement as (mcg, mg, g, kg, oz, lb, mt, t) Units
       <br /> Variable Type: Boolean
@@ -139,44 +133,34 @@ Here's the list of all the Prompt Fields available in Capture Information Card.
   <Tr>
     <Td>[CronSchedule](#cron-schedule)</Td>
     <Td>
-      Extracts a one-time or recurring schedule as a CRON Expression from the
-      Query
+      Extracts a one-time or recurring schedule as a CRON Expression from the Query
       <br /> Variable Type: Boolean
     </Td>
   </Tr>
   <Tr>
+    <Td>[OperatingSystem](#operating-system)</Td>
     <Td>
-      [OperatingSystem](#operating-system)
-    </Td>
-    <Td>
-      Extracts the name of an Operating System (Windows, OSX, IOS, Android,
-      Linux)
+      Extracts the name of an Operating System (Windows, OSX, IOS, Android, Linux)
       <br /> Variable Type: Boolean
     </Td>
   </Tr>
   <Tr>
-    <Td>
-      [QuantityofPeople](#quantity-of-people)
-    </Td>
+    <Td>[QuantityofPeople](#quantity-of-people)</Td>
     <Td>
       Extracts the Number of People in a Query
       <br /> Variable Type: Boolean
     </Td>
   </Tr>
   <Tr>
+    <Td>[VolumeMeasurement](#volume-measurement)</Td>
     <Td>
-      [VolumeMeasurement](#volume-measurement)
-    </Td>
-    <Td>
-      Extracts a volume measurement as (mm3, cm3, ml, l, kl, m3, km3, tsp, Tbs,
-      in3, fl-oz, cup, pnt, qt, gal, ft3, yd3) Units
+      Extracts a volume measurement as (mm3, cm3, ml, l, kl, m3, km3, tsp, Tbs, in3, fl-oz, cup, pnt, qt, gal, ft3, yd3)
+      Units
       <br /> Variable Type: Boolean
     </Td>
   </Tr>
   <Tr>
-    <Td>
-      [TemperatureMeasurement](#temperature-measurement)
-    </Td>
+    <Td>[TemperatureMeasurement](#temperature-measurement)</Td>
     <Td>
       Extracts a Temperature Measurement as (C, K, F) Units
       <br /> Variable Type: Boolean
@@ -433,9 +417,8 @@ When the user enters their address, the FullAddress card will extract the inform
 Here's an example of how you can use the extracted information in a message:
 
 ```html
-Thank you for your order! Your shipping address is:
-{{workflow.shippingAddress.number}} {{workflow.shippingAddress.street}},
-{{workflow.shippingAddress.city}}, {{workflow.shippingAddress.country}},
+Thank you for your order! Your shipping address is: {{workflow.shippingAddress.number}}
+{{workflow.shippingAddress.street}}, {{workflow.shippingAddress.city}}, {{workflow.shippingAddress.country}},
 {{workflow.shippingAddress.zip}}
 ```
 
@@ -505,8 +488,8 @@ When the user enters the issue description, the Raw Input card will extract the 
 You can create a message node with the following text:
 
 ```html
-Thank you for reporting the issue: {{issueDescription}}. Our team will
-investigate the issue and get back to you with an update as soon as possible.
+Thank you for reporting the issue: {{issueDescription}}. Our team will investigate the issue and get back to you with an
+update as soon as possible.
 ```
 
 This will acknowledge the issue and provide the user with an estimated time frame for resolution.
@@ -572,8 +555,7 @@ When the user enters a valid quantity, the Quantity card will extract and save t
 Here's an example of how you can use the extracted information in a message:
 
 ```html
-Thank you for your order! Your total price is {{workflow.productQuantity *
-productPrice}}.
+Thank you for your order! Your total price is {{workflow.productQuantity * productPrice}}.
 ```
 
 This will display the total price to the user based on the quantity they entered and the price of the product.
@@ -606,10 +588,9 @@ When the user enters their favourite colour, the Color card will extract the inf
 Here's an example of how you can use the extracted information in a message:
 
 ```html
-Thank you for telling us your favourite colour! We love
-{{workflow.favoriteColor.colorName}} too. The hexadecimal code for
-{{workflow.favoriteColor.colorName}} is {{workflow.favoriteColor.hexCode}} and
-the RGB values are {{workflow.favoriteColor.rgb}}.
+Thank you for telling us your favourite colour! We love {{workflow.favoriteColor.colorName}} too. The hexadecimal code
+for {{workflow.favoriteColor.colorName}} is {{workflow.favoriteColor.hexCode}} and the RGB values are
+{{workflow.favoriteColor.rgb}}.
 ```
 
 This will display the user's favourite colour and its associated information in a personalised message, making the interaction with the bot more engaging and memorable.
@@ -1127,8 +1108,8 @@ Suppose you have a Capture Information card that asks the user for their email a
 
 ```typescript
 function validate(input: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(input);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return emailRegex.test(input)
 }
 ```
 
@@ -1183,9 +1164,8 @@ If you turn on the **Confirm before cancelling** option, the bot will ask the us
 The **Choices** setting is used to offer a list of predefined options to the user as a response to a Capture Information card. This can be useful when you want to restrict the user's input to a specific set of values.
 
 <Callout>
-  **Tip** <br/>
-  Choices are only available for **Single Choice** & **Multi Choice** Prompt
-  types.
+  **Tip** <br />
+  Choices are only available for **Single Choice** & **Multi Choice** Prompt types.
 </Callout>
 
 #### Example
