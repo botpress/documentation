@@ -12,7 +12,7 @@ const withNextra = nextra({
 })
 
 export default withNextra({
-  basePath: process.env.BASEPATH ?? '/docs',
+  basePath: '/docs',
   images: {
     unoptimized: true,
   },
