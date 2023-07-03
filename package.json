@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "develop": "pnpm dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start -p 3001",
     "generate": "pnpm generate-openapi && pnpm generate-api-docs",
     "generate-openapi": "esbuild --bundle --platform=node --target=esnext --outfile=dist/generateApi.js scripts/generateApi.ts && node dist/generateApi.js",
