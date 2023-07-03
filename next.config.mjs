@@ -13,11 +13,6 @@ const withNextra = nextra({
 
 export default withNextra({
   basePath: '/docs',
-  reactStrictMode: true,
-  swcMinify: true,
-  compiler: {
-    removeConsole: true,
-  },
   images: {
     unoptimized: true,
   },
@@ -30,4 +25,5 @@ export default withNextra({
 
     return config
   },
+  reactStrictMode: true,
 })
