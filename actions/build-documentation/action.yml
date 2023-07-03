@@ -41,3 +41,4 @@ runs:
         export NEXT_PUBLIC_UNLEASH_CLIENT_KEY="${{inputs.unleash-client-key}}"
         export NEXT_PUBLIC_UNLEASH_URL="${{inputs.unleash-url}}"
         pnpm build
+        pnpm export

@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import * as React from 'react'
-import BpLogo from '../assets/bp-logo.inline.svg'
-import Linkedin from '../assets/linkedin.inline.svg'
-import Github from '../assets/github.inline.svg'
-import Discord from '../assets/discord.inline.svg'
-import Twitter from '../assets/twitter.inline.svg'
-import Youtube from '../assets/youtube.inline.svg'
+import BpLogo from '@assets/bp-logo.inline.svg'
+import Linkedin from '@assets/linkedin.inline.svg'
+import Github from '@assets/github.inline.svg'
+import Discord from '@assets/discord.inline.svg'
+import Twitter from '@assets/twitter.inline.svg'
+import Youtube from '@assets/youtube.inline.svg'
 
 export function Footer() {
   return (
