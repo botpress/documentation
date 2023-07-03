@@ -1,5 +1,4 @@
 import nextra from 'nextra'
-import withImages from 'next-images'
 
 const withNextra = nextra({
   theme: 'nextra-theme-docs',
@@ -21,9 +20,14 @@ export default withNextra({
   images: {
     unoptimized: true,
   },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ['@svgr/webpack'],
+    })
+
+    return config
+  },
   reactStrictMode: true,
-  ...withImages({
-    inlineImageLimit: false,
-    assetPrefix: '/docs',
-  }),
 })

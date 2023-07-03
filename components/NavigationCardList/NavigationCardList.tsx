@@ -21,7 +21,7 @@ export function NavigationCardList(props: NavigationCardListProps) {
                 { 'h-48': props.isSmallGrid }
               )}
             >
-              <img alt="DotGridBackground" src={DotGridBackground} className="absolute" />
+              <DotGridBackground className="absolute" />
               <div className="position-absolute absolute flex h-14 w-14 items-center justify-center rounded-full border border-indigo-400 bg-indigo-500 shadow-inner-xl group-hover:bg-indigo-600 dark:border-indigo-900 dark:bg-button-link-dark-2 group-hover:dark:bg-button-link-dark-2-hover md:h-24 md:w-24">
                 <card.Icon />
               </div>

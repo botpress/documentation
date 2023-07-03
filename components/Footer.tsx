@@ -14,10 +14,16 @@ export function Footer() {
         <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-3 md:grid-cols-5">
           <div className="flex flex-col gap-2">
             <Link href="https://botpress.com" className="mb-5">
-              <img src={BpLogo} className="hover:opacity-75 dark:opacity-50 dark:invert dark:hover:opacity-100" />
+              <BpLogo className="hover:opacity-75 dark:opacity-50 dark:invert dark:hover:opacity-100" />
             </Link>
             <div className="flex gap-2">
-              {footerLinks.map(([Icon, href]) => (
+              {[
+                [Github, 'https://github.com/botpress'],
+                [Youtube, 'https://www.youtube.com/botpress'],
+                [Linkedin, 'https://www.linkedin.com/company/botpress/'],
+                [Twitter, 'https://twitter.com/getbotpress/'],
+                [Discord, 'https://discord.gg/botpress'],
+              ].map(([Icon, href]) => (
                 <Link href={href} target="_blank" className="ml-1 flex items-center" key={href}>
                   <Icon className="h-6 w-6 hover:opacity-75 dark:opacity-50 dark:invert dark:hover:opacity-100" />
                 </Link>
@@ -83,14 +89,3 @@ export function Footer() {
     </footer>
   )
 }
-
-const footerLinks = [
-  [(props: React.ComponentProps<'img'>) => <img {...props} src={Github} />, 'https://github.com/botpress'],
-  [(props: React.ComponentProps<'img'>) => <img {...props} src={Youtube} />, 'https://www.youtube.com/botpress'],
-  [
-    (props: React.ComponentProps<'img'>) => <img {...props} src={Linkedin} />,
-    'https://www.linkedin.com/company/botpress/',
-  ],
-  [(props: React.ComponentProps<'img'>) => <img {...props} src={Twitter} />, 'https://twitter.com/getbotpress/'],
-  [(props: React.ComponentProps<'img'>) => <img {...props} src={Discord} />, 'https://discord.gg/botpress'],
-] as const

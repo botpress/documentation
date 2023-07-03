@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@readme/openapi-parser": "^2.5.0",
-    "next-images": "^1.8.5",
+    "@svgr/webpack": "^8.0.1",
     "@types/lodash": "^4.14.195",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",

@@ -27,36 +27,35 @@ export type DocumentationIcons =
   | 'lightning'
   | 'rocket'
 
-const IconElement = (name: DocumentationIcons) => {
-  switch (name) {
-    case 'book':
-      return (props: ImageProps) => <img {...props} alt="Book" src={Book} />
-    case 'chip':
-      return (props: ImageProps) => <img {...props} alt="Chip" src={Chip} />
-    case 'coding':
-      return (props: ImageProps) => <img {...props} alt="Coding" src={Coding} />
-    case 'keyboard':
-      return (props: ImageProps) => <img {...props} alt="Keyboard" src={Keyboard} />
-    case 'prompt':
-      return (props: ImageProps) => <img {...props} alt="Prompt" src={Prompt} />
-    case 'blog':
-      return (props: ImageProps) => <img {...props} alt="Blog" src={Blog} />
-    case 'studio_layout':
-      return (props: ImageProps) => <img {...props} alt="StudioLayout" src={StudioLayout} />
-    case 'chat':
-      return (props: ImageProps) => <img {...props} alt="Chat" src={Chat} />
-    case 'grid':
-      return (props: ImageProps) => <img {...props} alt="Grid" src={Grid} />
-    case 'lightning':
-      return (props: ImageProps) => <img {...props} alt="Lightning" src={Lightning} />
-    case 'rocket':
-      return (props: ImageProps) => <img {...props} alt="Rocket" src={Rocket} />
-    default:
-      return (props: SvgProps) => <svg {...props} />
-  }
-}
-
 export function DocumentationIcon(props: { name: DocumentationIcons; className: string }) {
-  const Icon = IconElement(props.name)
-  return <Icon className={props.className} />
+  const IconElement = (() => {
+    switch (props.name) {
+      case 'book':
+        return Book
+      case 'chip':
+        return Chip
+      case 'coding':
+        return Coding
+      case 'keyboard':
+        return Keyboard
+      case 'prompt':
+        return Prompt
+      case 'blog':
+        return Blog
+      case 'studio_layout':
+        return StudioLayout
+      case 'chat':
+        return Chat
+      case 'grid':
+        return Grid
+      case 'lightning':
+        return Lightning
+      case 'rocket':
+        return Rocket
+
+      default:
+        return <svg />
+    }
+  })()
+  return <IconElement className={props.className} />
 }
