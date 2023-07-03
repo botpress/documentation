@@ -88,8 +88,6 @@ const config: DocsThemeConfig = {
   logo,
   primaryHue: { dark: 217, light: 217 },
   head: function useHead() {
-    const { title } = useConfig()
-
     return (
       <>
         <meta name="theme-color" content="#fff" />
@@ -97,9 +95,13 @@ const config: DocsThemeConfig = {
         <meta httpEquiv="Content-Language" content="en" />
         <link rel="icon" href="/docs/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/docs/favicon.png" type="image/png" />
-        <title>{title || ''} - Botpress Documentation</title>
       </>
     )
+  },
+  useNextSeoProps() {
+    return {
+      titleTemplate: '%s - Botpress Documentation',
+    }
   },
   sidebar: {
     titleComponent({ title, type }) {

@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import * as React from 'react'
-import BpLogo from '../assets/bp-logo.inline.svg'
-import Linkedin from '../assets/linkedin.inline.svg'
-import Github from '../assets/github.inline.svg'
-import Discord from '../assets/discord.inline.svg'
-import Twitter from '../assets/twitter.inline.svg'
-import Youtube from '../assets/youtube.inline.svg'
+import BpLogo from '@assets/bp-logo.inline.svg'
+import Linkedin from '@assets/linkedin.inline.svg'
+import Github from '@assets/github.inline.svg'
+import Discord from '@assets/discord.inline.svg'
+import Twitter from '@assets/twitter.inline.svg'
+import Youtube from '@assets/youtube.inline.svg'
 
 export function Footer() {
   return (
@@ -24,7 +24,7 @@ export function Footer() {
                 [Twitter, 'https://twitter.com/getbotpress/'],
                 [Discord, 'https://discord.gg/botpress'],
               ].map(([Icon, href]) => (
-                <Link href={href} target="_blank" className="ml-1 flex items-center">
+                <Link href={href} target="_blank" className="ml-1 flex items-center" key={href}>
                   <Icon className="h-6 w-6 hover:opacity-75 dark:opacity-50 dark:invert dark:hover:opacity-100" />
                 </Link>
               ))}
@@ -74,10 +74,10 @@ export function Footer() {
               ],
             ],
           ].map(([title, links]) => (
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3" key={title as string}>
               <div className="font-bold">{title}</div>
               {(links as string[][]).map(([href, text]) => (
-                <Link href={href} target="_blank" className="link">
+                <Link href={href} target="_blank" className="link" key={text}>
                   {text}
                 </Link>
               ))}

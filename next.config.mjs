@@ -13,9 +13,14 @@ const withNextra = nextra({
 
 export default withNextra({
   basePath: '/docs',
+  swcMinify: true,
+  compiler: {
+    removeConsole: true,
+  },
   images: {
     unoptimized: true,
   },
+  trailingSlash: true,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
