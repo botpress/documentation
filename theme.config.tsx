@@ -88,7 +88,15 @@ const config: DocsThemeConfig = {
     link: undefined,
   },
   logo,
+  components: {
+    img: (props: React.ComponentProps<'img'>) => <img {...props} src={`${assetPrefix}${props.src}`} />,
+  },
   primaryHue: { dark: 217, light: 217 },
+  useNextSeoProps() {
+    return {
+      titleTemplate: '%s - Botpress Documentation',
+    }
+  },
   head: function useHead() {
     const { title } = useConfig()
 
@@ -99,7 +107,6 @@ const config: DocsThemeConfig = {
         <meta httpEquiv="Content-Language" content="en" />
         <link rel="icon" href={`${assetPrefix}/favicon.svg`} type="image/svg+xml" />
         <link rel="icon" href={`${assetPrefix}/favicon.png`} type="image/png" />
-        <title>{title || ''} - Botpress Documentation</title>
       </>
     )
   },
