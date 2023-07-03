@@ -1,6 +1,6 @@
 import nextra from 'nextra'
 
-const rewrites = async () => [{ source: '/docs/_next/:path*', destination: '/_next/:path' }]
+const rewrites = async () => [{ source: '/docs/_next/:path*', destination: '/_next/:path*' }]
 
 const withNextra = nextra({
   theme: 'nextra-theme-docs',
