@@ -13,9 +13,15 @@ const withNextra = nextra({
 
 export default withNextra({
   basePath: '/docs',
+  swcMinify: true,
+  compiler: {
+    removeConsole: true,
+  },
   images: {
     unoptimized: true,
   },
+  rewrites:
+    process.env.ASSET_REWRITE === 'true' ? [{ source: '/docs/_next/:path*', destination: '/_next/:path' }] : undefined,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
