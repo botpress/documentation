@@ -1,6 +1,13 @@
 import nextra from 'nextra'
 
-const rewrites = async () => [{ source: '/docs/_next/:path*', destination: '/_next/:path*' }]
+const rewrites =
+  process.env.ASSET_REWRITE === 'true'
+    ? async () => [
+        { source: '/docs/_next/:path*', destination: '/_next/:path*' },
+        { source: '/docs', destination: '/' },
+        { source: '/docs/:path*', destination: '/:path*' },
+      ]
+    : undefined
 
 const withNextra = nextra({
   theme: 'nextra-theme-docs',
@@ -22,7 +29,7 @@ export default withNextra({
   images: {
     unoptimized: true,
   },
-  rewrites: process.env.ASSET_REWRITE === 'true' ? rewrites : undefined,
+  rewrites,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
