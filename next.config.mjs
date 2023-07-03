@@ -2,11 +2,7 @@ import nextra from 'nextra'
 
 const rewrites =
   process.env.ASSET_REWRITE === 'true'
-    ? async () => [
-        { source: '/docs/_next/:path*', destination: '/_next/:path*' },
-        { source: '/docs', destination: '/' },
-        { source: '/docs/:path*', destination: '/:path*' },
-      ]
+    ? async () => [{ source: '/docs/_next/:path*', destination: '/_next/:path*' }]
     : undefined
 
 const withNextra = nextra({
