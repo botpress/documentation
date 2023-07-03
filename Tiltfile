@@ -13,7 +13,6 @@ local_resource(
 )
 
 documentation_env = {
-  'BASEPATH': '',
   'NEXT_PUBLIC_UNLEASH_APP_NAME': 'cdm',
   'NEXT_PUBLIC_UNLEASH_CLIENT_KEY': 'cdm:development.23c5337748c2fa1433ab463704660120ff4b3430451b3274ab53a909',
   'NEXT_PUBLIC_UNLEASH_URL': 'https://unleash.botpress.dev/proxy',
