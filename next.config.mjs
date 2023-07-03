@@ -12,8 +12,12 @@ const withNextra = nextra({
 })
 
 export default withNextra({
-  basePath: process.env.BASE_PATH ?? '/docs',
-  assetPrefix: process.env.ASSET_PREFIX ?? undefined,
+  basePath: '/docs',
+  reactStrictMode: true,
+  swcMinify: true,
+  compiler: {
+    removeConsole: true,
+  },
   images: {
     unoptimized: true,
   },
@@ -26,5 +30,4 @@ export default withNextra({
 
     return config
   },
-  reactStrictMode: true,
 })
