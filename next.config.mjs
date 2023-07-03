@@ -20,6 +20,7 @@ export default withNextra({
   images: {
     unoptimized: true,
   },
+  trailingSlash: true,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
