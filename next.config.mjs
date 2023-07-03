@@ -12,8 +12,7 @@ const withNextra = nextra({
 })
 
 export default withNextra({
-  basePath: '',
-  assetPrefix: '/docs',
+  basePath: '/docs',
   swcMinify: true,
   compiler: {
     removeConsole: true,
