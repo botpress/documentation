@@ -88,3 +88,24 @@ Now we can go back to Step (3) & Step (4) in this [article](https://developers.f
 - Text is mapped to Text Object
 - Interactive feedbacks are mapped to Text Object.
 - The rest of the types are not currently processed by Botpress
+
+## Creating Conversations
+
+WhatsApp conversations can be proactively initiated with a user only by using [Message Templates](https://developers.facebook.com/docs/whatsapp/message-templates/guidelines/) which need to be created in your [WhatsApp Manager](https://business.facebook.com/wa/manage/message-templates/) dashboard and need to be reviewed and approved first by WhatsApp in order to use them.
+
+Once you have a message template approved by WhatsApp, it's very easy to have your bot initiate a conversation with a user by running the following code inside your bot:
+
+```ts
+const response = await client.createConversation({
+  integrationName: 'whatsapp',
+  channel: 'channel',
+  tags: {
+    'whatsapp:userPhone': '+1 504 123 456 78', // The full phone number of the user you want to initiate the conversation with.
+    'whatsapp:templateName': 'test_message', // This is the name (identifier) of your WhatsApp message template.
+    'whatsapp:templateLanguage': 'en_US', // Optional (defaults to `en_US`)
+    'whatsapp:templateVariables': JSON.stringify(['John']), // Optional (only needed if your message template uses variables)
+  },
+})
+```
+
+> **Note**: The `client` in the code example above is an instance of the [Botpress Client](https://www.npmjs.com/package/@botpress/client) that is always provided as a prop to the bot handlers (e.g. message handler, event, conversation, state expiry, etc.)
