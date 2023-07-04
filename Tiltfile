@@ -24,7 +24,8 @@ local_resource(
   serve_cmd='pnpm dev',
   labels=['documentation'],
   resource_deps=['generate-api'],
-  serve_env=documentation_env
+  links=['http://localhost:3000'],
+  serve_env=documentation_env,
 )
 
 local_resource(
