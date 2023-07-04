@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@botpress/api':
-    specifier: ^0.3.1
-    version: 0.3.1
+    specifier: ^0.3.2
+    version: 0.3.2
   '@vercel/og':
     specifier: ^0.5.0
     version: 0.5.8
@@ -1428,8 +1428,8 @@ packages:
       '@babel/helper-validator-identifier': 7.22.5
       to-fast-properties: 2.0.0
 
-  /@botpress/api@0.3.1:
-    resolution: {integrity: sha512-rMrE7+yeuEui0508eXzjBEgdWW0lFu8MWNXotvzOnDXvvuBHVtszcMKUhh8N/VGBJDnVyVhmScgNgBNcLp6bTg==}
+  /@botpress/api@0.3.2:
+    resolution: {integrity: sha512-xIdf0jCrGb2+Wo6rHz4xnvN2L5e5wlHJnT/eEf8qpjtkvwpSUfb7duvrWumGsMqhKi1W4X4xdkvYLEpmA4fNtg==}
     dependencies:
       '@bpinternal/opapi': 0.2.1
     transitivePeerDependencies:
