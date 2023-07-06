@@ -1,4 +1,4 @@
-## Configuration
+# Configuration
 
 When it comes to chatbot integrations, the **configuration** component plays a pivotal role. It's used to define the schema of the integration's settings and handles the validation of the provided configuration data.
 
@@ -6,7 +6,7 @@ It also serves as a secure place to store sensitive data such as API keys, acces
 
 Here's a detailed explanation of each part:
 
-### Defining Configuration Schema
+## Defining Configuration Schema
 
 The configuration schema is a blueprint that outlines the necessary parameters for the chatbot integration to function properly.
 
@@ -17,13 +17,13 @@ The schema is defined in the **configuration** object, where each key correspond
 Each parameter must specify a **type**, such as **string**, **number**, **boolean**, etc.
 Some parameters might be marked as **required** if they are necessary for the integration to function.
 
-### Validation
+## Validation
 
 Once the configuration schema is defined, it serves as a validation rule set for the integration. Whenever an attempt is made to add or update the integration's configuration, the provided configuration is checked against the schema.
 
 This validation ensures that all required parameters are present and that they are of the correct type. If the validation fails, the integration should provide a meaningful error message indicating what was missing or incorrect.
 
-### Storing Sensitive Information
+## Storing Sensitive Information
 
 The **configuration** object can store sensitive data like API keys, tokens, and other platform-specific credentials. This data is provided by the user when adding the integration to their bot.
 
@@ -33,7 +33,7 @@ In essence, the configuration is an essential part of any chatbot integration. I
 
 Understanding how to define and work with the configuration is key to developing successful chatbot integrations.
 
-### Example - Configuration Fields
+## Example - Configuration Fields
 
 ```javascript
 const integration = {

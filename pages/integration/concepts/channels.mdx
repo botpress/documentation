@@ -1,5 +1,5 @@
 
-## Channels
+# Channels
 
 In the context of chatbot integrations, **channels** represent the different types of communication mediums within the integrated platform.
 
@@ -11,17 +11,17 @@ Each **channel** defined in the integration must be supported by the chatbot, as
 
 Here's how it works:
 
-### Defining Channels
+## Defining Channels
 
 The channels that an integration supports are defined in the **channels** object. Each key within this object corresponds to a supported channel.
 
 In our Telegram example, we've defined a single channel, **group**, to send messages to a group chat in Telegram.
 
-### Message Types
+## Message Types
 
 Each channel has a **messages** property, which is used to specify the types of messages that can be sent and received through that channel. Currently, we've implemented only **text** messages, but this can be expanded to include other message types as needed.
 
-### Default Messages
+## Default Messages
 
 The **defaults** object, which is part of the SDK, specifies the default types of messages that the integration should support. For a comprehensive integration, it's highly recommended to implement support for all the message types defined in the **defaults** object.
 
@@ -31,7 +31,7 @@ For example, in a Slack integration, you could define channels such as **channel
 
 Keep in mind that the channels and message types you define will depend on the features provided by the platform you're integrating with. The goal is to map the platform's features to corresponding channels and message types within the chatbot integration, thus ensuring seamless interaction between the chatbot and the platform.
 
-### Example - Channels
+## Example - Channels
 
 ```javascript
 const integration = {
