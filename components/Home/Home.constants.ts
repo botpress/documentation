@@ -58,7 +58,7 @@ export const OTHER_RESOURCES_CARDS: NavigationCard[] = [
   {
     heading: 'Community',
     subHeading: 'Get help from others in the Botpress community forum',
-    link: 'https://community.botpress.com/',
+    link: 'https://discord.gg/botpress',
     Icon: CommunityIcon,
   },
 ]
