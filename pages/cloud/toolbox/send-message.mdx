@@ -1,15 +1,12 @@
 import { Table, Td, Tr } from '@components/WrapperElements'
 
-
 # Send Message
-
 
 ![Send Message](/docs/content/toolbox-1-cover.png)
 
-## Send Message
+Botpress cloud lets you send 8 different types of messages to your users! Content types like text, images, and audio look different depending on which channel you're using (web, WhatsApp, etc).
 
-You can **Send Message** using 8 built-in content-types. A Content-Type defines the structure of what the chatbot sends. It also dictates how your chatbot should render the content. It can be as straightforward or as complex as you want. For instance, a content type could be simple text or an image or a carousel.
-You can add Content by dragging a Content Card over to a Standard Node.
+Your bot's content can be as straightforward or as complex as you want. For instance, a content type could be simple text or an image or a carousel. You can add content by dragging a Content Card over to a Standard Node.
 
 <br />
 <Table>
@@ -20,19 +17,16 @@ You can add Content by dragging a Content Card over to a Standard Node.
   <Tr>
     <Td>Text</Td>
     <Td>
-      The text content type denotes a regular text message with optional typing
-      indicators. You can write HTML in the text content on the web channel, and
-      your chatbot will render it correctly. This opens up the possibility of
-      including iFrames and constructing miniature web pages (commonly known as
-      web views) in your content without creating custom components.
+Text content are regular text messages. Botpress Cloud supports limited markdown formatting for text messages:
+Use ** two asterisks ** for bold text, * single asterisks * for italic text, and __ double underscores __ for underlined text.
+Make clickable links like this: `(click me!)[https://botpress.com]`
     </Td>
+
   </Tr>
   <Tr>
     <Td>Image</Td>
     <Td>
-      To show an image with a title in the chat window, you can use the Image
-      content type. Supported image formats are .tiff, .jpg, .png, .jpeg, .gif,
-      .bmp, .tif.
+      Image content shows an image with a title in the chat window. Supported image formats are .tiff, .jpg, .png, .jpeg, .gif, .bmp, .tif, up to 10mb in size.
     </Td>
   </Tr>
   <Tr>
@@ -52,48 +46,37 @@ You can add Content by dragging a Content Card over to a Standard Node.
   <Tr>
     <Td>File</Td>
     <Td>
-      Allows you to upload any file that the user can download from the chat. In
-      addition, you can add a title which will appear as a message under the
-      file.
+  Allows you to upload any file that the user can download from the chat. In addition, you can add a title which will appear as a message under the file.
     </Td>
   </Tr>
   <Tr>
     <Td>Dropdown</Td>
     <Td>
-      The dropdown displays a list of options to the user. It includes a message
-      to the user, and you can customize the dropdown placeholder text and the
-      text displayed on the selection button.
+    The dropdown displays a list of options to the user. It includes a message to the user, and you can customize the dropdown placeholder text and the text displayed on the selection button.
     </Td>
   </Tr>
   <Tr>
     <Td>Card</Td>
     <Td>
-      A card is a message with a title and an optional subtitle. It also
-      contains an image and action buttons. Note that you first need to create
-      the action button separately.
+     A card is a message with a title and an optional subtitle. It also contains an image and action buttons. Note that you first need to create the action button separately.
     </Td>
   </Tr>
   <Tr>
     <Td>Carousel</Td>
     <Td>
-      A carousel is an array of cards. This collection of cards can either be
-      presented as a horizontally scrolling slide or a vertical message stack,
-      depending on the channel.
+ A carousel is a list of cards. This collection of cards can either be presented as a horizontally scrolling slide or a vertical message stack, depending on the channel.
     </Td>
   </Tr>
   <Tr>
     <Td>Choice</Td>
     <Td>
-      This component carries a message, usually a question, and suggests choices
-      to the user to fulfill the message in the form of buttons.
+     This component carries a message, usually a question, and suggests choices to the user to fulfill the message in the form of buttons.
     </Td>
   </Tr>
   <Tr>
     <Td>Location</Td>
     <Td>
-      It generates a message showing a location with an optional address and
-      title. The required parameters to complete this content element are
-      longitude and latitude.
+      Location content shows a location with an optional address and title. The required parameters to complete this content element are longitude and latitude.
     </Td>
   </Tr>
 </Table>
