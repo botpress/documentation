@@ -236,6 +236,26 @@ of the error:
 }
  ``` 
 
+<H4> Already Exists </H4> 
+
+```json 
+ {
+  "type": "AlreadyExists",
+  "description": "The record attempted to be created already exists.",
+  "status": 409
+}
+ ``` 
+
+<H4> Rate Limited </H4> 
+
+```json 
+ {
+  "type": "RateLimited",
+  "description": "The request has been rate limited.",
+  "status": 429
+}
+ ``` 
+
 ## User 
  
 
@@ -1640,7 +1660,7 @@ Type of the [Message](#schema_message) represents the resource type that the mes
 
 ```tags``` : map of objects  
 
-Set of [Tags](#tags) that you can attach to a [Conversation](#schema_conversation). The set of [Tags](#tags) available on a [Conversation](#schema_conversation) is restricted by the list of [Tags](#tags) defined previously by the [Bot](#schema_bot). Individual keys can be unset by posting an empty value to them.
+Set of [Tags](#tags) that you can attach to a [Message](#schema_message). The set of [Tags](#tags) available on a [Message](#schema_message) is restricted by the list of [Tags](#tags) defined previously by the [Bot](#schema_bot). Individual keys can be unset by posting an empty value to them.
 
 </Collapsible>
 
@@ -1792,7 +1812,7 @@ Type of the [Message](#schema_message) represents the resource type that the mes
 
 ```tags``` : map of objects  
 
-Set of [Tags](#tags) that you can attach to a [Conversation](#schema_conversation). The set of [Tags](#tags) available on a [Conversation](#schema_conversation) is restricted by the list of [Tags](#tags) defined previously by the [Bot](#schema_bot). Individual keys can be unset by posting an empty value to them.
+Set of [Tags](#tags) that you can attach to a [Message](#schema_message). The set of [Tags](#tags) available on a [Message](#schema_message) is restricted by the list of [Tags](#tags) defined previously by the [Bot](#schema_bot). Individual keys can be unset by posting an empty value to them.
 
 </Collapsible>
 
@@ -3353,9 +3373,25 @@ Schema of the configuration in the `JSON schema` format. The configuration data 
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```channels``` : map of objects (3) 
+```channels``` : map of objects (5) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the channel
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the channel
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -3489,9 +3525,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -3505,9 +3557,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```actions``` : map of objects (2) 
+```actions``` : map of objects (4) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the action
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the action
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -3735,9 +3803,25 @@ Schema of the configuration in the `JSON schema` format. The configuration data 
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```channels``` : map of objects (3) 
+```channels``` : map of objects (5) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the channel
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the channel
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -3871,9 +3955,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -3887,9 +3987,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```actions``` : map of objects (2) 
+```actions``` : map of objects (4) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the action
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the action
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -4117,7 +4233,7 @@ Signing secret of the [Bot](#schema_bot)
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```integrations``` : map of objects (6) 
+```integrations``` : map of objects (7) 
 
 A mapping of integrations to their configuration
 
@@ -4164,6 +4280,14 @@ A mapping of integrations to their configuration
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
 ```status``` : string  
+
+
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```statusReason``` : string  
 
 
 
@@ -4325,9 +4449,25 @@ Schema of the configuration in the `JSON schema` format. The configuration data 
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 Events definition
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -4477,9 +4617,25 @@ Expiry of the [State](#schema_state) in milliseconds. The state will expire if i
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 Events definition
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -4753,7 +4909,7 @@ Signing secret of the [Bot](#schema_bot)
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```integrations``` : map of objects (6) 
+```integrations``` : map of objects (7) 
 
 A mapping of integrations to their configuration
 
@@ -4800,6 +4956,14 @@ A mapping of integrations to their configuration
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
 ```status``` : string  
+
+
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```statusReason``` : string  
 
 
 
@@ -4961,9 +5125,25 @@ Schema of the configuration in the `JSON schema` format. The configuration data 
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 Events definition
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -5239,9 +5419,25 @@ Description of the tag
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -5435,7 +5631,7 @@ Signing secret of the [Bot](#schema_bot)
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```integrations``` : map of objects (6) 
+```integrations``` : map of objects (7) 
 
 A mapping of integrations to their configuration
 
@@ -5482,6 +5678,14 @@ A mapping of integrations to their configuration
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
 ```status``` : string  
+
+
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```statusReason``` : string  
 
 
 
@@ -5643,9 +5847,25 @@ Schema of the configuration in the `JSON schema` format. The configuration data 
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 Events definition
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -5937,7 +6157,7 @@ Signing secret of the [Bot](#schema_bot)
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```integrations``` : map of objects (6) 
+```integrations``` : map of objects (7) 
 
 A mapping of integrations to their configuration
 
@@ -5984,6 +6204,14 @@ A mapping of integrations to their configuration
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
 ```status``` : string  
+
+
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```statusReason``` : string  
 
 
 
@@ -6145,9 +6373,25 @@ Schema of the configuration in the `JSON schema` format. The configuration data 
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 Events definition
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -6540,9 +6784,25 @@ Schema of the configuration in the `JSON schema` format. The configuration data 
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```channels``` : map of objects (3) 
+```channels``` : map of objects (5) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the channel
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the channel
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -6676,9 +6936,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -6692,9 +6968,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```actions``` : map of objects (2) 
+```actions``` : map of objects (4) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the action
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the action
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -6892,9 +7184,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -6908,9 +7216,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```actions``` : map of objects (2) 
+```actions``` : map of objects (4) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the action
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the action
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -6948,9 +7272,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```channels``` : map of objects (3) 
+```channels``` : map of objects (5) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the channel
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the channel
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -7240,9 +7580,25 @@ Schema of the configuration in the `JSON schema` format. The configuration data 
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```channels``` : map of objects (3) 
+```channels``` : map of objects (5) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the channel
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the channel
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -7376,9 +7732,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -7392,9 +7764,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```actions``` : map of objects (2) 
+```actions``` : map of objects (4) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the action
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the action
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -7566,9 +7954,25 @@ Schema of the configuration in the `JSON schema` format. The configuration data 
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```channels``` : map of objects (3) 
+```channels``` : map of objects (5) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the channel
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the channel
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -7678,9 +8082,25 @@ Description of the tag
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```actions``` : map of objects (2) 
+```actions``` : map of objects (4) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the action
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the action
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -7718,9 +8138,25 @@ Description of the tag
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -7930,9 +8366,25 @@ Schema of the configuration in the `JSON schema` format. The configuration data 
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```channels``` : map of objects (3) 
+```channels``` : map of objects (5) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the channel
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the channel
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -8066,9 +8518,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -8082,9 +8550,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```actions``` : map of objects (2) 
+```actions``` : map of objects (4) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the action
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the action
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -8430,9 +8914,25 @@ Schema of the configuration in the `JSON schema` format. The configuration data 
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```channels``` : map of objects (3) 
+```channels``` : map of objects (5) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the channel
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the channel
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -8566,9 +9066,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -8582,9 +9098,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```actions``` : map of objects (2) 
+```actions``` : map of objects (4) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the action
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the action
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -8866,9 +9398,25 @@ Schema of the configuration in the `JSON schema` format. The configuration data 
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```channels``` : map of objects (3) 
+```channels``` : map of objects (5) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the channel
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the channel
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
@@ -9002,9 +9550,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```events``` : map of objects (1) 
+```events``` : map of objects (3) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the event
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the event
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
 
@@ -9018,9 +9582,25 @@ Schema of the [State](#schema_state) in the `JSON schema` format. This `JSON sch
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
-```actions``` : map of objects (2) 
+```actions``` : map of objects (4) 
 
 
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```title``` : string  
+
+Title of the action
+
+</Collapsible>
+
+<Collapsible className="mt-3" isCollapsible={false} defaultCollapsed={false}>
+
+```description``` : string  
+
+Description of the action
+
+</Collapsible>
 
 <Collapsible className="mt-3" isCollapsible={true} defaultCollapsed={true}>
 
