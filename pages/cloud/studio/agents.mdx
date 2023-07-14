@@ -1,3 +1,5 @@
+import { Callout } from 'nextra/components'
+
 # Agents
 
 ![Studio Agents](/docs/content/studio-agents.png)
@@ -35,38 +37,72 @@ There are no known conflicts with the Summary Agent and other Botpress functiona
 
 ## Translator Agent
 
-The Translator Agent allows your chatbot to interact with users in different languages, breaking language barriers and expanding the range of your bot's audience. This agent translates the incoming user messages to a language that your chatbot can understand and processes its responses back to the user's language.
+<iframe
+  data-youtube-iframe
+  width="720"
+  height="360"
+  src="https://www.youtube.com/embed/SIrmuihqNhs"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+![Languages](/docs/content/translator-agent.png)
 
-### Input Parameter
+The Translator Agent allows your chatbot to interact with users in different languages, breaking language barriers and expanding the range of your bot's audience.
 
-- **Detect User Language**: When enabled, this option allows the Translator Agent to identify the user's language based on their input automatically. If the user's language has yet to be discovered, it can be determined if the input message is long enough to discern it. Activating this feature consequently sets the `{{user.TranslatorAgent.language}}` variable when it's not already defined.
+### Configuration
 
-### Output Parameter
+- **Automatically Detect User Language** - When enabled, the Translator Agent will automatically detect the user's language from their input.
 
-- **user.TranslatorAgent.language**: This variable represents the detected language of the user. By setting this variable to null, the language detection can be reset. Alternatively, to specify a language, you can set it to any valid ISO 639-1 language code (e.g., 'en', 'fr', 'es').
+Activating this feature consequently sets the `{{user.TranslatorAgent.language}}` variable when it's not already defined.
 
-### Usage
+### Exposed Variables
 
-The Translator Agent automatically translates the chatbot's responses into the user's language once activated. If you wish to define the user's language manually, you can directly set the `{{user.TranslatorAgent.language}}` variable. This can be set to any ISO 639-1 language code, such as 'en' for English, 'fr' for French, or 'es' for Spanish.
+- **user.TranslatorAgent.language**: This variable represents the detected language of the user.
 
-For instance, if you'd like to set the user's language to Spanish, you can use:
+### Example - setting language to french
+
+1. Open the Toolbox Cards and drag the **Set User Language** Card into your first node(ideally).
+2. Specify a language. In this case, we will use `fr` for French.
+
+The Translator Agent automatically translates the chatbot's responses into the user's language once activated. If you wish to define the user's language manually, you can directly set the `{{user.TranslatorAgent.language}}` variable.
+
+This variable is set to `null` by default, which means that the Translator Agent will automatically detect the user's language from their input.
+
+### Resetting the language
+
+Drag the **Reset User Language** Card into your flow. This will reset the `{{user.TranslatorAgent.language}}` variable to `null`.
+
+You can do this in Execute Code card as well:
 
 ```javascript
-{{user.TranslatorAgent.language}} = 'es';
-```
-
-If you want to reset the language detection and allow the Translator Agent to determine the user's language from their input automatically, set the variable to 'null' or 'undefined'. For example:
-
-```javascript
+//use null to reset the language, otherwise set it to a language code
 {{user.TranslatorAgent.language}} = null;
 ```
+
+<Callout type="info">
+  **Note** <br />
+  It's currently not possible to build a chatbot that can speak multiple languages at the same time, i.e. switching between
+  Spanish, English & French within the same flow.
+</Callout>
+
 
 ### Conflicts
 
 It is important to note that the Translator Agent may conflict with the Personality Agent. The Personality Agent is designed to manipulate chatbot responses according to pre-set personalities and could overwrite the translations done by the Translator Agent. If both the Translator Agent and the Personality Agent are enabled, the Personality Agent will take priority. If you want the Translator Agent to take effect, you may need to adjust the settings of the Personality Agent or turn it off.
 
-
 ## Personality Agent
+<iframe
+  data-youtube-iframe
+  width="720"
+  height="360"
+  src="https://www.youtube.com/embed/D9EGSzKy-N0"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
 
 The Personality Agent enables you to provide your chatbot with a unique personality. It tailors the bot's behavior and responses according to the defined personality traits, providing a more engaging and human-like interaction for the users.
 
