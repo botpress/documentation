@@ -33,7 +33,8 @@ Workflow Variables are created and used only within a single workflow. These var
 4. Saving flags or tags that track the conversation
 
 <Callout type="info">
-  **Workflow Variables**<br />
+  **Workflow Variables**
+  <br />
   Workflow variables are not accessible in any workflow other than the one they were created in. For example, a workflow
   variable created in a separate workflow will not be accessible in **Main**.
 </Callout>
@@ -78,7 +79,7 @@ Session variables are available in all flows, but only for one conversation. The
 
 ### How to make session variables
 
-Session variables can only be created inside of an **Execute Code** card. 
+Session variables can only be created inside of an **Execute Code** card.
 
 To create one, simply write: `session.variablename = “Hello World”`
 
@@ -155,3 +156,10 @@ Variables can be assigned values or updated in code- just be aware of their type
 Displaying Variables
 
 You can either use `{{workflow.variablename}}` or `@variablename` in a text field to display a variable.
+
+## Passing Variables between Flows
+
+1. In your target workflow, define an input variable from the workflow properties window.
+2. Toggle it `ON` on the `Entry node` of the target workflow.
+3. Now, on the `exit` node of the parent workflow, the one that brings the user to the target workflow, match the parent workflow variable with the target workflow input variable.
+4. Now, when you call the target workflow from the parent workflow, you will see the input variable in the card. You can pass a value or a variable to it.
