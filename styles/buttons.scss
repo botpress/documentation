@@ -13,6 +13,17 @@
 @layer components {
   .button {
     @apply flex h-[32px] items-center rounded-md px-5 text-white transition-all duration-100;
+    // TODO: Maybe add a mixin for this
+    &.icon-leading {
+      & > * {
+        @apply mr-1 h-[24px] w-[24px] flex-shrink-0;
+      }
+    }
+    &.icon-trailing {
+      & > * {
+        @apply ml-1 h-[24px] w-[24px] flex-shrink-0;
+      }
+    }
     &:active {
       @apply scale-[.98];
     }

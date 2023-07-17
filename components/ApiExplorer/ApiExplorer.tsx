@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
+import { BoltIcon } from '@heroicons/react/24/outline'
 
 export function ApiExplorer() {
   const [query, setQuery] = useState<string>('')
 
   return (
     <div className="flex flex-col">
-      <label htmlFor="queryField" className="mb-2 block text-sm text-zinc-600">
+      <label htmlFor="queryField" className="mb-2 block text-sm text-zinc-400">
         Query (prompt)
       </label>
       <textarea
@@ -18,7 +19,7 @@ export function ApiExplorer() {
         placeholder="Describe what you want to do in natural language"
       ></textarea>
       <div className="flex">
-        <div className="no-scrollbar mr-2 flex overflow-x-scroll">
+        <div className="no-scrollbar relative mr-2 flex overflow-x-scroll">
           {SAMPLE_MESSAGES.map((message) => {
             return (
               <div
@@ -33,7 +34,10 @@ export function ApiExplorer() {
             )
           })}
         </div>
-        <button className="button primary">Generate</button>
+        <button className="button primary icon-leading">
+          <BoltIcon />
+          Generate
+        </button>
       </div>
     </div>
   )
