@@ -18,12 +18,17 @@ export function ApiExplorer() {
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Describe what you want to do in natural language"
       ></textarea>
-      <div className="flex">
-        <div className="no-scrollbar relative mr-2 flex overflow-x-scroll">
+      <div className="flex items-stretch">
+        <div className="no-scrollbar relative mr-3 flex overflow-x-scroll">
           {SAMPLE_MESSAGES.map((message) => {
             return (
               <div
                 onClick={(event) => {
+                  ;(event.target as HTMLDivElement).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'nearest',
+                  })
                   setQuery(message)
                 }}
                 key={message}
