@@ -1,0 +1,23 @@
+@mixin variant($primary, $dark, $focus: $dark) {
+  @apply #{$primary};
+  &:focus {
+    @apply #{$focus};
+  }
+  &:hover {
+    @apply #{$dark};
+  }
+}
+
+@layer components {
+  .button {
+    @apply flex h-[32px] items-center rounded-md px-5 text-white;
+    &.primary {
+      @include variant(bg-primary, bg-primary-dark);
+    }
+  }
+  .link {
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+}
