@@ -1,5 +1,7 @@
 @mixin variant($primary, $dark, $focus: $dark) {
   @apply #{$primary};
+  &:active {
+  }
   &:focus {
     @apply #{$focus};
   }
@@ -10,7 +12,10 @@
 
 @layer components {
   .button {
-    @apply flex h-[32px] items-center rounded-md px-5 text-white;
+    @apply flex h-[32px] items-center rounded-md px-5 text-white transition-all duration-100;
+    &:active {
+      @apply scale-[.98];
+    }
     &.primary {
       @include variant(bg-primary, bg-primary-dark);
     }

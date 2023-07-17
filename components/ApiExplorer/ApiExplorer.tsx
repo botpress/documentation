@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 
 export function ApiExplorer() {
   const [query, setQuery] = useState<string>('')
@@ -16,7 +17,22 @@ export function ApiExplorer() {
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Describe what you want to do in natural language"
       ></textarea>
-      <div className="flex justify-end">
+      <div className="flex">
+        <div className="no-scrollbar mr-2 flex overflow-x-scroll">
+          {SAMPLE_MESSAGES.map((message) => {
+            return (
+              <div
+                onClick={(event) => {
+                  setQuery(message)
+                }}
+                key={message}
+                className="mr-2 flex cursor-pointer items-center whitespace-nowrap rounded-full border border-zinc-100 px-4 text-sm first:ml-5 last:mr-5 hover:border-zinc-200 hover:bg-zinc-100"
+              >
+                {message}
+              </div>
+            )
+          })}
+        </div>
         <button className="button primary">Generate</button>
       </div>
     </div>
