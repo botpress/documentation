@@ -1,1 +1,1 @@
-export * from "./prompts.generators";
+export * from './prompts.generators'
