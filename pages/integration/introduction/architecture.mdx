@@ -1,1 +1,31 @@
+# Introduction:
 
+Start with a brief overview of Botpress, what it is used for, and the importance of understanding its architecture.
+
+## Key Concepts:
+
+Outline and define the primary concepts users must understand when dealing with Botpress. This section could include an explanation of bots, modules, skills, actions, hooks, etc.
+
+## Architecture Overview:
+
+Present a high-level diagram of Botpress's architecture. Describe the core components and how they interact with each other.
+
+###Conversation Communication Diagram
+1.0 The external system (Slack, for example) receives a message from the user
+1.1 The external system calls Botpress webhook and sends respective information to Botpress Handler
+2.0 The integration handler defined in the integration code is called
+3.0 After the handler code is executed, the transformed information is then sent to the platform API
+4.0 Then to be directed to the respective bot to be processed.
+5.0 After processing the message, the output is then sent back to the Platform API
+6.0 Then it is transformed by the integration code to the way the external systems understands
+7.0 The transformed message is then sent to the External System
+7.1 The External System forwards the message to the user
+![Architecture Design](/docs/content/Architcture-Conversation%20Architecture.drawio.png)
+
+###Conversation Communication Diagram
+1.0 The external system (Slack, for example) matches an event/trigger conditions
+1.1 The external system calls Botpress webhook and sends respective information to Botpress Handler
+2.0 The respective integration event defined in the integration code is called
+3.0 After the event code is executed, the transformed information is then sent to the platform API
+4.0 The event is sent to the bot for processing
+![Architecture Design](/docs/content/Architcture-Events%20Architecture.drawio.png)
