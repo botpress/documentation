@@ -20,7 +20,7 @@ export const DEFAULT_THEME: editor.IStandaloneThemeData = {
     'dropdown.background': '#353b45',
     'dropdown.border': '#181A1F',
     'editorIndentGuide.activeBackground': '#626772',
-    'editor.background': '#282C34',
+    'editor.background': '#27272a',
     'editor.foreground': '#ABB2BF',
     'editor.lineHighlightBackground': '#99BBFF0A',
     'editor.selectionBackground': '#3E4451',
