@@ -5,11 +5,19 @@ import { getResponseFromPromptChain } from './ApiExplorer.http'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 import { DEFAULT_THEME } from './theme'
 import { copyCode, withExtensions } from './monaco'
+import { actionButton } from './monaco/action-button'
 
 export function ApiExplorer() {
   const [query, setQuery] = useState<string>('')
   const [response, setResponse] = useState<string>('')
-  const monaco = withExtensions([copyCode])
+  const monaco = withExtensions([
+    copyCode,
+    (editor, domNode) => actionButton(editor, domNode, { title: 'Run', onClick: run }),
+  ])
+
+  function run() {
+    console.log('Running!')
+  }
 
   function generate() {
     getResponseFromPromptChain(query).then((response) => {
