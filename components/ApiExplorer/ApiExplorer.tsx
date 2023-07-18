@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react'
 import { getResponseFromPromptChain } from './ApiExplorer.http'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 import { DEFAULT_THEME } from './theme'
+import { copyCode, withExtensions } from './monaco'
 
 export function ApiExplorer() {
   const [query, setQuery] = useState<string>('')
   const [response, setResponse] = useState<string>('')
-  const monaco = useMonaco()
+  const monaco = withExtensions([copyCode])
 
   function generate() {
     getResponseFromPromptChain(query).then((response) => {
