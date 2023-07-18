@@ -72,7 +72,7 @@ export function ApiExplorer() {
         <Editor
           className="monaco-editor-container"
           height={'35vh'}
-          options={{ fontSize: 15, padding: { top: 16 } }}
+          options={{ fontSize: 15, padding: { top: 16 }, minimap: { enabled: false } }}
           defaultLanguage="typescript"
           value={["import Client from '@botpress/client';", response.toString()].join('\n')}
         ></Editor>
