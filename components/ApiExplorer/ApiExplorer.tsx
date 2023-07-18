@@ -1,6 +1,6 @@
 import { BoltIcon } from '@heroicons/react/24/outline'
 import Editor, { useMonaco } from '@monaco-editor/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getResponseFromPromptChain } from './ApiExplorer.http'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 
@@ -16,10 +16,16 @@ export function ApiExplorer() {
     })
   }
 
+  useEffect(() => {
+    if (monaco) {
+      monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({ noSemanticValidation: true })
+    }
+  }, [monaco])
+
   return (
     <div className="flex flex-col">
       <label htmlFor="queryField" className="mb-2 block text-sm text-zinc-400">
-        Query (prompt)
+        What do you want to do with the API?
       </label>
       <textarea
         id="queryField"
