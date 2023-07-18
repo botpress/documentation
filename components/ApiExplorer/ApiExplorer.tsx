@@ -3,6 +3,7 @@ import Editor, { useMonaco } from '@monaco-editor/react'
 import { useEffect, useState } from 'react'
 import { getResponseFromPromptChain } from './ApiExplorer.http'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
+import { DEFAULT_THEME } from './theme'
 
 export function ApiExplorer() {
   const [query, setQuery] = useState<string>('')
@@ -19,6 +20,8 @@ export function ApiExplorer() {
   useEffect(() => {
     if (monaco) {
       monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({ noSemanticValidation: true })
+      monaco.editor.defineTheme('default', DEFAULT_THEME)
+      monaco.editor.setTheme('default')
     }
   }, [monaco])
 
@@ -69,7 +72,7 @@ export function ApiExplorer() {
         <Editor
           className="monaco-editor-container"
           height={'35vh'}
-          theme="vs-dark"
+          options={{ fontSize: 15, padding: { top: 16 } }}
           defaultLanguage="typescript"
           value={["import Client from '@botpress/client';", response.toString()].join('\n')}
         ></Editor>
