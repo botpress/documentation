@@ -15,7 +15,7 @@ export default withNextra({
   basePath: '/docs',
   swcMinify: true,
   compiler: {
-    removeConsole: true,
+    removeConsole: process.env.ENVIRONMENT !== 'local',
   },
   images: {
     unoptimized: true,

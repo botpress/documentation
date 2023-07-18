@@ -1,9 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 import { BoltIcon } from '@heroicons/react/24/outline'
+import { getResponseFromPromptChain } from './ApiExplorer.http'
 
 export function ApiExplorer() {
   const [query, setQuery] = useState<string>('')
+  const [response, setResponse] = useState<string>('')
+
+  function generate() {
+    getResponseFromPromptChain(query).then((response) => {
+      console.log(response)
+      setResponse(response)
+    })
+  }
 
   return (
     <div className="flex flex-col">
@@ -39,10 +48,24 @@ export function ApiExplorer() {
             )
           })}
         </div>
-        <button className="button primary icon-leading">
+        <button onClick={generate} className="button primary icon-leading">
           <BoltIcon />
           Generate
         </button>
+      </div>
+
+      <div className="mt-10 flex flex-col">
+        <label htmlFor="responseField" className="mb-2 block text-sm text-zinc-400">
+          Generated Code
+        </label>
+        <textarea
+          id="responseField"
+          rows={4}
+          className="mb-2 rounded-lg border border-zinc-300 bg-zinc-100 p-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary"
+          value={response}
+          readOnly
+          placeholder="Response"
+        ></textarea>
       </div>
     </div>
   )
