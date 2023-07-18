@@ -1,1087 +1,1512 @@
+/**
+ * Borrowed from https://github.com/akamud/vscode-theme-onedark
+ */
 import { editor } from 'monaco-editor'
 export const DEFAULT_THEME: editor.IStandaloneThemeData = {
-  base: 'vs-dark',
   inherit: true,
+  base: 'vs-dark',
+  colors: {
+    'activityBar.background': '#333842',
+    'activityBar.foreground': '#D7DAE0',
+    'editorInlayHint.background': '#2C313A',
+    'editorInlayHint.foreground': '#636e83',
+    'notebook.cellEditorBackground': '#2C313A',
+    'activityBarBadge.background': '#528BFF',
+    'activityBarBadge.foreground': '#D7DAE0',
+    'button.background': '#4D78CC',
+    'button.foreground': '#FFFFFF',
+    'button.hoverBackground': '#6087CF',
+    'diffEditor.insertedTextBackground': '#00809B33',
+    'dropdown.background': '#353b45',
+    'dropdown.border': '#181A1F',
+    'editorIndentGuide.activeBackground': '#626772',
+    'editor.background': '#282C34',
+    'editor.foreground': '#ABB2BF',
+    'editor.lineHighlightBackground': '#99BBFF0A',
+    'editor.selectionBackground': '#3E4451',
+    'editorCursor.foreground': '#528BFF',
+    'editor.findMatchHighlightBackground': '#528BFF3D',
+    'editorGroup.background': '#21252B',
+    'editorGroup.border': '#181A1F',
+    'editorGroupHeader.tabsBackground': '#21252B',
+    'editorIndentGuide.background': '#ABB2BF26',
+    'editorLineNumber.foreground': '#636D83',
+    'editorLineNumber.activeForeground': '#ABB2BF',
+    'editorWhitespace.foreground': '#ABB2BF26',
+    'editorRuler.foreground': '#ABB2BF26',
+    'editorHoverWidget.background': '#21252B',
+    'editorHoverWidget.border': '#181A1F',
+    'editorSuggestWidget.background': '#21252B',
+    'editorSuggestWidget.border': '#181A1F',
+    'editorSuggestWidget.selectedBackground': '#2C313A',
+    'editorWidget.background': '#21252B',
+    'editorWidget.border': '#3A3F4B',
+    'input.background': '#1B1D23',
+    'input.border': '#181A1F',
+    focusBorder: '#528BFF',
+    'list.activeSelectionBackground': '#2C313A',
+    'list.activeSelectionForeground': '#D7DAE0',
+    'list.focusBackground': '#2C313A',
+    'list.hoverBackground': '#2C313A66',
+    'list.highlightForeground': '#D7DAE0',
+    'list.inactiveSelectionBackground': '#2C313A',
+    'list.inactiveSelectionForeground': '#D7DAE0',
+    'notification.background': '#21252B',
+    'pickerGroup.border': '#528BFF',
+    'scrollbarSlider.background': '#4E566680',
+    'scrollbarSlider.activeBackground': '#747D9180',
+    'scrollbarSlider.hoverBackground': '#5A637580',
+    'sideBar.background': '#21252B',
+    'sideBarSectionHeader.background': '#333842',
+    'statusBar.background': '#21252B',
+    'statusBar.foreground': '#9DA5B4',
+    'statusBarItem.hoverBackground': '#2C313A',
+    'statusBar.noFolderBackground': '#21252B',
+    'tab.activeBackground': '#282C34',
+    'tab.activeForeground': '#D7DAE0',
+    'tab.border': '#181A1F',
+    'tab.inactiveBackground': '#21252B',
+    'titleBar.activeBackground': '#21252B',
+    'titleBar.activeForeground': '#9DA5B4',
+    'titleBar.inactiveBackground': '#21252B',
+    'titleBar.inactiveForeground': '#9DA5B4',
+    'statusBar.debuggingForeground': '#FFFFFF',
+    'extensionButton.prominentBackground': '#2BA143',
+    'extensionButton.prominentHoverBackground': '#37AF4E',
+    'badge.background': '#528BFF',
+    'badge.foreground': '#D7DAE0',
+    'peekView.border': '#528BFF',
+    'peekViewResult.background': '#21252B',
+    'peekViewResult.selectionBackground': '#2C313A',
+    'peekViewTitle.background': '#1B1D23',
+    'peekViewEditor.background': '#1B1D23',
+  },
   rules: [
     {
-      background: '002B36',
-      token: '',
-    },
-    {
-      foreground: '586e75',
+      foreground: '#5C6370',
+      fontStyle: 'italic',
       token: 'comment',
     },
     {
-      foreground: '2aa198',
-      token: 'string',
+      foreground: '#5C6370',
+      token: 'comment markup.link',
     },
     {
-      foreground: '586e75',
-      token: 'string',
+      foreground: '#E5C07B',
+      token: 'entity.name.type',
     },
     {
-      foreground: 'dc322f',
-      token: 'string.regexp',
+      foreground: '#E5C07B',
+      token: 'entity.other.inherited-class',
     },
     {
-      foreground: 'd33682',
-      token: 'constant.numeric',
-    },
-    {
-      foreground: '268bd2',
-      token: 'variable.language',
-    },
-    {
-      foreground: '268bd2',
-      token: 'variable.other',
-    },
-    {
-      foreground: '859900',
+      foreground: '#C678DD',
       token: 'keyword',
     },
     {
-      foreground: '859900',
-      token: 'storage',
+      foreground: '#C678DD',
+      token: 'keyword.control',
     },
     {
-      foreground: '268bd2',
-      token: 'entity.name.class',
+      foreground: '#C678DD',
+      token: 'keyword.operator',
     },
     {
-      foreground: '268bd2',
-      token: 'entity.name.type.class',
-    },
-    {
-      foreground: '268bd2',
-      token: 'entity.name.function',
-    },
-    {
-      foreground: '859900',
-      token: 'punctuation.definition.variable',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'punctuation.section.embedded.begin',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'punctuation.section.embedded.end',
-    },
-    {
-      foreground: 'b58900',
-      token: 'constant.language',
-    },
-    {
-      foreground: 'b58900',
-      token: 'meta.preprocessor',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'support.function.construct',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'keyword.other.new',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'constant.character',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'constant.other',
-    },
-    {
-      foreground: '268bd2',
-      fontStyle: 'bold',
-      token: 'entity.name.tag',
-    },
-    {
-      foreground: '586e75',
-      token: 'punctuation.definition.tag.html',
-    },
-    {
-      foreground: '586e75',
-      token: 'punctuation.definition.tag.begin',
-    },
-    {
-      foreground: '586e75',
-      token: 'punctuation.definition.tag.end',
-    },
-    {
-      foreground: '93a1a1',
-      token: 'entity.other.attribute-name',
-    },
-    {
-      foreground: '268bd2',
-      token: 'support.function',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'punctuation.separator.continuation',
-    },
-    {
-      foreground: '859900',
-      token: 'support.type',
-    },
-    {
-      foreground: '859900',
-      token: 'support.class',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'support.type.exception',
-    },
-    {
-      foreground: 'cb4b16',
+      foreground: '#61AFEF',
       token: 'keyword.other.special-method',
     },
     {
-      foreground: '2aa198',
-      token: 'string.quoted.double',
+      foreground: '#D19A66',
+      token: 'keyword.other.unit',
     },
     {
-      foreground: '2aa198',
-      token: 'string.quoted.single',
+      foreground: '#C678DD',
+      token: 'storage',
     },
     {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.string.begin',
+      foreground: '#C678DD',
+      token: 'storage.type.annotation',
     },
     {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.string.end',
+      foreground: '#C678DD',
+      token: 'storage.type.primitive',
     },
     {
-      foreground: 'b58900',
-      token: 'entity.name.tag.css',
+      foreground: '#ABB2BF',
+      token: 'storage.modifier.package',
     },
     {
-      foreground: 'b58900',
-      token: 'support.type.property-name.css',
+      foreground: '#ABB2BF',
+      token: 'storage.modifier.import',
     },
     {
-      foreground: 'b58900',
-      token: 'meta.property-name.css',
+      foreground: '#D19A66',
+      token: 'constant',
     },
     {
-      foreground: 'dc322f',
-      token: 'source.css',
+      foreground: '#D19A66',
+      token: 'constant.variable',
     },
     {
-      foreground: '586e75',
-      token: 'meta.selector.css',
+      foreground: '#56B6C2',
+      token: 'constant.character.escape',
     },
     {
-      foreground: '6c71c4',
-      token: 'punctuation.section.property-list.css',
+      foreground: '#D19A66',
+      token: 'constant.numeric',
     },
     {
-      foreground: '2aa198',
-      token: 'meta.property-value.css constant.numeric.css',
+      foreground: '#56B6C2',
+      token: 'constant.other.color',
     },
     {
-      foreground: '2aa198',
-      token: 'keyword.other.unit.css',
+      foreground: '#56B6C2',
+      token: 'constant.other.symbol',
     },
     {
-      foreground: '2aa198',
-      token: 'constant.other.color.rgb-value.css',
+      foreground: '#E06C75',
+      token: 'variable',
     },
     {
-      foreground: '2aa198',
-      token: 'meta.property-value.css',
+      foreground: '#BE5046',
+      token: 'variable.interpolation',
     },
     {
-      foreground: 'dc322f',
-      token: 'keyword.other.important.css',
+      foreground: '#ABB2BF',
+      token: 'variable.parameter',
     },
     {
-      foreground: '2aa198',
-      token: 'support.constant.color',
+      foreground: '#98C379',
+      token: 'string',
     },
     {
-      foreground: '859900',
-      token: 'entity.name.tag.css',
+      foreground: '#ABB2BF',
+      token: 'string > source',
     },
     {
-      foreground: '586e75',
-      token: 'punctuation.separator.key-value.css',
+      foreground: '#ABB2BF',
+      token: 'string embedded',
     },
     {
-      foreground: '586e75',
-      token: 'punctuation.terminator.rule.css',
+      foreground: '#56B6C2',
+      token: 'string.regexp',
     },
     {
-      foreground: '268bd2',
-      token: 'entity.other.attribute-name.class.css',
+      foreground: '#E5C07B',
+      token: 'string.regexp source.ruby.embedded',
     },
     {
-      foreground: 'cb4b16',
-      token: 'entity.other.attribute-name.pseudo-element.css',
+      foreground: '#E06C75',
+      token: 'string.other.link',
     },
     {
-      foreground: 'cb4b16',
-      token: 'entity.other.attribute-name.pseudo-class.css',
+      foreground: '#5C6370',
+      token: 'punctuation.definition.comment',
     },
     {
-      foreground: '268bd2',
-      token: 'entity.other.attribute-name.id.css',
+      foreground: '#ABB2BF',
+      token: 'punctuation.definition.method-parameters',
     },
     {
-      foreground: 'b58900',
-      token: 'meta.function.js',
+      foreground: '#ABB2BF',
+      token: 'punctuation.definition.function-parameters',
     },
     {
-      foreground: 'b58900',
-      token: 'entity.name.function.js',
+      foreground: '#ABB2BF',
+      token: 'punctuation.definition.parameters',
     },
     {
-      foreground: 'b58900',
-      token: 'support.function.dom.js',
+      foreground: '#ABB2BF',
+      token: 'punctuation.definition.separator',
     },
     {
-      foreground: 'b58900',
-      token: 'text.html.basic source.js.embedded.html',
+      foreground: '#ABB2BF',
+      token: 'punctuation.definition.seperator',
     },
     {
-      foreground: '268bd2',
-      token: 'storage.type.function.js',
+      foreground: '#ABB2BF',
+      token: 'punctuation.definition.array',
     },
     {
-      foreground: '2aa198',
-      token: 'constant.numeric.js',
+      foreground: '#61AFEF',
+      token: 'punctuation.definition.heading',
     },
     {
-      foreground: '268bd2',
-      token: 'meta.brace.square.js',
+      foreground: '#61AFEF',
+      token: 'punctuation.definition.identity',
     },
     {
-      foreground: '268bd2',
-      token: 'storage.type.js',
-    },
-    {
-      foreground: '93a1a1',
-      token: 'meta.brace.round',
-    },
-    {
-      foreground: '93a1a1',
-      token: 'punctuation.definition.parameters.begin.js',
-    },
-    {
-      foreground: '93a1a1',
-      token: 'punctuation.definition.parameters.end.js',
-    },
-    {
-      foreground: '268bd2',
-      token: 'meta.brace.curly.js',
-    },
-    {
-      foreground: '93a1a1',
-      fontStyle: 'italic',
-      token: 'entity.name.tag.doctype.html',
-    },
-    {
-      foreground: '93a1a1',
-      fontStyle: 'italic',
-      token: 'meta.tag.sgml.html',
-    },
-    {
-      foreground: '93a1a1',
-      fontStyle: 'italic',
-      token: 'string.quoted.double.doctype.identifiers-and-DTDs.html',
-    },
-    {
-      foreground: '839496',
-      fontStyle: 'italic',
-      token: 'comment.block.html',
-    },
-    {
-      fontStyle: 'italic',
-      token: 'entity.name.tag.script.html',
-    },
-    {
-      foreground: '2aa198',
-      token: 'source.css.embedded.html string.quoted.double.html',
-    },
-    {
-      foreground: 'cb4b16',
+      foreground: '#E5C07B',
       fontStyle: 'bold',
-      token: 'text.html.ruby',
+      token: 'punctuation.definition.bold',
     },
     {
-      foreground: '657b83',
-      token: 'text.html.basic meta.tag.other.html',
+      foreground: '#C678DD',
+      fontStyle: 'italic',
+      token: 'punctuation.definition.italic',
     },
     {
-      foreground: '657b83',
-      token: 'text.html.basic meta.tag.any.html',
+      foreground: '#BE5046',
+      token: 'punctuation.section.embedded',
     },
     {
-      foreground: '657b83',
-      token: 'text.html.basic meta.tag.block.any',
+      foreground: '#ABB2BF',
+      token: 'punctuation.section.method',
     },
     {
-      foreground: '657b83',
-      token: 'text.html.basic meta.tag.inline.any',
+      foreground: '#ABB2BF',
+      token: 'punctuation.section.class',
     },
     {
-      foreground: '657b83',
-      token: 'text.html.basic meta.tag.structure.any.html',
+      foreground: '#ABB2BF',
+      token: 'punctuation.section.inner-class',
     },
     {
-      foreground: '657b83',
-      token: 'text.html.basic source.js.embedded.html',
+      foreground: '#E5C07B',
+      token: 'support.class',
     },
     {
-      foreground: '657b83',
-      token: 'punctuation.separator.key-value.html',
+      foreground: '#56B6C2',
+      token: 'support.type',
     },
     {
-      foreground: '657b83',
-      token: 'text.html.basic entity.other.attribute-name.html',
+      foreground: '#56B6C2',
+      token: 'support.function',
     },
     {
-      foreground: '2aa198',
-      token: 'text.html.basic meta.tag.structure.any.html punctuation.definition.string.begin.html',
+      foreground: '#61AFEF',
+      token: 'support.function.any-method',
     },
     {
-      foreground: '2aa198',
-      token: 'punctuation.definition.string.begin.html',
+      foreground: '#61AFEF',
+      token: 'entity.name.function',
     },
     {
-      foreground: '2aa198',
-      token: 'punctuation.definition.string.end.html',
+      foreground: '#E5C07B',
+      token: 'entity.name.class',
     },
     {
-      foreground: '268bd2',
+      foreground: '#E5C07B',
+      token: 'entity.name.type.class',
+    },
+    {
+      foreground: '#61AFEF',
+      token: 'entity.name.section',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'entity.name.tag',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'entity.other.attribute-name',
+    },
+    {
+      foreground: '#61AFEF',
+      token: 'entity.other.attribute-name.id',
+    },
+    {
+      foreground: '#E5C07B',
+      token: 'meta.class',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.class.body',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.method-call',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.method',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'meta.definition.variable',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'meta.link',
+    },
+    {
+      foreground: '#61AFEF',
+      token: 'meta.require',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'meta.selector',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.separator',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.tag',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'none',
+    },
+    {
+      foreground: '#523D14',
+      background: '#E0C285',
+      token: 'invalid.deprecated',
+    },
+    {
+      foreground: 'ffffff',
+      background: '#E05252',
+      token: 'invalid.illegal',
+    },
+    {
+      foreground: '#D19A66',
       fontStyle: 'bold',
-      token: 'entity.name.tag.block.any.html',
+      token: 'markup.bold',
     },
     {
-      fontStyle: 'italic',
-      token: 'source.css.embedded.html entity.name.tag.style.html',
-    },
-    {
-      foreground: '839496',
-      fontStyle: 'italic',
-      token: 'source.css.embedded.html',
-    },
-    {
-      foreground: '839496',
-      fontStyle: 'italic',
-      token: 'comment.block.html',
-    },
-    {
-      foreground: '268bd2',
-      token: 'punctuation.definition.variable.ruby',
-    },
-    {
-      foreground: '657b83',
-      token: 'meta.function.method.with-arguments.ruby',
-    },
-    {
-      foreground: '2aa198',
-      token: 'variable.language.ruby',
-    },
-    {
-      foreground: '268bd2',
-      token: 'entity.name.function.ruby',
-    },
-    {
-      foreground: '859900',
-      fontStyle: 'bold',
-      token: 'keyword.control.ruby',
-    },
-    {
-      foreground: '859900',
-      fontStyle: 'bold',
-      token: 'keyword.control.def.ruby',
-    },
-    {
-      foreground: '859900',
-      token: 'keyword.control.class.ruby',
-    },
-    {
-      foreground: '859900',
-      token: 'meta.class.ruby',
-    },
-    {
-      foreground: 'b58900',
-      token: 'entity.name.type.class.ruby',
-    },
-    {
-      foreground: '859900',
-      token: 'keyword.control.ruby',
-    },
-    {
-      foreground: 'b58900',
-      token: 'support.class.ruby',
-    },
-    {
-      foreground: '859900',
-      token: 'keyword.other.special-method.ruby',
-    },
-    {
-      foreground: '2aa198',
-      token: 'constant.language.ruby',
-    },
-    {
-      foreground: '2aa198',
-      token: 'constant.numeric.ruby',
-    },
-    {
-      foreground: 'b58900',
-      token: 'variable.other.constant.ruby',
-    },
-    {
-      foreground: '2aa198',
-      token: 'constant.other.symbol.ruby',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'punctuation.section.embedded.ruby',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.string.begin.ruby',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.string.end.ruby',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'keyword.other.special-method.ruby',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'keyword.control.import.include.php',
-    },
-    {
-      foreground: '839496',
-      token: 'text.html.ruby meta.tag.inline.any.html',
-    },
-    {
-      foreground: '2aa198',
-      token: 'text.html.ruby punctuation.definition.string.begin',
-    },
-    {
-      foreground: '2aa198',
-      token: 'text.html.ruby punctuation.definition.string.end',
-    },
-    {
-      foreground: '839496',
-      token: 'punctuation.definition.string.begin',
-    },
-    {
-      foreground: '839496',
-      token: 'punctuation.definition.string.end',
-    },
-    {
-      foreground: '839496',
-      token: 'support.class.php',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'keyword.operator.index-start.php',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'keyword.operator.index-end.php',
-    },
-    {
-      foreground: '586e75',
-      token: 'meta.array.php',
-    },
-    {
-      foreground: 'b58900',
-      token: 'meta.array.php support.function.construct.php',
-    },
-    {
-      foreground: 'b58900',
-      token: 'meta.array.empty.php support.function.construct.php',
-    },
-    {
-      foreground: 'b58900',
-      token: 'support.function.construct.php',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.array.begin',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.array.end',
-    },
-    {
-      foreground: '2aa198',
-      token: 'constant.numeric.php',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'keyword.other.new.php',
-    },
-    {
-      foreground: '839496',
-      token: 'keyword.operator.class',
-    },
-    {
-      foreground: '93a1a1',
-      token: 'variable.other.property.php',
-    },
-    {
-      foreground: 'b58900',
-      token: 'storage.modifier.extends.php',
-    },
-    {
-      foreground: 'b58900',
-      token: 'storage.type.class.php',
-    },
-    {
-      foreground: 'b58900',
-      token: 'keyword.operator.class.php',
-    },
-    {
-      foreground: '839496',
-      token: 'punctuation.terminator.expression.php',
-    },
-    {
-      foreground: '586e75',
-      token: 'meta.other.inherited-class.php',
-    },
-    {
-      foreground: '859900',
-      token: 'storage.type.php',
-    },
-    {
-      foreground: '93a1a1',
-      token: 'entity.name.function.php',
-    },
-    {
-      foreground: '859900',
-      token: 'support.function.construct.php',
-    },
-    {
-      foreground: '839496',
-      token: 'entity.name.type.class.php',
-    },
-    {
-      foreground: '839496',
-      token: 'meta.function-call.php',
-    },
-    {
-      foreground: '839496',
-      token: 'meta.function-call.static.php',
-    },
-    {
-      foreground: '839496',
-      token: 'meta.function-call.object.php',
-    },
-    {
-      foreground: '93a1a1',
-      token: 'keyword.other.phpdoc',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'source.php.embedded.block.html',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'storage.type.function.php',
-    },
-    {
-      foreground: '2aa198',
-      token: 'constant.numeric.c',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'meta.preprocessor.c.include',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'meta.preprocessor.macro.c',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'keyword.control.import.define.c',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'keyword.control.import.include.c',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'entity.name.function.preprocessor.c',
-    },
-    {
-      foreground: '2aa198',
-      token: 'meta.preprocessor.c.include string.quoted.other.lt-gt.include.c',
-    },
-    {
-      foreground: '2aa198',
-      token: 'meta.preprocessor.c.include punctuation.definition.string.begin.c',
-    },
-    {
-      foreground: '2aa198',
-      token: 'meta.preprocessor.c.include punctuation.definition.string.end.c',
-    },
-    {
-      foreground: '586e75',
-      token: 'support.function.C99.c',
-    },
-    {
-      foreground: '586e75',
-      token: 'support.function.any-method.c',
-    },
-    {
-      foreground: '586e75',
-      token: 'entity.name.function.c',
-    },
-    {
-      foreground: '2aa198',
-      token: 'punctuation.definition.string.begin.c',
-    },
-    {
-      foreground: '2aa198',
-      token: 'punctuation.definition.string.end.c',
-    },
-    {
-      foreground: 'b58900',
-      token: 'storage.type.c',
-    },
-    {
-      foreground: 'e0eddd',
-      background: 'b58900',
-      fontStyle: 'italic',
-      token: 'meta.diff',
-    },
-    {
-      foreground: 'e0eddd',
-      background: 'b58900',
-      fontStyle: 'italic',
-      token: 'meta.diff.header',
-    },
-    {
-      foreground: 'dc322f',
-      background: 'eee8d5',
-      token: 'markup.deleted',
-    },
-    {
-      foreground: 'cb4b16',
-      background: 'eee8d5',
+      foreground: '#C678DD',
       token: 'markup.changed',
     },
     {
-      foreground: '219186',
-      background: 'eee8d5',
+      foreground: '#E06C75',
+      token: 'markup.deleted',
+    },
+    {
+      foreground: '#C678DD',
+      fontStyle: 'italic',
+      token: 'markup.italic',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'markup.heading',
+    },
+    {
+      foreground: '#61AFEF',
+      token: 'markup.heading punctuation.definition.heading',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'markup.link',
+    },
+    {
+      foreground: '#98C379',
       token: 'markup.inserted',
     },
     {
-      foreground: 'e0eddd',
-      background: 'b58900',
-      token: 'text.html.markdown meta.dummy.line-break',
+      foreground: '#D19A66',
+      token: 'markup.quote',
     },
     {
-      foreground: '2aa198',
-      token: 'text.html.markdown markup.raw.inline',
+      foreground: '#98C379',
+      token: 'markup.raw',
     },
     {
-      foreground: '2aa198',
-      token: 'text.restructuredtext markup.raw',
+      foreground: '#C678DD',
+      token: 'source.c keyword.operator',
     },
     {
-      foreground: 'dc322f',
-      token: 'other.package.exclude',
+      foreground: '#C678DD',
+      token: 'source.cpp keyword.operator',
     },
     {
-      foreground: 'dc322f',
-      token: 'other.remove',
+      foreground: '#C678DD',
+      token: 'source.cs keyword.operator',
     },
     {
-      foreground: '2aa198',
-      token: 'other.add',
+      foreground: '#828997',
+      token: 'source.css property-name',
     },
     {
-      foreground: 'dc322f',
-      token: 'punctuation.section.group.tex',
+      foreground: '#828997',
+      token: 'source.css property-value',
     },
     {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.arguments.begin.latex',
+      foreground: '#ABB2BF',
+      token: 'source.css property-name.support',
     },
     {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.arguments.end.latex',
+      foreground: '#ABB2BF',
+      token: 'source.css property-value.support',
     },
     {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.arguments.latex',
+      foreground: '#ABB2BF',
+      token: 'source.elixir source.embedded.source',
     },
     {
-      foreground: 'b58900',
-      token: 'meta.group.braces.tex',
+      foreground: '#61AFEF',
+      token: 'source.elixir constant.language',
     },
     {
-      foreground: 'b58900',
-      token: 'string.other.math.tex',
+      foreground: '#61AFEF',
+      token: 'source.elixir constant.numeric',
     },
     {
-      foreground: 'cb4b16',
-      token: 'variable.parameter.function.latex',
+      foreground: '#61AFEF',
+      token: 'source.elixir constant.definition',
     },
     {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.constant.math.tex',
+      foreground: '#C678DD',
+      token: 'source.elixir variable.definition',
     },
     {
-      foreground: '2aa198',
-      token: 'text.tex.latex constant.other.math.tex',
+      foreground: '#C678DD',
+      token: 'source.elixir variable.anonymous',
     },
     {
-      foreground: '2aa198',
-      token: 'constant.other.general.math.tex',
-    },
-    {
-      foreground: '2aa198',
-      token: 'constant.other.general.math.tex',
-    },
-    {
-      foreground: '2aa198',
-      token: 'constant.character.math.tex',
-    },
-    {
-      foreground: 'b58900',
-      token: 'string.other.math.tex',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.string.begin.tex',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.string.end.tex',
-    },
-    {
-      foreground: '2aa198',
-      token: 'keyword.control.label.latex',
-    },
-    {
-      foreground: '2aa198',
-      token: 'text.tex.latex constant.other.general.math.tex',
-    },
-    {
-      foreground: 'dc322f',
-      token: 'variable.parameter.definition.label.latex',
-    },
-    {
-      foreground: '859900',
-      token: 'support.function.be.latex',
-    },
-    {
-      foreground: 'cb4b16',
-      token: 'support.function.section.latex',
-    },
-    {
-      foreground: '2aa198',
-      token: 'support.function.general.tex',
-    },
-    {
+      foreground: '#D19A66',
       fontStyle: 'italic',
-      token: 'punctuation.definition.comment.tex',
+      token: 'source.elixir parameter.variable.function',
     },
     {
-      fontStyle: 'italic',
-      token: 'comment.line.percentage.tex',
+      foreground: '#98C379',
+      token: 'source.elixir quoted',
     },
     {
-      foreground: '2aa198',
-      token: 'keyword.control.ref.latex',
+      foreground: '#E06C75',
+      token: 'source.elixir keyword.special-method',
     },
     {
-      foreground: '586e75',
-      token: 'string.quoted.double.block.python',
+      foreground: '#E06C75',
+      token: 'source.elixir embedded.section',
     },
     {
-      foreground: '859900',
-      token: 'storage.type.class.python',
+      foreground: '#E06C75',
+      token: 'source.elixir embedded.source.empty',
     },
     {
-      foreground: '859900',
-      token: 'storage.type.function.python',
+      foreground: '#E06C75',
+      token: 'source.elixir readwrite.module punctuation',
     },
     {
-      foreground: '859900',
-      token: 'storage.modifier.global.python',
+      foreground: '#BE5046',
+      token: 'source.elixir regexp.section',
     },
     {
-      foreground: 'cb4b16',
-      token: 'keyword.control.import.python',
+      foreground: '#BE5046',
+      token: 'source.elixir regexp.string',
     },
     {
-      foreground: 'cb4b16',
-      token: 'keyword.control.import.from.python',
+      foreground: '#D19A66',
+      token: 'source.elixir separator',
     },
     {
-      foreground: 'b58900',
-      token: 'support.type.exception.python',
+      foreground: '#D19A66',
+      token: 'source.elixir keyword.operator',
     },
     {
-      foreground: '859900',
-      token: 'support.function.builtin.shell',
+      foreground: '#E5C07B',
+      token: 'source.elixir variable.constant',
     },
     {
-      foreground: 'cb4b16',
-      token: 'variable.other.normal.shell',
+      foreground: '#828997',
+      token: 'source.elixir array',
     },
     {
-      foreground: '268bd2',
-      token: 'source.shell',
+      foreground: '#828997',
+      token: 'source.elixir scope',
     },
     {
-      foreground: '586e75',
-      token: 'meta.scope.for-in-loop.shell',
+      foreground: '#828997',
+      token: 'source.elixir section',
     },
     {
-      foreground: '586e75',
-      token: 'variable.other.loop.shell',
+      foreground: '#61AFEF',
+      token: 'source.gfm link entity',
     },
     {
-      foreground: '859900',
-      token: 'punctuation.definition.string.end.shell',
+      foreground: '#C678DD',
+      token: 'source.go storage.type.string',
     },
     {
-      foreground: '859900',
-      token: 'punctuation.definition.string.begin.shell',
+      foreground: '#E06C75',
+      token: 'source.ini keyword.other.definition.ini',
     },
     {
-      foreground: '586e75',
-      token: 'meta.scope.case-block.shell',
+      foreground: '#E5C07B',
+      token: 'source.java storage.modifier.import',
     },
     {
-      foreground: '586e75',
-      token: 'meta.scope.case-body.shell',
+      foreground: '#E5C07B',
+      token: 'source.java storage.type',
     },
     {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.logical-expression.shell',
+      foreground: '#C678DD',
+      token: 'source.java keyword.operator.instanceof',
     },
     {
-      fontStyle: 'italic',
-      token: 'comment.line.number-sign.shell',
+      foreground: '#E06C75',
+      token: 'source.java-properties meta.key-pair',
     },
     {
-      foreground: 'cb4b16',
-      token: 'keyword.other.import.java',
+      foreground: '#ABB2BF',
+      token: 'source.java-properties meta.key-pair > punctuation',
     },
     {
-      foreground: '586e75',
-      token: 'storage.modifier.import.java',
+      foreground: '#56B6C2',
+      token: 'source.js keyword.operator',
     },
     {
-      foreground: 'b58900',
-      token: 'meta.class.java storage.modifier.java',
+      foreground: '#C678DD',
+      token: 'source.js keyword.operator.delete',
     },
     {
-      foreground: '586e75',
-      token: 'source.java comment.block',
+      foreground: '#C678DD',
+      token: 'source.js keyword.operator.in',
     },
     {
-      foreground: '586e75',
-      token: 'comment.block meta.documentation.tag.param.javadoc keyword.other.documentation.param.javadoc',
+      foreground: '#C678DD',
+      token: 'source.js keyword.operator.of',
     },
     {
-      foreground: 'b58900',
-      token: 'punctuation.definition.variable.perl',
+      foreground: '#C678DD',
+      token: 'source.js keyword.operator.instanceof',
     },
     {
-      foreground: 'b58900',
-      token: 'variable.other.readwrite.global.perl',
+      foreground: '#C678DD',
+      token: 'source.js keyword.operator.new',
     },
     {
-      foreground: 'b58900',
-      token: 'variable.other.predefined.perl',
+      foreground: '#C678DD',
+      token: 'source.js keyword.operator.typeof',
     },
     {
-      foreground: 'b58900',
-      token: 'keyword.operator.comparison.perl',
+      foreground: '#C678DD',
+      token: 'source.js keyword.operator.void',
     },
     {
-      foreground: '859900',
-      token: 'support.function.perl',
+      foreground: '#56B6C2',
+      token: 'source.ts keyword.operator',
     },
     {
-      foreground: '586e75',
-      fontStyle: 'italic',
-      token: 'comment.line.number-sign.perl',
+      foreground: '#56B6C2',
+      token: 'source.flow keyword.operator',
     },
     {
-      foreground: '2aa198',
-      token: 'punctuation.definition.string.begin.perl',
+      foreground: '#E06C75',
+      token: 'source.json meta.structure.dictionary.json > string.quoted.json',
     },
     {
-      foreground: '2aa198',
-      token: 'punctuation.definition.string.end.perl',
+      foreground: '#E06C75',
+      token: 'source.json meta.structure.dictionary.json > string.quoted.json > punctuation.string',
     },
     {
-      foreground: 'dc322f',
-      token: 'constant.character.escape.perl',
+      foreground: '#98C379',
+      token: 'source.json meta.structure.dictionary.json > value.json > string.quoted.json',
     },
     {
-      foreground: '268bd2',
-      token: 'markup.heading.markdown',
+      foreground: '#98C379',
+      token: 'source.json meta.structure.array.json > value.json > string.quoted.json',
     },
     {
-      foreground: '268bd2',
-      token: 'markup.heading.1.markdown',
+      foreground: '#98C379',
+      token: 'source.json meta.structure.dictionary.json > value.json > string.quoted.json > punctuation',
     },
     {
-      foreground: '268bd2',
-      token: 'markup.heading.2.markdown',
+      foreground: '#98C379',
+      token: 'source.json meta.structure.array.json > value.json > string.quoted.json > punctuation',
     },
     {
-      foreground: '268bd2',
-      token: 'markup.heading.3.markdown',
+      foreground: '#56B6C2',
+      token: 'source.json meta.structure.dictionary.json > constant.language.json',
     },
     {
-      foreground: '268bd2',
-      token: 'markup.heading.4.markdown',
+      foreground: '#56B6C2',
+      token: 'source.json meta.structure.array.json > constant.language.json',
     },
     {
-      foreground: '268bd2',
-      token: 'markup.heading.5.markdown',
+      foreground: '#E06C75',
+      token: 'ng.interpolation',
     },
     {
-      foreground: '268bd2',
-      token: 'markup.heading.6.markdown',
+      foreground: '#61AFEF',
+      token: 'ng.interpolation.begin',
     },
     {
-      foreground: '839496',
-      fontStyle: 'bold',
-      token: 'markup.bold.markdown',
+      foreground: '#61AFEF',
+      token: 'ng.interpolation.end',
     },
     {
-      foreground: '839496',
-      fontStyle: 'italic',
-      token: 'markup.italic.markdown',
+      foreground: '#E06C75',
+      token: 'ng.interpolation function',
     },
     {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.bold.markdown',
+      foreground: '#61AFEF',
+      token: 'ng.interpolation function.begin',
     },
     {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.italic.markdown',
+      foreground: '#61AFEF',
+      token: 'ng.interpolation function.end',
     },
     {
-      foreground: 'dc322f',
-      token: 'punctuation.definition.raw.markdown',
+      foreground: '#D19A66',
+      token: 'ng.interpolation bool',
     },
     {
-      foreground: 'b58900',
-      token: 'markup.list.unnumbered.markdown',
+      foreground: '#ABB2BF',
+      token: 'ng.interpolation bracket',
     },
     {
-      foreground: '859900',
-      token: 'markup.list.numbered.markdown',
+      foreground: '#ABB2BF',
+      token: 'ng.pipe',
     },
     {
-      foreground: '2aa198',
+      foreground: '#ABB2BF',
+      token: 'ng.operator',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'ng.tag',
+    },
+    {
+      foreground: '#E5C07B',
+      token: 'ng.attribute-with-value attribute-name',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'ng.attribute-with-value string',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'ng.attribute-with-value string.begin',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'ng.attribute-with-value string.end',
+    },
+    {
+      foreground: 'ffffff',
+      token: 'source.ruby constant.other.symbol > punctuation',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.php class.bracket',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'source.python keyword.operator.logical.python',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'source.python variable.parameter',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'customrule',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'support.type.property-name',
+    },
+    {
+      foreground: '#98C379',
+      token: 'string.quoted.double punctuation',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'support.constant',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.type.property-name.json',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.type.property-name.json punctuation',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'punctuation.separator.key-value.ts',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'punctuation.separator.key-value.js',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'punctuation.separator.key-value.tsx',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'source.js.embedded.html keyword.operator',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'source.ts.embedded.html keyword.operator',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'variable.other.readwrite.js',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'variable.other.readwrite.ts',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'variable.other.readwrite.tsx',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.variable.dom.js',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.variable.dom.ts',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.variable.property.dom.js',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.variable.property.dom.ts',
+    },
+    {
+      foreground: '#BE5046',
+      token: 'meta.template.expression.js punctuation.definition',
+    },
+    {
+      foreground: '#BE5046',
+      token: 'meta.template.expression.ts punctuation.definition',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.ts punctuation.definition.typeparameters',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.js punctuation.definition.typeparameters',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.tsx punctuation.definition.typeparameters',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.ts punctuation.definition.block',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.js punctuation.definition.block',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.tsx punctuation.definition.block',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.ts punctuation.separator.comma',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.js punctuation.separator.comma',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.tsx punctuation.separator.comma',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.variable.property.js',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.variable.property.ts',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.variable.property.tsx',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'keyword.control.default.js',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'keyword.control.default.ts',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'keyword.control.default.tsx',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.operator.expression.instanceof.js',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.operator.expression.instanceof.ts',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.operator.expression.instanceof.tsx',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.operator.expression.of.js',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.operator.expression.of.ts',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.operator.expression.of.tsx',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.brace.round.js',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.array-binding-pattern-variable.js',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.brace.square.js',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.brace.round.ts',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.array-binding-pattern-variable.ts',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.brace.square.ts',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.brace.round.tsx',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.array-binding-pattern-variable.tsx',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.brace.square.tsx',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.js punctuation.accessor',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.ts punctuation.accessor',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.tsx punctuation.accessor',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'punctuation.terminator.statement.js',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'punctuation.terminator.statement.ts',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'punctuation.terminator.statement.tsx',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'meta.array-binding-pattern-variable.js variable.other.readwrite.js',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'meta.array-binding-pattern-variable.ts variable.other.readwrite.ts',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'meta.array-binding-pattern-variable.tsx variable.other.readwrite.tsx',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'source.js support.variable',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'source.ts support.variable',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'source.tsx support.variable',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'variable.other.constant.property.js',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'variable.other.constant.property.ts',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'variable.other.constant.property.tsx',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.operator.new.ts',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.operator.new.j',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.operator.new.tsx',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'source.ts keyword.operator',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'source.tsx keyword.operator',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'punctuation.separator.parameter.js',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'punctuation.separator.parameter.ts',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'punctuation.separator.parameter.tsx ',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'constant.language.import-export-all.js',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'constant.language.import-export-all.ts',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'constant.language.import-export-all.jsx',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'constant.language.import-export-all.tsx',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'keyword.control.as.js',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'keyword.control.as.ts',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'keyword.control.as.jsx',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'keyword.control.as.tsx',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'variable.other.readwrite.alias.js',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'variable.other.readwrite.alias.ts',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'variable.other.readwrite.alias.jsx',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'variable.other.readwrite.alias.tsx',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'variable.other.constant.js',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'variable.other.constant.ts',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'variable.other.constant.jsx',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'variable.other.constant.tsx',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'meta.export.default.js variable.other.readwrite.js',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'meta.export.default.ts variable.other.readwrite.ts',
+    },
+    {
+      foreground: '#98C379',
+      token: 'source.js meta.template.expression.js punctuation.accessor',
+    },
+    {
+      foreground: '#98C379',
+      token: 'source.ts meta.template.expression.ts punctuation.accessor',
+    },
+    {
+      foreground: '#98C379',
+      token: 'source.tsx meta.template.expression.tsx punctuation.accessor',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.js meta.import-equals.external.js keyword.operator',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.jsx meta.import-equals.external.jsx keyword.operator',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.ts meta.import-equals.external.ts keyword.operator',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.tsx meta.import-equals.external.tsx keyword.operator',
+    },
+    {
+      foreground: '#98C379',
+      token: 'entity.name.type.module.js',
+    },
+    {
+      foreground: '#98C379',
+      token: 'entity.name.type.module.ts',
+    },
+    {
+      foreground: '#98C379',
+      token: 'entity.name.type.module.jsx',
+    },
+    {
+      foreground: '#98C379',
+      token: 'entity.name.type.module.tsx',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.class.js',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.class.ts',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.class.jsx',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.class.tsx',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.definition.property.js variable',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.definition.property.ts variable',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.definition.property.jsx variable',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.definition.property.tsx variable',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.type.parameters.js support.type',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.type.parameters.jsx support.type',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.type.parameters.ts support.type',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.type.parameters.tsx support.type',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.js meta.tag.js keyword.operator',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.jsx meta.tag.jsx keyword.operator',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.ts meta.tag.ts keyword.operator',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.tsx meta.tag.tsx keyword.operator',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.tag.js punctuation.section.embedded',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.tag.jsx punctuation.section.embedded',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.tag.ts punctuation.section.embedded',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.tag.tsx punctuation.section.embedded',
+    },
+    {
+      foreground: '#E5C07B',
+      token: 'meta.array.literal.js variable',
+    },
+    {
+      foreground: '#E5C07B',
+      token: 'meta.array.literal.jsx variable',
+    },
+    {
+      foreground: '#E5C07B',
+      token: 'meta.array.literal.ts variable',
+    },
+    {
+      foreground: '#E5C07B',
+      token: 'meta.array.literal.tsx variable',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.type.object.module.js',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.type.object.module.jsx',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.type.object.module.ts',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.type.object.module.tsx',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'constant.language.json',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'variable.other.constant.object.js',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'variable.other.constant.object.jsx',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'variable.other.constant.object.ts',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'variable.other.constant.object.tsx',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'storage.type.property.js',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'storage.type.property.jsx',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'storage.type.property.ts',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'storage.type.property.tsx',
+    },
+    {
+      foreground: '#98C379',
+      token: 'meta.template.expression.js string.quoted punctuation.definition',
+    },
+    {
+      foreground: '#98C379',
+      token: 'meta.template.expression.jsx string.quoted punctuation.definition',
+    },
+    {
+      foreground: '#98C379',
+      token: 'meta.template.expression.ts string.quoted punctuation.definition',
+    },
+    {
+      foreground: '#98C379',
+      token: 'meta.template.expression.tsx string.quoted punctuation.definition',
+    },
+    {
+      foreground: '#98C379',
+      token: 'meta.template.expression.js string.template punctuation.definition.string.template',
+    },
+    {
+      foreground: '#98C379',
+      token: 'meta.template.expression.jsx string.template punctuation.definition.string.template',
+    },
+    {
+      foreground: '#98C379',
+      token: 'meta.template.expression.ts string.template punctuation.definition.string.template',
+    },
+    {
+      foreground: '#98C379',
+      token: 'meta.template.expression.tsx string.template punctuation.definition.string.template',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.operator.expression.in.js',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.operator.expression.in.jsx',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.operator.expression.in.ts',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.operator.expression.in.tsx',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'variable.other.object.js',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'variable.other.object.ts',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'meta.object-literal.key.js',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'meta.object-literal.key.ts',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.python constant.other',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'source.python constant',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'constant.character.format.placeholder.other.python storage',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'support.variable.magic.python',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'meta.function.parameters.python',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'punctuation.separator.annotation.python',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'punctuation.separator.parameters.python',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'entity.name.variable.field.cs',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'source.cs keyword.operator',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'variable.other.readwrite.cs',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'variable.other.object.cs',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'variable.other.object.property.cs',
+    },
+    {
+      foreground: '#61AFEF',
+      token: 'entity.name.variable.property.cs',
+    },
+    {
+      foreground: '#E5C07B',
+      token: 'storage.type.cs',
+    },
+    {
+      foreground: '#C678DD',
+      token: 'keyword.other.unsafe.rust',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'entity.name.type.rust',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'storage.modifier.lifetime.rust',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'entity.name.lifetime.rust',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'storage.type.core.rust',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'meta.attribute.rust',
+    },
+    {
+      foreground: '#56B6C2',
+      token: 'storage.class.std.rust',
+    },
+    {
+      foreground: '#ABB2BF',
       token: 'markup.raw.block.markdown',
     },
     {
-      foreground: '2aa198',
-      token: 'markup.raw.inline.markdown',
+      foreground: '#E06C75',
+      token: 'punctuation.definition.variable.shell',
     },
     {
-      foreground: '6c71c4',
+      foreground: '#ABB2BF',
+      token: 'support.constant.property-value.css',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'punctuation.definition.constant.css',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'punctuation.separator.key-value.scss',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'punctuation.definition.constant.scss',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.property-list.scss punctuation.separator.key-value.scss',
+    },
+    {
+      foreground: '#E5C07B',
+      token: 'storage.type.primitive.array.java',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'entity.name.section.markdown',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'punctuation.definition.heading.markdown',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'markup.heading.setext',
+    },
+    {
+      foreground: '#D19A66',
+      token: 'punctuation.definition.bold.markdown',
+    },
+    {
+      foreground: '#98C379',
+      token: 'markup.inline.raw.markdown',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'beginning.punctuation.definition.list.markdown',
+    },
+    {
+      foreground: '#5C6370',
+      fontStyle: 'italic',
       token: 'markup.quote.markdown',
     },
     {
-      foreground: '6c71c4',
-      token: 'punctuation.definition.blockquote.markdown',
-    },
-    {
-      foreground: 'd33682',
-      token: 'meta.separator.markdown',
-    },
-    {
-      foreground: '586e75',
-      fontStyle: 'italic',
-      token: 'meta.image.inline.markdown',
-    },
-    {
-      foreground: '586e75',
-      fontStyle: 'italic',
-      token: 'markup.underline.link.markdown',
-    },
-    {
-      foreground: '93a1a1',
-      token: 'string.other.link.title.markdown',
-    },
-    {
-      foreground: '93a1a1',
-      token: 'string.other.link.description.markdown',
-    },
-    {
-      foreground: '586e75',
-      token: 'punctuation.definition.link.markdown',
-    },
-    {
-      foreground: '586e75',
-      token: 'punctuation.definition.metadata.markdown',
-    },
-    {
-      foreground: '586e75',
+      foreground: '#ABB2BF',
       token: 'punctuation.definition.string.begin.markdown',
     },
     {
-      foreground: '586e75',
+      foreground: '#ABB2BF',
       token: 'punctuation.definition.string.end.markdown',
     },
     {
-      foreground: '586e75',
-      token: 'punctuation.definition.constant.markdown',
+      foreground: '#ABB2BF',
+      token: 'punctuation.definition.metadata.markdown',
     },
     {
-      foreground: 'eee8d5',
-      background: 'eee8d5',
-      token: 'sublimelinter.notes',
+      foreground: '#C678DD',
+      token: 'punctuation.definition.metadata.markdown',
     },
     {
-      foreground: '93a1a1',
-      background: '93a1a1',
-      token: 'sublimelinter.outline.illegal',
+      foreground: '#C678DD',
+      token: 'markup.underline.link.markdown',
     },
     {
-      background: 'dc322f',
-      token: 'sublimelinter.underline.illegal',
+      foreground: '#C678DD',
+      token: 'markup.underline.link.image.markdown',
     },
     {
-      foreground: '839496',
-      background: '839496',
-      token: 'sublimelinter.outline.warning',
+      foreground: '#61AFEF',
+      token: 'string.other.link.title.markdown',
     },
     {
-      background: 'b58900',
-      token: 'sublimelinter.underline.warning',
+      foreground: '#61AFEF',
+      token: 'string.other.link.description.markdown',
     },
     {
-      foreground: '657b83',
-      background: '657b83',
-      token: 'sublimelinter.outline.violation',
+      foreground: '#E06C75',
+      token: 'punctuation.separator.variable.ruby',
     },
     {
-      background: 'cb4b16',
-      token: 'sublimelinter.underline.violation',
+      foreground: '#D19A66',
+      token: 'variable.other.constant.ruby',
+    },
+    {
+      foreground: '#98C379',
+      token: 'keyword.operator.other.ruby',
+    },
+    {
+      foreground: '#E06C75',
+      token: 'punctuation.definition.variable.php',
+    },
+    {
+      foreground: '#ABB2BF',
+      token: 'meta.class.php',
     },
   ],
-  colors: {
-    'editor.foreground': '#839496',
-    'editor.background': '#002B36',
-    'editor.selectionBackground': '#073642',
-    'editor.lineHighlightBackground': '#073642',
-    'editorCursor.foreground': '#819090',
-    'editorWhitespace.foreground': '#073642',
-  },
+  encodedTokensColors: [],
 }
