@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react'
-import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 import { BoltIcon } from '@heroicons/react/24/outline'
+import Editor, { useMonaco } from '@monaco-editor/react'
+import { useState } from 'react'
 import { getResponseFromPromptChain } from './ApiExplorer.http'
+import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 
 export function ApiExplorer() {
   const [query, setQuery] = useState<string>('')
   const [response, setResponse] = useState<string>('')
+  const monaco = useMonaco()
 
   function generate() {
     getResponseFromPromptChain(query).then((response) => {
@@ -58,14 +60,13 @@ export function ApiExplorer() {
         <label htmlFor="responseField" className="mb-2 block text-sm text-zinc-400">
           Generated Code
         </label>
-        <textarea
-          id="responseField"
-          rows={4}
-          className="mb-2 rounded-lg border border-zinc-300 bg-zinc-100 p-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary"
-          value={response}
-          readOnly
-          placeholder="Response"
-        ></textarea>
+        <Editor
+          className="monaco-editor-container"
+          height={'35vh'}
+          theme="vs-dark"
+          defaultLanguage="typescript"
+          value={["import Client from '@botpress/client';", response.toString()].join('\n')}
+        ></Editor>
       </div>
     </div>
   )

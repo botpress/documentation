@@ -21,10 +21,12 @@
   "dependencies": {
     "@botpress/api": "^0.3.2",
     "@heroicons/react": "^2.0.18",
+    "@monaco-editor/react": "^4.5.1",
     "@vercel/og": "^0.5.0",
     "classnames": "^2.3.2",
     "esbuild": "^0.18.10",
     "lodash": "^4.17.21",
+    "monaco-editor": "^0.40.0",
     "next": "^13.4.6",
     "nextra": "^2.7.1",
     "nextra-theme-docs": "^2.7.1",
