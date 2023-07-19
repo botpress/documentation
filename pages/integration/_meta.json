@@ -3,5 +3,6 @@
   "getting-started": "Getting Started",
   "moving-parts": "Moving Parts",
   "cli": "CLI",
-  "sdk": "SDK"
+  "sdk": "SDK",
+  "concepts": "Key Concepts"
 }

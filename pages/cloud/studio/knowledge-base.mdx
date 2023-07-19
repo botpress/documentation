@@ -1,11 +1,6 @@
----
-title: "Knowledge Base"
-section:
-  name: "Studio Interface"
-  slot: D
-slot: 3
-slug: "studio/knowledge-base"
----
+import { Callout } from 'nextra/components'
+
+# Knowledge Base
 
 ![Studio Explorer](/docs/content/kb-banner.png)
 
@@ -16,6 +11,8 @@ It has been designed to replace the traditional Q&A system and enable users to u
 It's worth noting that the **Plain Text** Knowledge Base replaces our old **Q&A system**, while the **Web Search** Knowledge Base replaces **Botpress GO**.
 
 ## Creating a Knowledge Base
+
+![Studio Explorer](/docs/content/add-kb.png)
 
 To create a Knowledge Base, click on the **+ Knowledge Base** Icon in the Explorer on the left panel of the studio. You can create folders and organize your knowledge bases as per your preferences.
 
@@ -67,6 +64,12 @@ For instance, if a user searches for **"How to calibrate the XYZ device,"** Botp
 - **TXT files** are plain text documents, similar to the ones supported by the Plain Text Knowledge Base. However, TXT files can contain more complex formatting, such as tables and images. By uploading TXT files to Botpress, you can make this type of content searchable and easily accessible.
 - **DOC** and **DOCX** files are commonly used for word processing documents, such as memos and reports. By uploading these files to Botpress, you can make them searchable and easily accessible to employees.
 
+<Callout type="info">
+  **Size Limit** <br />
+  While there is no limit to the number of documents you may upload to the Knowledge Base, a size limit of **50MB** per document
+  applies. This feature is designed for optimal utilization.
+</Callout>
+
 ## 3. Web Search
 
 When using the Web Search Knowledge Base Source, you have the ability to specify the websites to include or exclude from your search. This allows you to customize the search to meet your specific requirements. Here are three options you can consider:
@@ -112,9 +115,11 @@ By disabling the Knowledge Base, you essentially exclude it as a potential sourc
 
 Let's consider an example of a chatbot for a travel agency. The bot is designed to capture information from users regarding their travel preferences and provide relevant recommendations. The bot uses the Capture Info action in certain nodes to gather specific details from users.
 
+#### Example 1: Enabling the Knowledge Base
+
 ```text
-Example 1: Enabling the Knowledge Base
-Node: Capture Destination Action: Capture Info
+Node: Capture Destination
+Action: Capture Info
 Scenario: The user is asked to provide their desired travel destination.
 Enable Knowledge Answering: Enabled
 
@@ -125,9 +130,11 @@ Response: The bot's Natural Language Understanding (NLU) recognizes that the use
 
 The conversation then proceeds to the next step of capturing additional information, such as travel dates or budget.
 
+#### Example 2: Disabling the Knowledge Base
+
 ```text
-Example 2: Disabling the Knowledge Base
-Node: Capture Transportation Action: Capture Info
+Node: Capture Transportation
+Action: Capture Info
 Scenario: The user is asked to specify their preferred mode of transportation for travel.
 Enable Knowledge Answering: Disabled
 
@@ -139,3 +146,13 @@ Response: Since the Knowledge Base feature is disabled for this node, the bot's 
 The conversation continues to the next step based on the specific logic or action defined for that node, without utilizing the Knowledge Base to provide answers or additional information.
 
 In both examples, enabling or disabling the Knowledge Base on nodes using the Capture Info action determines whether the bot incorporates Knowledge Base information into the conversation flow or relies solely on other mechanisms to handle user responses.
+
+## Removing the references
+
+To disable auto-generated references, utilize the **Execute Code** card with the following code:
+
+```javascript
+workflow.kbAnswerWithoutRef = event.preview.split("References:")[0].
+```
+
+Then, input `@kbAnswerWithoutRef` into your text or capture card. Make sure to create the variable `kbAnswerWithoutRef` in your workflow.

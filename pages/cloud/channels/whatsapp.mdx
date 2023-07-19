@@ -15,7 +15,7 @@
 
 ## Requirements
 
-You will need a Meta app and a WhatsApp Business Account to connect your bot to WhatsApp
+You will need a [Meta app](https://developers.facebook.com/apps/create/) and a WhatsApp Business Account to connect your bot to WhatsApp
 
 ### Create a Meta App & Business Account
 
@@ -31,27 +31,32 @@ A screen will pop up asking for the following details:
 
 ### 1. Verify Token
 
-The Verify Token is used by Meta to verify that you are the real owner of the provided webhook.
-
+The **Verify Token** is used by Meta to verify that you are the real owner of the provided webhook.
 You can generate any random alphanumeric string for this configuration. Paste it in your **Verify Token** channel configuration.
 
-### 2. Access Token
+### 2. Phone Number ID
 
+1. In your Meta App's left sidebar, expand the **WhatsApp** menu and select **Getting Started**
+2.  In the **Send and receive messages** section, beside the label **Phone Number ID** click **Copy** then paste it in the **Phone Number ID** field in Botpress
+
+### 3. Access Token
 The **Phone Number ID** and **Access Token** are used to send and receive messages to/from the WhatsApp API.
 
-In your Meta App:
-
-1.  In the left sidebar, expand the **WhatsApp** menu and select **Getting Started**
+1.  In your Meta App's left sidebar, expand the **WhatsApp** menu and select **Getting Started**
 2.  In the **Temporary access token** section, click **Copy** and then paste it in the **Access Token** field in Botpress
 
-For a permanent Access Token: [https://developers.facebook.com/blog/post/2022/12/05/auth-tokens/](https://developers.facebook.com/blog/post/2022/12/05/auth-tokens/)
+#### 4. (Optional): Permanent Access Token
 
-### 3. Phone Number ID
+**Permanent Access Token** can be used to send and receive messages to/from the WhatsApp API without the need to refresh the token every 24 hours.
 
-In your Meta App:
-
-1.  In the left sidebar, expand the **WhatsApp** menu and select **Getting Started**
-2.  In the **Send and receive messages** section, beside the label **Phone Number ID** click **Copy** then paste it in the **Phone Number ID** field in Botpress
+1. Navigate to [Business Settings](https://business.facebook.com/settings).
+2. Choose the business account associated with your app.
+3. Click on `Add` under `System Users`.
+4. Enter a name for the system user, assign the `Admin` role, and click `Create System User`.
+5. Click on `Create Asset` and select `Apps` from the asset type Tab.
+6. Select your app and toggle `Manage App (full control)`.
+7. Click `Generate New Token` and select `whatsapp_business_messaging` and `whatsapp_business_management` permission.
+9. Copy and save your token.
 
 ## Finalizing Channel Configuration
 
@@ -109,3 +114,4 @@ const response = await client.createConversation({
 ```
 
 > **Note**: The `client` in the code example above is an instance of the [Botpress Client](https://www.npmjs.com/package/@botpress/client) that is always provided as a prop to the bot handlers (e.g. message handler, event, conversation, state expiry, etc.)
+

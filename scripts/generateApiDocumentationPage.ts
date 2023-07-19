@@ -42,7 +42,8 @@ async function getApiDocumetationPageContent(): Promise<string> {
     md += `<EndpointBlock title={"Endpoints"} endpoints={routes${section.title}} /> \n\n`
 
     if (section.schema) {
-      md += `### The ${section.schema} object \n\n`
+      // Custom link for the heading
+      md += `### The ${section.schema} object [#schema_${section.schema?.toLowerCase()}] \n\n`
       md += '<H4> Attributes </H4>\n\n'
       md += getJsonSchemaMarkDown(context.schemas[section.schema])
     }
