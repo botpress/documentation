@@ -11,13 +11,15 @@ import { DEFAULT_THEME } from './theme'
 export function ApiExplorer() {
   const [query, setQuery] = useState<string>('')
   const [response, setResponse] = useState<string>('')
+  const [output, setOutput] = useState<string>('')
   const monaco = withExtensions([
     copyCode,
     (editor, domNode) => actionButton(editor, domNode, { title: 'Run', onClick: run }),
   ])
 
   function run(editor: CodeEditor) {
-    executeCode(editor.getValue())
+    const output = executeCode(editor.getValue())
+    setOutput(output)
   }
 
   function generate() {
@@ -78,11 +80,18 @@ export function ApiExplorer() {
       <div className="mt-10 flex flex-col">
         <div className="block rounded-t-lg bg-zinc-700 px-4 py-2 text-sm text-zinc-400">generated.ts</div>
         <Editor
-          className="monaco-editor-container rounded-t-none"
+          className="monaco-editor-container rounded-none"
           height={'35vh'}
           options={{ fontSize: 15, padding: { top: 16 }, minimap: { enabled: false } }}
           defaultLanguage="typescript"
           value={["const fart='fart!!!';", 'console.log(fart)', response.toString()].join('\n')}
+        ></Editor>
+        <Editor
+          className="monaco-editor-container rounded-t-none"
+          height={'35vh'}
+          options={{ fontSize: 15, padding: { top: 16 }, minimap: { enabled: false } }}
+          defaultLanguage="typescript"
+          value={[output].join('\n')}
         ></Editor>
       </div>
     </div>
