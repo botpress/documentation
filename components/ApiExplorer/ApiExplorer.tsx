@@ -13,8 +13,8 @@ export function ApiExplorer() {
   const [response, setResponse] = useState<string>('')
   const [output, setOutput] = useState<string>('')
   const monaco = withExtensions([
-    copyCode,
-    (editor, domNode) => actionButton(editor, domNode, { title: 'Run', onClick: run }),
+    [copyCode, (editor, domNode) => actionButton(editor, domNode, { title: 'Run', onClick: run })],
+    [],
   ])
 
   function run(editor: CodeEditor) {
