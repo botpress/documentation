@@ -2,6 +2,7 @@ import { useMonaco } from '@monaco-editor/react'
 import { useEffect } from 'react'
 import * as monacoEditor from 'monaco-editor'
 
+export type CodeEditor = monacoEditor.editor.ICodeEditor
 export type Extension = (editor: monacoEditor.editor.ICodeEditor, domNode: HTMLDivElement | null) => void
 
 export function withExtensions(

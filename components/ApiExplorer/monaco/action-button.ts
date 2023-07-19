@@ -5,7 +5,7 @@ export const actionButton = (
   domNode: Parameters<Extension>['1'],
   buttonConfig: {
     title: string
-    onClick: () => void
+    onClick: (editor: Parameters<Extension>['0']) => void
   }
 ) => {
   if (domNode) {
@@ -15,7 +15,7 @@ export const actionButton = (
   </svg> ${buttonConfig.title || 'Click'}`
     actionButton.className = 'icon-leading button primary absolute bottom-[12px] right-[20px]'
 
-    actionButton.addEventListener('click', buttonConfig.onClick)
+    actionButton.addEventListener('click', () => buttonConfig.onClick(editor))
     domNode.appendChild(actionButton)
   }
 }

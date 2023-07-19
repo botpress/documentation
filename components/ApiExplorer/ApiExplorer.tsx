@@ -1,11 +1,12 @@
 import { BoltIcon } from '@heroicons/react/24/outline'
-import Editor, { useMonaco } from '@monaco-editor/react'
+import Editor from '@monaco-editor/react'
 import { useEffect, useState } from 'react'
 import { getResponseFromPromptChain } from './ApiExplorer.http'
+import { executeCode } from './code-executer'
+import { CodeEditor, copyCode, withExtensions } from './monaco'
+import { actionButton } from './monaco/action-button'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 import { DEFAULT_THEME } from './theme'
-import { copyCode, withExtensions } from './monaco'
-import { actionButton } from './monaco/action-button'
 
 export function ApiExplorer() {
   const [query, setQuery] = useState<string>('')
@@ -15,8 +16,8 @@ export function ApiExplorer() {
     (editor, domNode) => actionButton(editor, domNode, { title: 'Run', onClick: run }),
   ])
 
-  function run() {
-    console.log('Running!')
+  function run(editor: CodeEditor) {
+    executeCode(editor.getValue())
   }
 
   function generate() {
@@ -81,7 +82,7 @@ export function ApiExplorer() {
           height={'35vh'}
           options={{ fontSize: 15, padding: { top: 16 }, minimap: { enabled: false } }}
           defaultLanguage="typescript"
-          value={["import Client from '@botpress/client';", response.toString()].join('\n')}
+          value={["const fart='fart!!!';", 'console.log(fart)', response.toString()].join('\n')}
         ></Editor>
       </div>
     </div>
