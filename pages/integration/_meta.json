@@ -1,6 +1,6 @@
 {
-  "index": "Introduction",
-  "getting-started": "Getting Started",
+  "index": "Overview",
+  "introduction": "Introduction",
   "moving-parts": "Moving Parts",
   "cli": "CLI",
   "sdk": "SDK",
