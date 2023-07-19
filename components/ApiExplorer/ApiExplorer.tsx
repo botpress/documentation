@@ -12,6 +12,7 @@ export function ApiExplorer() {
   const [query, setQuery] = useState<string>('')
   const [response, setResponse] = useState<string>('')
   const [output, setOutput] = useState<string>('')
+  const [awaitingResponse, setAwaitingResponse] = useState<boolean>(false)
   const monaco = withExtensions([
     [copyCode, (editor, domNode) => actionButton(editor, domNode, { title: 'Run', onClick: run })],
     [],
@@ -23,10 +24,15 @@ export function ApiExplorer() {
   }
 
   function generate() {
-    getResponseFromPromptChain(query).then((response) => {
-      console.log(response)
-      setResponse(response)
-    })
+    setAwaitingResponse(true)
+    getResponseFromPromptChain(query)
+      .then((response) => {
+        console.log(response)
+        setResponse(response)
+      })
+      .finally(() => {
+        setAwaitingResponse(false)
+      })
   }
 
   useEffect(() => {
@@ -71,9 +77,15 @@ export function ApiExplorer() {
             )
           })}
         </div>
-        <button onClick={generate} className="button primary icon-leading">
-          <BoltIcon />
-          Generate
+        <button disabled={awaitingResponse} onClick={generate} className="button primary icon-leading">
+          {awaitingResponse ? (
+            'Generating...'
+          ) : (
+            <>
+              <BoltIcon />
+              Generate
+            </>
+          )}
         </button>
       </div>
 
