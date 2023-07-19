@@ -86,10 +86,11 @@ export function ApiExplorer() {
           defaultLanguage="typescript"
           value={["const fart='fart!!!';", 'console.log(fart)', response.toString()].join('\n')}
         ></Editor>
+        <div className="mt-[-1px] block bg-zinc-700 px-4  py-2 text-sm text-zinc-400">Output</div>
         <Editor
           className="monaco-editor-container rounded-t-none"
-          height={'35vh'}
-          options={{ fontSize: 15, padding: { top: 16 }, minimap: { enabled: false } }}
+          height={'20vh'}
+          options={{ fontSize: 12, padding: { top: 16 }, minimap: { enabled: false } }}
           defaultLanguage="typescript"
           value={[output].join('\n')}
         ></Editor>
