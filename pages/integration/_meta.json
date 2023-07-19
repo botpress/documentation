@@ -1,5 +1,6 @@
 {
   "index": "Overview",
+  "introduction": "Introduction"
   "moving-parts": "Moving Parts",
   "cli": "CLI",
   "sdk": "SDK",
