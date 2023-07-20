@@ -1,5 +1,6 @@
 import { BoltIcon } from '@heroicons/react/24/outline'
 import Editor from '@monaco-editor/react'
+import * as monacoEditor from 'monaco-editor'
 import { useEffect, useState } from 'react'
 import { getResponseFromPromptChain } from './ApiExplorer.http'
 import { executeCode } from './code-executer'
@@ -7,12 +8,12 @@ import { CodeEditor, copyCode, withExtensions } from './monaco'
 import { actionButton } from './monaco/action-button'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 import { DEFAULT_THEME } from './theme'
-
 export function ApiExplorer() {
   const [query, setQuery] = useState<string>('')
   const [response, setResponse] = useState<string>('')
   const [output, setOutput] = useState<string>('')
   const [awaitingResponse, setAwaitingResponse] = useState<boolean>(false)
+
   const monaco = withExtensions([
     [copyCode, (editor, domNode) => actionButton(editor, domNode, { title: 'Run', onClick: run })],
     [],
@@ -26,6 +27,11 @@ export function ApiExplorer() {
         monaco.editor.getEditors()?.[1]?.getAction?.('editor.action.formatDocument')?.run()
       }
     }, 500)
+  }
+
+  function onMount(_editor: monacoEditor.editor.IStandaloneCodeEditor, _monaco: typeof monacoEditor) {
+    _monaco.editor.defineTheme(DEFAULT_THEME.name, DEFAULT_THEME.theme)
+    _monaco.editor.setTheme(DEFAULT_THEME.name)
   }
 
   function generate() {
@@ -43,8 +49,6 @@ export function ApiExplorer() {
   useEffect(() => {
     if (monaco) {
       monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({ noSemanticValidation: true })
-      monaco.editor.defineTheme('default', DEFAULT_THEME)
-      monaco.editor.setTheme('default')
     }
   }, [monaco])
 
@@ -101,6 +105,7 @@ export function ApiExplorer() {
           height={'35vh'}
           options={{ fontSize: 15, padding: { top: 16 }, minimap: { enabled: false } }}
           defaultLanguage="typescript"
+          onMount={onMount}
           value={['console.log(client)', 'console.log(arguments)', response.toString()].join('\n')}
         ></Editor>
         <div className="mt-[-1px] block bg-zinc-700 px-4  py-2 text-sm text-zinc-400">Output</div>
@@ -109,7 +114,7 @@ export function ApiExplorer() {
           height={'20vh'}
           options={{ fontSize: 12, padding: { top: 16 }, minimap: { enabled: false } }}
           defaultLanguage="json"
-          value={[output].join('\n')}
+          defaultValue={[output].join('\n')}
         ></Editor>
       </div>
     </div>

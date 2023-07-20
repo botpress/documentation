@@ -2,7 +2,7 @@
  * Borrowed from https://github.com/akamud/vscode-theme-onedark
  */
 import { editor } from 'monaco-editor'
-export const DEFAULT_THEME: editor.IStandaloneThemeData = {
+const DEFAULT_THEME_DATA: editor.IStandaloneThemeData = {
   inherit: true,
   base: 'vs-dark',
   colors: {
@@ -1510,3 +1510,5 @@ export const DEFAULT_THEME: editor.IStandaloneThemeData = {
   ],
   encodedTokensColors: [],
 }
+
+export const DEFAULT_THEME = { name: 'default', theme: DEFAULT_THEME_DATA }
