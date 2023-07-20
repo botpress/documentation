@@ -1,2 +1,2 @@
-export * from './extensions.tsx'
-export * from './copy-code.ts'
+export * from './extensions'
+export * from './copy-code'
