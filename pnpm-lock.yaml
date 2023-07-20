@@ -8,6 +8,9 @@ dependencies:
   '@botpress/api':
     specifier: ^0.3.2
     version: 0.3.2
+  '@botpress/client':
+    specifier: ^0.1.2
+    version: 0.1.2
   '@heroicons/react':
     specifier: ^2.0.18
     version: 2.0.18(react@18.2.0)
@@ -23,6 +26,9 @@ dependencies:
   esbuild:
     specifier: ^0.18.10
     version: 0.18.10
+  esbuild-wasm:
+    specifier: ^0.18.14
+    version: 0.18.14
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -1453,6 +1459,16 @@ packages:
       - debug
     dev: false
 
+  /@botpress/client@0.1.2:
+    resolution: {integrity: sha512-HS4NyNASQ0mQGiW7Ys8Yh59Wkoe3ATXSpCaJSpwmsAjXMObqcRnstNoUz8IO8kdOT0HR8A1yDs6S42/4BymvEg==}
+    dependencies:
+      axios: 1.2.5
+      browser-or-node: 2.1.1
+      type-fest: 3.13.1
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /@bpinternal/opapi@0.2.1:
     resolution: {integrity: sha512-QmmNskf8Hoaq21YjofHwJPDBvBFPrfGflx3nkSsI6vad0IM00gQsZQ6aR6K94CbF0vQpKnkwkkH27eDU/JrCpQ==}
     dependencies:
@@ -2554,6 +2570,16 @@ packages:
       - debug
     dev: false
 
+  /axios@1.2.5:
+    resolution: {integrity: sha512-9pU/8mmjSSOb4CXVsvGIevN+MlO/t9OWtKadTaLuN85Gge3HGorUckgp8A/2FH4V4hJ7JuQ3LIeI7KAV9ITZrQ==}
+    dependencies:
+      follow-redirects: 1.15.2
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /axios@1.4.0:
     resolution: {integrity: sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==}
     dependencies:
@@ -2642,6 +2668,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       fill-range: 7.0.1
+
+  /browser-or-node@2.1.1:
+    resolution: {integrity: sha512-8CVjaLJGuSKMVTxJ2DpBl5XnlNDiT4cQFeuCJJrvJmts9YrTZDizTX7PjC2s6W4x+MBGZeEY6dGMrF04/6Hgqg==}
+    dev: false
 
   /browserslist@4.21.9:
     resolution: {integrity: sha512-M0MFoZzbUrRU4KNfCrDLnvyE7gub+peetoTid3TBIqtunaDJyXlwhakT+/VkvSXcfIzFfK/nkCs4nmyTmxdNSg==}
@@ -3473,6 +3503,12 @@ packages:
     dependencies:
       is-arrayish: 0.2.1
     dev: true
+
+  /esbuild-wasm@0.18.14:
+    resolution: {integrity: sha512-HKXsWTfBejkWApChQi+HTVuVuANwLWC33ebbWRJymvUizJt0TsiMDG2ilipEamj6f79TINR2byp7sULrWWUtPw==}
+    engines: {node: '>=12'}
+    hasBin: true
+    dev: false
 
   /esbuild@0.18.10:
     resolution: {integrity: sha512-33WKo67auOXzZHBY/9DTJRo7kIvfU12S+D4sp2wIz39N88MDIaCGyCwbW01RR70pK6Iya0I74lHEpyLfFqOHPA==}
@@ -6513,6 +6549,11 @@ packages:
   /type-fest@1.4.0:
     resolution: {integrity: sha512-yGSza74xk0UG8k+pLh5oeoYirvIiWo5t0/o3zHHAO2tRDiZcxWP7fywNlXhqb6/r6sWvwi+RsyQMWhVLe4BVuA==}
     engines: {node: '>=10'}
+    dev: false
+
+  /type-fest@3.13.1:
+    resolution: {integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==}
+    engines: {node: '>=14.16'}
     dev: false
 
   /typescript@5.1.6:

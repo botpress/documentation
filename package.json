@@ -20,11 +20,13 @@
   },
   "dependencies": {
     "@botpress/api": "^0.3.2",
+    "@botpress/client": "^0.1.2",
     "@heroicons/react": "^2.0.18",
     "@monaco-editor/react": "^4.5.1",
     "@vercel/og": "^0.5.0",
     "classnames": "^2.3.2",
     "esbuild": "^0.18.10",
+    "esbuild-wasm": "^0.18.14",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.40.0",
     "next": "^13.4.6",
