@@ -1,0 +1,245 @@
+import { Callout } from 'nextra/components'
+import { Bleed } from 'nextra-theme-docs'
+
+# Tables
+
+![Studio Explorer](/docs/content/tables.png)
+
+Tables are an essential feature in the explorer, functioning as a local database within your chatbot's environment. They provide structured storage for various types of data that can be accessed and manipulated as required within your workflows.
+
+They are particularly useful for storing information that needs to be persisted across multiple sessions, such as user profiles, transaction histories, and other types of data that need to be retrieved and updated over time.
+
+## Adding a Table
+
+To add a new table, go to the explorer menu and select `Add Table`. You can then give your table a name and add fields to it. Each field has a name and a type. The type determines the kind of data that can be stored in the field. For example, a field with the type `String` can store any text value, while a field with the type `Number` can only store numeric values.
+
+## Types of Fields (Columns)
+
+There are several types of fields you can add to a table. Each field type has a specific purpose and can only store certain types of data. These are the field types you can choose from: `String`, `Number`, `Boolean`, `Date`, and `Object`.
+
+## Query Selector
+
+A Query Selector is the query you use to select or filter data from your table. For instance, you may need to find a specific record based on certain criteria like a user's ID or a transaction number. The Query Selector allows you to articulate these conditions in plain English, making it both intuitive and powerful. An example of a query could be "Find all records where 'user_id' equals '123'".
+
+To add a Query Selector, click on the table in the explorer menu. You'll then see a list of all the records in the table. Click on the `Add Query Selector` button from the right panel to add a new query selector. You can then enter the query selector in the text field.
+
+## Operations on Tables - Manual
+
+### Add Records (Rows) to a table
+
+Once you've created a table, you can add records to it. To do this, click on the table in the explorer menu. You'll then see a list of all the records in the table. Click on the `Add Record` button to add a new record. You can then enter the values for each field in the record.
+
+### Delete Records (Rows) from a table
+
+`Right Click` on the Record and select `Delete Record` to delete a record from a table.
+
+## Operations on Tables - via Cards
+
+In the context of the studio, there are several operations you can perform on table records.
+
+### Get Record
+
+The Get Record operation allows you to fetch a specific record from a table based on a unique identifier. For example, you might use the Get Record operation to retrieve a user's profile information based on their unique user ID.
+
+To get a record,
+
+1. Add the `Get Record` card
+2. Select the table you want to get the record from.
+3. You specify the unique identifier for the record (Record ID). For example, if you want to get a user's profile information, you can specify their user ID as the unique identifier.
+4. Create or select a variable to store the record in.
+5. You can then use the variable in subsequent cards to access the record's fields.
+
+### Insert Record
+
+The Insert Record operation is used to add a new record to a table. You can specify the values for each field in the record. This operation can be particularly useful when you need to store new information, such as a new user's details or a newly completed transaction.
+
+To insert a record,
+
+1. Add the `Insert Record` card
+2. Select the table you want to insert the record into.
+3. Specify the values for each field in the record.
+
+### Update Record
+
+The Update Record operation enables you to modify a specific record in a table. You can update a specific field in the record. For example, you might use this operation to update a user's profile information or to update the status of a transaction.
+
+To update a record,
+
+1. Add the `Update Record` card
+2. Select the table you want to update the record in.
+3. Specify the unique identifier for the record (Record ID). For example, if you want to update a user's profile information, you can specify their user ID as the unique identifier.
+4. Click on `+ Add Properties to update` button and specify the values for each field in the record.
+
+### Delete Record
+
+The Delete Record operation enables you to remove a specific record from a table based on a unique identifier. For instance, you might use this operation to delete a user's data if they choose to deactivate their account.
+
+To delete a record,
+
+1. Add the `Delete Record` card
+2. Select the table you want to delete the record from.
+3. Specify the unique identifier for the record (Record ID).
+
+### Find Records
+
+The Find Records operation allows you to search for and fetch multiple records that match certain criteria. This operation is beneficial when you need to handle multiple related records at once, such as fetching all transactions made by a specific user.
+
+To find records,
+
+1. Add the `Find Records` card
+2. Select the table you want to find the records from.
+3. Specify the query selector to use to find the records. For example, you might use the query selector "Find all records where 'user_id' equals '123'" to find all transactions made by a specific user.
+4. Create or select a variable to store the records in.
+5. You can then use the variable in subsequent cards to access the records' fields.
+
+Tables, therefore, provide a robust way to manage data within your chatbot, offering flexibility to handle a wide variety of scenarios that involve data persistence, retrieval, and manipulation.
+
+## Operations on Table Records - via Code
+
+![Studio Explorer](/docs/content/table-operations.png)
+
+### createRecord
+
+To create a new record in a table, use the `createRecord` function. You can specify the values for each field in the record. This function can be particularly useful when you need to store new information, such as a new user's details or a newly completed transaction.
+
+```javascript
+// Create a record in the table
+await Data1Table.createRecord({ Age: 25, Name: 'Tom', Occupation: 'Student' })
+```
+
+<iframe
+  width="720"
+  height="360"
+  src="/docs/content/createrecord.mov"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+### createRecords
+
+To create multiple records in a table, use the `createRecords` function. You can specify the values for each field in the record. Useful for creating multiple records at once.
+
+```javascript
+// Creating two records in the table
+await Data1Table.createRecords(
+  { Name: 'Tom', Age: 25, Occupation: 'Student', 'Is Friendly': true },
+  { Name: 'Didier', Age: 54, Occupation: 'Pilot', 'Is Friendly': true }
+)
+```
+
+<iframe
+  width="720"
+  height="360"
+  src="/docs/content/createrecords.mov"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+### deleteRecord
+
+To delete a record in a table, use the `deleteRecord` function. You need to specify the record ID of the record you want to delete.
+
+```javascript
+// Delete a record in the table at record ID 7
+await Data1Table.deleteRecord(7)
+```
+
+<iframe
+  width="720"
+  height="360"
+  src="/docs/content/deleterecord.mov"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+### deleteRecords
+
+To delete multiple records in a table, use the `deleteRecords` function. You need to specify the record IDs of the records you want to delete in an array.
+
+```javascript
+// Delete records in the table at record IDs 7, 8, 9
+await Data1Table.deleteRecords([7, 8, 9])
+```
+
+<iframe
+  width="720"
+  height="360"
+  src="/docs/content/deleterecords.mov"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+### findRecords
+
+To find records in a table, use the `findRecords` function. You need to specify the query selector to use to find the records.
+
+For example, you might use the query selector "People with age greater than 18" to find all users who are above 18.
+
+1. Create a query selector in the table and give it a name. (e.g. adults)
+2. Add query as `People with age greater than 18`
+3. use below code to find records and save it in a variable called `adults`
+
+```javascript
+// Find records in the table
+const data = await Data1Table.findRecords({ selectorName: 'adults' })
+workflow.adults = data
+```
+
+<iframe
+  width="720"
+  height="360"
+  src="/docs/content/findrecord.mov"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+### getRecord
+
+You can use the `getRecord` function to retrieve a specific record from a table based on a unique identifier. For example, you might use the `getRecord` function to retrieve a user's profile information based on their unique user ID.
+
+```javascript
+// Get a record from the table and store it in a variable
+const data = await Data1Table.getRecord(1)
+
+// 1 is the record ID and User is the variable name
+workflow.User = data
+```
+
+<iframe
+  width="720"
+  height="360"
+  src="/docs/content/getrecord.mov"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+### updateRecord
+
+You can use the `updateRecord` function to modify a specific record in a table. This will be useful when you need to update a specific field in the record. For example, you might use this function to update a user's profile information or to update the status of a transaction.
+
+```javascript
+// Update at record ID 8's Age to 45
+await Data1Table.updateRecord(8:{Age:45})
+```
+
+<iframe
+  width="720"
+  height="360"
+  src="/docs/content/updaterecord.mov"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
