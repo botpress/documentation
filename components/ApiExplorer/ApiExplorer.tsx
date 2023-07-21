@@ -5,8 +5,10 @@ import { getResponseFromPromptChain } from './ApiExplorer.http'
 import { executeCode } from './code-executer'
 import { CodeEditor, EditorWithExtensions, Extension, copyCode } from './monaco'
 import { actionButton } from './monaco/action-button'
+import { formatDocument } from './monaco/helpers'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 import { DEFAULT_THEME } from './theme'
+
 export function ApiExplorer() {
   const [query, setQuery] = useState<string>('')
   const [response, setResponse] = useState<string>('')
@@ -22,7 +24,7 @@ export function ApiExplorer() {
     const output = await executeCode(editor.getValue())
     setOutput(output)
     setTimeout(() => {
-      outputEditorRef.current?.getAction?.('editor.action.formatDocument')?.run()
+      formatDocument(outputEditorRef.current!)
     }, 500)
   }
 
