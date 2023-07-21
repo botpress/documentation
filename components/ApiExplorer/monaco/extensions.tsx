@@ -1,24 +1,23 @@
-import { useMonaco } from '@monaco-editor/react'
-import { useEffect } from 'react'
+import { Editor, EditorProps } from '@monaco-editor/react'
 import * as monacoEditor from 'monaco-editor'
 
 export type CodeEditor = monacoEditor.editor.ICodeEditor
-export type Extension = (editor: monacoEditor.editor.ICodeEditor, domNode: HTMLDivElement | null) => void
+export type Extension = (
+  editor: monacoEditor.editor.ICodeEditor,
+  /**
+   * The dom node of the editor `.monaco-editor`
+   */
+  domNode: HTMLDivElement | null
+) => void
 
 /**
- *
- * @param extensions An 2d array of extensions corresponding to each editor on the page
- * @returns
+ * @returns a monkey patched version of the monaco editor with support for extensions
  */
-export function withExtensions(extensions?: Array<Array<Extension>>) {
-  const monaco = useMonaco()
-  useEffect(() => {
-    if (monaco) {
-      monaco.editor.getEditors().forEach((editor, index) => {
-        const domNode = editor.getDomNode() as HTMLDivElement
-        extensions?.[index]?.forEach((extension) => extension(editor, domNode))
-      })
-    }
-  }, [monaco])
-  return monaco
+export function EditorWithExtensions(props: EditorProps & { extensions?: Extension[] }) {
+  function handleOnMount(editor: monacoEditor.editor.IStandaloneCodeEditor, monaco: typeof monacoEditor) {
+    props.extensions?.forEach((extension) => extension(editor, editor.getDomNode() as HTMLDivElement))
+    props?.onMount?.(editor, monaco)
+  }
+
+  return <Editor {...props} onMount={handleOnMount} />
 }

@@ -1,10 +1,9 @@
 import { BoltIcon } from '@heroicons/react/24/outline'
-import Editor from '@monaco-editor/react'
 import * as monacoEditor from 'monaco-editor'
-import { useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import { getResponseFromPromptChain } from './ApiExplorer.http'
 import { executeCode } from './code-executer'
-import { CodeEditor, Extension, copyCode, withExtensions } from './monaco'
+import { CodeEditor, EditorWithExtensions, Extension, copyCode } from './monaco'
 import { actionButton } from './monaco/action-button'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 import { DEFAULT_THEME } from './theme'
@@ -13,27 +12,26 @@ export function ApiExplorer() {
   const [response, setResponse] = useState<string>('')
   const [output, setOutput] = useState<string>('')
   const [awaitingResponse, setAwaitingResponse] = useState<boolean>(false)
-
-  const monaco = withExtensions([[], []])
+  const outputEditorRef = useRef<monacoEditor.editor.IStandaloneCodeEditor | null>(null)
+  const inputEditorExtensions: Extension[] = [
+    copyCode,
+    (editor, domNode) => actionButton(editor, domNode, { title: 'Run', onClick: run }),
+  ]
 
   async function run(editor: CodeEditor) {
     const output = await executeCode(editor.getValue())
     setOutput(output)
     setTimeout(() => {
-      if (monaco) {
-        monaco.editor.getEditors()?.[1]?.getAction?.('editor.action.formatDocument')?.run()
-      }
+      outputEditorRef.current?.getAction?.('editor.action.formatDocument')?.run()
     }, 500)
   }
 
-  const InputEditorExtensions: Extension[] = [
-    copyCode,
-    (editor, domNode) => actionButton(editor, domNode, { title: 'Run', onClick: run }),
-  ]
-  function onMountInputEditor(_editor: monacoEditor.editor.IStandaloneCodeEditor, _monaco: typeof monacoEditor) {
-    _monaco.editor.defineTheme(DEFAULT_THEME.name, DEFAULT_THEME.theme)
-    _monaco.editor.setTheme(DEFAULT_THEME.name)
-    InputEditorExtensions.forEach((extension) => extension(_editor, _editor.getDomNode() as HTMLDivElement))
+  function onMountInputEditor(_editor: monacoEditor.editor.IStandaloneCodeEditor, monaco: typeof monacoEditor) {
+    // monaco is the global scope of all the editors instances on the page
+    // this changes the settings of all the editors on the page
+    monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({ noSemanticValidation: true })
+    monaco.editor.defineTheme(DEFAULT_THEME.name, DEFAULT_THEME.theme)
+    monaco.editor.setTheme(DEFAULT_THEME.name)
   }
 
   function generate() {
@@ -47,12 +45,6 @@ export function ApiExplorer() {
         setAwaitingResponse(false)
       })
   }
-
-  useEffect(() => {
-    if (monaco) {
-      monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({ noSemanticValidation: true })
-    }
-  }, [monaco])
 
   return (
     <div className="flex flex-col">
@@ -102,22 +94,24 @@ export function ApiExplorer() {
 
       <div className="mt-10 flex flex-col">
         <div className="block rounded-t-lg bg-zinc-700 px-4 py-2 text-sm text-zinc-400">generated.ts</div>
-        <Editor
+        <EditorWithExtensions
           className="monaco-editor-container rounded-none"
           height={'35vh'}
           options={{ fontSize: 15, padding: { top: 16 }, minimap: { enabled: false } }}
           defaultLanguage="typescript"
           onMount={onMountInputEditor}
+          extensions={inputEditorExtensions}
           value={['console.log(client)', 'console.log(arguments)', response.toString()].join('\n')}
-        ></Editor>
+        />
         <div className="mt-[-1px] block bg-zinc-700 px-4  py-2 text-sm text-zinc-400">Output</div>
-        <Editor
+        <EditorWithExtensions
           className="monaco-editor-container rounded-t-none"
           height={'20vh'}
           options={{ fontSize: 12, padding: { top: 16 }, minimap: { enabled: false } }}
           defaultLanguage="json"
+          onMount={(editor) => (outputEditorRef.current = editor)}
           value={[output].join('\n')}
-        ></Editor>
+        />
       </div>
     </div>
   )

@@ -1,5 +1,4 @@
 import { Extension } from './extensions'
-
 export const copyCode: Extension = (editor, domNode) => {
   if (domNode) {
     const copyButton = document.createElement('button')
