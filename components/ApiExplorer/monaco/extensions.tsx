@@ -10,9 +10,7 @@ export type Extension = (editor: monacoEditor.editor.ICodeEditor, domNode: HTMLD
  * @param extensions An 2d array of extensions corresponding to each editor on the page
  * @returns
  */
-export function withExtensions(
-  extensions?: Array<Array<(editor: monacoEditor.editor.ICodeEditor, domNode: HTMLDivElement | null) => void>>
-) {
+export function withExtensions(extensions?: Array<Array<Extension>>) {
   const monaco = useMonaco()
   useEffect(() => {
     if (monaco) {
