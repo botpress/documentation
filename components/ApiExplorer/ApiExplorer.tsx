@@ -54,7 +54,7 @@ export function ApiExplorer() {
       <textarea
         id="queryField"
         rows={3}
-        className="mb-2 rounded-lg border border-zinc-300 p-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary"
+        className="mb-2 rounded-lg border border-zinc-300 p-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Describe what you want to do in natural language"
@@ -73,7 +73,7 @@ export function ApiExplorer() {
                   setQuery(message)
                 }}
                 key={message}
-                className="mr-2 flex cursor-pointer items-center whitespace-nowrap rounded-full border border-zinc-100 px-4 text-sm first:ml-5 last:mr-5 hover:border-zinc-200 hover:bg-zinc-100"
+                className="mr-2 flex cursor-pointer items-center whitespace-nowrap rounded-full border border-zinc-100 px-4 text-sm first:ml-5 last:mr-5 hover:border-zinc-200 hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
               >
                 {message}
               </div>
