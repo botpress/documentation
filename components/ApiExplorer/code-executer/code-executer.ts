@@ -32,7 +32,7 @@ export async function executeCode(code: string): Promise<string> {
     }
 
     const result = executer(BotpressClient, fakeConsole)
-    return result.join('')
+    return result.join('\n')
   } catch (error) {
     console.error('There was an error executing the code. ', error)
     return `There was an error executing the code: ${error}`

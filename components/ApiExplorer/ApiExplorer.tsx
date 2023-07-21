@@ -30,6 +30,7 @@ export function ApiExplorer() {
     // monaco is the global scope of all the editors instances on the page
     // this changes the settings of all the editors on the page
     monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({ noSemanticValidation: true })
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({ schemaValidation: 'ignore', validate: false })
     monaco.editor.defineTheme(DEFAULT_THEME.name, DEFAULT_THEME.theme)
     monaco.editor.setTheme(DEFAULT_THEME.name)
   }
@@ -107,6 +108,7 @@ export function ApiExplorer() {
         <EditorWithExtensions
           className="monaco-editor-container rounded-t-none"
           height={'20vh'}
+          extensions={[copyCode]}
           options={{ fontSize: 12, padding: { top: 16 }, minimap: { enabled: false } }}
           defaultLanguage="json"
           onMount={(editor) => (outputEditorRef.current = editor)}
