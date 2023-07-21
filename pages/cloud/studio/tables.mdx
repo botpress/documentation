@@ -107,16 +107,6 @@ To create a new record in a table, use the `createRecord` function. You can spec
 await Data1Table.createRecord({ Age: 25, Name: 'Tom', Occupation: 'Student' })
 ```
 
-<iframe
-  width="720"
-  height="360"
-  src="/docs/content/createrecord.mov"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
-
 ### createRecords
 
 To create multiple records in a table, use the `createRecords` function. You can specify the values for each field in the record. Useful for creating multiple records at once.
@@ -129,16 +119,6 @@ await Data1Table.createRecords(
 )
 ```
 
-<iframe
-  width="720"
-  height="360"
-  src="/docs/content/createrecords.mov"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
-
 ### deleteRecord
 
 To delete a record in a table, use the `deleteRecord` function. You need to specify the record ID of the record you want to delete.
@@ -148,16 +128,6 @@ To delete a record in a table, use the `deleteRecord` function. You need to spec
 await Data1Table.deleteRecord(7)
 ```
 
-<iframe
-  width="720"
-  height="360"
-  src="/docs/content/deleterecord.mov"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
-
 ### deleteRecords
 
 To delete multiple records in a table, use the `deleteRecords` function. You need to specify the record IDs of the records you want to delete in an array.
@@ -166,16 +136,6 @@ To delete multiple records in a table, use the `deleteRecords` function. You nee
 // Delete records in the table at record IDs 7, 8, 9
 await Data1Table.deleteRecords([7, 8, 9])
 ```
-
-<iframe
-  width="720"
-  height="360"
-  src="/docs/content/deleterecords.mov"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
 
 ### findRecords
 
@@ -193,16 +153,6 @@ const data = await Data1Table.findRecords({ selectorName: 'adults' })
 workflow.adults = data
 ```
 
-<iframe
-  width="720"
-  height="360"
-  src="/docs/content/findrecord.mov"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
-
 ### getRecord
 
 You can use the `getRecord` function to retrieve a specific record from a table based on a unique identifier. For example, you might use the `getRecord` function to retrieve a user's profile information based on their unique user ID.
@@ -215,16 +165,6 @@ const data = await Data1Table.getRecord(1)
 workflow.User = data
 ```
 
-<iframe
-  width="720"
-  height="360"
-  src="/docs/content/getrecord.mov"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
-
 ### updateRecord
 
 You can use the `updateRecord` function to modify a specific record in a table. This will be useful when you need to update a specific field in the record. For example, you might use this function to update a user's profile information or to update the status of a transaction.
@@ -233,13 +173,3 @@ You can use the `updateRecord` function to modify a specific record in a table. 
 // Update at record ID 8's Age to 45
 await Data1Table.updateRecord(8:{Age:45})
 ```
-
-<iframe
-  width="720"
-  height="360"
-  src="/docs/content/updaterecord.mov"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
