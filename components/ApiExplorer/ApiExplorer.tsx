@@ -2,7 +2,7 @@ import { BoltIcon } from '@heroicons/react/24/outline'
 import * as monacoEditor from 'monaco-editor'
 import { useRef, useState } from 'react'
 import { getResponseFromPromptChain } from './ApiExplorer.http'
-import { executeCode } from './code-executer'
+import { CodeExecuter } from './code-executer'
 import { CodeEditor, EditorWithExtensions, Extension, copyCode } from './monaco'
 import { actionButton } from './monaco/action-button'
 import { formatDocument } from './monaco/helpers'
@@ -10,6 +10,7 @@ import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 import { DEFAULT_THEME } from './theme'
 
 export function ApiExplorer() {
+  const codeExecuterRef = useRef<CodeExecuter>()
   const [query, setQuery] = useState<string>('')
   const [response, setResponse] = useState<string>('')
   const [output, setOutput] = useState<string>('')
@@ -21,7 +22,10 @@ export function ApiExplorer() {
   ]
 
   async function run(editor: CodeEditor) {
-    const output = await executeCode(editor.getValue())
+    if (!codeExecuterRef.current) {
+      codeExecuterRef.current = new CodeExecuter()
+    }
+    const output = await codeExecuterRef.current.executeCode(editor.getValue())
     setOutput(output)
     setTimeout(() => {
       formatDocument(outputEditorRef.current!)
