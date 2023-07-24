@@ -5,104 +5,110 @@ import { Table, Td, Tr } from '@components/WrapperElements'
 
 Events and Triggers in Botpress allow you to interact with your bot based on different states and interactions within the chat platform. This guide will help you understand how to use these tools effectively to enhance the user experience.
 
-# What are Events?
+## What are Events?
 
 Events represent interactions or changes of state within the chat platform. These might not directly involve a message exchange in a conversation, but they capture a variety of activities. For instance, it could be when a user opens the chat in WhatsApp, when a new issue is created in Linear, or a member joining a group in Telegram.
 
 ## Webchat Triggers
+
 When you enable the webchat, you can access Webchat Triggers. These are specific types of events that you can use for your benefit. Here are the types of Webchat Triggers:
 
-* Trigger: 
-Activated when a custom event is sent from the user's browser.
+- Trigger:
+  Activated when a custom event is sent from the user's browser.
 
-* Conversation Started: 
-Activated when the user opens the bot, useful for showing a welcome message before the user sends a message.
+- Conversation Started:
+  Activated when the user opens the bot, useful for showing a welcome message before the user sends a message.
 
-* Message In Channel: 
-Used to start a conversation or listen to events on external systems. For example, if there's a new lead in Salesforce, you can send a message to the sales team in Slack, or start the webchat when a visitor is on Page X.
+- Message In Channel:
+  Used to start a conversation or listen to events on external systems. For example, if there's a new lead in Salesforce, you can send a message to the sales team in Slack, or start the webchat when a visitor is on Page X.
 
 ### Using Triggers
+
 To use a trigger, add it to the studio editor. Here's what you need to remember when using triggers:
 
-* Conversation triggers can only be used once.
-* You can add conditions for the trigger to be fired using the Edit Filter.
-* To test your trigger, click 'Discover Events', choose the event you want to repeat, click 'save', then 'close'. Select it from the dropdown list named "Select an event to trigger". Now you can click on "Trigger this event" to repeat the payload in the emulator.
+- Conversation triggers can only be used once.
+- You can add conditions for the trigger to be fired using the Edit Filter.
+- To test your trigger, click 'Discover Events', choose the event you want to repeat, click 'save', then 'close'. Select it from the dropdown list named "Select an event to trigger". Now you can click on "Trigger this event" to repeat the payload in the emulator.
 
 ### Sending Custom Information
+
 To send custom information from your website to the bot using the "trigger" type, you can use a simple code snippet like the one provided here. For example you can execute this code when a button on the webpage is clicked, sending a custom payload to the bot:
 
 ```javascript
 window.botpressWebChat.sendPayload({
-    type: "trigger",
-    payload: {
-        myCustomProperty: "hello"
-    }
-});
+  type: 'trigger',
+  payload: {
+    myCustomProperty: 'hello',
+  },
+})
 ```
 
 ### Webchat Lifecycle and Events
+
 Webchat lifecycle events are specific stages in the lifecycle of the bot's interaction with the user. These stages include when the bot is loaded, ready, when the UI is opened, closed, resized, or when the user is connected, among others.
 
 On the other hand, webchat events are different actions that can be invoked for the bot. These include showing or hiding the webchat, toggling the webchat state, sending a custom event, or changing the bot's configuration.
 
 #### Webchat Lifecycle Events
+
 These are specific stages in the lifecycle of the bot's interaction with the user:
 
-| Event Name       | Description                                                  |
-|------------------|--------------------------------------------------------------|
-| `LIFECYCLE.LOADED` | Indicates the bot has been loaded.                          |
-| `LIFECYCLE.READY` | Indicates the bot is ready for interaction.                 |
-| `UI.OPENED`      | Indicates the chat user interface (UI) is opened.            |
-| `UI.CLOSED`      | Indicates the chat UI is closed.                             |
-| `UI.RESIZE`      | Triggered when the chat UI is resized. Useful in responsive designs. |
-| `UI.SET-CLASS`   | Allows setting a specific class to the chat UI. Useful for styling.  |
-| `CONFIG.SET`     | Triggered when a configuration setting is changed.           |
-| `MESSAGE.SENT`   | Indicates a message has been sent.                           |
-| `MESSAGE.RECEIVED` | Indicates a message has been received.                     |
-| `MESSAGE.SELECTED` | Triggered when a message is selected.                      |
-| `USER.CONNECTED` | Indicates a user has connected.                              |
-
-
+| Event Name         | Description                                                          |
+| ------------------ | -------------------------------------------------------------------- |
+| `LIFECYCLE.LOADED` | Indicates the bot has been loaded.                                   |
+| `LIFECYCLE.READY`  | Indicates the bot is ready for interaction.                          |
+| `UI.OPENED`        | Indicates the chat user interface (UI) is opened.                    |
+| `UI.CLOSED`        | Indicates the chat UI is closed.                                     |
+| `UI.RESIZE`        | Triggered when the chat UI is resized. Useful in responsive designs. |
+| `UI.SET-CLASS`     | Allows setting a specific class to the chat UI. Useful for styling.  |
+| `CONFIG.SET`       | Triggered when a configuration setting is changed.                   |
+| `MESSAGE.SENT`     | Indicates a message has been sent.                                   |
+| `MESSAGE.RECEIVED` | Indicates a message has been received.                               |
+| `MESSAGE.SELECTED` | Triggered when a message is selected.                                |
+| `USER.CONNECTED`   | Indicates a user has connected.                                      |
 
 <Callout>
-  **Tip** <br/>
-  Whether 'UI.RESIZE' and 'UI.SET-CLASS' are necessary depends on the specific needs of your bot interface and how you want to handle different UI events.
+  **Tip** <br />
+  Whether 'UI.RESIZE' and 'UI.SET-CLASS' are necessary depends on the specific needs of your bot interface and how you want
+  to handle different UI events.
 </Callout>
 
 #### Webchat Events
+
 These events allow for direct interaction with the webchat UI:
 
 Sure, here is the equivalent of your HTML table in Markdown syntax:
 
 Webchat Visibility:
-| Event Name       | Description                                                                 |
+| Event Name | Description |
 |------------------|-----------------------------------------------------------------------------|
-| `show`           | Opens up the webchat.                                                       |
-| `hide`           | Closes the webchat.                                                         |
-| `toggle`         | If the webchat is open, it closes it and vice versa.                        |
+| `show` | Opens up the webchat. |
+| `hide` | Closes the webchat. |
+| `toggle` | If the webchat is open, it closes it and vice versa. |
 
 Custom Event:
-| Event Name       | Description                                                                 |
+| Event Name | Description |
 |------------------|-----------------------------------------------------------------------------|
-| `custom-event`   | A custom event sent by the website/developer, handled in the studio.        |
+| `custom-event` | A custom event sent by the website/developer, handled in the studio. |
 
 Webchat Config:
-| Event Name       | Description                                                                 |
+| Event Name | Description |
 |------------------|-----------------------------------------------------------------------------|
 | `webchat-config` | Changes bot configuration, like the CSS file path to follow access standards.|
 
 Please note that Markdown doesn't support the rowspan attribute, so each row needs to be repeated for the 'Webchat Visibility' category.
 
-
 ### Webchat Integration
+
 To integrate the webchat into your website, you can include the Botpress webchat script in your HTML code and use the provided functions to control the bot's behavior based on user interactions.
 
 Here's an example:
-```javascript
+
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Triggers</title>
   </head>
 
@@ -112,24 +118,27 @@ Here's an example:
 
     <button id="myButton">Click Me!</button>
     <script>
-        function handleClick() {
-            console.log("Button clicked!");
-            window.botpressWebChat.sendPayload({
-                type: "trigger",
-                payload: {
-                    myCustomProperty: "hello"
-                }
-            });
-        }
-        
-        const button = document.getElementById("myButton");
-        button.addEventListener("click", handleClick);
-        
-        window.botpressWebChat.onEvent(function (event) {
-            if (event.type === "LIFECYCLE.LOADED") {
-                window.botpressWebChat.sendEvent({ type: "show" });
-            }
-        }, ["LIFECYCLE.LOADED"]);
+      function handleClick() {
+        console.log('Button clicked!')
+        window.botpressWebChat.sendPayload({
+          type: 'trigger',
+          payload: {
+            myCustomProperty: 'hello',
+          },
+        })
+      }
+
+      const button = document.getElementById('myButton')
+      button.addEventListener('click', handleClick)
+
+      window.botpressWebChat.onEvent(
+        function (event) {
+          if (event.type === 'LIFECYCLE.LOADED') {
+            window.botpressWebChat.sendEvent({ type: 'show' })
+          }
+        },
+        ['LIFECYCLE.LOADED']
+      )
     </script>
   </body>
 </html>
@@ -137,5 +146,6 @@ Here's an example:
 
 In this example, when the user clicks on the button, the bot opens up and then sends a payload to the bot. You can customize this code based on your needs to create interactive experiences for your users.
 
-# Conclusion
+## Conclusion
+
 Events and Triggers in Botpress are powerful tools that allow your bot to be more interactive and responsive to user actions. Understanding how to use these features will enable you to create a more engaging user experience.
