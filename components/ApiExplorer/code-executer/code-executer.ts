@@ -1,6 +1,5 @@
 import { CodeExecutorMessageData, CodeExecutorMessageEvent, MessageTypes } from './code-executer.types'
 
-let hasAlreadyInitialized = false
 export class CodeExecuter {
   private worker!: Worker
   constructor() {
@@ -11,9 +10,6 @@ export class CodeExecuter {
 
   public executeCode(code: string) {
     return new Promise<string>((resolve) => {
-      if (hasAlreadyInitialized) {
-        return 'Farts all the way down'
-      }
       this.worker.onmessage = (e: CodeExecutorMessageEvent) => {
         if (e.data.type === MessageTypes.EXECUTE_RESULT) {
           resolve(e.data.result)
