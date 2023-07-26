@@ -12,7 +12,7 @@ import { getContext } from './openApiContext'
 
 async function getApiDocumetationPageContent(): Promise<string> {
   const context = await getContext()
-  let md = DONT_EDIT_WARNING
+  let md = `${DONT_EDIT_WARNING}\n\n`
   md += 'import { EndpointBlock } from "@components/EndpointBlock"; \n\n'
   md += 'import { Collapsible } from "@components/Collapsible"; \n\n'
   md += 'import { H4 } from "@components/WrapperElements"; \n\n'
