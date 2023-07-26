@@ -5,13 +5,14 @@ import {
   API_DOCS_ERROR_DESCRIPTION,
   API_DOCS_INTRO,
   API_DOCS_PAGINATION,
+  DONT_EDIT_WARNING,
 } from './generateApiDocumentationPage.constants'
 import { JSONSchemaProperty, JSONSchemaType } from './generateApiDocumentationPage.types'
 import { getContext } from './openApiContext'
 
 async function getApiDocumetationPageContent(): Promise<string> {
   const context = await getContext()
-  let md = ''
+  let md = DONT_EDIT_WARNING
   md += 'import { EndpointBlock } from "@components/EndpointBlock"; \n\n'
   md += 'import { Collapsible } from "@components/Collapsible"; \n\n'
   md += 'import { H4 } from "@components/WrapperElements"; \n\n'
@@ -58,7 +59,9 @@ async function getApiDocumetationPageContent(): Promise<string> {
         md += `<H4> ${startCase(location)} </H4> \n\n`
         if (Array.isArray(parameters)) {
           parameters.forEach((parameter) => {
-            md += `<Collapsible className="mt-3" collapsible={false} defaultCollapsed={${!Boolean(parameter.schema?.description)}}>\n\n`
+            md += `<Collapsible className="mt-3" collapsible={false} defaultCollapsed={${!Boolean(
+              parameter.schema?.description
+            )}}>\n\n`
             md += getPropertyMdWithDescription(parameter.name, parameter.schema)
             md += '</Collapsible>\n\n'
           })
@@ -91,9 +94,9 @@ function getJsonSchemaMarkDown(schema: JSONSchemaType): string {
     return Object.entries(flattenedProperties).reduce((md, [name, property]) => {
       const flattenedSubProperties = property.type === 'object' ? getNormalizedProperties(property) : false
 
-      md += `<Collapsible className="mt-3" isCollapsible={${Boolean(flattenedSubProperties)}} defaultCollapsed={${Boolean(
+      md += `<Collapsible className="mt-3" isCollapsible={${Boolean(
         flattenedSubProperties
-      )}}>\n\n`
+      )}} defaultCollapsed={${Boolean(flattenedSubProperties)}}>\n\n`
 
       switch (property.type) {
         case 'object': {
