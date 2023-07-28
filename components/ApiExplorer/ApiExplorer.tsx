@@ -1,13 +1,18 @@
 import { BoltIcon } from '@heroicons/react/24/outline'
 import * as monacoEditor from 'monaco-editor'
 import { useRef, useState } from 'react'
-import { executePromptChain } from './ApiExplorer.http'
 import { CodeExecuter } from './code-executer'
 import { CodeEditor, EditorWithExtensions, Extension, copyCode } from './monaco'
 import { actionButton } from './monaco/action-button'
 import { formatDocument } from './monaco/helpers'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 import { DEFAULT_THEME } from './theme'
+import {
+  executePromptChain,
+  getResponseFromPrompt,
+  getResponseFromPrompt2,
+  getResponseFromPrompt3,
+} from './ApiExplorer.http'
 
 export function ApiExplorer() {
   const codeExecuterRef = useRef<CodeExecuter>()
@@ -43,10 +48,9 @@ export function ApiExplorer() {
 
   function generate() {
     setAwaitingResponse(true)
-    executePromptChain(query)
+    executePromptChain(query, [getResponseFromPrompt, getResponseFromPrompt2, getResponseFromPrompt3])
       .then((response) => {
-        console.log(response)
-        setResponse(response)
+        setResponse(response[0])
       })
       .finally(() => {
         setAwaitingResponse(false)
