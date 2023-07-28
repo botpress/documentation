@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@botpress/api": "^0.3.2",
-    "@botpress/client": "^0.1.2",
+    "@botpress/client": "^0.2.0",
     "@heroicons/react": "^2.0.18",
     "@monaco-editor/react": "^4.5.1",
     "@vercel/og": "^0.5.0",

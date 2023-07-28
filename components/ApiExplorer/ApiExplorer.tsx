@@ -1,7 +1,7 @@
 import { BoltIcon } from '@heroicons/react/24/outline'
 import * as monacoEditor from 'monaco-editor'
 import { useRef, useState } from 'react'
-import { getResponseFromPromptChain } from './ApiExplorer.http'
+import { executePromptChain } from './ApiExplorer.http'
 import { CodeExecuter } from './code-executer'
 import { CodeEditor, EditorWithExtensions, Extension, copyCode } from './monaco'
 import { actionButton } from './monaco/action-button'
@@ -43,7 +43,7 @@ export function ApiExplorer() {
 
   function generate() {
     setAwaitingResponse(true)
-    getResponseFromPromptChain(query)
+    executePromptChain(query)
       .then((response) => {
         console.log(response)
         setResponse(response)
