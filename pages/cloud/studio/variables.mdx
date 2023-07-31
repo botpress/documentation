@@ -81,9 +81,9 @@ Session variables are available in all flows, but only for one conversation. The
 
 Session variables can only be created inside of an **Execute Code** card.
 
-To create one, simply write: `session.variablename = “Hello World”`
+To create one, simply write: `event.state.session.variablename = "Hello World"` or for short `session.variablename = "Hello World"`
 
-To use a session variable in a text or other card, enclose it in double curly brackets like `{{session.variablename}}`
+To use a session variable in a text or other card, enclose it in double curly brackets like `{{event.state.session.variablename}}` or for short `{{session.variablename}}`
 
 ## User Variables
 
