@@ -12,12 +12,12 @@ The state is defined within the `states` object in your integration.
   **States Concept** <br />
   You can find more about the [States Concept](/docs/integration/concepts/states) here.
 </Callout>
-
+    
 ## State Definition
 
 The state definition includes `type` and `schema`:
 
-- `type`: It indicates the scope of the state. It could be 'integration' for global scope or 'conversation' for conversation-level scope.
+- `type`: It indicates the scope of the state. It could be 'integration' for global scope, 'conversation' for conversation-level scope or 'user' for user-level scope.
 
 - `schema`: This uses the Zod library to define the structure and type of the state data. It represents the data that the state will hold.
 
