@@ -2,7 +2,7 @@
 
 ## Register
 
-`register` is fired when the integration is enabled. It's essential to note that `register` can be triggered multiple times, so it's crucial to ensure that your integration handles this appropriately. 
+`register` is fired when the integration is enabled. It's essential to note that `register` is idempotent and can be triggered multiple times, so it's crucial to ensure that your integration handles this appropriately. 
 
 `register` is the perfect place to create webhooks or subscribe the Botpress webhook to the integration to receive information. It is also a suitable place to verify the correctness of the information provided in the configuration.
 
