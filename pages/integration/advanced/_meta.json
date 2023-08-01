@@ -1,5 +1,6 @@
 {
-  "actions": "Actions",
   "states": "States",
+  "register_unregister": "Register & Unregister",
+  "actions": "Actions",
   "logging": "Integration Logging"
 }
