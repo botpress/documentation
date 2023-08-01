@@ -78,7 +78,7 @@ const logo = (
 )
 
 const config: DocsThemeConfig = {
-  feedback: { content: 'Feedback ->' },
+  feedback: { content: 'Feedback →' },
   project: {
     link: undefined,
   },
