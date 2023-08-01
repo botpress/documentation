@@ -27,8 +27,17 @@ When you enable the webchat, you can access Webchat Triggers. These are specific
 To use a trigger, add it to the studio editor. Here's what you need to remember when using triggers:
 
 - Conversation triggers can only be used once.
-- You can add conditions for the trigger to be fired using the Edit Filter.
-- To test your trigger, click 'Discover Events', choose the event you want to repeat, click 'save', then 'close'. Select it from the dropdown list named "Select an event to trigger". Now you can click on "Trigger this event" to repeat the payload in the emulator.
+- You can add conditions for firing the trigger using the Edit Filter.
+- To test your trigger, click 'Discover Events', choose the event you want to repeat, click 'save', then 'close'. Select it from the dropdown list named "Select an event to trigger". Now you can click "Trigger this event" to repeat the payload in the emulator.
+
+## Welcome Message
+
+To make the bot send a welcome message, add a trigger to your flow, then choose the "Conversation Started" type. This would make the bot send a message even if the user didn't.
+
+<Callout type="warning">
+  **Welcome Message** <br />
+  Welcome Messages can be tested only after publishing the chatbot and can be tested mainly from the web chat screen. Like in the shareable link, the chat from the chatbot dashboard or the embedded web chat component.
+</Callout>
 
 ### Sending Custom Information
 
