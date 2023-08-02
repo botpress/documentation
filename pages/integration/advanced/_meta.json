@@ -1,5 +1,6 @@
 {
   "actions": "Actions",
+  "events": "Events",
   "states": "States",
-  "logging": "Integration Logging"
+  "logging": "Logging"
 }
