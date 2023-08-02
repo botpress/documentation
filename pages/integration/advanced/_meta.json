@@ -1,6 +1,7 @@
 {
+  "states": "States",
+  "register_unregister": "Register & Unregister",
   "actions": "Actions",
   "events": "Events",
-  "states": "States",
   "logging": "Logging"
 }
