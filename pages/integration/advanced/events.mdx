@@ -44,7 +44,7 @@ export const events = {
 ```
 
 ## Event Implementation
-This refers to the actual code segment that contains the implementation of the action in the integration. The parameters that can be passed to the implementation function can include but are not limited to ctx (context), input (user-provided inputs in the fields defined in the UI section in the definition), logger (useful for logging information to the bot logs), and client (information about the integration).
+This refers to the actual code segment that contains the implementation of the action in the integration. The parameters that are passed to the implementation function include but are not limited to `ctx` (context), `input` (user-provided inputs in the fields defined in the UI section in the definition), `logger` (useful for logging information to the bot logs), and `client` (Botpress API Client).
 
 ### Example:
 Here's an example of how you might implement the NewOrderCreated event in Shopify:
