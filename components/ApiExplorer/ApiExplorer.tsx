@@ -50,7 +50,7 @@ export function ApiExplorer() {
     setAwaitingResponse(true)
     executePromptChain(query, [getResponseFromPrompt, getResponseFromPrompt2, getResponseFromPrompt3])
       .then((response) => {
-        setResponse(response[0])
+        setResponse(response?.[0] ?? '')
       })
       .finally(() => {
         setAwaitingResponse(false)
