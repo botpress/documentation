@@ -120,8 +120,10 @@ To create multiple records in a table, use the `createRecords` function. You can
 ```javascript
 // Creating two records in the table
 await Data1Table.createRecords(
+[
   { Name: 'Tom', Age: 25, Occupation: 'Student', 'Is Friendly': true },
   { Name: 'Didier', Age: 54, Occupation: 'Pilot', 'Is Friendly': true }
+]
 )
 ```
 
