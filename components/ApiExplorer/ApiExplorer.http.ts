@@ -18,11 +18,12 @@ export async function getResponseFromPrompt(query: string): Promise<string[]> {
 }
 
 export async function getResponseFromPrompt2(query: string, categories: string[]): Promise<string[]> {
-  const methods = categories.reduce(
+  const methodsNames = categories.reduce(
     (contextMethods, category) => contextMethods.concat(CLIENT_METHODS[category as keyof typeof CLIENT_METHODS]),
     [] as string[]
   )
-  const prompt = `Which of the method(s) are best suited to respond for this query - "${query}". Respond in a valid JSON of type {methods:string[]}\n ### Methods: ${methods}`
+
+  const prompt = `Which of the method(s) are best suited to respond for this query - "${query}". Respond in a valid JSON of type {methods:string[]}\n ### Methods: ${methodsNames}`
   console.log({ prompt })
   const completionResponse = await getCompletion(prompt)
   if (completionResponse.success) {
@@ -47,30 +48,34 @@ export async function getResponseFromPrompt3(query: string, methods: string[]): 
   }
 }
 
-async function getContentForTypeBlock(blockName: string): Promise<string> {
-  const fileName = blockName + '.ts'
-  const response = files[fileName]
-  const { dependencyFileNames, content } = processImports(response)
-  if (dependencyFileNames.length === 0) {
-    return content
-  } else {
-    const dependencies = await Promise.all(dependencyFileNames.map((fileName) => getContentForTypeBlock(fileName)))
-    return dependencies.reduce((_content, dependency) => _content + dependency, content)
+function processFileContent(props: { blockName: string; processedDependencies: string[]; content: string }) {
+  const fileName = props.blockName + '.ts'
+  const fileContent = files[fileName]
+  const { dependencyFileNames, contentWithoutImports } = getContentWithoutImports(fileContent)
+  props.processedDependencies.push(props.blockName)
+
+  props.content += contentWithoutImports + '\n'
+  for (const dependency of dependencyFileNames) {
+    if (props.processedDependencies.includes(dependency)) {
+      continue
+    }
+    props.blockName = dependency
+    processFileContent(props)
   }
 }
 
-function processImports(content: string): { dependencyFileNames: string[]; content: string } {
+function getContentWithoutImports(content: string): { dependencyFileNames: string[]; contentWithoutImports: string } {
   const dependencyFileNames: string[] = []
-  let contentWithoutImportLines: string = ''
+  let contentWithoutImports: string = ''
   for (const line of content.split('\n')) {
     if (line.startsWith('import')) {
       const dependencyFileName = line.split('from')[1].split("'")[1].replace('./', '')
       dependencyFileNames.push(dependencyFileName)
     } else {
-      contentWithoutImportLines += line + '\n'
+      contentWithoutImports += line + '\n'
     }
   }
-  return { dependencyFileNames, content: contentWithoutImportLines }
+  return { dependencyFileNames, contentWithoutImports }
 }
 
 export async function executePromptChain(
@@ -87,7 +92,8 @@ export async function executePromptChain(
 
   return currentArgs[1]
 }
-const bot = `import { User } from './user'
+const bot = `
+import { User } from './user'
 import { Conversation } from './conversation'
 import { Message } from './message'
 export interface Bot {
