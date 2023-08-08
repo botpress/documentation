@@ -1,9 +1,9 @@
 {
   "index": "Overview",
-  "introduction": "Introduction",
+  "getting-started": "Getting Started",
   "moving-parts": "Moving Parts",
   "cli": "CLI",
   "sdk": "SDK",
-  "advanced":"Advanced",
+  "howTo":"How To",
   "concepts": "Key Concepts"
 }
