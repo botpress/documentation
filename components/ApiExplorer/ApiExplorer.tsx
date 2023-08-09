@@ -13,6 +13,7 @@ import {
   getResponseFromPrompt2,
   getResponseFromPrompt3,
 } from './ApiExplorer.http'
+import { CLIENT_LIB_SOURCE } from './ApiExplorer.constants'
 
 export function ApiExplorer() {
   const codeExecuterRef = useRef<CodeExecuter>()
@@ -41,7 +42,13 @@ export function ApiExplorer() {
     // monaco is the global scope of all the editors instances on the page
     // this changes the settings of all the editors on the page
     monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({ noSemanticValidation: true })
+    var libSource = [CLIENT_LIB_SOURCE].join('\n')
+    var libUri = 'ts:filename/client.d.ts'
+    monaco.languages.typescript.javascriptDefaults.addExtraLib(libSource, libUri)
+    monaco.editor.createModel(libSource, 'typescript', monaco.Uri.parse(libUri))
+
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({ schemaValidation: 'ignore', validate: false })
+
     monaco.editor.defineTheme(DEFAULT_THEME.name, DEFAULT_THEME.theme)
     monaco.editor.setTheme(DEFAULT_THEME.name)
   }
@@ -112,7 +119,7 @@ export function ApiExplorer() {
           defaultLanguage="typescript"
           onMount={onMountInputEditor}
           extensions={inputEditorExtensions}
-          value={[response.toString()].join('\n')}
+          value={['const client = new Client({})\n', response.toString()].join('\n')}
         />
         <div className="mt-[-1px] block bg-zinc-700 px-4  py-2 text-sm text-zinc-400">Output</div>
         <EditorWithExtensions
