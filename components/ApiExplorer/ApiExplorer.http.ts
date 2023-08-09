@@ -1,5 +1,4 @@
 import { getCompletion } from './gpt'
-import { CONSTANT } from './gpt/context'
 import { CLIENT_METHODS } from './prompts/client-context.constants'
 
 export async function getResponseFromPrompt(query: string): Promise<string[]> {
@@ -58,7 +57,7 @@ export async function getResponseFromPrompt3(query: string, methods: string[]): 
   ])
   if (completionResponse.success) {
     console.log({ completion: completionResponse.completion })
-    return [completionResponse.completion]
+    return [completionResponse.completion.replaceAll('```javascript', '').replaceAll('```', '')]
   } else {
     console.log({ completionFailure: completionResponse })
     return ['']
