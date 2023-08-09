@@ -1,11 +1,11 @@
-import { Configuration, OpenAIApi } from 'openai'
+import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from 'openai'
 
 const configuration = new Configuration({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
 })
 const openai = new OpenAIApi(configuration)
 
-export async function getCompletion(prompt: string): Promise<
+export async function getCompletion(prompt: ChatCompletionRequestMessage | ChatCompletionRequestMessage[]): Promise<
   | {
       success: false
       errorContext: any
@@ -17,9 +17,9 @@ export async function getCompletion(prompt: string): Promise<
 > {
   try {
     const completion = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: prompt }],
-      temperature: 0.6,
+      model: 'gpt-3.5-turbo-16k-0613',
+      messages: Array.isArray(prompt) ? prompt : [prompt],
+      temperature: 1,
     })
     if (completion.status === 200) {
       return {

@@ -112,7 +112,7 @@ export function ApiExplorer() {
           defaultLanguage="typescript"
           onMount={onMountInputEditor}
           extensions={inputEditorExtensions}
-          value={['console.log(client)', 'console.log(arguments)', response.toString()].join('\n')}
+          value={[response.toString()].join('\n')}
         />
         <div className="mt-[-1px] block bg-zinc-700 px-4  py-2 text-sm text-zinc-400">Output</div>
         <EditorWithExtensions
