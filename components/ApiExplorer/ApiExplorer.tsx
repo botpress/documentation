@@ -124,6 +124,7 @@ export function ApiExplorer() {
           onMount={(editor) => (outputEditorRef.current = editor)}
           value={[output].join('\n')}
         />
+        <div className="block h-3 rounded-b-xl bg-zinc-800" />
       </div>
     </div>
   )
