@@ -27,6 +27,7 @@
     &:active {
       @apply scale-[.98];
     }
+    @include variant(bg-zinc-600, bg-zinc-800);
     &.primary {
       @include variant(bg-primary, bg-primary-dark);
     }

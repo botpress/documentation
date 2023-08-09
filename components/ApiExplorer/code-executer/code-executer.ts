@@ -24,7 +24,7 @@ export class CodeExecuter {
         resolve(`There was an error executing the code <B> \n${JSON.stringify(e)}}`)
       }
 
-      const clientConfig = JSON.parse(localStorage.getItem('clientConfig') ?? '{}')
+      const clientConfig = JSON.parse(localStorage.getItem(CLIENT_PROPS_KEY) ?? '{}')
 
       this.worker.postMessage({
         type: MessageTypes.EXECUTE,
@@ -35,6 +35,7 @@ export class CodeExecuter {
   }
 }
 
+export const CLIENT_PROPS_KEY = 'clientProps'
 export function getClientCodeBlock(clientProps: Partial<ClientProps>) {
   return `const client = new Client(${JSON.stringify(clientProps)})\n`
 }

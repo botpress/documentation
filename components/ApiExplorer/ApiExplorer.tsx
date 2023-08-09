@@ -9,12 +9,13 @@ import {
   getResponseFromPrompt2,
   getResponseFromPrompt3,
 } from './ApiExplorer.http'
-import { CodeExecuter, getClientCodeBlock } from './code-executer'
+import { CLIENT_PROPS_KEY, CodeExecuter, getClientCodeBlock } from './code-executer'
 import { CodeEditor, EditorWithExtensions, Extension, copyCode } from './monaco'
 import { actionButton } from './monaco/action-button'
 import { formatDocument } from './monaco/helpers'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 import { DEFAULT_THEME } from './theme'
+import { ClientPropsForm } from './client-props-form'
 
 export function ApiExplorer() {
   const codeExecuterRef = useRef<CodeExecuter>()
@@ -24,11 +25,12 @@ export function ApiExplorer() {
   const [awaitingResponse, setAwaitingResponse] = useState<boolean>(false)
   const outputEditorRef = useRef<monacoEditor.editor.IStandaloneCodeEditor | null>(null)
   const inputEditorRef = useRef<monacoEditor.editor.IStandaloneCodeEditor | null>(null)
-  const [clientProps, setClientProps] = useState<Partial<ClientProps>>({})
+  const [clientProps, setClientProps] = useState<Partial<ClientProps>>()
 
   useEffect(() => {
-    localStorage.setItem('clientConfig', JSON.stringify(clientProps))
-  }, [clientProps])
+    // Initialize if missing
+    setClientProps(JSON.parse(localStorage.getItem(CLIENT_PROPS_KEY) || '{}'))
+  }, [])
 
   const inputEditorExtensions: Extension[] = [
     copyCode,
@@ -54,7 +56,9 @@ export function ApiExplorer() {
     var libSource = [CLIENT_LIB_SOURCE].join('\n')
     var libUri = 'ts:filename/client.d.ts'
     monaco.languages.typescript.javascriptDefaults.addExtraLib(libSource, libUri)
-    monaco.editor.createModel(libSource, 'typescript', monaco.Uri.parse(libUri))
+    if (!monaco.editor.getModel(monaco.Uri.parse(libUri))) {
+      monaco.editor.createModel(libSource, 'typescript', monaco.Uri.parse(libUri))
+    }
 
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({ schemaValidation: 'ignore', validate: false })
 
@@ -123,10 +127,9 @@ export function ApiExplorer() {
       </div>
 
       <div className="mt-10 flex flex-col">
-        {/* <div>
-          <label htmlFor="">Bot id</label>
-          <input type="text" className="mr-2" />
-        </div> */}
+        <div className="mb-2">
+          <ClientPropsForm clientProps={clientProps ?? {}} onChange={setClientProps} />
+        </div>
         <div className="block rounded-t-lg bg-zinc-700 px-4 py-2 text-sm text-zinc-400">generated.js</div>
         <EditorWithExtensions
           className="monaco-editor-container rounded-none"
@@ -135,7 +138,7 @@ export function ApiExplorer() {
           defaultLanguage="typescript"
           onMount={onMountInputEditor}
           extensions={inputEditorExtensions}
-          value={[getClientCodeBlock(clientProps), response.toString()].join('\n')}
+          value={[getClientCodeBlock(clientProps ?? {}), response.toString()].join('\n')}
         />
         <div className="mt-[-1px] block bg-zinc-700 px-4  py-2 text-sm text-zinc-400">Output</div>
         <EditorWithExtensions
