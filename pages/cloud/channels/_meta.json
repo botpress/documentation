@@ -1,6 +1,6 @@
 {
   "overview": "",
-  "whatsapp": "WhatsApp",
+  "whatsapp": "",
   "messenger": "",
   "teams": "Microsoft Teams",
   "slack": "",
@@ -13,5 +13,6 @@
   "line": "",
   "gmail": "",
   "instagram": "",
-  "zapier": "Zapier"
+  "zapier": "",
+  "shopify":""
 }

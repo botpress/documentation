@@ -1,0 +1,62 @@
+# Botpress Shopify Integration
+
+This integration enables you to connect your Botpress chatbot with Shopify. With this integration, you can manage various store operations directly from your chatbot. Follow the instructions below to create a dev Shopify app and configure the integration.
+
+## Prerequisites
+Before enabling the Botpress Shopify Integration, ensure you have:
+1. A Botpress cloud account.
+2. Access to a Shopify store admin panel.
+
+## Configuration Setup
+
+### Allow Creating Custom Apps
+1. From your Shopify admin, click Settings > Apps and sales channels.
+2. Click Develop apps.
+3. Click Allow custom app development.
+4. Read the warning and information provided, and then click Allow custom app development.
+
+### Create the App
+1. From your Shopify admin, click Settings > Apps and sales channels.
+2. Click Develop apps.
+3. Click Create a custom app.
+4. In the modal window, enter the App name and select an App developer. The app developer can be the store owner, or any staff or collaborator account with the Develop apps permission.
+5. Click Create app.
+
+### Get the Admin Access Token
+1. Install the app and get the API access tokens after setting the API scopes.
+2. Click Install app.
+3. In the modal window, click Install app.
+4. Get the access token, then go to the Admin API access token section and click Reveal token once.
+
+   **Warning:** Keep this token somewhere safe because it will be revealed once. If you lost it, you will have to create a new app.
+
+### Define Scopes
+1. Go to your app.
+2. Open Configuration.
+3. Click edit on Admin API integration.
+4. In the "Webhook subscriptions" section, choose "2023-07."
+5. In the "Admin API access scopes" section, choose the below:
+   - Requires products access scope.
+   - Requires ANY of the following access scopes: orders, marketplace_orders.
+   - Requires customers access scope.
+
+   For more details on scopes, visit [Shopify Help](https://help.shopify.com/en/manual/apps/app-types/custom-apps).
+
+### Enable Integration in Botpress
+1. Access the Botpress admin dashboard.
+2. Go to the “Integrations” tab.
+3. Search for the Shopify integration and select “Enable” or “Configure.”
+4. Input the required Shop/Store Name and Admin API access token.
+5. Save your configurations.
+
+## Usage
+After enabling the integration, your Botpress chatbot can seamlessly interact with Shopify. Specific instructions and examples are available in our core documentation.
+
+## Limitations
+- Ensure you have the correct and latest Admin API access token.
+- Shopify's API rate limits might apply.
+
+## Contributing
+Your contributions are welcome! Please submit any issues or pull requests.
+
+Enjoy the integrated e-commerce experience between Botpress and Shopify!
