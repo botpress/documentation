@@ -8,9 +8,12 @@ import { CodeExecuterSandboxDependencies, CodeExecutorMessageEvent, MessageTypes
  */
 async function executeCode(code: string): Promise<string> {
   try {
-    const BotpressClient = new Client({ host: 'http://localhost:3000' })
+    const BotpressClient = new Client({
+      // TODO: insert fields from the user's botpress instance
+    })
     const sanitizedCode = sanitizeCode(code)
-    const executer = new Function(
+    const AsyncFunction = async function () {}.constructor
+    const executer = AsyncFunction(
       CodeExecuterSandboxDependencies.CLIENT,
       CodeExecuterSandboxDependencies.CONSOLE,
       sanitizedCode
@@ -31,7 +34,7 @@ async function executeCode(code: string): Promise<string> {
       },
     }
 
-    const result = executer(BotpressClient, fakeConsole)
+    const result = await executer(BotpressClient, fakeConsole)
     return Array.isArray(result) ? result.join('\n') : result
   } catch (error) {
     console.error('There was an error executing the code. ', error)
@@ -40,8 +43,10 @@ async function executeCode(code: string): Promise<string> {
 }
 
 function sanitizeCode(transpiledCode: string): string {
+  const sanitized = transpiledCode
   return `
-    ${transpiledCode}\n
+    ${sanitized}\n
+    console.log(client.listConversations)
     return console.logs;
     `
 }

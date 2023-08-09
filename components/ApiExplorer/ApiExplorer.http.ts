@@ -5,14 +5,10 @@ export async function getResponseFromPrompt(query: string): Promise<string[]> {
   const prompt = `Which category of operations are best suited for this query: "${query}". Respond in a valid JSON of type {categories:string[]}\n ### CATEGORIES: ${Object.keys(
     CLIENT_METHODS
   )}`
-  console.log({ query })
-  console.log({ prompt1: prompt })
   const completionResponse = await getCompletion({ role: 'user', content: prompt })
   if (completionResponse.success) {
-    console.log({ completion: completionResponse.completion })
     return (JSON.parse(completionResponse.completion) as { categories: string[] }).categories
   } else {
-    console.log({ completionFailure: completionResponse })
     return []
   }
 }
@@ -28,14 +24,14 @@ export async function getResponseFromPrompt2(query: string, categories: string[]
     props.blockName = methodName
     await processFileContent(props)
   }
-  const prompt = `Which of the method(s) are best suited to respond for this query - "${query}". Respond in a valid JSON of type {methods:string[]}\n ### Methods: ${props.content}`
-  console.log({ prompt })
-  const completionResponse = await getCompletion({ role: 'user', content: prompt })
+  const prompt = `Which of the method(s) are best suited to respond for this query - "${query}". Respond in a valid JSON of type {methods:string[]}\n`
+  const completionResponse = await getCompletion([
+    { role: 'system', content: props.content },
+    { role: 'user', content: prompt },
+  ])
   if (completionResponse.success) {
-    console.log({ completion: completionResponse.completion })
     return { methods: (JSON.parse(completionResponse.completion) as { methods: string[] })?.methods || [] }.methods
   } else {
-    console.log({ completionFailure: completionResponse })
     return []
   }
 }
@@ -47,19 +43,14 @@ export async function getResponseFromPrompt3(query: string, methods: string[]): 
     await processFileContent(props)
   }
 
-  console.log(props.content)
-
-  const prompt = `Using the provided types, write valid javascript code that answers the following query - "${query}". All the methods are async and are available on an object called client. Start with const client = new Client({}). Do not explain your code`
-  console.log({ prompt })
+  const prompt = `Using the provided types, write valid javascript code that answers the following query - "${query}". All the methods are async and are available on an object called client. In the end call the functions you create with await and log the result. Do not explain your code`
   const completionResponse = await getCompletion([
     { role: 'system', content: props.content },
     { role: 'system', content: prompt },
   ])
   if (completionResponse.success) {
-    console.log({ completion: completionResponse.completion })
     return [completionResponse.completion.replaceAll('```javascript', '').replaceAll('```', '')]
   } else {
-    console.log({ completionFailure: completionResponse })
     return ['']
   }
 }

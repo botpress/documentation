@@ -104,7 +104,7 @@ export function ApiExplorer() {
       </div>
 
       <div className="mt-10 flex flex-col">
-        <div className="block rounded-t-lg bg-zinc-700 px-4 py-2 text-sm text-zinc-400">generated.ts</div>
+        <div className="block rounded-t-lg bg-zinc-700 px-4 py-2 text-sm text-zinc-400">generated.js</div>
         <EditorWithExtensions
           className="monaco-editor-container rounded-none"
           height={'35vh'}
