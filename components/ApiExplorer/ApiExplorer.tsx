@@ -1,19 +1,20 @@
+import { ClientProps } from '@botpress/client/dist/config'
 import { BoltIcon } from '@heroicons/react/24/outline'
 import * as monacoEditor from 'monaco-editor'
-import { useRef, useState } from 'react'
-import { CodeExecuter } from './code-executer'
-import { CodeEditor, EditorWithExtensions, Extension, copyCode } from './monaco'
-import { actionButton } from './monaco/action-button'
-import { formatDocument } from './monaco/helpers'
-import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
-import { DEFAULT_THEME } from './theme'
+import { useEffect, useRef, useState } from 'react'
+import { CLIENT_LIB_SOURCE } from './ApiExplorer.constants'
 import {
   executePromptChain,
   getResponseFromPrompt,
   getResponseFromPrompt2,
   getResponseFromPrompt3,
 } from './ApiExplorer.http'
-import { CLIENT_LIB_SOURCE } from './ApiExplorer.constants'
+import { CodeExecuter, getClientCodeBlock } from './code-executer'
+import { CodeEditor, EditorWithExtensions, Extension, copyCode } from './monaco'
+import { actionButton } from './monaco/action-button'
+import { formatDocument } from './monaco/helpers'
+import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
+import { DEFAULT_THEME } from './theme'
 
 export function ApiExplorer() {
   const codeExecuterRef = useRef<CodeExecuter>()
@@ -22,6 +23,13 @@ export function ApiExplorer() {
   const [output, setOutput] = useState<string>('')
   const [awaitingResponse, setAwaitingResponse] = useState<boolean>(false)
   const outputEditorRef = useRef<monacoEditor.editor.IStandaloneCodeEditor | null>(null)
+  const inputEditorRef = useRef<monacoEditor.editor.IStandaloneCodeEditor | null>(null)
+  const [clientProps, setClientProps] = useState<Partial<ClientProps>>({})
+
+  useEffect(() => {
+    localStorage.setItem('clientConfig', JSON.stringify(clientProps))
+  }, [clientProps])
+
   const inputEditorExtensions: Extension[] = [
     copyCode,
     (editor, domNode) => actionButton(editor, domNode, { title: 'Run', onClick: run }),
@@ -35,10 +43,11 @@ export function ApiExplorer() {
     setOutput(output)
     setTimeout(() => {
       formatDocument(outputEditorRef.current!)
-    }, 500)
+    }, 200)
   }
 
   function onMountInputEditor(_editor: monacoEditor.editor.IStandaloneCodeEditor, monaco: typeof monacoEditor) {
+    inputEditorRef.current = _editor
     // monaco is the global scope of all the editors instances on the page
     // this changes the settings of all the editors on the page
     monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({ noSemanticValidation: true })
@@ -61,6 +70,9 @@ export function ApiExplorer() {
       })
       .finally(() => {
         setAwaitingResponse(false)
+        setTimeout(() => {
+          formatDocument(inputEditorRef.current!)
+        }, 200)
       })
   }
 
@@ -111,6 +123,10 @@ export function ApiExplorer() {
       </div>
 
       <div className="mt-10 flex flex-col">
+        {/* <div>
+          <label htmlFor="">Bot id</label>
+          <input type="text" className="mr-2" />
+        </div> */}
         <div className="block rounded-t-lg bg-zinc-700 px-4 py-2 text-sm text-zinc-400">generated.js</div>
         <EditorWithExtensions
           className="monaco-editor-container rounded-none"
@@ -119,7 +135,7 @@ export function ApiExplorer() {
           defaultLanguage="typescript"
           onMount={onMountInputEditor}
           extensions={inputEditorExtensions}
-          value={['const client = new Client({})\n', response.toString()].join('\n')}
+          value={[getClientCodeBlock(clientProps), response.toString()].join('\n')}
         />
         <div className="mt-[-1px] block bg-zinc-700 px-4  py-2 text-sm text-zinc-400">Output</div>
         <EditorWithExtensions

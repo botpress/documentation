@@ -1,4 +1,5 @@
 import { Client } from '@botpress/client'
+import { ClientProps } from '@botpress/client/dist/config'
 import { CodeExecuterSandboxDependencies, CodeExecutorMessageEvent, MessageTypes } from './code-executer.types'
 
 /**
@@ -6,11 +7,9 @@ import { CodeExecuterSandboxDependencies, CodeExecutorMessageEvent, MessageTypes
  * @param code
  * @returns  - console logs logs from the code execution
  */
-async function executeCode(code: string): Promise<string> {
+async function executeCode(code: string, clientProps: Partial<ClientProps>): Promise<string> {
   try {
-    const BotpressClient = new Client({
-      // TODO: insert fields from the user's botpress instance
-    })
+    const BotpressClient = new Client(clientProps)
     const sanitizedCode = sanitizeCode(code)
     const AsyncFunction = async function () {}.constructor
     const executer = AsyncFunction(
@@ -43,7 +42,10 @@ async function executeCode(code: string): Promise<string> {
 }
 
 function sanitizeCode(transpiledCode: string): string {
-  const sanitized = transpiledCode
+  const sanitized = transpiledCode.replace(
+    /const\s+client\s+=\s+new\s+Client\((\{[^\}]*\}|)\)/,
+    '// this line was replaced because client is already a dependency of the sandbox'
+  )
   return `
     ${sanitized}\n
     console.log(client.listConversations)
@@ -53,7 +55,7 @@ function sanitizeCode(transpiledCode: string): string {
 
 onmessage = async (event: CodeExecutorMessageEvent) => {
   if (event.data.type === MessageTypes.EXECUTE) {
-    const result = await executeCode(event.data.code)
+    const result = await executeCode(event.data.code, event.data.clientProps)
     postMessage({ type: MessageTypes.EXECUTE_RESULT, result })
   }
 }

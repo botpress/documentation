@@ -1,3 +1,5 @@
+import { ClientProps } from '@botpress/client/dist/config'
+
 export enum MessageTypes {
   EXECUTE = 'execute',
   EXECUTE_RESULT = 'execute-result',
@@ -13,6 +15,7 @@ export type CodeExecutorMessageData =
   | {
       type: MessageTypes.EXECUTE
       code: string
+      clientProps: Partial<ClientProps>
     }
   | {
       type: MessageTypes.LOG

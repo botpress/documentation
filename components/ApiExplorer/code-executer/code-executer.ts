@@ -1,3 +1,4 @@
+import { ClientProps } from '@botpress/client/dist/config'
 import { CodeExecutorMessageData, CodeExecutorMessageEvent, MessageTypes } from './code-executer.types'
 
 export class CodeExecuter {
@@ -8,6 +9,9 @@ export class CodeExecuter {
     }
   }
 
+  /**
+   * sends and receives message from the worker to execute the `code`
+   */
   public executeCode(code: string) {
     return new Promise<string>((resolve) => {
       this.worker.onmessage = (e: CodeExecutorMessageEvent) => {
@@ -19,7 +23,18 @@ export class CodeExecuter {
         console.log(e)
         resolve(`There was an error executing the code <B> \n${JSON.stringify(e)}}`)
       }
-      this.worker.postMessage({ type: MessageTypes.EXECUTE, code } as CodeExecutorMessageData)
+
+      const clientConfig = JSON.parse(localStorage.getItem('clientConfig') ?? '{}')
+
+      this.worker.postMessage({
+        type: MessageTypes.EXECUTE,
+        code,
+        clientProps: clientConfig,
+      } as CodeExecutorMessageData)
     })
   }
+}
+
+export function getClientCodeBlock(clientProps: Partial<ClientProps>) {
+  return `const client = new Client(${JSON.stringify(clientProps)})\n`
 }
