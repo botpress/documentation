@@ -2,7 +2,6 @@ import { getCompletion } from './gpt'
 import { CLIENT_METHODS } from './prompts/client-context.constants'
 
 export async function getResponseFromPrompt(query: string): Promise<string[]> {
-  return []
   const prompt = `Which category of operations are best suited for this query: "${query}". Respond in a valid JSON of type {categories:string[]}\n ### CATEGORIES: ${Object.keys(
     CLIENT_METHODS
   )}`
@@ -15,7 +14,6 @@ export async function getResponseFromPrompt(query: string): Promise<string[]> {
 }
 
 export async function getResponseFromPrompt2(query: string, categories: string[]): Promise<string[]> {
-  return []
   const methodNames = categories.reduce(
     (contextMethods, category) => contextMethods.concat(CLIENT_METHODS[category as keyof typeof CLIENT_METHODS]),
     [] as string[]
@@ -39,21 +37,6 @@ export async function getResponseFromPrompt2(query: string, categories: string[]
 }
 
 export async function getResponseFromPrompt3(query: string, methods: string[]): Promise<string[]> {
-  return [
-    `const getLatestConversation = async () => {
-      const response = await client.listConversations({ nextToken: "", tags: {}, participantIds: [] });
-      const conversations = response.conversations;
-      if (conversations.length > 0) {
-        return conversations[0];
-      } else {
-        throw new Error("No conversations found");
-      }
-    };
-  
-      const response = await getLatestConversation()
-      console.log(response)
-  `,
-  ]
   const props = { blockName: '', processedDependencies: [], content: '' }
   for (const method of methods) {
     props.blockName = method

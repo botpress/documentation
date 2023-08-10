@@ -37,5 +37,7 @@ export class CodeExecuter {
 
 export const CLIENT_PROPS_KEY = 'clientProps'
 export function getClientCodeBlock(clientProps: Partial<ClientProps>) {
-  return `const client = new Client(${JSON.stringify(clientProps)})\n`
+  return `//Don't change the config here, you can only change it via the fields above \nconst client = new Client(${JSON.stringify(
+    clientProps
+  )})\n`
 }

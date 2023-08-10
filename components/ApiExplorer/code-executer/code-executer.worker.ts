@@ -9,7 +9,10 @@ import { CodeExecuterSandboxDependencies, CodeExecutorMessageEvent, MessageTypes
  */
 async function executeCode(code: string, clientProps: Partial<ClientProps>): Promise<string> {
   try {
-    const BotpressClient = new Client(clientProps)
+    const BotpressClient = new Client({
+      ...clientProps,
+      host: process.env.NEXT_PUBLIC_ENVIRONMENT === 'local' ? 'https://api.botpress.dev' : undefined,
+    })
     const sanitizedCode = sanitizeCode(code)
     const AsyncFunction = async function () {}.constructor
     const executer = AsyncFunction(
