@@ -27,7 +27,7 @@ export function ClientPropsForm(props: Props) {
   }
 
   return (
-    <div className="flex items-stretch justify-between rounded-xl border border-zinc-800">
+    <div className="flex items-stretch justify-between rounded-xl border border-zinc-100 dark:border-zinc-800">
       <div className="flex items-end justify-start p-2">
         <div className="input-container">
           <label htmlFor="tokenField">Token</label>
@@ -63,7 +63,7 @@ export function ClientPropsForm(props: Props) {
           />
         </div>
       </div>
-      <div className="flex items-center border-l border-zinc-800 p-4">
+      <div className="flex items-center border-l border-zinc-100 p-4 dark:border-zinc-800">
         <button className="button" onClick={onSaveClick}>
           Save
         </button>

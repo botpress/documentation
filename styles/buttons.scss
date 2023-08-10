@@ -27,9 +27,12 @@
     &:active {
       @apply scale-[.98];
     }
-    @include variant(bg-zinc-600, bg-zinc-800);
+    @include variant(
+      'dark:bg-zinc-600 dark:text-zinc-50 bg-zinc-200 text-zinc-600',
+      'bg-zinc-300 text-zinc-700 dark:text-zinc-50 dark:bg-zinc-700'
+    );
     &.primary {
-      @include variant(bg-primary, bg-primary-dark);
+      @include variant('bg-primary text-white', bg-primary-dark);
     }
   }
   .link {
