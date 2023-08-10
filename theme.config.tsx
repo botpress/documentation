@@ -78,14 +78,12 @@ const logo = (
 )
 
 const config: DocsThemeConfig = {
-  editLink: {
-    text: '',
-  },
-  feedback: { content: '' },
+  feedback: { content: 'Feedback →' },
   project: {
     link: undefined,
   },
   logo,
+  docsRepositoryBase: 'https://github.com/botpress/documentation/tree/master',
   primaryHue: { dark: 217, light: 217 },
   head: function useHead() {
     return (

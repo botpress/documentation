@@ -5,13 +5,14 @@ import {
   API_DOCS_ERROR_DESCRIPTION,
   API_DOCS_INTRO,
   API_DOCS_PAGINATION,
+  DONT_EDIT_WARNING,
 } from './generateApiDocumentationPage.constants'
 import { JSONSchemaProperty, JSONSchemaType } from './generateApiDocumentationPage.types'
 import { getContext } from './openApiContext'
 
 async function getApiDocumetationPageContent(): Promise<string> {
   const context = await getContext()
-  let md = ''
+  let md = `${DONT_EDIT_WARNING}\n\n`
   md += 'import { EndpointBlock } from "@components/EndpointBlock"; \n\n'
   md += 'import { Collapsible } from "@components/Collapsible"; \n\n'
   md += 'import { H4 } from "@components/WrapperElements"; \n\n'
