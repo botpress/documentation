@@ -5,7 +5,7 @@
   .input-container {
     @apply flex flex-col;
     label {
-      @apply mb-1 block text-zinc-500;
+      @apply mb-1 block text-sm text-zinc-500;
     }
   }
 }
