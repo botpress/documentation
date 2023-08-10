@@ -2,6 +2,7 @@ import { ClientProps } from '@botpress/client/dist/config'
 import { BoltIcon } from '@heroicons/react/24/outline'
 import * as monacoEditor from 'monaco-editor'
 import { useEffect, useRef, useState } from 'react'
+import { FailureResponse } from 'types/error'
 import { CLIENT_LIB_SOURCE } from './ApiExplorer.constants'
 import {
   executePromptChain,
@@ -9,13 +10,13 @@ import {
   getResponseFromPrompt2,
   getResponseFromPrompt3,
 } from './ApiExplorer.http'
+import { ClientPropsForm } from './client-props-form'
 import { CLIENT_PROPS_KEY, CodeExecuter, getClientCodeBlock } from './code-executer'
 import { CodeEditor, EditorWithExtensions, Extension, copyCode } from './monaco'
 import { actionButton } from './monaco/action-button'
 import { formatDocument } from './monaco/helpers'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 import { DEFAULT_THEME } from './theme'
-import { ClientPropsForm } from './client-props-form'
 
 export function ApiExplorer() {
   const codeExecuterRef = useRef<CodeExecuter>()
@@ -70,7 +71,11 @@ export function ApiExplorer() {
     setAwaitingResponse(true)
     executePromptChain(query, [getResponseFromPrompt, getResponseFromPrompt2, getResponseFromPrompt3])
       .then((response) => {
-        setResponse(response?.[0] ?? '')
+        if (response instanceof FailureResponse) {
+          console.log(response.getHumanizedErrorMessage())
+        } else {
+          setResponse(response?.[0] ?? '')
+        }
       })
       .finally(() => {
         setAwaitingResponse(false)

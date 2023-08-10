@@ -1,7 +1,8 @@
+import { FailureResponse, WithFailureResponse } from 'types/error'
 import { getCompletion } from './gpt'
 import { CLIENT_METHODS } from './prompts/client-context.constants'
 
-export async function getResponseFromPrompt(query: string): Promise<string[]> {
+export async function getResponseFromPrompt(query: string): Promise<WithFailureResponse<string[]>> {
   const prompt = `Which category of operations are best suited for this query: "${query}". Respond in a valid JSON of type {categories:string[]}\n ### CATEGORIES: ${Object.keys(
     CLIENT_METHODS
   )}`
@@ -9,11 +10,14 @@ export async function getResponseFromPrompt(query: string): Promise<string[]> {
   if (completionResponse.success) {
     return (JSON.parse(completionResponse.completion) as { categories: string[] }).categories
   } else {
-    return []
+    return new FailureResponse('There was an error processing the prompt', completionResponse.errorContext)
   }
 }
 
-export async function getResponseFromPrompt2(query: string, categories: string[]): Promise<string[]> {
+export async function getResponseFromPrompt2(
+  query: string,
+  categories: string[]
+): Promise<WithFailureResponse<string[]>> {
   const methodNames = categories.reduce(
     (contextMethods, category) => contextMethods.concat(CLIENT_METHODS[category as keyof typeof CLIENT_METHODS]),
     [] as string[]
@@ -32,11 +36,11 @@ export async function getResponseFromPrompt2(query: string, categories: string[]
   if (completionResponse.success) {
     return { methods: (JSON.parse(completionResponse.completion) as { methods: string[] })?.methods || [] }.methods
   } else {
-    return []
+    return new FailureResponse('There was an error processing the prompt', completionResponse.errorContext)
   }
 }
 
-export async function getResponseFromPrompt3(query: string, methods: string[]): Promise<string[]> {
+export async function getResponseFromPrompt3(query: string, methods: string[]): Promise<WithFailureResponse<string[]>> {
   const props = { blockName: '', processedDependencies: [], content: '' }
   for (const method of methods) {
     props.blockName = method
@@ -51,7 +55,7 @@ export async function getResponseFromPrompt3(query: string, methods: string[]): 
   if (completionResponse.success) {
     return [completionResponse.completion.replaceAll('```javascript', '').replaceAll('```', '')]
   } else {
-    return ['']
+    return new FailureResponse('There was an error processing the prompt', completionResponse.errorContext)
   }
 }
 
@@ -90,13 +94,15 @@ function getContentWithoutImportsOrExports(content: string): {
 
 export async function executePromptChain(
   query: string,
-  prompts: Array<(...args: any[]) => Promise<string[]>>
-): Promise<string[]> {
+  prompts: Array<(...args: any[]) => Promise<WithFailureResponse<string[]>>>
+): Promise<WithFailureResponse<string[]>> {
   let currentArgs: [any, any] = [query, undefined]
-
   for (let i = 0; i < prompts.length; i++) {
     const prompt = prompts[i]
     const response = await prompt(...currentArgs)
+    if (response instanceof FailureResponse) {
+      return response
+    }
     currentArgs = [query, response as any]
   }
 

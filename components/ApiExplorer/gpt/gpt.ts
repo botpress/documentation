@@ -21,6 +21,7 @@ export async function getCompletion(prompt: ChatCompletionRequestMessage | ChatC
       messages: Array.isArray(prompt) ? prompt : [prompt],
       temperature: 1,
     })
+
     if (completion.status === 200) {
       return {
         success: true,
