@@ -27,6 +27,9 @@ function getToastVariant(toastConfig: ToastConfig, variant: ToastVariant) {
   })
 }
 
+/**
+ * To update default toast behaviour, go to `src/_app.mdx`
+ */
 export const toast: Record<ToastVariant, (toastConfig: ToastConfig) => void> = {
   success: (toastConfig) => getToastVariant(toastConfig, 'success'),
   error: (toastConfig) => getToastVariant(toastConfig, 'error'),
