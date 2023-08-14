@@ -15,7 +15,7 @@ import { CLIENT_PROPS_KEY, CodeExecuter, getClientCodeBlock } from './code-execu
 import { CodeEditor, EditorWithExtensions, Extension, copyCode } from './monaco'
 import { actionButton } from './monaco/action-button'
 import { formatDocument } from './monaco/helpers'
-import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
+import { SAMPLE_PROMPTS } from './prompts/prompts.constants'
 import { DEFAULT_THEME } from './theme'
 import { toast } from '@utils/toast'
 
@@ -102,7 +102,7 @@ export function ApiExplorer() {
       ></textarea>
       <div className="flex items-stretch">
         <div className="no-scrollbar relative mr-3 flex overflow-x-scroll">
-          {SAMPLE_MESSAGES.map((message) => {
+          {SAMPLE_PROMPTS.map((message) => {
             return (
               <div
                 onClick={(event) => {
