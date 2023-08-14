@@ -1,6 +1,9 @@
 import { ClientProps } from '@botpress/client/dist/config'
 import { CodeExecutorMessageData, CodeExecutorMessageEvent, MessageTypes } from './code-executer.types'
 
+/**
+ * Spins up a web worker to execute the code in a sandboxed environment
+ */
 export class CodeExecuter {
   private worker!: Worker
   constructor() {
@@ -10,7 +13,7 @@ export class CodeExecuter {
   }
 
   /**
-   * sends and receives message from the worker to execute the `code`
+   * communicates with the worker to execute the `code`
    */
   public executeCode(code: string) {
     return new Promise<string>((resolve) => {

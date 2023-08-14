@@ -14,7 +14,7 @@ export async function getResponseFromPrompt(query: string): Promise<WithFailureR
   }
 }
 
-export async function getResponseFromPrompt2(
+export async function getResponseFromPrompt1(
   query: string,
   categories: string[]
 ): Promise<WithFailureResponse<string[]>> {
@@ -40,7 +40,7 @@ export async function getResponseFromPrompt2(
   }
 }
 
-export async function getResponseFromPrompt3(query: string, methods: string[]): Promise<WithFailureResponse<string[]>> {
+export async function getResponseFromPrompt2(query: string, methods: string[]): Promise<WithFailureResponse<string[]>> {
   const props = { blockName: '', processedDependencies: [], content: '' }
   for (const method of methods) {
     props.blockName = method

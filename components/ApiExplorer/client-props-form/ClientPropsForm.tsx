@@ -6,7 +6,9 @@ type Props = {
   clientProps: Partial<ClientProps>
   onChange?: (clientProps: Partial<ClientProps>) => void
 }
-
+/**
+ * Stores the client props in local storage
+ */
 export function ClientPropsForm(props: Props) {
   useEffect(() => {
     setClientProps(JSON.parse(localStorage.getItem(CLIENT_PROPS_KEY) || '{}'))

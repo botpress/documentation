@@ -1,6 +1,9 @@
 import * as fs from 'fs'
 import metadata from '../public/static/openApi/metadata.json'
 
+/**
+ * Generates the context needed by the ApiExplorer component for chaining prompts
+ */
 async function getApiExplorerContext(): Promise<string> {
   let fileContent = ''
   const clientMethodsMap = metadata.sections.reduce((_clientMethodsMap, section) => {

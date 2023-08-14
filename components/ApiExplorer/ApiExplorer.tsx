@@ -7,8 +7,8 @@ import { CLIENT_LIB_SOURCE } from './ApiExplorer.constants'
 import {
   executePromptChain,
   getResponseFromPrompt,
+  getResponseFromPrompt1,
   getResponseFromPrompt2,
-  getResponseFromPrompt3,
 } from './ApiExplorer.http'
 import { ClientPropsForm } from './client-props-form'
 import { CLIENT_PROPS_KEY, CodeExecuter, getClientCodeBlock } from './code-executer'
@@ -70,7 +70,7 @@ export function ApiExplorer() {
 
   function generate() {
     setAwaitingResponse(true)
-    executePromptChain(query, [getResponseFromPrompt, getResponseFromPrompt2, getResponseFromPrompt3])
+    executePromptChain(query, [getResponseFromPrompt, getResponseFromPrompt1, getResponseFromPrompt2])
       .then((response) => {
         if (response instanceof FailureResponse) {
           console.log(response.getHumanizedErrorMessage(), response.context)
@@ -145,6 +145,9 @@ export function ApiExplorer() {
           defaultLanguage="typescript"
           onMount={onMountInputEditor}
           extensions={inputEditorExtensions}
+          /**
+           * This is the line that's added to the top of the code block but not actually executed; see `code-executer.worker.ts`
+           */
           value={[getClientCodeBlock(clientProps ?? {}), response.toString()].join('\n')}
         />
         <div className="mt-[-1px] block bg-zinc-700 px-4  py-2 text-sm text-zinc-400">Output</div>

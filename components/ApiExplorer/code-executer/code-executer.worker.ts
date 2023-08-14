@@ -51,7 +51,6 @@ function sanitizeCode(transpiledCode: string): string {
   )
   return `
     ${sanitized}\n
-    console.log(client.listConversations)
     return console.logs;
     `
 }

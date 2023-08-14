@@ -11,7 +11,7 @@ export type Extension = (
 ) => void
 
 /**
- * @returns a monkey patched version of the monaco editor with support for extensions
+ * @returns a monkey-patched version of the monaco editor with support for extensions
  */
 export function EditorWithExtensions(props: EditorProps & { extensions?: Extension[] }) {
   function handleOnMount(editor: monacoEditor.editor.IStandaloneCodeEditor, monaco: typeof monacoEditor) {
