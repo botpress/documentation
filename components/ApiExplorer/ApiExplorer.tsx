@@ -17,6 +17,7 @@ import { actionButton } from './monaco/action-button'
 import { formatDocument } from './monaco/helpers'
 import { SAMPLE_MESSAGES } from './prompts/prompts.constants'
 import { DEFAULT_THEME } from './theme'
+import { toast } from '@utils/toast'
 
 export function ApiExplorer() {
   const codeExecuterRef = useRef<CodeExecuter>()
@@ -72,7 +73,8 @@ export function ApiExplorer() {
     executePromptChain(query, [getResponseFromPrompt, getResponseFromPrompt2, getResponseFromPrompt3])
       .then((response) => {
         if (response instanceof FailureResponse) {
-          console.log(response.getHumanizedErrorMessage())
+          console.log(response.getHumanizedErrorMessage(), response.context)
+          toast.error(response.getHumanizedErrorMessage())
         } else {
           setResponse(response?.[0] ?? '')
         }
