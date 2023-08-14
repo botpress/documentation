@@ -16,7 +16,11 @@ async function getApiDocumetationPageContent(): Promise<string> {
   md += 'import { EndpointBlock } from "@components/EndpointBlock"; \n\n'
   md += 'import { Collapsible } from "@components/Collapsible"; \n\n'
   md += 'import { H4 } from "@components/WrapperElements"; \n\n'
+  md += 'import { ApiExplorer } from "@components/ApiExplorer"; \n\n'
   md += '# Botpress API Documentation \n'
+  md += '## Explorer \n\n'
+  md += '<ApiExplorer /> \n\n'
+  md += '<br /> \n'
   md += '## Introduction \n\n'
   md += API_DOCS_INTRO
   md += '## Authentication \n\n'
