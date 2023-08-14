@@ -1,0 +1,49 @@
+# Webhook
+
+![Messaging channels](/docs/content/webhook-banner.png)
+
+Webhooks provide a powerful way to integrate Botpress with other services. This guide will walk you through how to set up a webhook in Botpress to receive updates from Botpress in real-time.
+
+## Enabling Webhook Integration
+
+1. Go to the [Botpress Hub](https://app.botpress.cloud/hub) and install the Webhook Integration to your chatbot
+2. Enable this integration in the `integrations` tab of your bot.
+3. You will get a WebhookURL that you can use to receive updates from Botpress.
+4. (Optional) You can also set a secret token to secure your webhook.
+
+## Sending info to your webhook using Postman
+
+1. Open Postman and create a new request
+2. Set the request type to `GET`/`POST`
+3. Set the URL to the WebhookURL you got from the Webhook Integration page in the Botpress Dashboard.
+4. Set the `Content-Type` header to `application/json`
+5. (Optional) Set the `x-botpress-secret` header to the secret token you set in the Botpress Hub
+6. [Example] Set the body to the following JSON:
+
+```json
+{
+  "type": "text",
+  "text": "Hello Webhooks!",
+  "user": {
+    "id": "user-id",
+    "name": "User Name"
+  },
+}
+```
+
+7. Send the request and you should see a `200 OK` success response.
+
+
+## Using the Webhook Event in your bot
+
+1. Go to the Botpress Studio and pick the `Webhook Event` Card and connect it to any of your desired node. This node will be triggered when the webhook is called.
+3. Click on `Discover Events` to see the event that was triggered.
+4. You can access the event data using the `event.payload.body` variable.
+5. You can also filter the events using a valid JS expression. For example, if you want to receive only the events that have a `type` equal to `text`, you can use the following filter: `event.payload.body.type === 'text'`
+
+## Additional Information
+
+- You can also add `/user` or any other path to the WebhookURL to record events specific to this URL. 
+- You can then add a filter to the Webhook Event to only receive events from this URL. 
+  - For example, if you want to receive only the events that have a `type` equal to `text` and a `user.id` equal to `user-id`, you can use the following filter: 
+  - `event.payload.body.type === 'text' && event.payload.body.user.id === 'user-id'`
