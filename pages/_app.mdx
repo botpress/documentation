@@ -1,5 +1,11 @@
 import '../style.scss'
+import { Toaster } from 'react-hot-toast'
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Component {...pageProps} />
+      <Toaster toastOptions={{ duration: 20000 }} position="bottom-center" />
+    </>
+  )
 }
