@@ -10,6 +10,7 @@ const initialNodes = [
 const initialEdges: Edge[] = [
   { id: 'e1-2', source: '1', target: '2', targetHandle: 'lt', type: 'smoothstep' },
   { id: 'e1-2-2', source: '1', target: '2', targetHandle: 'lb', type: 'smoothstep' },
+  { id: 'e2-1', source: '2', target: '1', type: 'smoothstep', markerStart: 'source' },
 ]
 export function SdkDiagram() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
@@ -19,7 +20,8 @@ export function SdkDiagram() {
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges])
 
   return (
-    <div style={{ width: '100%', height: '75vh' }} className="border border-orange-300">
+    <div style={{ width: '100%', height: '75vh' }} className="border border-orange-300 text-fuchsia-300">
+      <SourceMarker id="source" />
       <ReactFlow
         nodeTypes={nodeTypes}
         nodes={nodes}
@@ -32,7 +34,17 @@ export function SdkDiagram() {
   )
 }
 
-const handleStyle: CSSProperties = {}
+function SourceMarker(props: { id: string }) {
+  return (
+    <svg style={{ position: 'absolute', top: 0, left: 0 }}>
+      <defs>
+        <marker id={props.id} refX={1} refY={4} markerHeight={16} markerWidth={16}>
+          <ellipse cx="4" cy="4" rx="3" ry="3" fill="white" stroke="currentColor" />
+        </marker>
+      </defs>
+    </svg>
+  )
+}
 
 function BotpressNode({ data }) {
   return (
@@ -55,6 +67,8 @@ function BotpressNode({ data }) {
           </div>
         </div>
       </div>
+      <SourceHandle id="rt" top={90} />
+      <SourceHandle id="rb" top={161} />
       <TargetHandle id="lt" top={90} />
       <TargetHandle id="lb" top={161} />
     </>
@@ -86,6 +100,17 @@ function TargetHandle(props: { top?: number; id: string }) {
       position={Position.Left}
       style={{ top: props.top, backgroundColor: 'white' }}
       className="h-2 w-2 rounded-full border border-fuchsia-300 bg-white"
+    />
+  )
+}
+function SourceHandle(props: { top?: number; id: string }) {
+  return (
+    <Handle
+      {...props}
+      type="source"
+      position={Position.Right}
+      style={{ top: props.top, backgroundColor: 'white' }}
+      className="rounded-full border-0 bg-white opacity-0"
     />
   )
 }
