@@ -6,9 +6,6 @@ export type ToastConfig = {
 }
 type ToastVariant = 'success' | 'error'
 type ToastConfigOrMessage = ToastConfig | string
-function isToastConfig(object: any): object is ToastConfig {
-  return object?.message !== undefined
-}
 
 const TOAST_VARIANT_CLASSNAMES: Record<ToastVariant, string> = {
   success: 'bg-green-300 text-green-800 dark:bg-green-900 dark:text-zinc-50',
@@ -24,7 +21,7 @@ function getToastVariant(toastConfigOrMessage: ToastConfigOrMessage, variant: To
     return (
       <div className={classNames('flex rounded-md py-2 pr-4', TOAST_VARIANT_CLASSNAMES[variant])}>
         <Icon className="mx-2 h-6 w-6" />
-        {isToastConfig(toastConfigOrMessage) ? toastConfigOrMessage.message : toastConfigOrMessage}
+        {typeof toastConfigOrMessage === 'string' ? toastConfigOrMessage : toastConfigOrMessage.message}
       </div>
     )
   })
