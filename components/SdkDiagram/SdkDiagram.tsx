@@ -62,11 +62,11 @@ function BotpressNode({ data }) {
 }
 function NodeInfoCard(props: { title?: string; value?: string }) {
   return (
-    <div className="flex flex-col overflow-hidden rounded-md border border-zinc-200/75 bg-zinc-50/50">
-      <div className="flex items-center border-b  border-zinc-200/75 px-2 py-1 text-sm text-fuchsia-600">
+    <div className="flex flex-col overflow-hidden rounded-md border border-zinc-200/75 bg-zinc-50/50 font-code">
+      <div className="flex items-center border-b  border-zinc-200/75 px-3 py-1 text-sm text-fuchsia-600">
         {props.title}
       </div>
-      <div className="flex items-center px-2 py-1 text-zinc-900">{props.value}</div>
+      <div className="flex items-center px-3 py-1 text-zinc-700">{props.value}</div>
     </div>
   )
 }

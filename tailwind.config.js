@@ -11,6 +11,7 @@ module.exports = {
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
       heading: ['Lexend', 'sans-serif'],
+      code: ['JetBrains Mono', 'monospace'],
     },
     extend: {
       colors: {
