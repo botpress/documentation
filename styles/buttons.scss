@@ -34,6 +34,9 @@
     &.primary {
       @include variant('bg-primary text-white', bg-primary-dark);
     }
+    &.secondary {
+      @include variant('text-primary-dark bg-primary/10', 'bg-primary/25');
+    }
   }
   .link {
     &:hover {
