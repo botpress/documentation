@@ -41,3 +41,9 @@ Webhooks provide a powerful way to integrate Botpress with other services. This 
 4. You can access the event data using the `event.payload.body` variable.
 5. You can also filter the events using a valid JS expression. For example, if you want to receive only the events that have a `type` equal to `text`, you can use the following filter: `event.payload.body.type === 'text'`
 
+## Additional Information
+
+- You can also add `/user` or any other path to the WebhookURL to record events specific to this URL. 
+- You can then add a filter to the Webhook Event to only receive events from this URL. 
+  - For example, if you want to receive only the events that have a `type` equal to `text` and a `user.id` equal to `user-id`, you can use the following filter: 
+  - `event.payload.body.type === 'text' && event.payload.body.user.id === 'user-id'`
