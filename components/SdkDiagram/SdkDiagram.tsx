@@ -1,13 +1,11 @@
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import classNames from 'classnames'
-import { HtmlHTMLAttributes, SVGProps, useCallback, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import ReactFlow, {
   BaseEdge,
   Edge,
   EdgeLabelRenderer,
   EdgeProps,
-  Handle,
-  HandleProps,
   Node,
   Position,
   addEdge,
@@ -17,9 +15,13 @@ import ReactFlow, {
 } from 'reactflow'
 
 import 'reactflow/dist/base.css'
+import { BotpressNode, BotpressNodeData } from './BotpressNode'
+import { NodeInfoCard } from './NodeInfoCard'
+import { SourceHandle } from './SourceHandle'
+import { TargetHandle } from './TargetHandle'
 const INTEGRATION_SOURCE_MARKER_ID = 'source-marker-integration'
 const BOT_SOURCE_MARKER_ID = 'source-marker-bot'
-const initialNodes: Node[] = [
+const initialNodes: Node<ExternalApiNodeData | BotpressNodeData>[] = [
   {
     id: '1',
     position: { x: 10, y: 10 },
@@ -44,7 +46,7 @@ const initialNodes: Node[] = [
       infoCardTitleClass: 'text-fuchsia-600',
       headerBgClass: 'bg-fuchsia-50/50',
       sourceMarkerId: INTEGRATION_SOURCE_MARKER_ID,
-    } as BotpressNodeData,
+    },
   },
   {
     id: '3',
@@ -58,7 +60,7 @@ const initialNodes: Node[] = [
       infoCardTitleClass: 'text-blue-600',
       headerBgClass: 'bg-blue-50/50',
       sourceMarkerId: BOT_SOURCE_MARKER_ID,
-    } as BotpressNodeData,
+    },
   },
 ]
 type EdgeData = { color: string }
@@ -105,7 +107,10 @@ export function SdkDiagram() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
   const nodeTypes = useMemo(() => ({ botpress: BotpressNode, externalApi: ExternalApiNode }), [])
 
-  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges])
+  const onConnect = useCallback(
+    (params: Parameters<typeof addEdge>[0]) => setEdges((eds) => addEdge(params, eds)),
+    [setEdges]
+  )
 
   return (
     <div style={{ width: '100%', height: '75vh' }} className="border border-orange-300">
@@ -122,67 +127,6 @@ export function SdkDiagram() {
   )
 }
 
-function SourceMarker(props: { id: string } & SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      style={{ position: 'absolute', top: 0, left: 0, width: 0, height: 0 }}
-      id={`${props.id}-marker-container`}
-    >
-      <defs>
-        <marker id={props.id} refX={1} refY={4} markerHeight={16} markerWidth={16}>
-          <ellipse cx="4" cy="4" rx="3" ry="3" fill="white" stroke="currentColor" />
-        </marker>
-      </defs>
-    </svg>
-  )
-}
-type BotpressNodeData = {
-  label: string
-  icon?: () => JSX.Element
-  defaultCurrentColorClass?: string
-  infoCardTitleClass?: string
-  labelColorClass?: string
-  headerBgClass?: string
-  sourceMarkerId: string
-}
-function BotpressNode({ data }: { data: BotpressNodeData }) {
-  return (
-    <>
-      <SourceMarker id={data.sourceMarkerId} className={data.defaultCurrentColorClass} />
-      <div className={classNames('flex-col rounded-md border border-current', data.defaultCurrentColorClass)}>
-        <div className={classNames('flex rounded-t-md border-b border-current', data.headerBgClass)}>
-          <div
-            className={classNames(
-              'flex h-[32px] w-[42px] items-center justify-center rounded-tl-md border-r border-current'
-            )}
-          >
-            {data.icon && <data.icon />}
-          </div>
-          <div className={classNames('flex grow items-center px-3 text-sm', data.labelColorClass)}>{data.label}</div>
-        </div>
-        <div className="flex flex-col py-2">
-          <div className={classNames('relative flex items-center justify-center px-4 py-1')}>
-            <TargetHandleGroove />
-            <NodeInfoCard titleClass={data.infoCardTitleClass} title="channels.message.text" value="sendEmail" />
-            <SourceHandleMock />
-          </div>
-          <div className="relative flex items-center justify-center px-4 py-1">
-            <TargetHandleGroove />
-            <NodeInfoCard titleClass={data.infoCardTitleClass} title="channels.message.text" value="sendEmail" />
-            <SourceHandleMock />
-          </div>
-        </div>
-      </div>
-      <div className={classNames(data.defaultCurrentColorClass)}>
-        <SourceHandle id="rt" top={78} />
-        <SourceHandle id="rb" top={149} />
-        <TargetHandle id="lt" top={78} />
-        <TargetHandle id="lb" top={149} />
-      </div>
-    </>
-  )
-}
 type ExternalApiNodeData = {
   label: string
   link: { url: string; title: string }
@@ -224,54 +168,6 @@ function ExternalApiNode({ data }: { data: ExternalApiNodeData }) {
         <TargetHandle position={Position.Right} id="lb" top={133} />
       </div>
     </>
-  )
-}
-function NodeInfoCard(props: { title?: string; value?: string; titleClass?: string }) {
-  return (
-    <div className="flex flex-col overflow-hidden rounded-md border border-zinc-200/75 bg-zinc-50/50 font-code">
-      <div className={classNames('flex items-center border-b  border-zinc-200/75 px-3 py-1 text-sm', props.titleClass)}>
-        {props.title}
-      </div>
-      <div className="flex items-center px-3 py-1 text-zinc-500">{props.value}</div>
-    </div>
-  )
-}
-function TargetHandleGroove() {
-  return (
-    <div className="absolute -left-[1px] h-[18px] w-[10px] rounded-br-full rounded-tr-full border border-current">
-      <div className="absolute -left-1 h-full w-full rounded-full bg-white"></div>
-    </div>
-  )
-}
-
-function SourceHandleMock(props: HtmlHTMLAttributes<HTMLDivElement>) {
-  return (
-    <div
-      className={classNames('full absolute right-[5px] mt-[1px] h-[5px] w-[5px] rounded bg-current', props.className)}
-    ></div>
-  )
-}
-
-function TargetHandle(props: { top?: number; id: string } & Partial<HandleProps>) {
-  return (
-    <Handle
-      position={Position.Left}
-      {...props}
-      type="target"
-      style={{ top: props.top, backgroundColor: 'white' }}
-      className="h-[8px] w-[8px] rounded-full border border-current bg-white"
-    />
-  )
-}
-function SourceHandle(props: { top?: number; left?: number; id: string } & Partial<HandleProps>) {
-  return (
-    <Handle
-      position={Position.Right}
-      {...props}
-      type="source"
-      style={{ top: props.top, left: props.left, backgroundColor: 'white' }}
-      className="rounded-full border-0 bg-white opacity-0"
-    />
   )
 }
 
