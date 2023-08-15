@@ -12,6 +12,7 @@ export type BotpressNodeData = {
   labelColorClass?: string
   headerBgClass?: string
   sourceMarkerId: string
+  subNodes?: { title?: string; value?: string; hasTarget?: boolean; hasSource?: boolean }[]
 }
 
 export function BotpressNode({ data }: { data: BotpressNodeData }) {
@@ -30,23 +31,24 @@ export function BotpressNode({ data }: { data: BotpressNodeData }) {
           <div className={classNames('flex grow items-center px-3 text-sm', data.labelColorClass)}>{data.label}</div>
         </div>
         <div className="flex flex-col py-2">
-          <div className={classNames('relative flex items-center justify-center px-4 py-1')}>
-            <TargetHandleGroove />
-            <NodeInfoCard titleClass={data.infoCardTitleClass} title="channels.message.text" value="sendEmail" />
-            <SourceHandleMock />
-          </div>
-          <div className="relative flex items-center justify-center px-4 py-1">
-            <TargetHandleGroove />
-            <NodeInfoCard titleClass={data.infoCardTitleClass} title="channels.message.text" value="sendEmail" />
-            <SourceHandleMock />
-          </div>
+          {data.subNodes?.map((subNode, index) => (
+            <div className={classNames('relative flex items-center justify-center px-4 py-1')}>
+              {subNode.hasTarget && (
+                <>
+                  <TargetHandle id={`t${index}`} />
+                  <TargetHandleGroove />
+                </>
+              )}
+              <NodeInfoCard titleClass={data.infoCardTitleClass} title={subNode.title} value={subNode.value} />
+              {subNode.hasSource && (
+                <>
+                  <SourceHandle id={`s${index}`} />
+                  <SourceHandleMock />
+                </>
+              )}
+            </div>
+          ))}
         </div>
-      </div>
-      <div className={classNames(data.defaultCurrentColorClass)}>
-        <SourceHandle id="rt" top={78} />
-        <SourceHandle id="rb" top={149} />
-        <TargetHandle id="lt" top={78} />
-        <TargetHandle id="lb" top={149} />
       </div>
     </>
   )

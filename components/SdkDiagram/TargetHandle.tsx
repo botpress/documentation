@@ -7,7 +7,7 @@ export function TargetHandle(props: { top?: number; id: string } & Partial<Handl
       {...props}
       type="target"
       style={{ top: props.top, backgroundColor: 'white' }}
-      className="h-[8px] w-[8px] rounded-full border border-current bg-white"
+      className="z-10 h-[8px] w-[8px] rounded-full border border-current bg-white"
     />
   )
 }
