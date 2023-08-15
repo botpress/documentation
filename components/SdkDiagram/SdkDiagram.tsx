@@ -1,12 +1,24 @@
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import classNames from 'classnames'
-import { SVGProps, useCallback, useMemo } from 'react'
-import ReactFlow, { Edge, Handle, Node, Position, addEdge, useEdgesState, useNodesState } from 'reactflow'
+import { HtmlHTMLAttributes, SVGProps, useCallback, useMemo } from 'react'
+import ReactFlow, { Edge, Handle, HandleProps, Node, Position, addEdge, useEdgesState, useNodesState } from 'reactflow'
+
 import 'reactflow/dist/base.css'
 const INTEGRATION_SOURCE_MARKER_ID = 'source-marker-integration'
 const BOT_SOURCE_MARKER_ID = 'source-marker-bot'
-const s = 'text-fuchsia-800 text-fuchsia-800/10 bg-fuchsia-800/10 border-fuchsia-800/10'
 const initialNodes: Node[] = [
-  { id: '1', position: { x: 0, y: 0 }, data: { label: 'Google API' } },
+  {
+    id: '1',
+    position: { x: 0, y: 0 },
+    type: 'externalApi',
+    data: {
+      label: 'Google API',
+      link: {
+        url: '',
+        title: '(via Google APIs)',
+      },
+    } as ExternalApiNodeData,
+  },
   {
     id: '2',
     type: 'botpress',
@@ -37,15 +49,14 @@ const initialNodes: Node[] = [
   },
 ]
 const initialEdges: Edge[] = [
-  { id: 'e1-2', source: '1', target: '2', targetHandle: 'lt', type: 'smoothstep' },
-  { id: 'e1-2-2', source: '1', target: '2', targetHandle: 'lb', type: 'smoothstep' },
+  { id: 'e1-2', source: '1', target: '2', targetHandle: 'lt', type: 'smoothstep', markerStart: 'external' },
   { id: 'e2-1', source: '2', target: '1', type: 'smoothstep', markerStart: INTEGRATION_SOURCE_MARKER_ID },
-  { id: 'e3-1', source: '3', target: '2', type: 'smoothstep', markerStart: BOT_SOURCE_MARKER_ID },
+  { id: 'e3-2', source: '3', target: '2', type: 'smoothstep', targetHandle: 'lb', markerStart: BOT_SOURCE_MARKER_ID },
 ]
 export function SdkDiagram() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
-  const nodeTypes = useMemo(() => ({ botpress: BotpressNode }), [])
+  const nodeTypes = useMemo(() => ({ botpress: BotpressNode, externalApi: ExternalApiNode }), [])
 
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges])
 
@@ -65,7 +76,11 @@ export function SdkDiagram() {
 
 function SourceMarker(props: { id: string } & SVGProps<SVGSVGElement>) {
   return (
-    <svg {...props} style={{ position: 'absolute', top: 0, left: 0 }} id={`${props.id}-marker-container`}>
+    <svg
+      {...props}
+      style={{ position: 'absolute', top: 0, left: 0, width: 0, height: 0 }}
+      id={`${props.id}-marker-container`}
+    >
       <defs>
         <marker id={props.id} refX={1} refY={4} markerHeight={16} markerWidth={16}>
           <ellipse cx="4" cy="4" rx="3" ry="3" fill="white" stroke="currentColor" />
@@ -101,12 +116,12 @@ function BotpressNode({ data }: { data: BotpressNodeData }) {
         <div className="flex flex-col py-2">
           <div className={classNames('relative flex items-center justify-center px-4 py-1')}>
             <TargetHandleGroove />
-            <NodeInfoCard titleColorClass={data.infoCardTitleClass} title="channels.message.text" value="sendEmail" />
+            <NodeInfoCard titleClass={data.infoCardTitleClass} title="channels.message.text" value="sendEmail" />
             <SourceHandleMock />
           </div>
           <div className="relative flex items-center justify-center px-4 py-1">
             <TargetHandleGroove />
-            <NodeInfoCard titleColorClass={data.infoCardTitleClass} title="channels.message.text" value="sendEmail" />
+            <NodeInfoCard titleClass={data.infoCardTitleClass} title="channels.message.text" value="sendEmail" />
             <SourceHandleMock />
           </div>
         </div>
@@ -120,15 +135,53 @@ function BotpressNode({ data }: { data: BotpressNodeData }) {
     </>
   )
 }
-function NodeInfoCard(props: { title?: string; value?: string; titleColorClass?: string }) {
+type ExternalApiNodeData = {
+  label: string
+  link: { url: string; title: string }
+}
+
+function ExternalApiNode({ data }: { data: ExternalApiNodeData }) {
+  return (
+    <>
+      <div className={classNames('border-current, flex-col rounded-md border text-zinc-200')}>
+        <div className="p-4">
+          <div className={classNames('text-lg text-zinc-600')}>{data.label}</div>
+          <div className="flex items-center text-sm text-primary hover:text-primary-dark">
+            {data.label} <ArrowTopRightOnSquareIcon className="ml-1 h-4 w-4" />
+          </div>
+        </div>
+        <div className="flex gap-4">
+          <div className={classNames('relative flex flex-col items-center py-5 pl-4')}>
+            <NodeInfoCard titleClass="text-zinc-400" title="webhook" value="users/{userId}/watch" />
+            <div className={classNames('full absolute bottom-2 mt-[1px] h-[5px] w-[5px] rounded bg-current')}></div>
+          </div>
+          <div className={classNames('relative flex flex-col items-center justify-center py-5 pr-4')}>
+            <div className="absolute -right-[1px] h-[18px] w-[10px] rounded-bl-full rounded-tl-full border border-current">
+              <div className="absolute -right-1 h-full w-full rounded-full bg-white"></div>
+            </div>
+            <NodeInfoCard titleClass="text-zinc-400" title="POST" value="users/{userId}/messages/send" />
+          </div>
+        </div>
+      </div>
+      <div className={classNames('text-zinc-300')}>
+        <svg style={{ position: 'absolute', top: 0, left: 0, width: 0, height: 0 }} className="text-zinc-300">
+          <defs>
+            <marker id="external" refX={4} refY={1} markerHeight={16} markerWidth={16}>
+              <ellipse cx="4" cy="4" rx="3" ry="3" fill="white" stroke="currentColor" />
+            </marker>
+          </defs>
+        </svg>
+
+        <SourceHandle position={Position.Bottom} id="rt" left={126} />
+        <TargetHandle position={Position.Right} id="lb" top={133} />
+      </div>
+    </>
+  )
+}
+function NodeInfoCard(props: { title?: string; value?: string; titleClass?: string }) {
   return (
     <div className="flex flex-col overflow-hidden rounded-md border border-zinc-200/75 bg-zinc-50/50 font-code">
-      <div
-        className={classNames(
-          'flex items-center border-b  border-zinc-200/75 px-3 py-1 text-sm',
-          props.titleColorClass
-        )}
-      >
+      <div className={classNames('flex items-center border-b  border-zinc-200/75 px-3 py-1 text-sm', props.titleClass)}>
         {props.title}
       </div>
       <div className="flex items-center px-3 py-1 text-zinc-500">{props.value}</div>
@@ -142,28 +195,33 @@ function TargetHandleGroove() {
     </div>
   )
 }
-function SourceHandleMock() {
-  return <div className="full absolute right-[5px] mt-[1px] h-[5px] w-[5px] rounded bg-current"></div>
+
+function SourceHandleMock(props: HtmlHTMLAttributes<HTMLDivElement>) {
+  return (
+    <div
+      className={classNames('full absolute right-[5px] mt-[1px] h-[5px] w-[5px] rounded bg-current', props.className)}
+    ></div>
+  )
 }
 
-function TargetHandle(props: { top?: number; id: string }) {
+function TargetHandle(props: { top?: number; id: string } & Partial<HandleProps>) {
   return (
     <Handle
+      position={Position.Left}
       {...props}
       type="target"
-      position={Position.Left}
       style={{ top: props.top, backgroundColor: 'white' }}
       className="h-[8px] w-[8px] rounded-full border border-current bg-white"
     />
   )
 }
-function SourceHandle(props: { top?: number; id: string }) {
+function SourceHandle(props: { top?: number; left?: number; id: string } & Partial<HandleProps>) {
   return (
     <Handle
+      position={Position.Right}
       {...props}
       type="source"
-      position={Position.Right}
-      style={{ top: props.top, backgroundColor: 'white' }}
+      style={{ top: props.top, left: props.left, backgroundColor: 'white' }}
       className="rounded-full border-0 bg-white opacity-0"
     />
   )
