@@ -3,7 +3,7 @@ import { HtmlHTMLAttributes, SVGProps } from 'react'
 import { NodeInfoCard } from './NodeInfoCard'
 import { SourceHandle } from './SourceHandle'
 import { TargetHandle } from './TargetHandle'
-
+export const BOTPRESS_NODE = 'botpress'
 export type BotpressNodeData = {
   label: string
   icon?: () => JSX.Element
@@ -32,7 +32,7 @@ export function BotpressNode({ data }: { data: BotpressNodeData }) {
         </div>
         <div className="flex flex-col py-2">
           {data.subNodes?.map((subNode, index) => (
-            <div className={classNames('relative flex items-center justify-center px-4 py-1')}>
+            <div key={index} className={classNames('relative flex items-center justify-center px-4 py-1')}>
               {subNode.hasTarget && (
                 <>
                   <TargetHandle id={`t${index}`} />

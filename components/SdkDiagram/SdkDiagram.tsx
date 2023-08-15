@@ -1,22 +1,12 @@
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import classNames from 'classnames'
-import { useCallback, useMemo } from 'react'
-import ReactFlow, {
-  BaseEdge,
-  Edge,
-  EdgeLabelRenderer,
-  EdgeProps,
-  Node,
-  Position,
-  addEdge,
-  getSmoothStepPath,
-  useEdgesState,
-  useNodesState,
-} from 'reactflow'
+import { useCallback } from 'react'
+import ReactFlow, { Edge, Node, Position, addEdge, useEdgesState, useNodesState } from 'reactflow'
 
 import 'reactflow/dist/base.css'
-import { BotpressNode, BotpressNodeData } from './BotpressNode'
+import { BOTPRESS_NODE, BotpressNode, BotpressNodeData } from './BotpressNode'
 import { NodeInfoCard } from './NodeInfoCard'
+import { EdgeData, SMOOTH_STEP_WITH_LABEL_EDGE, SmoothStepWithLabelEdge } from './SmoothStepLabelEdge'
 import { SourceHandle } from './SourceHandle'
 import { TargetHandle } from './TargetHandle'
 const INTEGRATION_SOURCE_MARKER_ID = 'source-marker-integration'
@@ -36,7 +26,7 @@ const initialNodes: Node<ExternalApiNodeData | BotpressNodeData>[] = [
   },
   {
     id: '2',
-    type: 'botpress',
+    type: BOTPRESS_NODE,
     position: { x: 100, y: 350 },
     data: {
       label: 'Gmail',
@@ -54,8 +44,8 @@ const initialNodes: Node<ExternalApiNodeData | BotpressNodeData>[] = [
           hasTarget: true,
         },
         {
-          title: 'channels.message.text',
-          value: 'sendEmail',
+          title: 'handler',
+          value: 'onNewEmail',
           hasSource: true,
           hasTarget: true,
         },
@@ -64,8 +54,8 @@ const initialNodes: Node<ExternalApiNodeData | BotpressNodeData>[] = [
   },
   {
     id: '3',
-    type: 'botpress',
-    position: { x: 550, y: 700 },
+    type: BOTPRESS_NODE,
+    position: { x: 500, y: 700 },
     data: {
       label: 'Mail Shrimp',
       icon: BotIcon,
@@ -89,21 +79,20 @@ const initialNodes: Node<ExternalApiNodeData | BotpressNodeData>[] = [
     },
   },
 ]
-type EdgeData = { color: string }
 const initialEdges: Edge<EdgeData>[] = [
   {
     id: 'e1-2',
     source: '1',
     target: '2',
     targetHandle: 't0',
-    type: 'smoothStepWithLabel',
+    type: SMOOTH_STEP_WITH_LABEL_EDGE,
     markerStart: 'external',
   },
   {
     id: 'e2-1',
     source: '2',
     target: '1',
-    type: 'smoothStepWithLabel',
+    type: SMOOTH_STEP_WITH_LABEL_EDGE,
     markerStart: INTEGRATION_SOURCE_MARKER_ID,
     data: { color: '#f0abfc' },
   },
@@ -113,7 +102,7 @@ const initialEdges: Edge<EdgeData>[] = [
     target: '3',
     sourceHandle: 's1',
     targetHandle: 't1',
-    type: 'smoothStepWithLabel',
+    type: SMOOTH_STEP_WITH_LABEL_EDGE,
     markerStart: INTEGRATION_SOURCE_MARKER_ID,
     data: { color: '#f0abfc' },
   },
@@ -121,18 +110,18 @@ const initialEdges: Edge<EdgeData>[] = [
     id: 'e3-2',
     source: '3',
     target: '2',
-    type: 'smoothStepWithLabel',
+    type: SMOOTH_STEP_WITH_LABEL_EDGE,
     targetHandle: 't1',
     sourceHandle: 's1',
     data: { color: '#93c5fd' },
     markerStart: BOT_SOURCE_MARKER_ID,
   },
 ]
-const edgeTypes = { smoothStepWithLabel: SmoothStepWithLabelEdge }
+const edgeTypes = { [SMOOTH_STEP_WITH_LABEL_EDGE]: SmoothStepWithLabelEdge }
+const nodeTypes = { [BOTPRESS_NODE]: BotpressNode, externalApi: ExternalApiNode }
 export function SdkDiagram() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
-  const nodeTypes = useMemo(() => ({ botpress: BotpressNode, externalApi: ExternalApiNode }), [])
 
   const onConnect = useCallback(
     (params: Parameters<typeof addEdge>[0]) => setEdges((eds) => addEdge(params, eds)),
@@ -140,7 +129,7 @@ export function SdkDiagram() {
   )
 
   return (
-    <div style={{ width: '100%', height: '75vh' }} className="border border-orange-300">
+    <div className="w-100 h-[80vh] p-4">
       <ReactFlow
         nodeTypes={nodeTypes}
         nodes={nodes}
@@ -220,78 +209,5 @@ function BotIcon() {
       <rect x="6.5" y="9" width="2" height="2" fill="currentColor" />
       <rect x="16.5" y="9" width="2" height="2" fill="currentColor" />
     </svg>
-  )
-}
-
-function SmoothStepWithLabelEdge({
-  id,
-  sourceX,
-  sourceY,
-  targetX,
-  targetY,
-  sourcePosition,
-  targetPosition,
-  style = {},
-  markerEnd,
-  markerStart,
-  data,
-}: EdgeProps<EdgeData>) {
-  const [edgePath, labelX, labelY] = getSmoothStepPath({
-    sourceX,
-    sourceY,
-    sourcePosition,
-    targetX,
-    targetY,
-    targetPosition,
-  })
-  const labelOrientation = useMemo(() => computeLabelOrientation(), [sourceX, sourceY, targetX, targetY])
-  function computeLabelOrientation(): 'left' | 'right' | 'top' | 'bottom' {
-    const horizontal = sourceX < targetX ? 'right' : 'left'
-    const vertical = sourceY < targetY ? 'bottom' : 'top'
-
-    const verticalMagnitude = Math.abs(sourceY - targetY)
-    const horizontalMagnitude = Math.abs(sourceX - targetX)
-    return verticalMagnitude > horizontalMagnitude ? vertical : horizontal
-  }
-  const defaultColor = '#d4d4d8'
-  return (
-    <>
-      <BaseEdge path={edgePath} markerEnd={markerEnd} markerStart={markerStart} style={{ stroke: defaultColor }} />
-      <EdgeLabelRenderer>
-        <div
-          style={{
-            position: 'absolute',
-            transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
-            fontSize: 12,
-            color: data?.color ?? defaultColor,
-          }}
-          className="nodrag nopan"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="18"
-            viewBox="0 0 16 18"
-            fill="none"
-            className={classNames({
-              'rotate-180': labelOrientation === 'left',
-              '-rotate-90': labelOrientation === 'top',
-              'rotate-90': labelOrientation === 'bottom',
-            })}
-          >
-            <rect width="16" height="18" transform="matrix(1 0 0 -1 0 18)" fill="white" />
-            <path
-              opacity="0.5"
-              d="M0 2.50024L4.49997 8.5002L-5.24533e-07 14.5002L3.74997 14.5002L8.24994 8.5002L3.74997 2.50024L0 2.50024Z"
-              fill="currentColor"
-            />
-            <path
-              d="M5.25 2.50024L9.74997 8.5002L5.25 14.5002L8.99997 14.5002L13.4999 8.5002L8.99997 2.50024L5.25 2.50024Z"
-              fill="currentColor"
-            />
-          </svg>
-        </div>
-      </EdgeLabelRenderer>
-    </>
   )
 }
