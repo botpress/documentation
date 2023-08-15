@@ -49,9 +49,9 @@ function SourceMarker(props: { id: string }) {
 function BotpressNode({ data }) {
   return (
     <>
-      <div className="flex-col rounded-md border border-fuchsia-300">
-        <div className="flex rounded-t-md border-b border-fuchsia-300 bg-fuchsia-50/75">
-          <div className="border-r border-fuchsia-300  p-2 py-2 text-fuchsia-300">
+      <div className="flex-col rounded-md border border-fuchsia-200">
+        <div className="flex rounded-t-md border-b border-fuchsia-200 bg-fuchsia-50/75">
+          <div className="border-r border-fuchsia-200  p-2 py-2 text-fuchsia-300">
             <IntegrationIcon />
           </div>
           <div className="flex grow  items-center px-3 text-fuchsia-800">Gmail</div>
@@ -88,7 +88,7 @@ function NodeInfoCard(props: { title?: string; value?: string }) {
 }
 function TargetHandleGroove() {
   return (
-    <div className=" absolute -left-[1px] h-[18px] w-[10px] rounded-br-full rounded-tr-full border border-fuchsia-300 ">
+    <div className=" absolute -left-[1px] h-[18px] w-[10px] rounded-br-full rounded-tr-full border border-fuchsia-200 ">
       <div className="absolute -left-1 h-full w-full rounded-full bg-white"></div>
     </div>
   )
