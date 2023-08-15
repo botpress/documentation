@@ -1,7 +1,7 @@
 import { CSSProperties, useCallback, useMemo } from 'react'
 import ReactFlow, { Edge, Handle, Position, addEdge, useEdgesState, useNodesState } from 'reactflow'
 import 'reactflow/dist/base.css'
-
+const SOURCE_MARKER_ID = 'source-marker'
 const initialNodes = [
   { id: '1', position: { x: 0, y: 0 }, data: { label: 'Google API' } },
   { id: '2', type: 'botpress', position: { x: 0, y: 100 }, data: { label: '2' } },
@@ -10,7 +10,7 @@ const initialNodes = [
 const initialEdges: Edge[] = [
   { id: 'e1-2', source: '1', target: '2', targetHandle: 'lt', type: 'smoothstep' },
   { id: 'e1-2-2', source: '1', target: '2', targetHandle: 'lb', type: 'smoothstep' },
-  { id: 'e2-1', source: '2', target: '1', type: 'smoothstep', markerStart: 'source' },
+  { id: 'e2-1', source: '2', target: '1', type: 'smoothstep', markerStart: SOURCE_MARKER_ID },
 ]
 export function SdkDiagram() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
@@ -21,7 +21,7 @@ export function SdkDiagram() {
 
   return (
     <div style={{ width: '100%', height: '75vh' }} className="border border-orange-300 text-fuchsia-300">
-      <SourceMarker id="source" />
+      <SourceMarker id={SOURCE_MARKER_ID} />
       <ReactFlow
         nodeTypes={nodeTypes}
         nodes={nodes}
@@ -58,12 +58,14 @@ function BotpressNode({ data }) {
         </div>
         <div className="flex flex-col py-2">
           <div className="relative flex items-center justify-center px-4 py-1">
-            <TargetHandleContainer />
+            <TargetHandleGroove />
             <NodeInfoCard title="channels.message.text" value="sendEmail" />
+            <SourceHandleMock />
           </div>
           <div className="relative flex items-center justify-center px-4 py-1">
-            <TargetHandleContainer />
+            <TargetHandleGroove />
             <NodeInfoCard title="channels.message.text" value="sendEmail" />
+            <SourceHandleMock />
           </div>
         </div>
       </div>
@@ -84,12 +86,15 @@ function NodeInfoCard(props: { title?: string; value?: string }) {
     </div>
   )
 }
-function TargetHandleContainer() {
+function TargetHandleGroove() {
   return (
-    <div className=" absolute -left-[1px] box-content h-[16px] w-[7px] rounded-br-full rounded-tr-full border border-fuchsia-300 ">
+    <div className=" absolute -left-[1px] h-[18px] w-[10px] rounded-br-full rounded-tr-full border border-fuchsia-300 ">
       <div className="absolute -left-1 h-full w-full rounded-full bg-white"></div>
     </div>
   )
+}
+function SourceHandleMock() {
+  return <div className="full absolute right-[5px] mt-[1px] h-[5px] w-[5px] rounded bg-fuchsia-300"></div>
 }
 
 function TargetHandle(props: { top?: number; id: string }) {
@@ -99,7 +104,7 @@ function TargetHandle(props: { top?: number; id: string }) {
       type="target"
       position={Position.Left}
       style={{ top: props.top, backgroundColor: 'white' }}
-      className="h-2 w-2 rounded-full border border-fuchsia-300 bg-white"
+      className="h-[8px] w-[8px] rounded-full border border-fuchsia-300 bg-white"
     />
   )
 }
