@@ -1,11 +1,33 @@
-import { CSSProperties, useCallback, useMemo } from 'react'
-import ReactFlow, { Edge, Handle, Position, addEdge, useEdgesState, useNodesState } from 'reactflow'
+import classNames from 'classnames'
+import { useCallback, useMemo } from 'react'
+import ReactFlow, { Edge, Handle, Node, Position, addEdge, useEdgesState, useNodesState } from 'reactflow'
 import 'reactflow/dist/base.css'
 const SOURCE_MARKER_ID = 'source-marker'
-const initialNodes = [
+const s = 'text-fuchsia-800 text-fuchsia-800/10 bg-fuchsia-800/10 border-fuchsia-800/10'
+const initialNodes: Node[] = [
   { id: '1', position: { x: 0, y: 0 }, data: { label: 'Google API' } },
-  { id: '2', type: 'botpress', position: { x: 0, y: 100 }, data: { label: '2' } },
-  { id: '3', type: 'botpress', position: { x: 500, y: 100 }, data: { label: '2' } },
+  {
+    id: '2',
+    type: 'botpress',
+    position: { x: 0, y: 100 },
+    data: {
+      label: 'Gmail',
+      icon: IntegrationIcon,
+      defaultTextThemeClass: 'text-fuchsia-200',
+      labelColorClass: 'text-fuchsia-800',
+    } as BotpressNodeData,
+  },
+  {
+    id: '3',
+    type: 'botpress',
+    position: { x: 500, y: 100 },
+    data: {
+      label: 'Mail Shrimp',
+      icon: BotIcon,
+      defaultTextThemeClass: 'text-blue-200',
+      labelColorClass: 'text-blue-800',
+    } as BotpressNodeData,
+  },
 ]
 const initialEdges: Edge[] = [
   { id: 'e1-2', source: '1', target: '2', targetHandle: 'lt', type: 'smoothstep' },
@@ -20,7 +42,7 @@ export function SdkDiagram() {
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges])
 
   return (
-    <div style={{ width: '100%', height: '75vh' }} className="border border-orange-300 text-fuchsia-300">
+    <div style={{ width: '100%', height: '75vh' }} className="border border-orange-300">
       <SourceMarker id={SOURCE_MARKER_ID} />
       <ReactFlow
         nodeTypes={nodeTypes}
@@ -45,19 +67,26 @@ function SourceMarker(props: { id: string }) {
     </svg>
   )
 }
-
-function BotpressNode({ data }) {
+type BotpressNodeData = {
+  label: string
+  icon?: () => JSX.Element
+  defaultTextThemeClass?: string
+  labelColorClass?: string
+  headerBgClass?: string
+  iconColorClass?: string
+}
+function BotpressNode({ data }: { data: BotpressNodeData }) {
   return (
     <>
-      <div className="flex-col rounded-md border border-fuchsia-200">
-        <div className="flex rounded-t-md border-b border-fuchsia-200 bg-fuchsia-50/75">
-          <div className="border-r border-fuchsia-200  p-2 py-2 text-fuchsia-300">
-            <IntegrationIcon />
+      <div className={classNames('flex-col rounded-md border border-current', data.defaultTextThemeClass)}>
+        <div className={classNames('flex rounded-t-md border-b border-current', data.headerBgClass)}>
+          <div className={classNames('flex h-[45px] w-[45px] items-center justify-center border-r border-current')}>
+            {data.icon && <data.icon />}
           </div>
-          <div className="flex grow  items-center px-3 text-fuchsia-800">Gmail</div>
+          <div className={classNames('flex grow items-center px-3', data.labelColorClass)}>{data.label}</div>
         </div>
         <div className="flex flex-col py-2">
-          <div className="relative flex items-center justify-center px-4 py-1">
+          <div className={classNames('relative flex items-center justify-center px-4 py-1')}>
             <TargetHandleGroove />
             <NodeInfoCard title="channels.message.text" value="sendEmail" />
             <SourceHandleMock />
@@ -69,10 +98,10 @@ function BotpressNode({ data }) {
           </div>
         </div>
       </div>
-      <SourceHandle id="rt" top={90} />
-      <SourceHandle id="rb" top={161} />
-      <TargetHandle id="lt" top={90} />
-      <TargetHandle id="lb" top={161} />
+      <SourceHandle id="rt" top={91} />
+      <SourceHandle id="rb" top={162} />
+      <TargetHandle id="lt" top={91} />
+      <TargetHandle id="lb" top={162} />
     </>
   )
 }
@@ -88,7 +117,7 @@ function NodeInfoCard(props: { title?: string; value?: string }) {
 }
 function TargetHandleGroove() {
   return (
-    <div className=" absolute -left-[1px] h-[18px] w-[10px] rounded-br-full rounded-tr-full border border-fuchsia-200 ">
+    <div className="absolute -left-[1px] h-[18px] w-[10px] rounded-br-full rounded-tr-full border border-current">
       <div className="absolute -left-1 h-full w-full rounded-full bg-white"></div>
     </div>
   )
@@ -119,6 +148,7 @@ function SourceHandle(props: { top?: number; id: string }) {
     />
   )
 }
+
 function IntegrationIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
@@ -127,6 +157,19 @@ function IntegrationIcon() {
         stroke="currentColor"
         strokeWidth="1.5"
       />
+    </svg>
+  )
+}
+
+function BotIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+      <rect x="1.25" y="4.25" width="22.5" height="18.5" rx="5.01" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="7" y="0.5" width="1.5" height="3.42857" fill="currentColor" />
+      <rect x="16.4277" y="0.5" width="1.5" height="3.42857" fill="currentColor" />
+      <rect x="6.5" y="16" width="12" height="3" fill="currentColor" />
+      <rect x="6.5" y="9" width="2" height="2" fill="currentColor" />
+      <rect x="16.5" y="9" width="2" height="2" fill="currentColor" />
     </svg>
   )
 }
