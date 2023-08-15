@@ -1,7 +1,20 @@
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import classNames from 'classnames'
 import { HtmlHTMLAttributes, SVGProps, useCallback, useMemo } from 'react'
-import ReactFlow, { Edge, Handle, HandleProps, Node, Position, addEdge, useEdgesState, useNodesState } from 'reactflow'
+import ReactFlow, {
+  BaseEdge,
+  Edge,
+  EdgeLabelRenderer,
+  EdgeProps,
+  Handle,
+  HandleProps,
+  Node,
+  Position,
+  addEdge,
+  getSmoothStepPath,
+  useEdgesState,
+  useNodesState,
+} from 'reactflow'
 
 import 'reactflow/dist/base.css'
 const INTEGRATION_SOURCE_MARKER_ID = 'source-marker-integration'
@@ -49,17 +62,18 @@ const initialNodes: Node[] = [
   },
 ]
 const initialEdges: Edge[] = [
-  { id: 'e1-2', source: '1', target: '2', targetHandle: 'lt', type: 'smoothstep', markerStart: 'external' },
-  { id: 'e2-1', source: '2', target: '1', type: 'smoothstep', markerStart: INTEGRATION_SOURCE_MARKER_ID },
+  { id: 'e1-2', source: '1', target: '2', targetHandle: 'lt', type: 'smoothStepWithLabel', markerStart: 'external' },
+  { id: 'e2-1', source: '2', target: '1', type: 'smoothStepWithLabel', markerStart: INTEGRATION_SOURCE_MARKER_ID },
   {
     id: 'e3-2',
     source: '3',
     target: '2',
-    type: 'smoothstep',
+    type: 'smoothStepWithLabel',
     targetHandle: 'lb',
     markerStart: BOT_SOURCE_MARKER_ID,
   },
 ]
+const edgeTypes = { smoothStepWithLabel: SmoothStepWithLabelEdge }
 export function SdkDiagram() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
@@ -74,6 +88,7 @@ export function SdkDiagram() {
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
+        edgeTypes={edgeTypes}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
       />
@@ -256,5 +271,55 @@ function BotIcon() {
       <rect x="6.5" y="9" width="2" height="2" fill="currentColor" />
       <rect x="16.5" y="9" width="2" height="2" fill="currentColor" />
     </svg>
+  )
+}
+
+function SmoothStepWithLabelEdge({
+  id,
+  sourceX,
+  sourceY,
+  targetX,
+  targetY,
+  sourcePosition,
+  targetPosition,
+  style = {},
+  markerEnd,
+  markerStart,
+}: EdgeProps) {
+  const [edgePath, labelX, labelY] = getSmoothStepPath({
+    sourceX,
+    sourceY,
+    sourcePosition,
+    targetX,
+    targetY,
+    targetPosition,
+  })
+  const labelOrientation = useMemo(() => computeLabelOrientation(), [sourceX, sourceY, targetX, targetY])
+
+  function computeLabelOrientation(): 'left' | 'right' | 'top' | 'bottom' {
+    const horizontal = sourceX < targetX ? 'right' : 'left'
+    const vertical = sourceY < targetY ? 'bottom' : 'top'
+
+    const verticalMagnitude = Math.abs(sourceY - targetY)
+    const horizontalMagnitude = Math.abs(sourceX - targetX)
+    return verticalMagnitude > horizontalMagnitude ? vertical : horizontal
+  }
+
+  return (
+    <>
+      <BaseEdge path={edgePath} markerEnd={markerEnd} markerStart={markerStart} style={style} />
+      <EdgeLabelRenderer>
+        <div
+          style={{
+            position: 'absolute',
+            transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
+            fontSize: 12,
+          }}
+          className="nodrag nopan"
+        >
+          {labelOrientation}
+        </div>
+      </EdgeLabelRenderer>
+    </>
   )
 }
