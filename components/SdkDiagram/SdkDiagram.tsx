@@ -9,7 +9,7 @@ const BOT_SOURCE_MARKER_ID = 'source-marker-bot'
 const initialNodes: Node[] = [
   {
     id: '1',
-    position: { x: 0, y: 0 },
+    position: { x: 10, y: 10 },
     type: 'externalApi',
     data: {
       label: 'Google API',
@@ -22,7 +22,7 @@ const initialNodes: Node[] = [
   {
     id: '2',
     type: 'botpress',
-    position: { x: 0, y: 100 },
+    position: { x: 100, y: 350 },
     data: {
       label: 'Gmail',
       icon: IntegrationIcon,
@@ -36,7 +36,7 @@ const initialNodes: Node[] = [
   {
     id: '3',
     type: 'botpress',
-    position: { x: 500, y: 100 },
+    position: { x: 550, y: 650 },
     data: {
       label: 'Mail Shrimp',
       icon: BotIcon,
@@ -51,7 +51,14 @@ const initialNodes: Node[] = [
 const initialEdges: Edge[] = [
   { id: 'e1-2', source: '1', target: '2', targetHandle: 'lt', type: 'smoothstep', markerStart: 'external' },
   { id: 'e2-1', source: '2', target: '1', type: 'smoothstep', markerStart: INTEGRATION_SOURCE_MARKER_ID },
-  { id: 'e3-2', source: '3', target: '2', type: 'smoothstep', targetHandle: 'lb', markerStart: BOT_SOURCE_MARKER_ID },
+  {
+    id: 'e3-2',
+    source: '3',
+    target: '2',
+    type: 'smoothstep',
+    targetHandle: 'lb',
+    markerStart: BOT_SOURCE_MARKER_ID,
+  },
 ]
 export function SdkDiagram() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
