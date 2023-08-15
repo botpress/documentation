@@ -1,8 +1,9 @@
 import classNames from 'classnames'
-import { useCallback, useMemo } from 'react'
+import { SVGProps, useCallback, useMemo } from 'react'
 import ReactFlow, { Edge, Handle, Node, Position, addEdge, useEdgesState, useNodesState } from 'reactflow'
 import 'reactflow/dist/base.css'
-const SOURCE_MARKER_ID = 'source-marker'
+const INTEGRATION_SOURCE_MARKER_ID = 'source-marker-integration'
+const BOT_SOURCE_MARKER_ID = 'source-marker-bot'
 const s = 'text-fuchsia-800 text-fuchsia-800/10 bg-fuchsia-800/10 border-fuchsia-800/10'
 const initialNodes: Node[] = [
   { id: '1', position: { x: 0, y: 0 }, data: { label: 'Google API' } },
@@ -13,8 +14,11 @@ const initialNodes: Node[] = [
     data: {
       label: 'Gmail',
       icon: IntegrationIcon,
-      defaultTextThemeClass: 'text-fuchsia-200',
+      defaultCurrentColorClass: 'text-fuchsia-200',
       labelColorClass: 'text-fuchsia-800',
+      infoCardTitleClass: 'text-fuchsia-600',
+      headerBgClass: 'bg-fuchsia-50/50',
+      sourceMarkerId: INTEGRATION_SOURCE_MARKER_ID,
     } as BotpressNodeData,
   },
   {
@@ -24,15 +28,19 @@ const initialNodes: Node[] = [
     data: {
       label: 'Mail Shrimp',
       icon: BotIcon,
-      defaultTextThemeClass: 'text-blue-200',
+      defaultCurrentColorClass: 'text-blue-200',
       labelColorClass: 'text-blue-800',
+      infoCardTitleClass: 'text-blue-600',
+      headerBgClass: 'bg-blue-50/50',
+      sourceMarkerId: BOT_SOURCE_MARKER_ID,
     } as BotpressNodeData,
   },
 ]
 const initialEdges: Edge[] = [
   { id: 'e1-2', source: '1', target: '2', targetHandle: 'lt', type: 'smoothstep' },
   { id: 'e1-2-2', source: '1', target: '2', targetHandle: 'lb', type: 'smoothstep' },
-  { id: 'e2-1', source: '2', target: '1', type: 'smoothstep', markerStart: SOURCE_MARKER_ID },
+  { id: 'e2-1', source: '2', target: '1', type: 'smoothstep', markerStart: INTEGRATION_SOURCE_MARKER_ID },
+  { id: 'e3-1', source: '3', target: '2', type: 'smoothstep', markerStart: BOT_SOURCE_MARKER_ID },
 ]
 export function SdkDiagram() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
@@ -43,7 +51,6 @@ export function SdkDiagram() {
 
   return (
     <div style={{ width: '100%', height: '75vh' }} className="border border-orange-300">
-      <SourceMarker id={SOURCE_MARKER_ID} />
       <ReactFlow
         nodeTypes={nodeTypes}
         nodes={nodes}
@@ -56,9 +63,9 @@ export function SdkDiagram() {
   )
 }
 
-function SourceMarker(props: { id: string }) {
+function SourceMarker(props: { id: string } & SVGProps<SVGSVGElement>) {
   return (
-    <svg style={{ position: 'absolute', top: 0, left: 0 }}>
+    <svg {...props} style={{ position: 'absolute', top: 0, left: 0 }} id={`${props.id}-marker-container`}>
       <defs>
         <marker id={props.id} refX={1} refY={4} markerHeight={16} markerWidth={16}>
           <ellipse cx="4" cy="4" rx="3" ry="3" fill="white" stroke="currentColor" />
@@ -70,48 +77,61 @@ function SourceMarker(props: { id: string }) {
 type BotpressNodeData = {
   label: string
   icon?: () => JSX.Element
-  defaultTextThemeClass?: string
+  defaultCurrentColorClass?: string
+  infoCardTitleClass?: string
   labelColorClass?: string
   headerBgClass?: string
-  iconColorClass?: string
+  sourceMarkerId: string
 }
 function BotpressNode({ data }: { data: BotpressNodeData }) {
   return (
     <>
-      <div className={classNames('flex-col rounded-md border border-current', data.defaultTextThemeClass)}>
+      <SourceMarker id={data.sourceMarkerId} className={data.defaultCurrentColorClass} />
+      <div className={classNames('flex-col rounded-md border border-current', data.defaultCurrentColorClass)}>
         <div className={classNames('flex rounded-t-md border-b border-current', data.headerBgClass)}>
-          <div className={classNames('flex h-[45px] w-[45px] items-center justify-center border-r border-current')}>
+          <div
+            className={classNames(
+              'flex h-[32px] w-[42px] items-center justify-center rounded-tl-md border-r border-current'
+            )}
+          >
             {data.icon && <data.icon />}
           </div>
-          <div className={classNames('flex grow items-center px-3', data.labelColorClass)}>{data.label}</div>
+          <div className={classNames('flex grow items-center px-3 text-sm', data.labelColorClass)}>{data.label}</div>
         </div>
         <div className="flex flex-col py-2">
           <div className={classNames('relative flex items-center justify-center px-4 py-1')}>
             <TargetHandleGroove />
-            <NodeInfoCard title="channels.message.text" value="sendEmail" />
+            <NodeInfoCard titleColorClass={data.infoCardTitleClass} title="channels.message.text" value="sendEmail" />
             <SourceHandleMock />
           </div>
           <div className="relative flex items-center justify-center px-4 py-1">
             <TargetHandleGroove />
-            <NodeInfoCard title="channels.message.text" value="sendEmail" />
+            <NodeInfoCard titleColorClass={data.infoCardTitleClass} title="channels.message.text" value="sendEmail" />
             <SourceHandleMock />
           </div>
         </div>
       </div>
-      <SourceHandle id="rt" top={91} />
-      <SourceHandle id="rb" top={162} />
-      <TargetHandle id="lt" top={91} />
-      <TargetHandle id="lb" top={162} />
+      <div className={classNames(data.defaultCurrentColorClass)}>
+        <SourceHandle id="rt" top={78} />
+        <SourceHandle id="rb" top={149} />
+        <TargetHandle id="lt" top={78} />
+        <TargetHandle id="lb" top={149} />
+      </div>
     </>
   )
 }
-function NodeInfoCard(props: { title?: string; value?: string }) {
+function NodeInfoCard(props: { title?: string; value?: string; titleColorClass?: string }) {
   return (
     <div className="flex flex-col overflow-hidden rounded-md border border-zinc-200/75 bg-zinc-50/50 font-code">
-      <div className="flex items-center border-b  border-zinc-200/75 px-3 py-1 text-sm text-fuchsia-600">
+      <div
+        className={classNames(
+          'flex items-center border-b  border-zinc-200/75 px-3 py-1 text-sm',
+          props.titleColorClass
+        )}
+      >
         {props.title}
       </div>
-      <div className="flex items-center px-3 py-1 text-zinc-700">{props.value}</div>
+      <div className="flex items-center px-3 py-1 text-zinc-500">{props.value}</div>
     </div>
   )
 }
@@ -123,7 +143,7 @@ function TargetHandleGroove() {
   )
 }
 function SourceHandleMock() {
-  return <div className="full absolute right-[5px] mt-[1px] h-[5px] w-[5px] rounded bg-fuchsia-300"></div>
+  return <div className="full absolute right-[5px] mt-[1px] h-[5px] w-[5px] rounded bg-current"></div>
 }
 
 function TargetHandle(props: { top?: number; id: string }) {
@@ -133,7 +153,7 @@ function TargetHandle(props: { top?: number; id: string }) {
       type="target"
       position={Position.Left}
       style={{ top: props.top, backgroundColor: 'white' }}
-      className="h-[8px] w-[8px] rounded-full border border-fuchsia-300 bg-white"
+      className="h-[8px] w-[8px] rounded-full border border-current bg-white"
     />
   )
 }
