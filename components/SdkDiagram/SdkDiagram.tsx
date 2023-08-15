@@ -1,7 +1,7 @@
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import classNames from 'classnames'
 import { useCallback } from 'react'
-import ReactFlow, { Edge, Node, Position, addEdge, useEdgesState, useNodesState } from 'reactflow'
+import ReactFlow, { Edge, Node, NodeMouseHandler, Position, addEdge, useEdgesState, useNodesState } from 'reactflow'
 
 import 'reactflow/dist/base.css'
 import { BOTPRESS_NODE, BotpressNode, BotpressNodeData } from './BotpressNode'
@@ -128,18 +128,35 @@ export function SdkDiagram() {
     [setEdges]
   )
 
+  const onNodeClick: NodeMouseHandler = (event, node) => {
+    // Animate edges
+    setEdges((prevEdges) => {
+      prevEdges.forEach((edge) => {
+        if (edge.source === node.id) {
+          edge.animated = true
+        } else {
+          edge.animated = false
+        }
+      })
+      return [...prevEdges]
+    })
+  }
+
   return (
-    <div className="w-100 h-[80vh] p-4">
-      <ReactFlow
-        nodeTypes={nodeTypes}
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        edgeTypes={edgeTypes}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-      />
-    </div>
+    <>
+      <div className="w-100 h-[80vh] p-4">
+        <ReactFlow
+          nodeTypes={nodeTypes}
+          nodes={nodes}
+          edges={edges}
+          onNodeClick={onNodeClick}
+          onNodesChange={onNodesChange}
+          edgeTypes={edgeTypes}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+        />
+      </div>
+    </>
   )
 }
 
