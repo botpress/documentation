@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, createContext, useCallback } from 'react'
 import ReactFlow, { Edge, Node, NodeMouseHandler, addEdge, useEdgesState, useNodesState } from 'reactflow'
-
 import 'reactflow/dist/base.css'
 import {
   BOTPRESS_NODE,
@@ -155,9 +154,16 @@ export function SdkDiagram() {
 
   return (
     <>
-      <div className="w-100 h-[80vh] p-4">
+      <div
+        className="w-100 relative h-[80vh] p-4"
+        style={{
+          backgroundImage: 'radial-gradient(hsl(0deg 0% 93%) 1px, transparent 0)',
+          backgroundSize: '20px 20px',
+        }}
+      >
         <EdgesContext.Provider value={{ edges, setEdges }}>
           <ReactFlow
+            className="m-3"
             nodeTypes={nodeTypes}
             nodes={nodes}
             edges={edges}

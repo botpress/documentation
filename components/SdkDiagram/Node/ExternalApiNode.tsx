@@ -14,7 +14,7 @@ export const EXTERNAL_API_NODE = 'externalApiNode'
 export function ExternalApiNode({ data }: { data: ExternalApiNodeData }) {
   return (
     <>
-      <div className={classNames('border-current, flex-col rounded-md border text-zinc-200')}>
+      <div className={classNames('border-current, flex-col rounded-md border bg-white text-zinc-200')}>
         <div className="p-4">
           <div className={classNames('text-lg text-zinc-600')}>{data.label}</div>
           <div className="flex items-center text-sm text-primary hover:text-primary-dark">

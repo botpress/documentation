@@ -38,7 +38,7 @@ export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData
   return (
     <>
       <SourceMarker id={data.sourceMarkerId} className={data.defaultCurrentColorClass} />
-      <div className={classNames('flex-col rounded-md border border-current', data.defaultCurrentColorClass)}>
+      <div className={classNames('flex-col rounded-md border border-current bg-white', data.defaultCurrentColorClass)}>
         <div className={classNames('flex rounded-t-md border-b border-current', data.headerBgClass)}>
           <div
             className={classNames(
