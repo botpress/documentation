@@ -17,6 +17,7 @@ export function SmoothStepWithLabelEdge({
   markerEnd,
   markerStart,
   data,
+  ...otherProps
 }: EdgeProps<EdgeData>) {
   const [edgePath, labelX, labelY] = getSmoothStepPath({
     sourceX,
@@ -42,7 +43,7 @@ export function SmoothStepWithLabelEdge({
         path={edgePath}
         markerEnd={markerEnd}
         markerStart={markerStart}
-        style={{ stroke: defaultColor, ...style }}
+        style={{ stroke: '#e4e4e7', ...style }}
       />
       <EdgeLabelRenderer>
         <div
@@ -73,6 +74,7 @@ export function SmoothStepWithLabelEdge({
               fill="currentColor"
             />
             <path
+              className={classNames({ 'animate-pulse': otherProps.animated })}
               d="M5.25 2.50024L9.74997 8.5002L5.25 14.5002L8.99997 14.5002L13.4999 8.5002L8.99997 2.50024L5.25 2.50024Z"
               fill="currentColor"
             />

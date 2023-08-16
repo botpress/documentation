@@ -1,6 +1,8 @@
 import classNames from 'classnames'
-import { HtmlHTMLAttributes, SVGProps } from 'react'
+import { HtmlHTMLAttributes, SVGProps, useContext, MouseEvent } from 'react'
+import { NodeProps } from 'reactflow'
 import { NodeInfoCard } from './NodeInfoCard'
+import { EdgesContext } from './SdkDiagram'
 import { SourceHandle } from './SourceHandle'
 import { TargetHandle } from './TargetHandle'
 export const BOTPRESS_NODE = 'botpress'
@@ -15,7 +17,23 @@ export type BotpressNodeData = {
   subNodes?: { title?: string; value?: string; hasTarget?: boolean; hasSource?: boolean }[]
 }
 
-export function BotpressNode({ data }: { data: BotpressNodeData }) {
+export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData>) {
+  const edges = useContext(EdgesContext)
+  function onSubNodeClick(event: MouseEvent<HTMLDivElement>, index: number) {
+    event.stopPropagation()
+    edges?.setEdges((prevEdges) => {
+      prevEdges.forEach((edge) => {
+        if (edge.source === otherProps.id && edge.sourceHandle === getSourceMarkerId(index)) {
+          edge.animated = true
+        } else {
+          edge.animated = false
+        }
+      })
+
+      return [...prevEdges]
+    })
+  }
+
   return (
     <>
       <SourceMarker id={data.sourceMarkerId} className={data.defaultCurrentColorClass} />
@@ -35,14 +53,19 @@ export function BotpressNode({ data }: { data: BotpressNodeData }) {
             <div key={index} className={classNames('relative flex items-center justify-center px-4 py-1')}>
               {subNode.hasTarget && (
                 <>
-                  <TargetHandle id={`t${index}`} />
+                  <TargetHandle id={getTargetMarkerId(index)} />
                   <TargetHandleGroove />
                 </>
               )}
-              <NodeInfoCard titleClass={data.infoCardTitleClass} title={subNode.title} value={subNode.value} />
+              <NodeInfoCard
+                onClick={(e) => onSubNodeClick(e, index)}
+                titleClass={data.infoCardTitleClass}
+                title={subNode.title}
+                value={subNode.value}
+              />
               {subNode.hasSource && (
                 <>
-                  <SourceHandle id={`s${index}`} />
+                  <SourceHandle id={getSourceMarkerId(index)} />
                   <SourceHandleMock />
                 </>
               )}
@@ -52,6 +75,12 @@ export function BotpressNode({ data }: { data: BotpressNodeData }) {
       </div>
     </>
   )
+}
+function getTargetMarkerId(index: number) {
+  return `t${index}`
+}
+function getSourceMarkerId(index: number) {
+  return `s${index}`
 }
 
 function SourceMarker(props: { id: string } & SVGProps<SVGSVGElement>) {

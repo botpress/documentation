@@ -1,14 +1,10 @@
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
-import classNames from 'classnames'
-import { useCallback } from 'react'
-import ReactFlow, { Edge, Node, NodeMouseHandler, Position, addEdge, useEdgesState, useNodesState } from 'reactflow'
+import { Dispatch, SetStateAction, createContext, useCallback } from 'react'
+import ReactFlow, { Edge, Node, NodeMouseHandler, addEdge, useEdgesState, useNodesState } from 'reactflow'
 
 import 'reactflow/dist/base.css'
 import { BOTPRESS_NODE, BotpressNode, BotpressNodeData } from './BotpressNode'
-import { NodeInfoCard } from './NodeInfoCard'
+import { ExternalApiNode, ExternalApiNodeData } from './ExternalApiNode'
 import { EdgeData, SMOOTH_STEP_WITH_LABEL_EDGE, SmoothStepWithLabelEdge } from './SmoothStepLabelEdge'
-import { SourceHandle } from './SourceHandle'
-import { TargetHandle } from './TargetHandle'
 const INTEGRATION_SOURCE_MARKER_ID = 'source-marker-integration'
 const BOT_SOURCE_MARKER_ID = 'source-marker-bot'
 const initialNodes: Node<ExternalApiNodeData | BotpressNodeData>[] = [
@@ -92,6 +88,7 @@ const initialEdges: Edge<EdgeData>[] = [
     id: 'e2-1',
     source: '2',
     target: '1',
+    sourceHandle: 's0',
     type: SMOOTH_STEP_WITH_LABEL_EDGE,
     markerStart: INTEGRATION_SOURCE_MARKER_ID,
     data: { color: '#f0abfc' },
@@ -119,6 +116,11 @@ const initialEdges: Edge<EdgeData>[] = [
 ]
 const edgeTypes = { [SMOOTH_STEP_WITH_LABEL_EDGE]: SmoothStepWithLabelEdge }
 const nodeTypes = { [BOTPRESS_NODE]: BotpressNode, externalApi: ExternalApiNode }
+export const EdgesContext = createContext<{
+  edges: Edge[]
+  setEdges: Dispatch<SetStateAction<Edge<EdgeData>[]>>
+} | null>(null)
+
 export function SdkDiagram() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
@@ -145,60 +147,18 @@ export function SdkDiagram() {
   return (
     <>
       <div className="w-100 h-[80vh] p-4">
-        <ReactFlow
-          nodeTypes={nodeTypes}
-          nodes={nodes}
-          edges={edges}
-          onNodeClick={onNodeClick}
-          onNodesChange={onNodesChange}
-          edgeTypes={edgeTypes}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-        />
-      </div>
-    </>
-  )
-}
-
-type ExternalApiNodeData = {
-  label: string
-  link: { url: string; title: string }
-}
-
-function ExternalApiNode({ data }: { data: ExternalApiNodeData }) {
-  return (
-    <>
-      <div className={classNames('border-current, flex-col rounded-md border text-zinc-200')}>
-        <div className="p-4">
-          <div className={classNames('text-lg text-zinc-600')}>{data.label}</div>
-          <div className="flex items-center text-sm text-primary hover:text-primary-dark">
-            {data.label} <ArrowTopRightOnSquareIcon className="ml-1 h-4 w-4" />
-          </div>
-        </div>
-        <div className="flex gap-4">
-          <div className={classNames('relative flex flex-col items-center py-5 pl-4')}>
-            <NodeInfoCard titleClass="text-zinc-400" title="webhook" value="users/{userId}/watch" />
-            <div className={classNames('full absolute bottom-2 mt-[1px] h-[5px] w-[5px] rounded bg-current')}></div>
-          </div>
-          <div className={classNames('relative flex flex-col items-center justify-center py-5 pr-4')}>
-            <div className="absolute -right-[1px] h-[18px] w-[10px] rounded-bl-full rounded-tl-full border border-current">
-              <div className="absolute -right-1 h-full w-full rounded-full bg-white"></div>
-            </div>
-            <NodeInfoCard titleClass="text-zinc-400" title="POST" value="users/{userId}/messages/send" />
-          </div>
-        </div>
-      </div>
-      <div className={classNames('text-zinc-300')}>
-        <svg style={{ position: 'absolute', top: 0, left: 0, width: 0, height: 0 }} className="text-zinc-300">
-          <defs>
-            <marker id="external" refX={4} refY={1} markerHeight={16} markerWidth={16}>
-              <ellipse cx="4" cy="4" rx="3" ry="3" fill="white" stroke="currentColor" />
-            </marker>
-          </defs>
-        </svg>
-
-        <SourceHandle position={Position.Bottom} id="rt" left={126} />
-        <TargetHandle position={Position.Right} id="lb" top={133} />
+        <EdgesContext.Provider value={{ edges, setEdges }}>
+          <ReactFlow
+            nodeTypes={nodeTypes}
+            nodes={nodes}
+            edges={edges}
+            onNodeClick={onNodeClick}
+            onNodesChange={onNodesChange}
+            edgeTypes={edgeTypes}
+            onEdgesChange={onEdgesChange}
+            onConnect={onConnect}
+          />
+        </EdgesContext.Provider>
       </div>
     </>
   )
