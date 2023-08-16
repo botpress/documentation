@@ -6,8 +6,8 @@ export function TargetHandle(props: { top?: number; id: string } & Partial<Handl
       position={Position.Left}
       {...props}
       type="target"
-      style={{ top: props.top, backgroundColor: 'white' }}
-      className="z-10 h-[8px] w-[8px] rounded-full border border-current bg-white"
+      style={{ top: props.top }}
+      className="z-10 h-[8px] w-[8px] rounded-full border border-current bg-white dark:bg-zinc-800"
     />
   )
 }

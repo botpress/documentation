@@ -22,7 +22,7 @@ const initialNodes: Node<ExternalApiNodeData | BotpressNodeData>[] = [
     data: {
       label: 'Google API',
       link: {
-        url: '',
+        url: 'https://developers.google.com/gmail/api/reference/rest',
         title: '(via Google APIs)',
       },
     } as ExternalApiNodeData,
@@ -30,14 +30,14 @@ const initialNodes: Node<ExternalApiNodeData | BotpressNodeData>[] = [
   {
     id: '2',
     type: BOTPRESS_NODE,
-    position: { x: 175, y: 350 },
+    position: { x: 175, y: 250 },
     data: {
       label: 'Gmail',
       icon: IntegrationIcon,
-      defaultCurrentColorClass: 'text-fuchsia-200',
-      labelColorClass: 'text-fuchsia-800',
-      infoCardTitleClass: 'text-fuchsia-600',
-      headerBgClass: 'bg-fuchsia-50/50',
+      defaultCurrentColorClass: 'text-fuchsia-200 dark:text-fuchsia-200/25',
+      labelColorClass: 'text-fuchsia-800 dark:text-fuchsia-100',
+      infoCardTitleClass: 'text-fuchsia-600 dark:text-fuchsia-200',
+      headerBgClass: 'bg-fuchsia-50/50 dark:bg-fuchsia-50/10',
       sourceMarkerId: INTEGRATION_SOURCE_MARKER_ID,
       subNodes: [
         {
@@ -58,14 +58,14 @@ const initialNodes: Node<ExternalApiNodeData | BotpressNodeData>[] = [
   {
     id: '3',
     type: BOTPRESS_NODE,
-    position: { x: 500, y: 700 },
+    position: { x: 500, y: 520 },
     data: {
       label: 'Mail Shrimp',
       icon: BotIcon,
-      defaultCurrentColorClass: 'text-blue-200',
-      labelColorClass: 'text-blue-800',
-      infoCardTitleClass: 'text-blue-600',
-      headerBgClass: 'bg-blue-50/50',
+      defaultCurrentColorClass: 'text-blue-200 dark:text-blue-200/25',
+      labelColorClass: 'text-blue-800 dark:text-blue-100',
+      infoCardTitleClass: 'text-blue-600 dark:text-blue-200',
+      headerBgClass: 'bg-blue-50/50 dark:bg-blue-50/10',
       sourceMarkerId: BOT_SOURCE_MARKER_ID,
       subNodes: [
         {
@@ -154,13 +154,7 @@ export function SdkDiagram() {
 
   return (
     <>
-      <div
-        className="w-100 relative h-[80vh] p-4"
-        style={{
-          backgroundImage: 'radial-gradient(hsl(0deg 0% 93%) 1px, transparent 0)',
-          backgroundSize: '20px 20px',
-        }}
-      >
+      <div className="relative h-[80vh] w-full bg-dot-grid-light bg-[length:20px_20px] p-4 dark:bg-dot-grid-dark">
         <EdgesContext.Provider value={{ edges, setEdges }}>
           <ReactFlow
             className="m-3"

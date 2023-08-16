@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
+  important: true,
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -24,6 +25,7 @@ module.exports = {
         bpBlueGradient: '#1455c3',
         bpBlack: '#1a1e22',
         bpWhite: '#f5f6f8',
+        dark: '#111111',
       },
       boxShadow: {
         'button-link': '0 2px 6px 0 rgb(0 133 255 / 36%), inset 0 1px 1px 0 hsl(0deg 0% 100% / 50%)',
@@ -82,6 +84,8 @@ module.exports = {
       'button-link-dark-hover': 'linear-gradient(157deg, rgb(16 41 122), rgb(3 6 51))',
       'button-link-dark-2': 'linear-gradient(0deg, rgb(0 15 66), rgb(0 1 19))',
       'button-link-dark-2-hover': 'linear-gradient(0deg, rgb(16 41 122), rgb(3 6 51))',
+      'dot-grid-light': 'radial-gradient(hsl(0deg 0% 93%) 1px, transparent 0)',
+      'dot-grid-dark': 'radial-gradient(hsl(0deg 0% 20%) 1px, transparent 0)',
     },
   },
   plugins: [],

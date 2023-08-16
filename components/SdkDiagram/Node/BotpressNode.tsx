@@ -38,7 +38,12 @@ export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData
   return (
     <>
       <SourceMarker id={data.sourceMarkerId} className={data.defaultCurrentColorClass} />
-      <div className={classNames('flex-col rounded-md border border-current bg-white', data.defaultCurrentColorClass)}>
+      <div
+        className={classNames(
+          'flex-col rounded-md border border-current bg-white dark:bg-dark',
+          data.defaultCurrentColorClass
+        )}
+      >
         <div className={classNames('flex rounded-t-md border-b border-current', data.headerBgClass)}>
           <div
             className={classNames(
@@ -87,7 +92,13 @@ function SourceMarker(props: { id: string } & SVGProps<SVGSVGElement>) {
     >
       <defs>
         <marker id={props.id} refX={1} refY={4} markerHeight={16} markerWidth={16}>
-          <ellipse cx="4" cy="4" rx="3" ry="3" fill="white" stroke="currentColor" />
+          <ellipse
+            cx="4"
+            cy="4"
+            rx="3"
+            ry="3"
+            className="fill-white stroke-current dark:fill-dark dark:stroke-zinc-500"
+          />
         </marker>
       </defs>
     </svg>
@@ -96,9 +107,7 @@ function SourceMarker(props: { id: string } & SVGProps<SVGSVGElement>) {
 
 function TargetHandleGroove() {
   return (
-    <div className="absolute -left-[1px] h-[18px] w-[10px] rounded-br-full rounded-tr-full border border-current">
-      <div className="absolute -left-1 h-full w-full rounded-full bg-white"></div>
-    </div>
+    <div className="absolute -left-[1px] h-[18px] w-[10px] rounded-br-full rounded-tr-full border border-current"></div>
   )
 }
 

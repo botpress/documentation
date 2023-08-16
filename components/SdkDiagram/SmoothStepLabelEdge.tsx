@@ -36,7 +36,7 @@ export function SmoothStepWithLabelEdge({
     const horizontalMagnitude = Math.abs(sourceX - targetX)
     return verticalMagnitude > horizontalMagnitude ? vertical : horizontal
   }
-  const defaultColor = '#d4d4d8'
+  const defaultColor = 'hsl(0deg 0% 70% / 33%)'
   return (
     <>
       <BaseEdge
@@ -45,7 +45,7 @@ export function SmoothStepWithLabelEdge({
         markerStart={markerStart}
         style={{
           stroke: defaultColor,
-          opacity: otherProps.animated ? 1 : 0.5,
+          opacity: otherProps.animated ? 1 : 0.8,
           ...style,
         }}
       />
@@ -73,7 +73,7 @@ export function SmoothStepWithLabelEdge({
                 'rotate-90': labelOrientation === 'bottom',
               })}
             >
-              <rect width="16" height="18" transform="matrix(1 0 0 -1 0 18)" fill="white" />
+              <rect width="16" height="18" transform="matrix(1 0 0 -1 0 18)" className="fill-white dark:fill-dark" />
               <path
                 opacity="0.3"
                 d="M0 2.50024L4.49997 8.5002L-5.24533e-07 14.5002L3.74997 14.5002L8.24994 8.5002L3.74997 2.50024L0 2.50024Z"
