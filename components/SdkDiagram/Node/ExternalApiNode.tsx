@@ -21,7 +21,11 @@ export function ExternalApiNode({ data }: { data: ExternalApiNodeData }) {
       >
         <div className="p-4">
           <div className={classNames('text-lg text-zinc-600 dark:text-zinc-100')}>{data.label}</div>
-          <a href={data.link.url} className="flex items-center text-sm text-primary hover:text-primary-dark">
+          <a
+            target="blank"
+            href={data.link.url}
+            className="flex items-center text-sm text-primary hover:text-primary-dark"
+          >
             {data.link.title} <ArrowTopRightOnSquareIcon className="ml-1 h-4 w-4" />
           </a>
         </div>
