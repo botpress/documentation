@@ -1,7 +1,7 @@
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import classNames from 'classnames'
 import { Position } from 'reactflow'
-import { NodeInfoCard } from '../NodeInfoCard'
+import { SubNodeContent } from '../SubNodeContent'
 import { SourceHandle } from './SourceHandle'
 import { TargetHandle } from './TargetHandle'
 import { getSourceHandleId, getTargetHandleId } from './helpers'
@@ -31,12 +31,12 @@ export function ExternalApiNode({ data }: { data: ExternalApiNodeData }) {
         </div>
         <div className="flex gap-4">
           <div className={classNames('relative flex flex-col items-center py-5 pl-4')}>
-            <NodeInfoCard titleClass="text-zinc-400" title="webhook" value="users/{userId}/watch" />
+            <SubNodeContent titleClass="text-zinc-400" title="webhook" value="users/{userId}/watch" />
             <div className={classNames('full absolute bottom-2 mt-[1px] h-[5px] w-[5px] rounded bg-current')}></div>
           </div>
           <div className={classNames('relative flex flex-col items-center justify-center py-5 pr-4')}>
             <div className="absolute -right-[1px] h-[18px] w-[10px] rounded-bl-full rounded-tl-full border border-current dark:border-zinc-600/50"></div>
-            <NodeInfoCard titleClass="text-zinc-400" title="POST" value="users/{userId}/messages/send" />
+            <SubNodeContent titleClass="text-zinc-400" title="POST" value="users/{userId}/messages/send" />
           </div>
         </div>
       </div>

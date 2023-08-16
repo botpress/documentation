@@ -1,8 +1,8 @@
 import classNames from 'classnames'
-import { HtmlHTMLAttributes, SVGProps, useContext, MouseEvent } from 'react'
+import { HtmlHTMLAttributes, MouseEvent, SVGProps, useContext } from 'react'
 import { NodeProps } from 'reactflow'
-import { NodeInfoCard } from '../NodeInfoCard'
 import { EdgesContext } from '../SdkDiagram'
+import { SubNodeContent } from '../SubNodeContent'
 import { SourceHandle } from './SourceHandle'
 import { TargetHandle } from './TargetHandle'
 import { getSourceHandleId, getTargetHandleId } from './helpers'
@@ -40,7 +40,7 @@ export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData
       <SourceMarker id={data.sourceMarkerId} className={data.defaultCurrentColorClass} />
       <div
         className={classNames(
-          'flex-col rounded-md border border-current bg-white dark:bg-dark',
+          'relative flex-col rounded-md border border-current bg-white dark:bg-dark',
           data.defaultCurrentColorClass
         )}
       >
@@ -63,7 +63,7 @@ export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData
                   <TargetHandleGroove />
                 </>
               )}
-              <NodeInfoCard
+              <SubNodeContent
                 onClick={(e) => onSubNodeClick(e, index)}
                 titleClass={data.infoCardTitleClass}
                 title={subNode.title}

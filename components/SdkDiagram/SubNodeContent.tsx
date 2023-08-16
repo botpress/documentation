@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { HtmlHTMLAttributes } from 'react'
 
-export function NodeInfoCard(
+export function SubNodeContent(
   props: { title?: string; value?: string; titleClass?: string } & HtmlHTMLAttributes<HTMLDivElement>
 ) {
   return (

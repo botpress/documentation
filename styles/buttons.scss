@@ -16,12 +16,12 @@
     // TODO: Maybe add a mixin for this
     &.icon-leading {
       & > * {
-        @apply mr-1 h-[24px] w-[24px] flex-shrink-0;
+        @apply mr-1 h-[18px] w-[18px] flex-shrink-0;
       }
     }
     &.icon-trailing {
       & > * {
-        @apply ml-1 h-[24px] w-[24px] flex-shrink-0;
+        @apply ml-1 h-[18px] w-[18px] flex-shrink-0;
       }
     }
     &:active {
@@ -35,7 +35,10 @@
       @include variant('bg-primary text-white', bg-primary-dark);
     }
     &.secondary {
-      @include variant('text-primary-dark bg-primary/10 border border-primary/10', 'bg-primary/25');
+      @include variant(
+        'text-primary-dark dark:text-white/75 bg-primary/10 border border-primary/10',
+        'bg-primary/25 text-primary-dark dark:text-white'
+      );
     }
   }
   .link {
