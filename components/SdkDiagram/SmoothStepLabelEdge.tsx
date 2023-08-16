@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useMemo } from 'react'
 import { BaseEdge, EdgeLabelRenderer, EdgeProps, getSmoothStepPath } from 'reactflow'
-export type EdgeData = { color: string }
+export type EdgeData = { color: string; hasLabel?: boolean }
 
 export const SMOOTH_STEP_WITH_LABEL_EDGE = 'smoothStepWithLabelEdge'
 
@@ -43,7 +43,11 @@ export function SmoothStepWithLabelEdge({
         path={edgePath}
         markerEnd={markerEnd}
         markerStart={markerStart}
-        style={{ stroke: '#e4e4e7', ...style }}
+        style={{
+          stroke: defaultColor,
+          opacity: otherProps.animated ? 1 : 0.5,
+          ...style,
+        }}
       />
       <EdgeLabelRenderer>
         <div
@@ -55,30 +59,33 @@ export function SmoothStepWithLabelEdge({
           }}
           className="nodrag nopan"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="18"
-            viewBox="0 0 16 18"
-            fill="none"
-            className={classNames({
-              'rotate-180': labelOrientation === 'left',
-              '-rotate-90': labelOrientation === 'top',
-              'rotate-90': labelOrientation === 'bottom',
-            })}
-          >
-            <rect width="16" height="18" transform="matrix(1 0 0 -1 0 18)" fill="white" />
-            <path
-              opacity="0.5"
-              d="M0 2.50024L4.49997 8.5002L-5.24533e-07 14.5002L3.74997 14.5002L8.24994 8.5002L3.74997 2.50024L0 2.50024Z"
-              fill="currentColor"
-            />
-            <path
-              className={classNames({ 'animate-pulse': otherProps.animated })}
-              d="M5.25 2.50024L9.74997 8.5002L5.25 14.5002L8.99997 14.5002L13.4999 8.5002L8.99997 2.50024L5.25 2.50024Z"
-              fill="currentColor"
-            />
-          </svg>
+          {data?.hasLabel !== false && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="18"
+              viewBox="0 0 16 18"
+              fill="none"
+              className={classNames('transition-opacity duration-1000', {
+                'opacity-0': otherProps.animated,
+                'rotate-180': labelOrientation === 'left',
+                '-rotate-90': labelOrientation === 'top',
+                'rotate-90': labelOrientation === 'bottom',
+              })}
+            >
+              <rect width="16" height="18" transform="matrix(1 0 0 -1 0 18)" fill="white" />
+              <path
+                opacity="0.3"
+                d="M0 2.50024L4.49997 8.5002L-5.24533e-07 14.5002L3.74997 14.5002L8.24994 8.5002L3.74997 2.50024L0 2.50024Z"
+                fill="currentColor"
+              />
+              <path
+                className={classNames('animate-pulse')}
+                d="M5.25 2.50024L9.74997 8.5002L5.25 14.5002L8.99997 14.5002L13.4999 8.5002L8.99997 2.50024L5.25 2.50024Z"
+                fill="currentColor"
+              />
+            </svg>
+          )}
         </div>
       </EdgeLabelRenderer>
     </>
