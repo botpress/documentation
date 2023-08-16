@@ -2,8 +2,16 @@ import { Dispatch, SetStateAction, createContext, useCallback } from 'react'
 import ReactFlow, { Edge, Node, NodeMouseHandler, addEdge, useEdgesState, useNodesState } from 'reactflow'
 
 import 'reactflow/dist/base.css'
-import { BOTPRESS_NODE, BotpressNode, BotpressNodeData } from './BotpressNode'
-import { ExternalApiNode, ExternalApiNodeData } from './ExternalApiNode'
+import {
+  BOTPRESS_NODE,
+  BotpressNode,
+  BotpressNodeData,
+  EXTERNAL_API_NODE,
+  ExternalApiNode,
+  ExternalApiNodeData,
+  getSourceHandleId,
+  getTargetHandleId,
+} from './Node'
 import { EdgeData, SMOOTH_STEP_WITH_LABEL_EDGE, SmoothStepWithLabelEdge } from './SmoothStepLabelEdge'
 const INTEGRATION_SOURCE_MARKER_ID = 'source-marker-integration'
 const BOT_SOURCE_MARKER_ID = 'source-marker-bot'
@@ -11,7 +19,7 @@ const initialNodes: Node<ExternalApiNodeData | BotpressNodeData>[] = [
   {
     id: '1',
     position: { x: 10, y: 10 },
-    type: 'externalApi',
+    type: EXTERNAL_API_NODE,
     data: {
       label: 'Google API',
       link: {
@@ -83,12 +91,13 @@ const initialEdges: Edge<EdgeData>[] = [
     targetHandle: 't1',
     type: SMOOTH_STEP_WITH_LABEL_EDGE,
     markerStart: 'external',
+    animated: true,
   },
   {
     id: 'e2-1',
     source: '2',
     target: '1',
-    sourceHandle: 's0',
+    sourceHandle: getSourceHandleId(0),
     type: SMOOTH_STEP_WITH_LABEL_EDGE,
     markerStart: INTEGRATION_SOURCE_MARKER_ID,
     data: { color: '#f0abfc' },
@@ -97,8 +106,8 @@ const initialEdges: Edge<EdgeData>[] = [
     id: 'e2-3',
     source: '2',
     target: '3',
-    sourceHandle: 's1',
-    targetHandle: 't1',
+    sourceHandle: getSourceHandleId(1),
+    targetHandle: getTargetHandleId(1),
     type: SMOOTH_STEP_WITH_LABEL_EDGE,
     markerStart: INTEGRATION_SOURCE_MARKER_ID,
     data: { color: '#f0abfc', hasLabel: false },
@@ -108,14 +117,14 @@ const initialEdges: Edge<EdgeData>[] = [
     source: '3',
     target: '2',
     type: SMOOTH_STEP_WITH_LABEL_EDGE,
-    targetHandle: 't0',
-    sourceHandle: 's1',
+    targetHandle: getTargetHandleId(0),
+    sourceHandle: getSourceHandleId(1),
     data: { color: '#93c5fd' },
     markerStart: BOT_SOURCE_MARKER_ID,
   },
 ]
 const edgeTypes = { [SMOOTH_STEP_WITH_LABEL_EDGE]: SmoothStepWithLabelEdge }
-const nodeTypes = { [BOTPRESS_NODE]: BotpressNode, externalApi: ExternalApiNode }
+const nodeTypes = { [BOTPRESS_NODE]: BotpressNode, [EXTERNAL_API_NODE]: ExternalApiNode }
 export const EdgesContext = createContext<{
   edges: Edge[]
   setEdges: Dispatch<SetStateAction<Edge<EdgeData>[]>>

@@ -1,15 +1,16 @@
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import classNames from 'classnames'
 import { Position } from 'reactflow'
-import { NodeInfoCard } from './NodeInfoCard'
+import { NodeInfoCard } from '../NodeInfoCard'
 import { SourceHandle } from './SourceHandle'
 import { TargetHandle } from './TargetHandle'
+import { getSourceHandleId, getTargetHandleId } from './helpers'
 
 export type ExternalApiNodeData = {
   label: string
   link: { url: string; title: string }
 }
-
+export const EXTERNAL_API_NODE = 'externalApiNode'
 export function ExternalApiNode({ data }: { data: ExternalApiNodeData }) {
   return (
     <>
@@ -42,8 +43,8 @@ export function ExternalApiNode({ data }: { data: ExternalApiNodeData }) {
           </defs>
         </svg>
 
-        <SourceHandle position={Position.Bottom} id="rt" left={126} />
-        <TargetHandle position={Position.Right} id="lb" top={133} />
+        <SourceHandle position={Position.Bottom} id={getSourceHandleId(0)} left={126} />
+        <TargetHandle position={Position.Right} id={getTargetHandleId(1)} top={133} />
       </div>
     </>
   )

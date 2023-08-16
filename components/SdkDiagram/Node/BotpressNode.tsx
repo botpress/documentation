@@ -1,10 +1,11 @@
 import classNames from 'classnames'
 import { HtmlHTMLAttributes, SVGProps, useContext, MouseEvent } from 'react'
 import { NodeProps } from 'reactflow'
-import { NodeInfoCard } from './NodeInfoCard'
-import { EdgesContext } from './SdkDiagram'
+import { NodeInfoCard } from '../NodeInfoCard'
+import { EdgesContext } from '../SdkDiagram'
 import { SourceHandle } from './SourceHandle'
 import { TargetHandle } from './TargetHandle'
+import { getSourceHandleId, getTargetHandleId } from './helpers'
 export const BOTPRESS_NODE = 'botpress'
 export type BotpressNodeData = {
   label: string
@@ -23,7 +24,7 @@ export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData
     event.stopPropagation()
     edges?.setEdges((prevEdges) => {
       prevEdges.forEach((edge) => {
-        if (edge.source === otherProps.id && edge.sourceHandle === getSourceMarkerId(index)) {
+        if (edge.source === otherProps.id && edge.sourceHandle === getSourceHandleId(index)) {
           edge.animated = true
         } else {
           edge.animated = false
@@ -53,7 +54,7 @@ export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData
             <div key={index} className={classNames('relative flex items-center justify-center px-4 py-1')}>
               {subNode.hasTarget && (
                 <>
-                  <TargetHandle id={getTargetMarkerId(index)} />
+                  <TargetHandle id={getTargetHandleId(index)} />
                   <TargetHandleGroove />
                 </>
               )}
@@ -65,7 +66,7 @@ export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData
               />
               {subNode.hasSource && (
                 <>
-                  <SourceHandle id={getSourceMarkerId(index)} />
+                  <SourceHandle id={getSourceHandleId(index)} />
                   <SourceHandleMock />
                 </>
               )}
@@ -75,12 +76,6 @@ export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData
       </div>
     </>
   )
-}
-function getTargetMarkerId(index: number) {
-  return `t${index}`
-}
-function getSourceMarkerId(index: number) {
-  return `s${index}`
 }
 
 function SourceMarker(props: { id: string } & SVGProps<SVGSVGElement>) {
