@@ -17,7 +17,7 @@ export const SubNodeContent = forwardRef<HTMLDivElement, Props>(({ title, value,
       {
         name: 'offset',
         options: {
-          offset: [8, 8],
+          offset: [4, 4],
         },
       },
       {
@@ -38,6 +38,7 @@ export const SubNodeContent = forwardRef<HTMLDivElement, Props>(({ title, value,
           visibility: isDocumentationCardVisible ? 'visible' : 'hidden',
           opacity: isDocumentationCardVisible ? 1 : 0,
           zIndex: 100,
+          transition: 'opacity 0.3s',
         }}
         ref={popoverRef}
       ></DocumentationCard>
@@ -45,7 +46,10 @@ export const SubNodeContent = forwardRef<HTMLDivElement, Props>(({ title, value,
       <div
         ref={setReferenceElement}
         {...otherProps}
-        onClick={toggle}
+        onClick={(e) => {
+          otherProps?.onClick?.(e)
+          toggle()
+        }}
         className="group flex w-full flex-col overflow-hidden rounded-md border border-zinc-200/75 bg-zinc-50/50 font-code hover:border-zinc-300 hover:bg-white dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600 dark:hover:bg-zinc-800"
       >
         <div
