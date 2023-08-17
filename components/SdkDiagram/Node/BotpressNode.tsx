@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { HtmlHTMLAttributes, MouseEvent, SVGProps, useContext } from 'react'
 import { NodeProps } from 'reactflow'
 import { EdgesContext } from '../SdkDiagram'
-import { SubNodeContent } from '../SubNodeContent'
+import { SubNodeContent, SubNodeContentProps } from '../SubNodeContent'
 import { SourceHandle } from './SourceHandle'
 import { TargetHandle } from './TargetHandle'
 import { getSourceHandleId, getTargetHandleId } from './helpers'
@@ -15,7 +15,7 @@ export type BotpressNodeData = {
   labelColorClass?: string
   headerBgClass?: string
   sourceMarkerId: string
-  subNodes?: { title?: string; value?: string; hasTarget?: boolean; hasSource?: boolean }[]
+  subNodes?: Array<{ hasTarget?: boolean; hasSource?: boolean } & SubNodeContentProps>
 }
 
 export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData>) {
@@ -68,6 +68,7 @@ export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData
                 titleClass={data.infoCardTitleClass}
                 title={subNode.title}
                 value={subNode.value}
+                details={subNode.details}
               />
               {subNode.hasSource && (
                 <>

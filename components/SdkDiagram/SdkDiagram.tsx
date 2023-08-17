@@ -45,12 +45,38 @@ const initialNodes: Node<ExternalApiNodeData | BotpressNodeData>[] = [
           value: 'sendEmail',
           hasSource: true,
           hasTarget: true,
+          details: {
+            title: 'Handler',
+            bodyMarkDown: `The handler function is used to handle the incoming requests from the integration. Which means that this
+            function will be called every time the telegram integration sends a request to the webhook url set in the
+            register function.\n\nIn this case, when the Gmail API has a new email it calls the webhook url we’ve registered with it. The
+            request is parsed by the handler which in turn calls the onNewEmail function defined in the integration
+            implementation.
+  `,
+            actionLinks: [
+              { label: 'Code', link: 'https://github.com', isExternal: true },
+              { label: 'Documentation', link: 'https://botpress.com/docs' },
+            ],
+          },
         },
         {
           title: 'handler',
           value: 'onNewEmail',
           hasSource: true,
           hasTarget: true,
+          details: {
+            title: 'Handler',
+            bodyMarkDown: `The handler function is used to handle the incoming requests from the integration. Which means that this
+            function will be called every time the telegram integration sends a request to the webhook url set in the
+            register function.\n\nIn this case, when the Gmail API has a new email it calls the webhook url we’ve registered with it. The
+            request is parsed by the handler which in turn calls the onNewEmail function defined in the integration
+            implementation.
+  `,
+            actionLinks: [
+              { label: 'Code', link: 'https://github.com', isExternal: true },
+              { label: 'Documentation', link: 'https://botpress.com/docs' },
+            ],
+          },
         },
       ],
     },
@@ -72,11 +98,37 @@ const initialNodes: Node<ExternalApiNodeData | BotpressNodeData>[] = [
           title: 'Send message to user',
           value: 'sendEmail',
           hasTarget: true,
+          details: {
+            title: 'Handler',
+            bodyMarkDown: `The handler function is used to handle the incoming requests from the integration. Which means that this
+            function will be called every time the telegram integration sends a request to the webhook url set in the
+            register function.\n\nIn this case, when the Gmail API has a new email it calls the webhook url we’ve registered with it. The
+            request is parsed by the handler which in turn calls the onNewEmail function defined in the integration
+            implementation.
+  `,
+            actionLinks: [
+              { label: 'Code', link: 'https://github.com', isExternal: true },
+              { label: 'Documentation', link: 'https://botpress.com/docs' },
+            ],
+          },
         },
         {
           title: 'Trigger',
           value: 'createMessage',
           hasSource: true,
+          details: {
+            title: 'Handler',
+            bodyMarkDown: `The handler function is used to handle the incoming requests from the integration. Which means that this
+            function will be called every time the telegram integration sends a request to the webhook url set in the
+            register function.\n\nIn this case, when the Gmail API has a new email it calls the webhook url we’ve registered with it. The
+            request is parsed by the handler which in turn calls the onNewEmail function defined in the integration
+            implementation.
+  `,
+            actionLinks: [
+              { label: 'Code', link: 'https://github.com', isExternal: true },
+              { label: 'Documentation', link: 'https://botpress.com/docs' },
+            ],
+          },
         },
       ],
     },
