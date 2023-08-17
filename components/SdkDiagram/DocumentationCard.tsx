@@ -32,6 +32,7 @@ export const DocumentationCard = forwardRef<HTMLDivElement, DocumentationCardPro
               <Link
                 key={index}
                 href={actionLink.link}
+                target={actionLink.isExternal ? '_blank' : '_self'}
                 className={classNames('button icon-trailing w-full', actionLink.isExternal ? 'primary' : 'secondary')}
               >
                 {actionLink.label} {actionLink.isExternal ? <ArrowTopRightOnSquareIcon /> : <ArrowRightIcon />}
