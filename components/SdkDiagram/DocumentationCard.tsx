@@ -8,11 +8,11 @@ export const DocumentationCard = forwardRef<HTMLDivElement, Props>((props, ref) 
       {...props}
       ref={ref}
       className={classNames(
-        'max-w-[310px] rounded-lg border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900',
+        'max-w-[310px] rounded-lg border border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-900',
         props.className
       )}
     >
-      <div className="border-b border-zinc-200 p-3 px-4 text-zinc-500 dark:border-zinc-800 dark:text-zinc-300">
+      <div className="border-b border-zinc-200 p-3 px-4 text-zinc-500 dark:border-zinc-700 dark:text-zinc-300">
         Handler
       </div>
       <div className="p-3 px-4 text-sm text-zinc-600 dark:text-zinc-400">
