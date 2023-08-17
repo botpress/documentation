@@ -1,11 +1,12 @@
 import { ArrowRightIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import classNames from 'classnames'
-import { HTMLAttributes } from 'react'
-type Props = {}
-export function DocumentationCard(props: Props & HTMLAttributes<HTMLDivElement>) {
+import { HTMLAttributes, forwardRef } from 'react'
+type Props = {} & HTMLAttributes<HTMLDivElement>
+export const DocumentationCard = forwardRef<HTMLDivElement, Props>((props, ref) => {
   return (
     <div
       {...props}
+      ref={ref}
       className={classNames(
         'rounded-lg border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900',
         props.className
@@ -34,4 +35,4 @@ export function DocumentationCard(props: Props & HTMLAttributes<HTMLDivElement>)
       </div>
     </div>
   )
-}
+})
