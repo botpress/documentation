@@ -78,11 +78,14 @@ export const INITIAL_NODES: Node<ExternalApiNodeData | BotpressNodeData>[] = [
           hasTarget: true,
           details: {
             title: 'Handler',
-            bodyMarkDown: `Whenever the connected Gmail account receives a new email, the webhook registered with this is called.
-    `,
+            bodyMarkDown: `When the integration receives a request from the bot on any of the channels it supports (only \`text\` for now), it calls the sendEmail function`,
             actionLinks: [
-              { label: 'Code', link: 'https://github.com', isExternal: true },
-              { label: 'Documentation', link: 'https://botpress.com/docs' },
+              {
+                label: 'Code',
+                link: 'https://github.com/botpress/botpress/blob/69dc23e92e79849ee43cadd64fd0e913d43f76a8/integrations/gmail/src/index.ts#L46',
+                isExternal: true,
+              },
+              { label: 'Documentation', link: 'https://botpress.com/docs/integration/concepts/channels/' },
             ],
           },
         },
@@ -93,15 +96,14 @@ export const INITIAL_NODES: Node<ExternalApiNodeData | BotpressNodeData>[] = [
           hasTarget: true,
           details: {
             title: 'Handler',
-            bodyMarkDown: `The handler function is used to handle the incoming requests from the integration. Which means that this
-              function will be called every time the telegram integration sends a request to the webhook url set in the
-              register function.\n\nIn this case, when the Gmail API has a new email it calls the webhook url we’ve registered with it. The
-              request is parsed by the handler which in turn calls the onNewEmail function defined in the integration
-              implementation.
-    `,
+            bodyMarkDown: `The handler function is called everytime the webhook receives a request.\n\n Here, the Gmail integration's **handler** parses the email from the incoming request and passes it on to the **onNewEmail** function.`,
             actionLinks: [
-              { label: 'Code', link: 'https://github.com', isExternal: true },
-              { label: 'Documentation', link: 'https://botpress.com/docs' },
+              {
+                label: 'Code',
+                link: 'https://github.com/botpress/botpress/blob/69dc23e92e79849ee43cadd64fd0e913d43f76a8/integrations/gmail/src/index.ts#L149',
+                isExternal: true,
+              },
+              { label: 'Documentation', link: 'https://botpress.com/docs/integration/howTo/handler/' },
             ],
           },
         },
@@ -122,20 +124,15 @@ export const INITIAL_NODES: Node<ExternalApiNodeData | BotpressNodeData>[] = [
       sourceMarkerId: BOT_SOURCE_MARKER_ID,
       subNodes: [
         {
-          title: 'Send message to user',
-          value: 'sendEmail',
+          title: 'Event',
+          value: 'OnNewEmail',
           hasTarget: true,
           details: {
             title: 'Handler',
-            bodyMarkDown: `The handler function is used to handle the incoming requests from the integration. Which means that this
-              function will be called every time the telegram integration sends a request to the webhook url set in the
-              register function.\n\nIn this case, when the Gmail API has a new email it calls the webhook url we’ve registered with it. The
-              request is parsed by the handler which in turn calls the onNewEmail function defined in the integration
-              implementation.
-    `,
+            bodyMarkDown: `When the Gmail integration receives a new message it passes it over to the bot where it's received as an *event trigger*. The uses can use the event triggers to start a series of node to process and react on the incoming event, in this case, a new incoming email.`,
             actionLinks: [
               { label: 'Code', link: 'https://github.com', isExternal: true },
-              { label: 'Documentation', link: 'https://botpress.com/docs' },
+              { label: 'Documentation', link: 'https://botpress.com/docs/integration/concepts/events/' },
             ],
           },
         },

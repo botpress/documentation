@@ -57,7 +57,7 @@ export const SubNodeContent = forwardRef<HTMLDivElement, SubNodeContentProps & H
             toggle()
           }}
           className={classNames(
-            'group flex w-full flex-col overflow-hidden rounded-md border border-zinc-200/75 bg-zinc-50/50 font-code hover:border-zinc-300 hover:bg-white dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600 dark:hover:bg-zinc-800',
+            'group flex min-w-[200px] flex-col overflow-hidden rounded-md border border-zinc-200/75 bg-zinc-50/50 font-code hover:border-zinc-300 hover:bg-white dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600 dark:hover:bg-zinc-800',
             {
               'border-zinc-300 bg-white/100 dark:border-zinc-600 dark:bg-zinc-800/100': isDocumentationCardVisible,
             }
