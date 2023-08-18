@@ -10,7 +10,7 @@ Tables are an essential feature in the explorer, functioning as a local database
 They are particularly useful for storing information that needs to be persisted across multiple sessions, such as user profiles, transaction histories, and other types of data that need to be retrieved and updated over time.
 
 <Callout type="note">
-  **Note** <br/>
+  **Note** <br />
   You can create upto **10 tables** with **20 columns** and **10,000 rows** in the **Free Plan**. <br />
   [Get in touch](https://botpress.com/contact-us) if you want to increase the limits.
 </Callout>
@@ -106,8 +106,15 @@ Tables, therefore, provide a robust way to manage data within your chatbot, offe
 
 ### createRecord
 
-To create a new record in a table, use the `createRecord` function. You can specify the values for each field in the record. This function can be particularly useful when you need to store new information, such as a new user's details or a newly completed transaction.
+To create a new record in a table, use the `createRecord` function. You can specify the values for each field in the record.
+This function can be particularly useful when you need to store new information, such as a new user's details or a newly
+completed transaction.
 
+
+
+<video width="100%"  controls>
+ <source src="/docs/content/createrecord.mov" type="video/mp4"/>
+ </video>
 ```javascript
 // Create a record in the table
 await Data1Table.createRecord({ Age: 25, Name: 'Tom', Occupation: 'Student' })
@@ -117,20 +124,24 @@ await Data1Table.createRecord({ Age: 25, Name: 'Tom', Occupation: 'Student' })
 
 To create multiple records in a table, use the `createRecords` function. You can specify the values for each field in the record. Useful for creating multiple records at once.
 
+<video width="100%"  controls>
+ <source src="/docs/content/createrecords.mov" type="video/mp4"/>
+ </video>
 ```javascript
 // Creating two records in the table
-await Data1Table.createRecords(
-[
+await Data1Table.createRecords([
   { Name: 'Tom', Age: 25, Occupation: 'Student', 'Is Friendly': true },
-  { Name: 'Didier', Age: 54, Occupation: 'Pilot', 'Is Friendly': true }
-]
-)
+  { Name: 'Didier', Age: 54, Occupation: 'Pilot', 'Is Friendly': true },
+])
 ```
 
 ### deleteRecord
 
 To delete a record in a table, use the `deleteRecord` function. You need to specify the record ID of the record you want to delete.
 
+<video width="100%"  controls>
+ <source src="/docs/content/deleterecord.mov" type="video/mp4"/>
+ </video>
 ```javascript
 // Delete a record in the table at record ID 7
 await Data1Table.deleteRecord(7)
@@ -140,6 +151,9 @@ await Data1Table.deleteRecord(7)
 
 To delete multiple records in a table, use the `deleteRecords` function. You need to specify the record IDs of the records you want to delete in an array.
 
+<video width="100%"  controls>
+ <source src="/docs/content/deleterecords.mov" type="video/mp4"/>
+ </video>
 ```javascript
 // Delete records in the table at record IDs 7, 8, 9
 await Data1Table.deleteRecords([7, 8, 9])
@@ -155,6 +169,10 @@ For example, you might use the query selector "People with age greater than 18" 
 2. Add query as `People with age greater than 18`
 3. use below code to find records and save it in a variable called `adults`
 
+<video width="100%"  controls>
+ <source src="/docs/content/findrecords.mov" type="video/mp4"/>
+ </video>
+
 ```javascript
 // Find records in the table
 const data = await Data1Table.findRecords({ selectorName: 'adults' })
@@ -165,6 +183,9 @@ workflow.adults = data
 
 You can use the `getRecord` function to retrieve a specific record from a table based on a unique identifier. For example, you might use the `getRecord` function to retrieve a user's profile information based on their unique user ID.
 
+<video width="100%"  controls>
+ <source src="/docs/content/getrecord.mov" type="video/mp4"/>
+ </video>
 ```javascript
 // Get a record from the table and store it in a variable
 const data = await Data1Table.getRecord(1)
