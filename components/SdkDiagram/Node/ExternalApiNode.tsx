@@ -9,45 +9,10 @@ import { getSourceHandleId, getTargetHandleId } from './helpers'
 export type ExternalApiNodeData = {
   label: string
   link: { url: string; title: string }
+  subNodes: [SubNodeContentProps, SubNodeContentProps]
 }
 export const EXTERNAL_API_NODE = 'externalApiNode'
 
-const NODE_CONTENT: SubNodeContentProps[] = [
-  {
-    title: 'webhook',
-    value: 'users/{userId}/watch',
-    details: {
-      title: 'Handler',
-      bodyMarkDown: `The handler function is used to handle the incoming requests from the integration. Which means that this
-    function will be called every time the telegram integration sends a request to the webhook url set in the
-    register function.\n\nIn this case, when the Gmail API has a new email it calls the webhook url we’ve registered with it. The
-    request is parsed by the handler which in turn calls the onNewEmail function defined in the integration
-    implementation.
-`,
-      actionLinks: [
-        { label: 'Code', link: 'https://github.com', isExternal: true },
-        { label: 'Documentation', link: 'https://botpress.com/docs' },
-      ],
-    },
-  },
-  {
-    title: 'POST',
-    value: 'users/{userId}/messages/send',
-    details: {
-      title: 'Handler',
-      bodyMarkDown: `The handler function is used to handle the incoming requests from the integration. Which means that this
-      function will be called every time the telegram integration sends a request to the webhook url set in the
-      register function.\n\nIn this case, when the Gmail API has a new email it calls the webhook url we’ve registered with it. The
-      request is parsed by the handler which in turn calls the onNewEmail function defined in the integration
-      implementation.
-`,
-      actionLinks: [
-        { label: 'Code', link: 'https://github.com', isExternal: true },
-        { label: 'Documentation', link: 'https://botpress.com/docs' },
-      ],
-    },
-  },
-]
 export function ExternalApiNode({ data }: { data: ExternalApiNodeData }) {
   return (
     <>
@@ -68,12 +33,12 @@ export function ExternalApiNode({ data }: { data: ExternalApiNodeData }) {
         </div>
         <div className="flex gap-4">
           <div className={classNames('relative flex flex-col items-center py-5 pl-4')}>
-            <SubNodeContent titleClass="text-zinc-400" {...NODE_CONTENT[0]} />
+            <SubNodeContent titleClass="text-zinc-400" {...data.subNodes[0]} />
             <div className={classNames('full absolute bottom-2 mt-[1px] h-[5px] w-[5px] rounded bg-current')}></div>
           </div>
           <div className={classNames('relative flex flex-col items-center justify-center py-5 pr-4')}>
             <div className="absolute -right-[1px] h-[18px] w-[10px] rounded-bl-full rounded-tl-full border border-current dark:border-zinc-600/50"></div>
-            <SubNodeContent titleClass="text-zinc-400" {...NODE_CONTENT[1]} />
+            <SubNodeContent titleClass="text-zinc-400" {...data.subNodes[1]} />
           </div>
         </div>
       </div>
