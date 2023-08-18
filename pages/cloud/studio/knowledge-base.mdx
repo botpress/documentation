@@ -66,7 +66,8 @@ For instance, if a user searches for **"How to calibrate the XYZ device,"** Botp
 
 <Callout type="info">
   **File Limits** <br />
-  You can upload upto **100** documents to the Knowledge Base, with a size limit of **50MB** per document. This feature is designed for optimal utilization.
+  You can upload upto **100** documents to the Knowledge Base, with a size limit of **50MB** per document. This feature is
+  designed for optimal utilization.
 </Callout>
 
 ## 3. Web Search
@@ -109,8 +110,6 @@ If you disable the Knowledge Base feature on nodes that use the Capture Info act
 Disabling the Knowledge Base means that when users are prompted for a response and their input matches a query that could be answered using the Knowledge Base, Botpress's NLU will not retrieve answers from the Knowledge Base. Instead, the conversation will continue without incorporating information from the Knowledge Base.
 
 By disabling the Knowledge Base, you essentially exclude it as a potential source of information for those specific nodes. This may be useful if you want to handle user responses differently or if you prefer to rely on other mechanisms to provide answers or capture information in those particular nodes.
-
-### Example
 
 Let's consider an example of a chatbot for a travel agency. The bot is designed to capture information from users regarding their travel preferences and provide relevant recommendations. The bot uses the Capture Info action in certain nodes to gather specific details from users.
 
@@ -155,3 +154,13 @@ workflow.kbAnswerWithoutRef = event.preview.split("References:")[0].
 ```
 
 Then, input `@kbAnswerWithoutRef` into your text or capture card. Make sure to create the variable `kbAnswerWithoutRef` in your workflow.
+
+## Query Knowledge Bases Card
+
+The Query Knowledge Bases card allows you to programatically query Knowledge Bases from within your bot. This card is useful when you want to retrieve information from your Knowledge Bases and display it to the user during the conversation.
+
+This supports variables and expressions.
+
+This card will NOT directly send the answer to the user.
+
+The result will be stored in {{turn.KnowledgeAgent.answer}} and {{turn.KnowledgeAgent.citations}}'
