@@ -8,13 +8,17 @@ The Botpress Knowledge Base is a powerful tool that allows users to manage and a
 
 It has been designed to replace the traditional Q&A system and enable users to upload various sources of information, including PDFs, Text Document, and website URLs.
 
-It's worth noting that the **Text Document** Knowledge Base replaces our old **Q&A system**, while the **Web Search** Knowledge Base replaces **Botpress GO**.
+## Enabling the Knowledge Base Agent
+
+You need to enable the Knowledge Base Agent to use the Knowledge Base feature in Botpress.
+
+Click on the **Agent** Tab in the Explorer on the left panel of the studio. You will find the [**Knowledge Base**](./agents/#knowledge-agent) Agent in the list of available agents. Click on the **Enable** button to enable the Knowledge Base Agent.
 
 ## Creating a Knowledge Base
 
 ![Studio Explorer](/docs/content/add-kb.png)
 
-To create a Knowledge Base, click on the **+ Knowledge Base** Icon in the Explorer on the left panel of the studio. You can create folders and organize your knowledge bases as per your preferences.
+To create a Knowledge Base, click on the **Add Knowledge Base** Icon in the Explorer on the left panel of the studio. You can create folders and organize your knowledge bases as per your preferences.
 
 ## Description
 
@@ -35,21 +39,9 @@ This description helps the NLU engine understand the focus of the Knowledge Base
 
 ## Knowledge Sources
 
-## 1. Text Document
+## 1. Documents
 
-The Text Document KB Source allows users to create/add plain textual information, such as FAQs, guides, and manuals. This Knowledge Base replaces Botpress's old Q&A system and is designed to provide users with quick access to information on various topics.
-
-Here's an example of how the Text Document Knowledge Base could be used in a company that sells different types of home appliances, such as **refrigerators**, **washing machines**, and **ovens**:
-
-Let's say that the customer support team at this company receives a lot of questions about how to troubleshoot common problems with their products. The team decides to create a Knowledge Base in Botpress to provide quick and easy access to this information.
-
-Using the Text Document Knowledge Base, the team creates a series of Text Document documents that contain troubleshooting tips for each type of product. They organize these documents by title (e.g., "Refrigerators," "Washing Machines," "Ovens") and add description for common issues (e.g., "Not cooling," "Won't spin," "Not heating up").
-
-So, when users search for a specific problem like **My refrigerator is not cooling**, Botpress's Natural Language Understanding (NLU) functionality will retrieve the relevant response from the Text Document Knowledge Base, providing users with the necessary troubleshooting information.
-
-## 2. Documents
-
-The Documents KB Source allows users to upload various file formats, including **PDFs**, **HTML** files, **TXT** files, **DOC** files, and **DOCX** files. This feature enables users to create a comprehensive Knowledge Base by incorporating different types of documents, such as manuals, guides, reports, and more.
+The **Documents** KB Source allows users to upload various file formats, including **PDFs**, **HTML** files, **TXT** files, **DOC** files, and **DOCX** files. This feature enables users to create a comprehensive Knowledge Base by incorporating different types of documents, such as manuals, guides, reports, and more.
 
 Let's consider a scenario where a company deals with medical equipment. The organization's support team frequently encounters inquiries about the usage and maintenance of their products. To address this, they decide to utilize the Documents Knowledge Source in Botpress to provide customers with easy access to relevant information.
 
@@ -69,6 +61,18 @@ For instance, if a user searches for **"How to calibrate the XYZ device,"** Botp
   You can upload upto **100** documents to the Knowledge Base, with a size limit of **50MB** per document. This feature is
   designed for optimal utilization.
 </Callout>
+
+## 2. Web Pages
+
+The **Web Pages** KB Source allows users to upload website URLs to their Knowledge Base. This feature enables users to create a comprehensive Knowledge Base by incorporating different types of web content, such as articles, blog posts, and online forums.
+
+### Add from URLs
+
+To add a web page to your Knowledge Base, you can simply enter the URLs (one URL per line) in the **Add from URLs** field. Botpress will automatically retrieve the content from the web page and add it to your Knowledge Base.
+
+### Add from Site Map
+
+You can also add multiple web pages to your Knowledge Base by entering the **Site Map URL**. This file contains a list of URLs that you want to add to your Knowledge Base. Botpress will automatically retrieve the content from these web pages and add them to your Knowledge Base.
 
 ## 3. Web Search
 
@@ -92,6 +96,29 @@ To enhance your web search capabilities and filter search results by time period
 - **Pages discovered in the last 30 days**: This option filters the search results to include web pages that have been discovered or indexed within the past 30 days. It provides a slightly broader time range for retrieving recent information.
 
 By utilizing these options, you can tailor the time period for your web search and ensure that the search results align with your Knowledge Base requirements. Whether you prefer real-time updates or a broader range of recent information, these options help you refine your search results accordingly.
+
+## 4. Text Document
+
+The Text Document KB Source allows users to create/add plain textual information, such as FAQs, guides, and manuals. This Knowledge Base replaces Botpress's old Q&A system and is designed to provide users with quick access to information on various topics.
+
+Here's an example of how the Text Document Knowledge Base could be used in a company that sells different types of home appliances, such as **refrigerators**, **washing machines**, and **ovens**:
+
+Let's say that the customer support team at this company receives a lot of questions about how to troubleshoot common problems with their products. The team decides to create a Knowledge Base in Botpress to provide quick and easy access to this information.
+
+Using the Text Document Knowledge Base, the team creates a series of Text Document documents that contain troubleshooting tips for each type of product. They organize these documents by title (e.g., "Refrigerators," "Washing Machines," "Ovens") and add description for common issues (e.g., "Not cooling," "Won't spin," "Not heating up").
+
+So, when users search for a specific problem like **My refrigerator is not cooling**, Botpress's Natural Language Understanding (NLU) functionality will retrieve the relevant response from the Text Document Knowledge Base, providing users with the necessary troubleshooting information.
+
+## Storage Quota
+
+The Knowledge Base feature in Botpress is designed to provide users with quick access to information on various topics. However, the amount of information that can be stored in the Knowledge Base is limited by the storage quota.
+
+The storage quota is the maximum amount of data that can be stored in the Knowledge Base. 
+
+<Callout type="info">
+  **Limit** <br />
+  All chatbots have a limit of **5000** vectors - which is the equivalent to approximately 200 blog articles or 1000 PDF pages.
+</Callout>
 
 ## Enabling/Disabling KB on Nodes
 
@@ -154,13 +181,3 @@ workflow.kbAnswerWithoutRef = event.preview.split("References:")[0].
 ```
 
 Then, input `@kbAnswerWithoutRef` into your text or capture card. Make sure to create the variable `kbAnswerWithoutRef` in your workflow.
-
-## Query Knowledge Bases Card
-
-The Query Knowledge Bases card allows you to programatically query Knowledge Bases from within your bot. This card is useful when you want to retrieve information from your Knowledge Bases and display it to the user during the conversation.
-
-This supports variables and expressions.
-
-This card will NOT directly send the answer to the user.
-
-The result will be stored in `{{turn.KnowledgeAgent.answer}}` and `{{turn.KnowledgeAgent.citations}}`
