@@ -5,6 +5,9 @@ import Link from 'next/link'
 import { HTMLAttributes, forwardRef, useMemo } from 'react'
 export type DocumentationCardProps = {
   title?: string
+  /**
+   * GFM
+   */
   bodyMarkDown?: string
   actionLinks?: {
     label: string
