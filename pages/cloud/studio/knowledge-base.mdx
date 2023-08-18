@@ -6,9 +6,9 @@ import { Callout } from 'nextra/components'
 
 The Botpress Knowledge Base is a powerful tool that allows users to manage and access organizational knowledge in one central location.
 
-It has been designed to replace the traditional Q&A system and enable users to upload various sources of information, including PDFs, plain text, and website URLs.
+It has been designed to replace the traditional Q&A system and enable users to upload various sources of information, including PDFs, Text Document, and website URLs.
 
-It's worth noting that the **Plain Text** Knowledge Base replaces our old **Q&A system**, while the **Web Search** Knowledge Base replaces **Botpress GO**.
+It's worth noting that the **Text Document** Knowledge Base replaces our old **Q&A system**, while the **Web Search** Knowledge Base replaces **Botpress GO**.
 
 ## Creating a Knowledge Base
 
@@ -35,17 +35,17 @@ This description helps the NLU engine understand the focus of the Knowledge Base
 
 ## Knowledge Sources
 
-## 1. Plain Text
+## 1. Text Document
 
-The Plain Text KB Source allows users to create/add plain textual information, such as FAQs, guides, and manuals. This Knowledge Base replaces Botpress's old Q&A system and is designed to provide users with quick access to information on various topics.
+The Text Document KB Source allows users to create/add plain textual information, such as FAQs, guides, and manuals. This Knowledge Base replaces Botpress's old Q&A system and is designed to provide users with quick access to information on various topics.
 
-Here's an example of how the Plain Text Knowledge Base could be used in a company that sells different types of home appliances, such as **refrigerators**, **washing machines**, and **ovens**:
+Here's an example of how the Text Document Knowledge Base could be used in a company that sells different types of home appliances, such as **refrigerators**, **washing machines**, and **ovens**:
 
 Let's say that the customer support team at this company receives a lot of questions about how to troubleshoot common problems with their products. The team decides to create a Knowledge Base in Botpress to provide quick and easy access to this information.
 
-Using the Plain Text Knowledge Base, the team creates a series of plain text documents that contain troubleshooting tips for each type of product. They organize these documents by title (e.g., "Refrigerators," "Washing Machines," "Ovens") and add description for common issues (e.g., "Not cooling," "Won't spin," "Not heating up").
+Using the Text Document Knowledge Base, the team creates a series of Text Document documents that contain troubleshooting tips for each type of product. They organize these documents by title (e.g., "Refrigerators," "Washing Machines," "Ovens") and add description for common issues (e.g., "Not cooling," "Won't spin," "Not heating up").
 
-So, when users search for a specific problem like **My refrigerator is not cooling**, Botpress's Natural Language Understanding (NLU) functionality will retrieve the relevant response from the plain text Knowledge Base, providing users with the necessary troubleshooting information.
+So, when users search for a specific problem like **My refrigerator is not cooling**, Botpress's Natural Language Understanding (NLU) functionality will retrieve the relevant response from the Text Document Knowledge Base, providing users with the necessary troubleshooting information.
 
 ## 2. Documents
 
@@ -61,7 +61,7 @@ For instance, if a user searches for **"How to calibrate the XYZ device,"** Botp
 
 - **PDF documents** are commonly used for manuals, guides, and other types of documentation. With Botpress, you can upload PDFs to your Knowledge Base, making it easy for employees to search for and access the information they need.
 - **HTML documents** are used for web pages and other online content. By uploading HTML documents to Botpress, you can make this web content accessible to employees who may not have internet access.
-- **TXT files** are plain text documents, similar to the ones supported by the Plain Text Knowledge Base. However, TXT files can contain more complex formatting, such as tables and images. By uploading TXT files to Botpress, you can make this type of content searchable and easily accessible.
+- **TXT files** are Text Document documents, similar to the ones supported by the Text Document Knowledge Base. However, TXT files can contain more complex formatting, such as tables and images. By uploading TXT files to Botpress, you can make this type of content searchable and easily accessible.
 - **DOC** and **DOCX** files are commonly used for word processing documents, such as memos and reports. By uploading these files to Botpress, you can make them searchable and easily accessible to employees.
 
 <Callout type="info">
@@ -163,4 +163,4 @@ This supports variables and expressions.
 
 This card will NOT directly send the answer to the user.
 
-The result will be stored in {{turn.KnowledgeAgent.answer}} and {{turn.KnowledgeAgent.citations}}'
+The result will be stored in `{{turn.KnowledgeAgent.answer}}` and `{{turn.KnowledgeAgent.citations}}`
