@@ -1,18 +1,9 @@
 import { Dispatch, SetStateAction, createContext, useCallback } from 'react'
-import ReactFlow, { Edge, Node, NodeMouseHandler, addEdge, useEdgesState, useNodesState } from 'reactflow'
+import ReactFlow, { Edge, NodeMouseHandler, addEdge, useEdgesState, useNodesState } from 'reactflow'
 import 'reactflow/dist/base.css'
-import {
-  BOTPRESS_NODE,
-  BotpressNode,
-  BotpressNodeData,
-  EXTERNAL_API_NODE,
-  ExternalApiNode,
-  ExternalApiNodeData,
-  getSourceHandleId,
-  getTargetHandleId,
-} from './Node'
+import { BOTPRESS_NODE, BotpressNode, EXTERNAL_API_NODE, ExternalApiNode } from './Node'
 import { EdgeData, SMOOTH_STEP_WITH_LABEL_EDGE, SmoothStepWithLabelEdge } from './SmoothStepLabelEdge'
-import { INITIAL_EDGES, INITIAL_NODES } from './constants'
+import { botNode, gmailNode } from './constants'
 
 const edgeTypes = { [SMOOTH_STEP_WITH_LABEL_EDGE]: SmoothStepWithLabelEdge }
 const nodeTypes = { [BOTPRESS_NODE]: BotpressNode, [EXTERNAL_API_NODE]: ExternalApiNode }
@@ -22,8 +13,11 @@ export const EdgesContext = createContext<{
 } | null>(null)
 
 export function SdkDiagram() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(INITIAL_NODES)
-  const [edges, setEdges, onEdgesChange] = useEdgesState(INITIAL_EDGES)
+  const [nodes, setNodes, onNodesChange] = useNodesState([gmailNode.node, botNode.node] as any)
+  const [edges, setEdges, onEdgesChange] = useEdgesState([
+    gmailNode.connectWithNode(botNode, 'd1', 'p1'),
+    botNode.connectWithNode(gmailNode, 'd2', 'p2'),
+  ])
 
   const onConnect = useCallback(
     (params: Parameters<typeof addEdge>[0]) => setEdges((eds) => addEdge(params, eds)),
