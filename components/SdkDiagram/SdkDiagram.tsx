@@ -49,7 +49,7 @@ const initialNodes: Node<ExternalApiNodeData | BotpressNodeData>[] = [
             title: 'Handler',
             bodyMarkDown: `The handler function is used to handle the incoming requests from the integration. Which means that this
             function will be called every time the telegram integration sends a request to the webhook url set in the
-            register function.\n\nIn this case, when the Gmail API has a new email it calls the webhook url we’ve registered with it. The
+            register function.\n\nIn this case, when the **Gmail API** has a new email it calls the webhook url we’ve registered with it. The
             request is parsed by the handler which in turn calls the onNewEmail function defined in the integration
             implementation.
   `,

@@ -1,7 +1,8 @@
 import { ArrowRightIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import classNames from 'classnames'
+import { marked } from 'marked'
 import Link from 'next/link'
-import { HTMLAttributes, forwardRef } from 'react'
+import { HTMLAttributes, forwardRef, useMemo } from 'react'
 export type DocumentationCardProps = {
   title?: string
   bodyMarkDown?: string
@@ -13,6 +14,13 @@ export type DocumentationCardProps = {
 }
 export const DocumentationCard = forwardRef<HTMLDivElement, DocumentationCardProps & HTMLAttributes<HTMLDivElement>>(
   (props, ref) => {
+    const parsedMarkDown = useMemo(
+      () => ({
+        __html: marked.parse(props.bodyMarkDown ?? '', { gfm: true }),
+      }),
+      [props.bodyMarkDown]
+    )
+
     return (
       <div
         {...props}
@@ -26,7 +34,7 @@ export const DocumentationCard = forwardRef<HTMLDivElement, DocumentationCardPro
           {props.title}
         </div>
         <div className="p-3 px-4 text-sm text-zinc-600 dark:text-zinc-400">
-          {props.bodyMarkDown}
+          <div dangerouslySetInnerHTML={parsedMarkDown}></div>
           <div className="mt-4 flex gap-2">
             {props.actionLinks?.map((actionLink, index) => (
               <Link
