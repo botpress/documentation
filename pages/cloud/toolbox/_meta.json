@@ -4,5 +4,6 @@
   "capture-information": "",
   "transition-to": "",
   "ai-task": "AI Task",
-  "events-triggers": "Events & Triggers"
+  "events-triggers": "Events & Triggers",
+  "query-kb": "Query Knowledge Bases"
 }
