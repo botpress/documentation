@@ -72,7 +72,7 @@ Now we can go back to Step (3) & Step (4) in this [article](https://developers.f
 
 - Messages: For the chat to work properly, you need to subscribe to the **messages** webhook field.
 
-## Content Types Mapping
+## Content Types on WhatsApp
 
 ### From Botpress to WhatsApp
 
@@ -83,10 +83,19 @@ Now we can go back to Step (3) & Step (4) in this [article](https://developers.f
 - Video is mapped to [Media Video Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#media-object)
 - File is mapped to [Media File Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#media-object)
 - Location is mapped to [Location Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#location-object)
-- Carousel is mapped to [Interactive List Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#interactive-object)
-- Card is mapped to [Interactive List Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#interactive-object)
-- Dropdown is mapped to [Interactive List Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#interactive-object)
-- Choice is mapped to [Interactive Button Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#interactive-object)
+
+**Special behaviors for choices, cards, and carousels**
+
+Choices (buttons), dropdowns, cards, and carousels are all mapped to [Interactive List Objects.](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#interactive-object)
+
+This comes with a few restrictions and behaviors specific to WhatsApp:
+- When there are 3 or fewer choices as buttons or in a dropdown, they will be rendered as buttons.
+- When there are more than 3 choices as buttons or in a dropdown, they will be rendered as a dropdown.
+- If there are more than 10 choices in a dropdown, the multiple dropdown messages will be sent with up to 10 choices in each messsage.
+  - For example, if your bot has a dropdown with 10 choices, the user will receive two messages: the first message will have a dropdown with 10 choices, and the second messge will have a dropdown with two choices.
+- Each dropdown requires a label but the Studio currently doesn’t support that, so the label “Choose…” is used for all dropdowns.
+- Button labels are limited to 20 characters, and dropdown labels are limited to 24 characters.
+  - Labels exceeding these limits are automatically truncated. For example, the label "This button label is very long" would become "This button label is" on a button and "This button label is ver" on a dropdown.
 
 ### From WhatsApp to Botpress
 
@@ -114,4 +123,3 @@ const response = await client.createConversation({
 ```
 
 > **Note**: The `client` in the code example above is an instance of the [Botpress Client](https://www.npmjs.com/package/@botpress/client) that is always provided as a prop to the bot handlers (e.g. message handler, event, conversation, state expiry, etc.)
-
