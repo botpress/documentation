@@ -3,17 +3,19 @@ import ReactFlow, { Edge, Node, NodeMouseHandler, addEdge, useEdgesState, useNod
 import 'reactflow/dist/base.css'
 import { BOTPRESS_NODE, BotpressNode, EXTERNAL_API_NODE, ExternalApiNode } from './Node'
 import { EdgeData, SMOOTH_STEP_WITH_LABEL_EDGE, SmoothStepWithLabelEdge } from './SmoothStepLabelEdge'
-import { bot, botpress, gmail, google } from './constants'
+import { bot, botpressApi, gmail, google } from './constants'
 
-const initialNodes: Node[] = [google.node, gmail.node, botpress.node, bot.node]
+const initialNodes: Node[] = [google.node, gmail.node, botpressApi.node, bot.node]
 const initialEdges = [
   gmail.connectWithSubNode(bot, 'handler', 'Event', { color: '#f0abfc' }),
   gmail.connectWithSubNode(google, 'channels.message.text', 'POST', {
     color: '#f0abfc',
     hasLabel: false,
   }),
-  google.connectWithSubNode(gmail, 'webhook', 'handler'),
-  bot.connectWithSubNode(gmail, 'Trigger', 'handler'),
+  google.connectWithSubNode(botpressApi, 'webhook', 'handler'),
+  botpressApi.connectWithSubNode(gmail, 'handler', 'handler'),
+  botpressApi.connectWithSubNode(gmail, 'Webhook handler', 'channels.message.text'),
+  bot.connectWithSubNode(botpressApi, 'Trigger', 'Webhook handler'),
 ]
 const edgeTypes = { [SMOOTH_STEP_WITH_LABEL_EDGE]: SmoothStepWithLabelEdge }
 const nodeTypes = { [BOTPRESS_NODE]: BotpressNode, [EXTERNAL_API_NODE]: ExternalApiNode }

@@ -49,7 +49,8 @@ export const google = new NodeCreator(
     },
   })
 )
-export const botpress = new NodeCreator(
+
+export const botpressApi = new NodeCreator(
   {
     type: BOTPRESS_NODE,
     position: { x: 290, y: 280 },
@@ -65,21 +66,14 @@ export const botpress = new NodeCreator(
   },
   getSubNodeBuilder({
     markerId: INTEGRATION_SOURCE_MARKER_ID,
-    title: 'channels.message.text',
-    value: 'sendEmail',
+    title: 'Webhook handler',
+    value: 'webhookHandler',
     targetHandle: 'channel-t',
     sourceHandle: 'channel-s',
     details: {
-      title: 'Handler',
-      bodyMarkDown: `When the integration receives a request from the bot on any of the channels it supports (only \`text\` for now), it calls the sendEmail function`,
-      actionLinks: [
-        {
-          label: 'Code',
-          link: 'https://github.com/botpress/botpress/blob/69dc23e92e79849ee43cadd64fd0e913d43f76a8/integrations/gmail/src/index.ts#L46',
-          isExternal: true,
-        },
-        { label: 'Documentation', link: 'https://botpress.com/docs/integration/concepts/channels/' },
-      ],
+      title: 'Webhook handler',
+      bodyMarkDown: `When the integration's webhook registered with the Gmail API receives a request the Botpress API passes it on to the integration`,
+      actionLinks: [{ label: 'Documentation', link: 'https://botpress.com/docs/integration/concepts/channels/' }],
     },
   }).appendSubNode({
     markerId: INTEGRATION_SOURCE_MARKER_ID,
@@ -105,7 +99,7 @@ export const botpress = new NodeCreator(
 export const gmail = new NodeCreator(
   {
     type: BOTPRESS_NODE,
-    position: { x: 80, y: 550 },
+    position: { x: 500, y: 550 },
     data: {
       label: 'Gmail',
       icon: IntegrationIcon,
@@ -117,24 +111,6 @@ export const gmail = new NodeCreator(
     },
   },
   getSubNodeBuilder({
-    markerId: INTEGRATION_SOURCE_MARKER_ID,
-    title: 'channels.message.text',
-    value: 'sendEmail',
-    targetHandle: 'channel-t',
-    sourceHandle: 'channel-s',
-    details: {
-      title: 'Handler',
-      bodyMarkDown: `When the integration receives a request from the bot on any of the channels it supports (only \`text\` for now), it calls the sendEmail function`,
-      actionLinks: [
-        {
-          label: 'Code',
-          link: 'https://github.com/botpress/botpress/blob/69dc23e92e79849ee43cadd64fd0e913d43f76a8/integrations/gmail/src/index.ts#L46',
-          isExternal: true,
-        },
-        { label: 'Documentation', link: 'https://botpress.com/docs/integration/concepts/channels/' },
-      ],
-    },
-  }).appendSubNode({
     markerId: INTEGRATION_SOURCE_MARKER_ID,
     title: 'handler',
     value: 'onNewEmail',
@@ -152,12 +128,30 @@ export const gmail = new NodeCreator(
         { label: 'Documentation', link: 'https://botpress.com/docs/integration/howTo/handler/' },
       ],
     },
+  }).appendSubNode({
+    markerId: INTEGRATION_SOURCE_MARKER_ID,
+    title: 'channels.message.text',
+    value: 'sendEmail',
+    targetHandle: 'channel-t',
+    sourceHandle: 'channel-s',
+    details: {
+      title: 'Handler',
+      bodyMarkDown: `When the integration receives a request from the bot on any of the channels it supports (only \`text\` for now), it calls the sendEmail function`,
+      actionLinks: [
+        {
+          label: 'Code',
+          link: 'https://github.com/botpress/botpress/blob/69dc23e92e79849ee43cadd64fd0e913d43f76a8/integrations/gmail/src/index.ts#L46',
+          isExternal: true,
+        },
+        { label: 'Documentation', link: 'https://botpress.com/docs/integration/concepts/channels/' },
+      ],
+    },
   })
 )
 
 export const bot = new NodeCreator(
   {
-    position: { x: 500, y: 550 },
+    position: { x: 80, y: 550 },
     type: BOTPRESS_NODE,
 
     data: {
