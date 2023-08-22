@@ -3,9 +3,9 @@ import ReactFlow, { Edge, Node, NodeMouseHandler, addEdge, useEdgesState, useNod
 import 'reactflow/dist/base.css'
 import { BOTPRESS_NODE, BotpressNode, EXTERNAL_API_NODE, ExternalApiNode } from './Node'
 import { EdgeData, SMOOTH_STEP_WITH_LABEL_EDGE, SmoothStepWithLabelEdge } from './SmoothStepLabelEdge'
-import { bot, gmail, google } from './constants'
+import { bot, botpress, gmail, google } from './constants'
 
-const initialNodes: Node[] = [google.node, gmail.node, bot.node]
+const initialNodes: Node[] = [google.node, gmail.node, botpress.node, bot.node]
 const initialEdges = [
   gmail.connectWithSubNode(bot, 'handler', 'Event', { color: '#f0abfc' }),
   gmail.connectWithSubNode(google, 'channels.message.text', 'POST', {

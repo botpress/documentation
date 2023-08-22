@@ -1,4 +1,5 @@
 import { BotIcon } from './BotIcon'
+import { BotpressIcon } from './BotpressIcon'
 import { IntegrationIcon } from './IntegrationIcon'
 import { BOTPRESS_NODE, EXTERNAL_API_NODE, NodeCreator, getSubNodeBuilder } from './Node'
 const INTEGRATION_SOURCE_MARKER_ID = 'source-marker-integration'
@@ -6,7 +7,7 @@ const BOT_SOURCE_MARKER_ID = 'source-marker-bot'
 
 export const google = new NodeCreator(
   {
-    position: { x: 10, y: 10 },
+    position: { x: 130, y: 10 },
     type: EXTERNAL_API_NODE,
     data: {
       label: 'Google API',
@@ -48,11 +49,63 @@ export const google = new NodeCreator(
     },
   })
 )
+export const botpress = new NodeCreator(
+  {
+    type: BOTPRESS_NODE,
+    position: { x: 290, y: 280 },
+    data: {
+      label: 'Botpress Cloud',
+      icon: BotpressIcon,
+      defaultCurrentColorClass: 'text-gray-200 dark:text-gray-200/25',
+      labelColorClass: 'text-gray-900 dark:text-gray-100',
+      infoCardTitleClass: 'text-gray-600 dark:text-gray-200',
+      headerBgClass: 'bg-gray-50/50 dark:bg-gray-50/10',
+      sourceMarkerId: INTEGRATION_SOURCE_MARKER_ID,
+    },
+  },
+  getSubNodeBuilder({
+    markerId: INTEGRATION_SOURCE_MARKER_ID,
+    title: 'channels.message.text',
+    value: 'sendEmail',
+    targetHandle: 'channel-t',
+    sourceHandle: 'channel-s',
+    details: {
+      title: 'Handler',
+      bodyMarkDown: `When the integration receives a request from the bot on any of the channels it supports (only \`text\` for now), it calls the sendEmail function`,
+      actionLinks: [
+        {
+          label: 'Code',
+          link: 'https://github.com/botpress/botpress/blob/69dc23e92e79849ee43cadd64fd0e913d43f76a8/integrations/gmail/src/index.ts#L46',
+          isExternal: true,
+        },
+        { label: 'Documentation', link: 'https://botpress.com/docs/integration/concepts/channels/' },
+      ],
+    },
+  }).appendSubNode({
+    markerId: INTEGRATION_SOURCE_MARKER_ID,
+    title: 'handler',
+    value: 'onNewEmail',
+    targetHandle: 'handler-t',
+    sourceHandle: 'handler-s',
+    details: {
+      title: 'Handler',
+      bodyMarkDown: `The handler function is called everytime the webhook receives a request.\n\n Here, the Gmail integration's **handler** parses the email from the incoming request and passes it on to the **onNewEmail** function.`,
+      actionLinks: [
+        {
+          label: 'Code',
+          link: 'https://github.com/botpress/botpress/blob/69dc23e92e79849ee43cadd64fd0e913d43f76a8/integrations/gmail/src/index.ts#L149',
+          isExternal: true,
+        },
+        { label: 'Documentation', link: 'https://botpress.com/docs/integration/howTo/handler/' },
+      ],
+    },
+  })
+)
 
 export const gmail = new NodeCreator(
   {
     type: BOTPRESS_NODE,
-    position: { x: 175, y: 250 },
+    position: { x: 80, y: 550 },
     data: {
       label: 'Gmail',
       icon: IntegrationIcon,
@@ -104,7 +157,7 @@ export const gmail = new NodeCreator(
 
 export const bot = new NodeCreator(
   {
-    position: { x: 500, y: 10 },
+    position: { x: 500, y: 550 },
     type: BOTPRESS_NODE,
 
     data: {
