@@ -9,7 +9,8 @@ local_resource(
   allow_parallel=True,
   cmd='pnpm generate',
   labels=['documentation'],
-  resource_deps=['pnpm-install']
+  resource_deps=['pnpm-install'],
+  deps=['scripts/generateApiDocumentationPage.ts', 'scripts/generateApiDocumentationPage.constants.ts', 'scripts/generateApiDocumentationPage.types.ts'],
 )
 
 documentation_env = {
