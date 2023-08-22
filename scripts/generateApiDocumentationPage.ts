@@ -10,6 +10,16 @@ import {
 import { JSONSchemaProperty, JSONSchemaType } from './generateApiDocumentationPage.types'
 import { getContext } from './openApiContext'
 
+const HiddenSections = ['file']
+
+type Section = {
+  name: string
+  title: string
+  description: string
+  operations: string[]
+  schema?: string
+}
+
 async function getApiDocumetationPageContent(): Promise<string> {
   const context = await getContext()
   let md = `${DONT_EDIT_WARNING}\n\n`
@@ -31,7 +41,12 @@ async function getApiDocumetationPageContent(): Promise<string> {
     md += `\`\`\`json \n ${JSON.stringify(error, undefined, 2)}\n \`\`\` \n\n`
   })
 
-  context.metadata.sections.forEach((section: any) => {
+  context.metadata.sections.forEach((section: Section) => {
+    if (HiddenSections.includes(section.name)) {
+      console.info(`Skipping section "${section.name}" of API documentation because it's marked as hidden`)
+      return
+    }
+
     const endpointRoutes = section.operations.map((operationId: string) => {
       const { method, path } = context.operations[operationId]
       return { method, path }

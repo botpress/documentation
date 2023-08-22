@@ -1,12 +1,18 @@
 ## Getting Started
 
-First, install the dependencies
+1. First, install the dependencies
 
 ```bash
-pnpm dev
+pnpm install
 ```
 
-then run the development server:
+2. Run the API documentation generator script:
+
+```bash
+pnpm generate
+```
+
+3. Then run the development server:
 
 ```bash
 pnpm dev
