@@ -98,7 +98,7 @@ This comes with a few restrictions and behaviors specific to WhatsApp:
   - Labels exceeding these limits are automatically truncated. For example, the label "This button label is very long" would become "This button label i…" on a button and "This button label is ve…" on a dropdown.
 - There is a limit of 3 URL action buttons on each cards
 - Each card in a carousel will be sent individually
-
+- When files are sent over Whatsapp, the Studio doesn't store the original filename (for security reasons) but only the file extension, so the file will be sent with a generic filename ("file") followed by the extension of the file. For example, if you send a PNG file, it will be sent as "file.png".
 ### From WhatsApp to Botpress
 
 - Text is mapped to Text Object
