@@ -1,11 +1,11 @@
 import classNames from 'classnames'
 import { HtmlHTMLAttributes, MouseEvent, SVGProps, useContext } from 'react'
-import { NodeProps } from 'reactflow'
 import { EdgesContext } from '../SdkDiagram'
-import { SubNodeContent, SubNodeContentProps } from '../SubNodeContent'
+import { SubNodeContent } from '../SubNodeContent'
+import { NodeProps } from './Node'
 import { SourceHandle } from './SourceHandle'
 import { TargetHandle } from './TargetHandle'
-import { getSourceHandleId, getTargetHandleId } from './helpers'
+import { getSourceHandleId } from './helpers'
 export const BOTPRESS_NODE = 'botpress'
 export type BotpressNodeData = {
   label: string
@@ -15,11 +15,12 @@ export type BotpressNodeData = {
   labelColorClass?: string
   headerBgClass?: string
   sourceMarkerId: string
-  subNodes?: Array<{ hasTarget?: boolean; hasSource?: boolean } & SubNodeContentProps>
 }
 
 export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData>) {
   const edges = useContext(EdgesContext)
+  const subNodes = data.nodeCreatorInstance.subNodes
+
   function onSubNodeClick(event: MouseEvent<HTMLDivElement>, index: number) {
     event.stopPropagation()
     edges?.setEdges((prevEdges) => {
@@ -55,24 +56,24 @@ export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData
           <div className={classNames('flex grow items-center px-3 text-sm', data.labelColorClass)}>{data.label}</div>
         </div>
         <div className="flex flex-col py-2">
-          {data.subNodes?.map((subNode, index) => (
+          {subNodes?.map((subNode, index) => (
             <div key={index} className={classNames('relative flex items-center justify-center px-4 py-1')}>
-              {subNode.hasTarget && (
+              {subNode.targetHandle && (
                 <>
-                  <TargetHandle id={getTargetHandleId(index)} />
+                  <TargetHandle id={subNode.targetHandle} />
                   <TargetHandleGroove />
                 </>
               )}
               <SubNodeContent
                 onClick={(e) => onSubNodeClick(e, index)}
-                titleClass={data.infoCardTitleClass}
+                titleClass={data.infoCardTitleClass ?? ''}
                 title={subNode.title}
                 value={subNode.value}
                 details={subNode.details}
               />
-              {subNode.hasSource && (
+              {subNode.sourceHandle && (
                 <>
-                  <SourceHandle id={getSourceHandleId(index)} />
+                  <SourceHandle id={subNode.sourceHandle} />
                   <SourceHandleMock />
                 </>
               )}

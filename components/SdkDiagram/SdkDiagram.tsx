@@ -1,10 +1,20 @@
 import { Dispatch, SetStateAction, createContext, useCallback } from 'react'
-import ReactFlow, { Edge, NodeMouseHandler, addEdge, useEdgesState, useNodesState } from 'reactflow'
+import ReactFlow, { Edge, Node, NodeMouseHandler, addEdge, useEdgesState, useNodesState } from 'reactflow'
 import 'reactflow/dist/base.css'
 import { BOTPRESS_NODE, BotpressNode, EXTERNAL_API_NODE, ExternalApiNode } from './Node'
 import { EdgeData, SMOOTH_STEP_WITH_LABEL_EDGE, SmoothStepWithLabelEdge } from './SmoothStepLabelEdge'
-import { botNode, gmailNode } from './constants'
+import { bot, gmail, google } from './constants'
 
+const initialNodes: Node[] = [google.node, gmail.node, bot.node]
+const initialEdges = [
+  gmail.connectWithSubNode(bot, 'handler', 'Event', { color: '#f0abfc' }),
+  gmail.connectWithSubNode(google, 'channels.message.text', 'POST', {
+    color: '#f0abfc',
+    hasLabel: false,
+  }),
+  google.connectWithSubNode(gmail, 'webhook', 'handler'),
+  bot.connectWithSubNode(gmail, 'Trigger', 'handler'),
+]
 const edgeTypes = { [SMOOTH_STEP_WITH_LABEL_EDGE]: SmoothStepWithLabelEdge }
 const nodeTypes = { [BOTPRESS_NODE]: BotpressNode, [EXTERNAL_API_NODE]: ExternalApiNode }
 export const EdgesContext = createContext<{
@@ -13,11 +23,8 @@ export const EdgesContext = createContext<{
 } | null>(null)
 
 export function SdkDiagram() {
-  const [nodes, setNodes, onNodesChange] = useNodesState([gmailNode.node, botNode.node] as any)
-  const [edges, setEdges, onEdgesChange] = useEdgesState([
-    gmailNode.connectWithNode(botNode, 'd1', 'p1'),
-    botNode.connectWithNode(gmailNode, 'd2', 'p2'),
-  ])
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
 
   const onConnect = useCallback(
     (params: Parameters<typeof addEdge>[0]) => setEdges((eds) => addEdge(params, eds)),

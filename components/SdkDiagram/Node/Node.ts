@@ -1,15 +1,24 @@
-import { Edge, Node } from 'reactflow'
+import { Edge, Node, NodeProps as ReactFlowNodeProps } from 'reactflow'
 import { v4 as uuid } from 'uuid'
+import { DocumentationCardProps } from '../DocumentationCard'
+import { EdgeData, SMOOTH_STEP_WITH_LABEL_EDGE } from '../SmoothStepLabelEdge'
 
+type WithNodeCreatorInstance<T extends {}> = T & {
+  nodeCreatorInstance: NodeCreator<T, SubNode<string>, any>
+}
+export type NodeProps<T extends {}> = ReactFlowNodeProps<WithNodeCreatorInstance<T>>
+
+/**
+ * Provides typesafe way to creating and interacting with nodes
+ */
 export class NodeCreator<T extends {}, SubNodes extends SubNode<SubNodeTitle>, SubNodeTitle extends string> {
-  node: Node<T>
+  node: Node<WithNodeCreatorInstance<T>>
   subNodeBuilder: SubNodeBuilder<SubNodes, SubNodeTitle> | undefined
 
   constructor(nodeWithoutId: Omit<Node<T>, 'id'>, subNodes?: SubNodeBuilder<SubNodes, SubNodeTitle>) {
-    this.node = { ...nodeWithoutId, id: uuid() }
+    this.node = { ...nodeWithoutId, id: uuid(), data: { ...nodeWithoutId.data, nodeCreatorInstance: this } }
     this.subNodeBuilder = subNodes
   }
-
   get id() {
     return this.node.id
   }
@@ -30,49 +39,43 @@ export class NodeCreator<T extends {}, SubNodes extends SubNode<SubNodeTitle>, S
   >(
     targetNodeCreator: TargetNodeCreator,
     sourceSubNodeTitle: (typeof this.subNodes)[number]['title'],
-    targetSubNodeTitle: TargetNodeCreator['subNodes'][number]['title']
+    targetSubNodeTitle: TargetNodeCreator['subNodes'][number]['title'],
+    edgeData?: EdgeData
   ): Edge {
     const targetSubNode = targetNodeCreator.subNodes.find((subNode) => subNode.title === targetSubNodeTitle)
     const sourceSubNode = this.subNodes.find((subNode) => subNode.title === sourceSubNodeTitle)
     if (!targetSubNode) throw new Error(`No target subnode found with title ${targetSubNodeTitle}`)
     if (!sourceSubNode) throw new Error(`No source subnode found with title ${sourceSubNodeTitle}`)
+    if (!targetSubNode.targetHandle) throw new Error(`No target handle found for target subnode ${targetSubNodeTitle}`)
+    if (!sourceSubNode.sourceHandle) throw new Error(`No source handle found for source subnode ${sourceSubNodeTitle}`)
+
     return {
       id: `${this.node.id}-${targetNodeCreator.node.id}`,
       source: this.node.id,
       target: targetNodeCreator.node.id,
-      targetHandle: targetSubNode?.sourceHandle,
-      sourceHandle: sourceSubNode?.targetHandle,
-      type: 'smoothstep',
-      markerStart: 'external',
-      animated: false,
+      targetHandle: targetSubNode.targetHandle,
+      sourceHandle: sourceSubNode.sourceHandle,
+      type: SMOOTH_STEP_WITH_LABEL_EDGE,
+      markerStart: sourceSubNode?.markerId ?? 'external',
+      data: edgeData,
     }
   }
 }
 
-export function getHandleBuilder<T extends string>(defaultHandle: T) {
-  return new HandleBuilder(defaultHandle)
+export function getSubNodeBuilder<T extends SubNode<Title>, Title extends string>(_initialSubNode: T) {
+  return new SubNodeBuilder(_initialSubNode)
 }
 
-class HandleBuilder<T extends string> {
-  handles: T[] = []
-  constructor(_initialHandle: T) {
-    if (this.handles.some((handle) => handle === _initialHandle))
-      throw new Error(`Handle already exists: ${_initialHandle}`)
-    this.handles.push(_initialHandle)
-  }
-
-  appendHandle<U extends string>(s: U) {
-    return new HandleBuilder<T | U>(s)
-  }
-}
-
-type SubNode<Title extends string> = {
+export type SubNode<Title extends string> = {
   title: Title
   targetHandle?: string
   sourceHandle?: string
+  value?: string
+  details?: DocumentationCardProps
+  markerId?: string
 }
 
-export class SubNodeBuilder<T extends SubNode<Title>, Title extends string> {
+class SubNodeBuilder<T extends SubNode<Title>, Title extends string> {
   subNodes: T[] = []
   constructor(_initialSubNode: T, _parent?: SubNodeBuilder<T, Title>) {
     this.subNodes = [...(_parent?.subNodes ?? []), _initialSubNode]

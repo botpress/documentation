@@ -1,19 +1,19 @@
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import classNames from 'classnames'
 import { Position } from 'reactflow'
-import { SubNodeContent, SubNodeContentProps } from '../SubNodeContent'
+import { SubNodeContent } from '../SubNodeContent'
+import { NodeProps } from './Node'
 import { SourceHandle } from './SourceHandle'
 import { TargetHandle } from './TargetHandle'
-import { getSourceHandleId, getTargetHandleId } from './helpers'
 
 export type ExternalApiNodeData = {
   label: string
   link: { url: string; title: string }
-  subNodes: [SubNodeContentProps, SubNodeContentProps]
 }
 export const EXTERNAL_API_NODE = 'externalApiNode'
 
-export function ExternalApiNode({ data }: { data: ExternalApiNodeData }) {
+export function ExternalApiNode({ data }: NodeProps<ExternalApiNodeData>) {
+  const subNodes = data.nodeCreatorInstance.subNodes
   return (
     <>
       <div
@@ -33,12 +33,12 @@ export function ExternalApiNode({ data }: { data: ExternalApiNodeData }) {
         </div>
         <div className="flex gap-4">
           <div className={classNames('relative flex flex-col items-center py-5 pl-4')}>
-            <SubNodeContent titleClass="text-zinc-400" {...data.subNodes[0]} />
+            <SubNodeContent titleClass="text-zinc-400" {...subNodes[0]} />
             <div className={classNames('full absolute bottom-2 mt-[1px] h-[5px] w-[5px] rounded bg-current')}></div>
           </div>
           <div className={classNames('relative flex flex-col items-center justify-center py-5 pr-4')}>
             <div className="absolute -right-[1px] h-[18px] w-[10px] rounded-bl-full rounded-tl-full border border-current dark:border-zinc-600/50"></div>
-            <SubNodeContent titleClass="text-zinc-400" {...data.subNodes[1]} />
+            <SubNodeContent titleClass="text-zinc-400" {...subNodes[1]} />
           </div>
         </div>
       </div>
@@ -54,8 +54,8 @@ export function ExternalApiNode({ data }: { data: ExternalApiNodeData }) {
           </defs>
         </svg>
 
-        <SourceHandle position={Position.Bottom} id={getSourceHandleId(0)} left={126} />
-        <TargetHandle position={Position.Right} id={getTargetHandleId(1)} top={133} />
+        <SourceHandle position={Position.Bottom} id={subNodes[0].sourceHandle ?? ''} left={126} />
+        <TargetHandle position={Position.Right} id={subNodes[0].targetHandle ?? ''} top={133} />
       </div>
     </>
   )
