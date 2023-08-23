@@ -10,12 +10,11 @@ const initialEdges = [
   gmail.connectWithSubNode(bot, 'handler', 'Event', { color: '#f0abfc' }),
   gmail.connectWithSubNode(google, 'channels.message.text', 'POST', {
     color: '#f0abfc',
-    hasLabel: false,
   }),
   google.connectWithSubNode(botpressApi, 'webhook', 'handler'),
   botpressApi.connectWithSubNode(gmail, 'handler', 'handler'),
   botpressApi.connectWithSubNode(gmail, 'Webhook handler', 'channels.message.text'),
-  bot.connectWithSubNode(botpressApi, 'Trigger', 'Webhook handler'),
+  bot.connectWithSubNode(botpressApi, 'Trigger', 'Webhook handler', { hasLabel: false }),
 ]
 const edgeTypes = { [SMOOTH_STEP_WITH_LABEL_EDGE]: SmoothStepWithLabelEdge }
 const nodeTypes = { [BOTPRESS_NODE]: BotpressNode, [EXTERNAL_API_NODE]: ExternalApiNode }

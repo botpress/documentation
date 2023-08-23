@@ -53,7 +53,7 @@ export const google = new NodeCreator(
 export const botpressApi = new NodeCreator(
   {
     type: BOTPRESS_NODE,
-    position: { x: 290, y: 280 },
+    position: { x: 150, y: 280 },
     data: {
       label: 'Botpress Cloud',
       icon: BotpressIcon,
@@ -65,17 +65,6 @@ export const botpressApi = new NodeCreator(
     },
   },
   getSubNodeBuilder({
-    markerId: INTEGRATION_SOURCE_MARKER_ID,
-    title: 'Webhook handler',
-    value: 'webhookHandler',
-    targetHandle: 'channel-t',
-    sourceHandle: 'channel-s',
-    details: {
-      title: 'Webhook handler',
-      bodyMarkDown: `When the integration's webhook registered with the Gmail API receives a request the Botpress API passes it on to the integration`,
-      actionLinks: [{ label: 'Documentation', link: 'https://botpress.com/docs/integration/concepts/channels/' }],
-    },
-  }).appendSubNode({
     markerId: INTEGRATION_SOURCE_MARKER_ID,
     title: 'handler',
     value: 'onNewEmail',
@@ -93,13 +82,24 @@ export const botpressApi = new NodeCreator(
         { label: 'Documentation', link: 'https://botpress.com/docs/integration/howTo/handler/' },
       ],
     },
+  }).appendSubNode({
+    markerId: INTEGRATION_SOURCE_MARKER_ID,
+    title: 'Webhook handler',
+    value: 'webhookHandler',
+    targetHandle: 'channel-t',
+    sourceHandle: 'channel-s',
+    details: {
+      title: 'Webhook handler',
+      bodyMarkDown: `When the integration's webhook registered with the Gmail API receives a request the Botpress API passes it on to the integration`,
+      actionLinks: [{ label: 'Documentation', link: 'https://botpress.com/docs/integration/concepts/channels/' }],
+    },
   })
 )
 
 export const gmail = new NodeCreator(
   {
     type: BOTPRESS_NODE,
-    position: { x: 500, y: 550 },
+    position: { x: 450, y: 280 },
     data: {
       label: 'Gmail',
       icon: IntegrationIcon,
@@ -151,7 +151,7 @@ export const gmail = new NodeCreator(
 
 export const bot = new NodeCreator(
   {
-    position: { x: 80, y: 550 },
+    position: { x: 70, y: 610 },
     type: BOTPRESS_NODE,
 
     data: {

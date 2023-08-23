@@ -40,7 +40,7 @@ export class NodeCreator<T extends {}, SubNodes extends SubNode<SubNodeTitle>, S
     targetNodeCreator: TargetNodeCreator,
     sourceSubNodeTitle: (typeof this.subNodes)[number]['title'],
     targetSubNodeTitle: TargetNodeCreator['subNodes'][number]['title'],
-    edgeData?: EdgeData
+    edgeData?: Partial<EdgeData>
   ): Edge {
     const targetSubNode = targetNodeCreator.subNodes.find((subNode) => subNode.title === targetSubNodeTitle)
     const sourceSubNode = this.subNodes.find((subNode) => subNode.title === sourceSubNodeTitle)
