@@ -31,7 +31,7 @@
 ### Using Zapier to trigger an action in your Botpress chatbot
 
 1. If you're setting it up as an Action in Zapier, you can send custom Event Data to your bot and an optional Correlation ID which you can use to associate individual zap runs with a particular event in your bot.
-1. Zapier only allows entering a single text value for the Event Data, but you can put a Code Step from Zapier before the Botpress action in your zap in order to construct an object with multiple values and then use `JSON.stringify()` in your Code Step to convert the object to a text field that you can use in the last part of your zto pass it as the Event Data to Botpress.
+1. Zapier only allows entering a single text value for the Event Data, but you can put a Code Step from Zapier before the Botpress action in your zap in order to construct an object with multiple values and then use `JSON.stringify()` in your Code Step to convert the object to a text field that you can use in the last part of your zap as the Event Data to send to Botpress.
 1. To receive data from Zapier in your bot, you can use the "Event from Zapier" trigger in the Studio:
    ![Zapier action](/docs/content/zapier-trigger.png)
 1. Then add an Execute Code card with the following code assuming you sent your data in JSON format:
