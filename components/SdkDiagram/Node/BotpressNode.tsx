@@ -25,7 +25,7 @@ export function BotpressNode({ data, ...otherProps }: NodeProps<BotpressNodeData
     event.stopPropagation()
     edges?.setEdges((prevEdges) => {
       prevEdges.forEach((edge) => {
-        if (edge.source === otherProps.id && edge.sourceHandle === getSourceHandleId(index)) {
+        if (edge.source === otherProps.id && edge.sourceHandle === subNodes[index].sourceHandle) {
           edge.animated = true
         } else {
           edge.animated = false
