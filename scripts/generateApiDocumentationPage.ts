@@ -2,15 +2,31 @@ import * as fs from 'fs'
 import { startCase } from 'lodash'
 import {
   API_DOCS_AUTHENTICATION,
+  API_DOCS_CLIENT,
   API_DOCS_ERROR_DESCRIPTION,
   API_DOCS_INTRO,
   API_DOCS_PAGINATION,
+  API_REQUIRED_BOT_ID_HEADER,
+  API_REQUIRED_INTEGRATION_ID_HEADER,
+  API_REQUIRED_WORKSPACE_ID_HEADER,
   DONT_EDIT_WARNING,
 } from './generateApiDocumentationPage.constants'
 import { JSONSchemaProperty, JSONSchemaType } from './generateApiDocumentationPage.types'
 import { getContext } from './openApiContext'
 
 const HiddenSections = ['file']
+const SectionsWithRequiredWorkspaceIdHeader = ['bot', 'integration', 'workspaceMember']
+const SectionsWithRequiredBotIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'hub', 'action']
+const SectionsWithRequiredIntegrationIdHeader = [
+  'user',
+  'conversation',
+  'event',
+  'message',
+  'file',
+  'state',
+  'hub',
+  'action',
+]
 
 type Section = {
   name: string
@@ -27,13 +43,10 @@ async function getApiDocumetationPageContent(): Promise<string> {
   md += 'import { Collapsible } from "@components/Collapsible"; \n\n'
   md += 'import { H4 } from "@components/WrapperElements"; \n\n'
   md += '# Botpress API Documentation \n'
-  md += '## Introduction \n\n'
   md += API_DOCS_INTRO
-  md += '## Authentication \n\n'
+  md += API_DOCS_CLIENT
   md += API_DOCS_AUTHENTICATION
-  md += '## Pagination \n\n'
   md += API_DOCS_PAGINATION
-  md += '## Errors \n\n'
   md += API_DOCS_ERROR_DESCRIPTION + '\n\n'
 
   context.metadata.errors.forEach((error: any) => {
@@ -58,6 +71,29 @@ async function getApiDocumetationPageContent(): Promise<string> {
     md += `${section.description} \n\n`
     md += `export const ${routesVariableName} = ${JSON.stringify(endpointRoutes)} \n\n`
     md += `<EndpointBlock title={"Endpoints"} endpoints={${routesVariableName}} /> \n\n`
+
+    const hasRequiredWorkspaceIdHeader = SectionsWithRequiredWorkspaceIdHeader.includes(section.name)
+    const hasRequiredBotIdHeader = SectionsWithRequiredBotIdHeader.includes(section.name)
+    const hasRequiredIntegrationIdHeader = SectionsWithRequiredIntegrationIdHeader.includes(section.name)
+    const hasRequiredHeaders = hasRequiredWorkspaceIdHeader || hasRequiredBotIdHeader || hasRequiredIntegrationIdHeader
+
+    if (hasRequiredHeaders) {
+      md +=
+        '### Required Headers \n\n' +
+        'To access these API endpoints the following HTTP headers are required to be passed in all requests:'
+
+      if (hasRequiredWorkspaceIdHeader) {
+        md += API_REQUIRED_WORKSPACE_ID_HEADER(section.title)
+      }
+
+      if (hasRequiredBotIdHeader) {
+        md += API_REQUIRED_BOT_ID_HEADER(section.title)
+      }
+
+      if (hasRequiredIntegrationIdHeader) {
+        md += API_REQUIRED_INTEGRATION_ID_HEADER
+      }
+    }
 
     if (section.schema) {
       // Custom link for the heading
