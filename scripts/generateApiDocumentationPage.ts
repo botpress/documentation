@@ -52,10 +52,12 @@ async function getApiDocumetationPageContent(): Promise<string> {
       return { method, path }
     })
 
+    const routesVariableName = `routes_${section.name}`
+
     md += `## ${section.title} \n`
     md += `${section.description} \n\n`
-    md += `export const routes${section.title} = ${JSON.stringify(endpointRoutes)} \n\n`
-    md += `<EndpointBlock title={"Endpoints"} endpoints={routes${section.title}} /> \n\n`
+    md += `export const ${routesVariableName} = ${JSON.stringify(endpointRoutes)} \n\n`
+    md += `<EndpointBlock title={"Endpoints"} endpoints={${routesVariableName}} /> \n\n`
 
     if (section.schema) {
       // Custom link for the heading
