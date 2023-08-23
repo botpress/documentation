@@ -5,12 +5,14 @@ import {
   API_DOCS_ERROR_DESCRIPTION,
   API_DOCS_INTRO,
   API_DOCS_PAGINATION,
+  API_REQUIRED_WORKSPACE_ID_HEADER,
   DONT_EDIT_WARNING,
 } from './generateApiDocumentationPage.constants'
 import { JSONSchemaProperty, JSONSchemaType } from './generateApiDocumentationPage.types'
 import { getContext } from './openApiContext'
 
 const HiddenSections = ['file']
+const SectionsWithRequiredWorkspaceIdHeaders = ['bot', 'workspaceMember']
 
 type Section = {
   name: string
@@ -58,6 +60,11 @@ async function getApiDocumetationPageContent(): Promise<string> {
     md += `${section.description} \n\n`
     md += `export const ${routesVariableName} = ${JSON.stringify(endpointRoutes)} \n\n`
     md += `<EndpointBlock title={"Endpoints"} endpoints={${routesVariableName}} /> \n\n`
+
+    if (SectionsWithRequiredWorkspaceIdHeaders.includes(section.name)) {
+      md += '### Required Headers \n\n'
+      md += API_REQUIRED_WORKSPACE_ID_HEADER(section.title)
+    }
 
     if (section.schema) {
       // Custom link for the heading
