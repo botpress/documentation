@@ -18,10 +18,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@botpress/api": "^0.3.2",
+    "@botpress/api": "^0.5.3",
+    "@heroicons/react": "^2.0.18",
     "@vercel/og": "^0.5.0",
     "classnames": "^2.3.2",
-    "@heroicons/react": "^2.0.18",
     "esbuild": "^0.18.10",
     "lodash": "^4.17.21",
     "next": "^13.4.6",
