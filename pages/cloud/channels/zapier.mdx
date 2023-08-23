@@ -20,9 +20,21 @@
 ### Using Botpress to trigger a Zapier workflow
 
 1. If you're setting up Botpress as a Trigger in Zapier there will be an option to test the trigger and see some sample data that could be received from your bot. Use this to create the rest of your Zap.
-1. To make your bot send real data to Zapier, you'll find an action for Zapier when editing your bot in the Botpress Studio which you can use to send data to your zap. It's recommended that you send your data in JSON format so you can send multiple value at once, as Zapier will automatically parse it.
+1. To make your bot send real data to Zapier, you'll find a "Send to Zapier" action when editing your bot in the Botpress Studio which you can use to send data to your zap:
+   ![Zapier action](/docs/content/zapier-action.png)
+   It's recommended that you send your data in JSON format so you can send multiple value at once, as Zapier will automatically parse it. For example, you could use the following expression to send a JSON object with multiple values in the "Trigger Data" field of the "Send to Zapier" action:
+   ```
+   {{ JSON.stringify({ myVariable1: workflow.myVariable1, myVariable2: workflow.myVariable2 }) }}
+   ```
 
 ### Using Zapier to trigger an action in your Botpress chatbot
 
 1. If you're setting it up as an Action in Zapier, you can send custom Event Data to your bot and an optional Correlation ID which you can use to associate individual zap runs with a particular event in your bot.
-1. Zapier only allows entering a single text value for the Event Data, but you can put a Code Step from Zapier before the Botpress action in your zap in order to construct an object with multiple values and then use `JSON.stringify()` to convert it to a text field that you can use in your zap to pass as the Event Data.
+1. Zapier only allows entering a single text value for the Event Data, but you can put a Code Step from Zapier before the Botpress action in your zap in order to construct an object with multiple values and then use `JSON.stringify()` in your Code Step to convert the object to a text field that you can use in the last part of your Zap to pass it as the Event Data to Botpress.
+1. To receive data from Zapier in your bot, you can use the "Event from Zapier" trigger in the Studio:
+   ![Zapier action](/docs/content/zapier-trigger.png)
+1. And then add an Execute Code card with the following code assuming you sent your data in JSON format:
+   ```js
+   workflow.zapierData = JSON.parse(event.payload.body)
+   ```
+1. Now the rest of your trigger workflow can use the `{{ workflow.zapierData }}` variable to access the data you sent from Zapier.
