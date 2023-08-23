@@ -24,6 +24,10 @@ Authorization: Bearer {ACCESS_TOKEN}
 - **Integration Token**: This will be provided to the integration (once deployed) in the \`BP_TOKEN\` environment variable.
 `
 
+export const API_REQUIRED_WORKSPACE_ID_HEADER = (resourceLabel: string) => `
+To access these API endpoints the HTTP header \`x-workspace-id\` is required to be passed in all requests, containing the ID of the workspace that the ${resourceLabel} belongs to.
+`
+
 export const API_DOCS_PAGINATION = `
 The "List" endpoints of our API will return paginated results based on the creation date of the resource, with a default limit of 20 results per page.
 
