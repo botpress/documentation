@@ -53,7 +53,7 @@ export const google = new NodeCreator(
 export const botpressApi = new NodeCreator(
   {
     type: BOTPRESS_NODE,
-    position: { x: 150, y: 280 },
+    position: { x: 80, y: 280 },
     data: {
       label: 'Botpress Cloud',
       icon: BotpressIcon,
