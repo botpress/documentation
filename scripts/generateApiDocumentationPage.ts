@@ -16,7 +16,7 @@ import { getContext } from './openApiContext'
 
 const HiddenSections = ['file']
 const SectionsWithRequiredWorkspaceIdHeader = ['bot', 'integration', 'workspaceMember']
-const SectionsWithRequiredBotIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'hub', 'action']
+const SectionsWithRequiredBotIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'action']
 const SectionsWithRequiredIntegrationIdHeader = [
   'user',
   'conversation',
@@ -24,7 +24,6 @@ const SectionsWithRequiredIntegrationIdHeader = [
   'message',
   'file',
   'state',
-  'hub',
   'action',
 ]
 
