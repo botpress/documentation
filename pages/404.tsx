@@ -17,7 +17,7 @@ export default function Custom404() {
 
   return (
     <div className="flex h-[100vh] flex-col items-center justify-center">
-      <h1 className="mb-4">Oups! Looks like the page you're trying to access doesn't exist.</h1>
+      <h1 className="mb-4">Oops! Looks like the page you're trying to access doesn't exist.</h1>
       <Link href="/" className="mb-2 text-blue-500 hover:text-blue-800">
         Go to Documentation home
       </Link>
