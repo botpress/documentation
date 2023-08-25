@@ -1,11 +1,12 @@
 import '../style.scss'
 import { Toaster } from 'react-hot-toast'
+import LoadGTM from '../components/LoadGTM'
 
 export default function App({ Component, pageProps }) {
   return (
-    <>
+    <LoadGTM>
       <Component {...pageProps} />
       <Toaster toastOptions={{ duration: 20000 }} position="bottom-center" />
-    </>
+    </LoadGTM>
   )
 }
