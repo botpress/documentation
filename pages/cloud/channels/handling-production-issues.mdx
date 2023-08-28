@@ -1,0 +1,35 @@
+# Debugging Bot Behavior in Production
+
+## Situation: Bot Behaving Differently in Production
+
+### Scenario: Bot Already Live
+
+If your bot is already live and you're facing issues with its behavior, follow these steps:
+
+1. Export your bot by clicking the Botpress icon.
+2. Select "Export as" and save the exported file.
+3. Go to [app.botpress.cloud](https://app.botpress.cloud) and log in or create an account.
+4. Create a new bot within the platform.
+5. Click the Botpress icon and select "Import from file".
+6. Upload the exported file to the new bot on the platform.
+7. This will allow you to safely test and debug your bot's behavior.
+
+### Using Text as Breakpoints in Logs (Simple)
+
+If regular logs aren't sufficient, you can add Text Cards at different stages of the conversation to isolate problems:
+
+1. Insert Text Cards in various parts of the conversation.
+2. Deploy the bot to production and engage with it.
+3. Observe where the conversation deviates from the expected behavior using the text cards as indicators.
+
+### Using `console.log` in Logs (Advanced)
+
+For more detailed debugging, utilize `console.log` statements in the logs:
+
+1. Access [app.botpress.cloud](https://app.botpress.cloud) and select your bot.
+2. Navigate to the "Logs" tab to view your bot's runtime logs.
+3. To improve readability, add Custom Code Cards.
+4. Inside the Custom Code Cards, insert `console.log('message')` statements.
+5. Replace `'message'` with relevant information or variables like `workflow.userName`.
+6. Deploy the bot to production and trigger conversations.
+7. Check the logs to analyze the flow of the conversation and gather more information about the bot's behavior.
