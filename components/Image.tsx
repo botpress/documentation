@@ -1,7 +1,12 @@
 import classNames from 'classnames'
 import NextImage, { ImageProps as NextImageProps } from 'next/image'
 import { useRef, useState } from 'react'
-type ImageProps = { width?: number | 'full' | 'natural' }
+type ImageProps = {
+  /**
+   * defaults to `natural`
+   */
+  width?: number | 'full' | 'natural'
+}
 
 export function Image({ width = 'natural', ...props }: Omit<NextImageProps, 'width' | 'height'> & ImageProps) {
   const [isLoaded, setIsLoaded] = useState(false)
