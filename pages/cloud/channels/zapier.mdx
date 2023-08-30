@@ -1,3 +1,5 @@
+import { Image } from '@components/Image'
+
 # Zapier
 
 > The Botpress app for Zapier is currently in BETA. In order to use Botpress in your Zaps please [click here to obtain access](https://zapier.com/developer/public-invite/179950/2d89a44be6d7ddcae4ae23df0be19b3c/) to the private beta in Zapier.
@@ -41,3 +43,12 @@
    ```
 
 1. Now the rest of your trigger workflow can use the `{{ workflow.zapierData }}` variable to access the data you sent from Zapier.
+
+### Testing your Zapier integration
+
+You can create an "echo" zap in Zapier to test if everything works well. For example, you can create a zap that triggers when you send a message to your bot and then sends the same message back to your bot.
+Here's what a simple echo zap would look like:
+
+<Image src="/docs/content/zapier-echo-zap.png" alt='Screenshot of a sample "echo" zap' />
+
+The first action receives an event from the bot, and the second one sends the same event back to the bot. You can see the events you receive on the "Discover Events" button on the node containing "Events from Zapier" card.
