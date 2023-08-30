@@ -23,7 +23,7 @@ import { Image } from '@components/Image'
 
 1. If you're setting up Botpress as a Trigger in Zapier there will be an option to test the trigger and see some sample data that could be received from your bot. Use this to create the rest of your Zap.
 1. To make your bot send real data to Zapier, you'll find a "Send to Zapier" action card in Botpress Studio which you can use to send data from your bot to your Zap:
-   ![Zapier action](/docs/content/zapier-action.png)
+   <Image src="/docs/content/zapier-action.png" alt='"Send from Zapier" action in the Studio card tray' />
 1. It's recommended that you send your data in JSON format so you can send multiple value at once, as Zapier will automatically parse it. For example, you could use the following expression to send a JSON object with multiple values in the "Trigger Data" field of the "Send to Zapier" action:
 
    ```
@@ -35,7 +35,7 @@ import { Image } from '@components/Image'
 1. If you're setting it up as an Action in Zapier, you can send custom Event Data to your bot and an optional Correlation ID which you can use to associate individual zap runs with a particular event in your bot.
 1. Zapier only allows entering a single text value for the Event Data, but you can put a Code Step from Zapier before the Botpress action in your zap in order to construct an object with multiple values and then use `JSON.stringify()` in your Code Step to convert the object to a text field that you can use in the last part of your zap as the Event Data to send to Botpress.
 1. To receive data from Zapier in your bot, you can use the "Event from Zapier" trigger in the Studio:
-   ![Zapier action](/docs/content/zapier-trigger.png)
+   <Image src="/docs/content/zapier-trigger.png" alt='"Event from Zapier" event in the Studio card tray' />
 1. Then add an Execute Code card with the following code assuming you sent your data in JSON format:
 
    ```js
