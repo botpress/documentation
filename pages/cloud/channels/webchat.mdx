@@ -259,7 +259,62 @@ window.botpressWebchat.onEvent(
 ---
 
 <Callout type="info">
-  In simpler terms: - **botpressWebChat** is your toolbox. - **sendEvent** lets you signal the chat. - **sendPayload**
-  lets you send a message to the chatbot. - **configure** lets you set up the chat's behavior. - **mergeConfig** lets
-  you tweak that behavior. - **onEvent** lets you watch and react to things happening in the chat.
+  In simpler terms: 
+  - **botpressWebChat** is your toolbox. 
+  - **sendEvent** lets you signal the chat. 
+  - **sendPayload** lets you send a message to the chatbot. 
+  - **configure** lets you set up the chat's behavior. 
+  - **mergeConfig** lets you tweak that behavior. 
+  - **onEvent** lets you watch and react to things happening in the chat.
 </Callout>
+
+
+## Using the Web Chat in a React App
+
+You can use the web chat in a React app by creating a component that will add the web chat to your app.
+
+```jsx
+import React, { useEffect } from 'react'
+
+const Chatbot = () => {
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'https://cdn.botpress.cloud/webchat/v1/inject.js'
+    script.async = true
+    document.body.appendChild(script)
+
+    script.onload = () => {
+      window.botpressWebChat.init({
+        botId: '<botID>',
+        hostUrl: 'https://cdn.botpress.cloud/webchat/v1',
+        messagingUrl: 'https://messaging.botpress.cloud',
+        clientId: '<clientID>',
+      })
+    }
+  }, [])
+
+  return <div id="webchat" />
+}
+
+export default Chatbot
+```
+
+You can then add the component to your app.
+
+You can also click on the **Configurable** option if you want to customize the web chat configuration.
+```jsx
+import React from 'react'
+import Chatbot from './Chatbot'
+
+![Messaging channels](/docs/content/custom-config.png)
+const App = () => {
+  return (
+    <div>
+      <Chatbot />
+    </div>
+  )
+}
+
+Learn more about [customizing your chatbot](../webchat-customization/overview/)
+export default App
+```
