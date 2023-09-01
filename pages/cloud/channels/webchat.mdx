@@ -157,7 +157,7 @@ window.botpressWebchat.init({
 })
 ```
 
-### Send data from website to web chat
+### Send user data from website to Botpress
 
 You can send data from your website to the web chat using the `init` function.
 
@@ -177,31 +177,8 @@ window.botpressWebChat.init({
 })
 ```
 
-### Receiving data from website
+You can receive data from the web chat in Botpress by using `Get User Data` Card in the flow. In the User ID field, add `{{event.userId}}`.
 
-You can receive data from the web chat in your website by using `Get User Data` Card in the flow.
-
-#### User ID
-
-Pass the `userId` to the web chat to receive the data from the web chat using `{{event.userId}}` and store it in a variable.
-
-
-### customUser Object
-
-You can pass the `customUser` object to the web chat to pass the user data to the bot.
-
-```js
-window.botpressWebChat.init({
-  botId: '<botID>',
-  hostUrl: 'https://cdn.botpress.cloud/webchat/v1',
-  messagingUrl: 'https://messaging.botpress.cloud',
-  clientId: '<clientID>',
-  customUser: {
-    userId: 'uuid v4 as string',
-    userToken: 'token returned from the USER.CONNECTED post to parent',
-  },
-})
-```
 
 ---
 
