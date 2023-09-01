@@ -1,14 +1,315 @@
+import { Callout } from 'nextra/components'
+
 # Web Chat
 
 ![Messaging channels](/docs/content/webchat-banner.png)
 
+The Web Chat is a widget that you can add to your website to allow your users to interact with your chatbot. It's a great way to provide support to your users and answer their questions.
+
+## Settings
+
+### General Settings
+
+These will be displayed on the webchat page.
+
+#### Bot name
+
+The name of your bot that will be displayed in the web chat.
+
+#### Avatar URL
+
+The URL of the Avatar that webchat will use for your bot.
+
+#### Bot description
+
+A short description of your bot that will be displayed below the bot name in the web chat.
+
+#### Composer placeholder
+
+The placeholder text that will be displayed in the composer(input) of the web chat.
+
+#### Stylesheet URL
+
+The URL of the stylesheet that will be used to style the web chat. You can customize your web chat by creating your own stylesheet in CSS and uploading it to a CDN or your own server.
+
+You can also use the [Styler](https://styler.botpress.app/) to create your own stylesheet.
+
+### Bot information
+
+These will be displayed when the user clicks on the bot information page. You can enable or disable the bot information page using the toggle button from the Features section.
+
+#### Terms & Conditions
+
+The terms and conditions of your bot that will be displayed in the bot information page.
+
+#### Privacy Policy
+
+The privacy policy of your bot that will be displayed in the bot information page.
+
+### Features
+
+These will add options to the header of the webchat page.
+
+#### Show Bot Information
+
+This will add a button to the header of the webchat page that will open the bot information page.
+
+#### Show "Created with Botpress"
+
+White label your webchat by disabling this option. This will remove the **Created with Botpress** link from the footer of the webchat page. This is ON by default.
+
+#### Clear conversation on exit
+
+If you enable this option `useSessionStorage=true` will be added to your webchat configuration, the conversation will be stored in the browser's session storage. This means that the conversation will be cleared when the user closes the browser tab.
+
+#### Show delete conversation
+
+This will add a button to the header of the webchat page that will delete the conversation.
+
+## Prerequisites for adding Web Chat to your website
+
 1. Make sure you've [published your chatbot](../getting-started/create-and-publish-your-chatbot/#publishing-your-bot) to Botpress Cloud.
-2. Go to your published chatbot in the [Botpress Cloud](https://app.botpress.cloud/) dashboard and click on `Web Chat` under the `Channels` tab and **enable** it.
-3. Copy the **Pre-configured script** and paste it in the `<body></body>` tag of your HTML page.(Optional)
-4. You can share your chatbot with people that would like to quickly test your chatbot using the **Shareable Link**
+2. Go to your published chatbot in the [Botpress Cloud](https://app.botpress.cloud/) dashboard and click on `Web Chat` under the `Integrations` tab. (Enable it if it's not enabled)
+
+## Pre-configured Script
+
+### Shareable URL
+
+You can share your chatbot with people that would like to quickly test your chatbot using the **Shareable Link**.
+
+### Embedded Script
+
+This script will add the web chat to your website. You can copy the script and paste it in the `<body></body>` tag of your HTML page.
+This is the **recommended** way of adding the web chat to your website.
+
+## Using the Configurable Script
+
+The configurable webchat code must be updated manually every time there is a change. We highly recommend using the **Pre-configured** version.
+
+Copy the code from the **Configurable** tab and paste it in the `<body></body>` tag of your HTML page.
+
+### Configurable Script Parameters
+
+You can customize the webchat by changing/adding the values of the parameters in the script.
+
+| **Parameter**                | **Description**                                                                                                                                                                         | **Default value**      | **parameter type** |  
+| :--------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------- | :----------------- | 
+| `stylesheet`                 | Provide a path to a stylesheet to customize the web chat                                                                                                                                | `-`                    | string             |
+| `showConversationsButton`    | If false, will hide the conversation list pane                                                                                                                                          | `true`                 | boolean            |
+| `showTimestamp`              | If true, will display a timestamp under each messages                                                                                                                                   | `false`                | boolean            |
+| `enableTranscriptDownload`   | Allows the user to download the conversation history                                                                                                                                    | `true`                 | boolean            |
+| `enableConversationDeletion` | Allows the user to delete its conversation history                                                                                                                                      | `false`                | boolean            |
+| `closeOnEscape`              | Close the web chat when pressing the Esc key                                                                                                                                            | `true`                 | boolean            |
+| `botName`                    | Displays the bot name to the right of its avatar                                                                                                                                        | `-`                    | string             |
+| `composerPlaceholder`        | Allows to set a custom composer placeholder                                                                                                                                             | `'Reply to {botname}'` | string             |
+| `avatarUrl`                  | Allow to specify a custom URL for the bot's avatar                                                                                                                                      | `-`                    | string             |
+| `locale`                     | Force the display language of the web chat (en, fr, ar, ru, etc..) <br /> Defaults to the user's browser language if not set<br /> Set to 'browser' to force use the browser's language | `'browser'`            | string             |
+| `botConversationDescription` | Small description written under the bot's name                                                                                                                                          | `-`                    | string             |
+| `hideWidget`                 | When true, the widget button to open the chat is hidden                                                                                                                                 | `false`                | boolean            |
+| `disableAnimations`          | Disable the slide in / out animations of the web chat                                                                                                                                   | `false`                | boolean            |
+| `useSessionStorage`          | Use sessionStorage instead of localStorage, which means the session expires when tab is closed                                                                                          | `false`                | boolean            |
+| `containerWidth`             | Sends an event to the parent container with the width provided                                                                                                                          | `360`                  | string OR number   |
+| `layoutWidth`                | Sets the width of the web chat                                                                                                                                                          | `360`                  | string OR number   |
+| `enablePersistHistory`       | When enabled, sent messages are persisted to local storage (recall previous messages)                                                                                                   | `true`                 | boolean            |
+| `className`                  | CSS class to be applied to iframe                                                                                                                                                       | `-`                    | string             |
+| `disableNotificationSound`   | If true, chat will no longer play the notification sound for new messages.                                                                                                              | `false`                | boolean            |
+| `googleMapsAPIKey`           | Google Maps API Key required to display the map. It will display a link to Google Maps otherwise.                                                                                       | `-`                    | string             |
+| `website`                    | Displays the bot's website in the conversation page                                                                                                                                     | `-`                    | string             |
+| `phoneNumber`                | Displays the bot's contact phone number in the conversation page                                                                                                                        | `-`                    | string             |
+| `termsConditions`            | Displays the bot's terms of service in the conversation page                                                                                                                            | `-`                    | string             |
+| `privacyPolicy`              | Displays the bot's privacy policy in the conversation page                                                                                                                              | `-`                    | string             |
+| `emailAddress`               | Displays the bot's email address in the conversation page.                                                                                                                              | `-`                    | string             |
+| `coverPictureUrl`            | Displays the bot's cover picture in the conversation page                                                                                                                               | `-`                    | string             |
+| `showBotInfoPage`            | Enables the bot's information page in the web chat                                                                                                                                      | `false`                | boolean            |
+| `showCloseButton`            | Display's the web chat close button when the web chat is opened                                                                                                                         | `true`                 | boolean            |
+| `userData`                   | Passes the user data to the bot                                                                                                                                                         | `-`                    | object             |
+| `customUser`                 | Passes the custom user data to the bot                                                                                                                                                  | `-`                    | object             |
+
+## botpressWebChat Object Events
+
+This object is like a toolkit that provides various tools (or functions) to interact with the Botpress web chat.
+
+```js
+window.botpressWebChat = {
+  init,
+  configure,
+  sendEvent,
+  mergeConfig,
+  sendPayload,
+  onEvent,
+}
+```
+
+<Callout type="info">It's the main toolkit you'll be using to work with the chat.</Callout>
+
+---
+
+### init
+
+This function initializes the web chat and connects it to your bot. It's like setting up the chat.
+
+```js
+window.botpressWebchat.init({
+  botId: '<botID>',
+  hostUrl: 'https://cdn.botpress.cloud/webchat/v1',
+  messagingUrl: 'https://messaging.botpress.cloud',
+  clientId: '<clientID>',
+})
+```
+
+### Send user data from website to Botpress
+
+You can send data from your website to the web chat using the `init` function.
+
+```js
+window.botpressWebChat.init({
+  botId: '<botID>',
+  hostUrl: 'https://cdn.botpress.cloud/webchat/v1',
+  messagingUrl: 'https://messaging.botpress.cloud',
+  clientId: '<clientID>',
+  userData: {
+    type: 'feedback',
+    data: {
+      rating: '5',
+      comment: 'This is a test comment',
+    },
+  },
+})
+```
+
+You can receive data from the web chat in Botpress by using `Get User Data` Card in the flow. In the User ID field, add `{{event.userId}}`.
+
+
+---
+
+### sendEvent
+
+This function allows you to send a custom event to the chat. Think of it as sending a signal to the chat for it to do something specific.
+
+```js
+// Show the chat
+window.botpressWebchat.sendEvent({ type: 'show' })
+
+// Hide the chat
+window.botpressWebchat.sendEvent({ type: 'hide' })
+
+// Toggle the chat
+window.botpressWebchat.sendEvent({ type: 'toggle' })
+
+// Send a message to the chatbot
+window.botpressWebchat.sendEvent({ type: 'message', payload: { type: 'text', content: 'Hello, Botpress!' } })
+
+// Load a conversation by ID
+window.botpressWebchat.sendEvent({ type: 'loadConversation', conversationId: '6ffe8622-49fd-4de9-81e5-412ba2296913' })
+
+// Create a new conversation
+window.botpressWebchat.sendEvent({ type: 'createConversation' })
+
+// Toggle the bot info page
+window.botpressWebchat.sendEvent({ type: 'toggleBotInfo' })
+```
+
+---
+
+### sendPayload
+
+You can use this function to send a specific message or instruction to the chatbot.
+
+```js
+window.botpressWebchat.sendPayload({ type: "trigger", payload: { customProperty1: "value1", ...}});
+```
+
+---
+
+### configure
+
+Use this to set the chat's configuration. It's like setting the rules or preferences for how the chat should behave.
+
+```js
+window.botpressWebchat.configure({ showTimestamp: true, botName: 'ChatBot' })
+```
+
+---
+
+### mergeConfig
+
+If you want to update only a part of the chat's configuration without changing everything, you'd use `mergeConfig`.
+
+```js
+window.botpressWebchat.mergeConfig({ showTimestamp: false })
+```
+
+---
+
+### onEvent
+
+This function lets you listen for certain events happening in the chat and then do something when they happen. It's like setting up a watch for specific actions.
+
+```js
+window.botpressWebchat.onEvent(
+  (event) => {
+    if (event.type === 'message') {
+      console.log('A new message was received!')
+    }
+  },
+  ['message']
+)
+```
+
+---
+
+<Callout type="info">
+  In simpler terms: - **botpressWebChat** is your toolbox. - **sendEvent** lets you signal the chat. - **sendPayload**
+  lets you send a message to the chatbot. - **configure** lets you set up the chat's behavior. - **mergeConfig** lets
+  you tweak that behavior. - **onEvent** lets you watch and react to things happening in the chat.
+</Callout>
+
+## Using the Web Chat in a React App
+
+You can use the web chat in a React app by creating a component that will add the web chat to your app.
+
+```jsx
+import React, { useEffect } from 'react'
+
+const Chatbot = () => {
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'https://cdn.botpress.cloud/webchat/v1/inject.js'
+    script.async = true
+    document.body.appendChild(script)
+
+    script.onload = () => {
+      window.botpressWebChat.init({
+        botId: '<botID>',
+        hostUrl: 'https://cdn.botpress.cloud/webchat/v1',
+        messagingUrl: 'https://messaging.botpress.cloud',
+        clientId: '<clientID>',
+      })
+    }
+  }, [])
+
+  return <div id="webchat" />
+}
+
+export default Chatbot
+```
+
+You can then add the component to your app.
 
 You can also click on the **Configurable** option if you want to customize the web chat configuration.
+```jsx
+import React from 'react'
+import Chatbot from './Chatbot'
 
 ![Messaging channels](/docs/content/custom-config.png)
+const App = () => {
+  return (
+    <div>
+      <Chatbot />
+    </div>
+  )
+}
 
 Learn more about [customizing your chatbot](../webchat-customization/overview/)
+export default App
+```
