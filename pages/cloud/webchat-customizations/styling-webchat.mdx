@@ -1,0 +1,782 @@
+import { Table, Td, Tr } from '@components/WrapperElements'
+import { Callout } from 'nextra/components'
+
+## Styling the Web Chat
+
+This CSS code includes styles for a chatbot widget
+
+<br />
+
+|    Class Name |    Description | 
+| :--- | :--- | 
+  |    .bpw-layout |     Sets the height, position, border, border-radius, and z-index of the chatbot widget. | 
+  |    .bpw-header-title |    Sets the font color of the chatbot header title to white. | 
+  |    .bpw-from-bot .bpw-chat-bubble .bpw-chat-bubble-content |     Sets the font color and background color of the chatbot message bubbles from the bot. | 
+  |    .bpw-header-icon |     Sets the fill color of the chatbot header icon to white when hovered over. | 
+  |    .bpw-header-container |     Sets the border, background color, and border radius of the chatbot header container. | 
+  |    .bpw-header-title-container .bpw-bot-avatar |    Hides the bot avatar in the chatbot header title container. | 
+  |    a |     Sets the font color of links in the chatbot widget to white and changes color to light gray when hovered over. | 
+  |    .bpw-from-user .bpw-chat-bubble .bpw-chat-bubble-content |     Sets the background color and border radius of the chatbot message bubbles from the user. | 
+  |    #botpress-tooltip-1, #botpress-tooltip-37 |    Hides the tooltips for the chatbot widget. | 
+  |    .bpw-send-button |    Sets the appearance and position of the chatbot send button. | 
+  |    .bpw-powered |    Hides the powered by Botpress logo in the chatbot widget. | 
+  |    .bpw-card-action |     Sets the font weight, color, and border of the action buttons in the chatbot card carousel. | 
+  |    .bpw-card-container |    Sets the border of the chatbot card carousel. | 
+  |    .bpw-keyboard-quick_reply |     Sets the background color and padding of the chatbot quick reply buttons. | 
+  |    .bpw-button |    Sets the appearance and font of the chatbot quick reply buttons. | 
+  |    .bpw-widget-btn |     Sets the appearance and background image of the chatbot widget button. | 
+  |    .bpw-floating-button |    Removes the box shadow from the chatbot widget button. | 
+
+<br />
+
+Go to next chapters to learn more about how to configure these classes.
+
+
+### Chatbot Button
+
+![Styling Webchat](/docs/content/chat-button-cover.png)
+
+You can Customize the Chatbot Button using below CSS
+
+<br />
+This class styles the floating button element
+
+```typescript
+.bpw-floating-button {
+    /* Aligns the button to the right side of the container */
+    float: right;
+    /* Sets the fill color of the button icon */
+    fill: rgb(255, 255, 255);
+    /* Changes the cursor to a pointer when hovering over the button */
+    cursor: pointer;
+    /* Removes the outline around the button when clicked */
+    outline: none;
+
+    /* Centers the icon inside the button element */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Sets the z-index to ensure the button is on top of other elements */
+    z-index: 1;
+    /* Sets the width and height of the button */
+    width: 52px;
+    height: 52px;
+    /* Changes the cursor to a pointer when hovering over the button */
+    cursor: pointer;
+    /* Rounds the corners of the button */
+    border-radius: 50%;
+    /* Adds a shadow effect to the button */
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+    /* Clips any content that overflows the button */
+    overflow: hidden;
+
+    /* Removes padding and borders from the button */
+    padding: 0;
+    border: none;
+    background-clip: padding-box;
+
+    /* Adds a transition effect to the button when its size changes */
+    transition: width 1s, height 1s;
+}
+```
+
+<br/>
+To add your own Icon as Chatbot Button, use this code
+```typescript
+.bpw-floating-button {
+    background-image: url(YOUR_URL);
+}
+```
+
+<br />
+
+This class styles the icon inside the floating button
+
+```typescript
+.bpw-floating-button i {
+    /* Adds a transition effect to the icon when its opacity changes */
+    transition: opacity 0.3s ease;
+    /* Sets the opacity of the icon to fully visible */
+    opacity: 1;
+    /* Inherit the fill and stroke color from the parent button element */
+    fill: inherit;
+    stroke: inherit;
+    /* Sets the width of the icon to 100% of the parent button element */
+    width: 100%;
+    /* Removes padding and sets line-height to 0 to center the icon */
+    padding: 0;
+    line-height: 0;
+}
+```
+
+<br />
+This class styles the notification badge on the floating button
+
+```typescript
+.bpw-floating-button .bpw-floating-button-unread {
+    /* Displays the notification badge */
+    display: block;
+    /* Positions the badge to the top right of the button */
+    position: absolute;
+    right: 2px;
+    bottom: 54px;
+    /* Sets the width and height of the badge */
+    width: 20px;
+    height: 20px;
+    /* Rounds the corners of the badge to make it circular */
+    border-radius: 50%;
+    /* Centers the text inside the badge */
+    line-height: 20px;
+
+    /* Sets the color of the text inside the badge */
+    color: #fff;
+    /* Sets the background color of the badge */
+    background-color: #ff5d5d;
+    /* Adds a shadow effect to the badge */
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.4);
+}
+```
+
+
+
+### Chat Header
+
+![Styling Webchat](/docs/content/chat-header-cover.png)
+
+You can Customize the Chatbot Header using below CSS
+
+<br />
+1. Styles the Header Icon
+
+```css
+/* This block of CSS code styles a header icon element */
+.bpw-header-icon {
+  /* Remove border */
+  border: none;
+  /* Remove background color */
+  background: none;
+  /* Remove padding */
+  padding: 0;
+  /* Remove margin */
+  margin: 0;
+  /* Set text color to a variable named shark */
+  color: var(--shark);
+  /* Set line-height to zero */
+  line-height: 0;
+  /* Set left margin to a variable named spacing-large */
+  margin-left: var(--spacing-large);
+  /* Align text to the right */
+  text-align: right;
+  /* Align element vertically in the middle */
+  vertical-align: middle;
+  /* Set cursor to a pointer */
+  cursor: pointer;
+  /* Set fill color to a variable named shark */
+  fill: var(--shark);
+  /* Set width to 16 pixels */
+  width: 16px;
+  /* Set height to 16 pixels */
+  height: 16px;
+  /* Set fill transition duration to 0.3 seconds */
+  transition: fill 0.3s;
+}
+
+/* Apply the same fill color and fill transition to the icon's SVG and path elements */
+.bpw-header-icon svg,
+.bpw-header-icon svg path {
+  /* Set fill color to a variable named shark */
+  fill: var(--shark);
+  /* Set fill transition duration to 0.3 seconds */
+  transition: fill 0.3s;
+}
+
+/* When the icon is hovered over, change the fill color to a variable named reef for the icon, SVG and path elements */
+.bpw-header-icon:hover,
+.bpw-header-icon:hover svg,
+.bpw-header-icon:hover svg path {
+  fill: var(--reef);
+}
+```
+
+<br />
+2. Styles the Header Title & Subtitle
+
+```typescript
+.bpw-header-title-flexbox {
+    /* sets the overflow behavior of the element */
+    overflow: hidden;
+    /* sets the text overflow behavior of the element */
+    text-overflow: ellipsis;
+    /* sets the flexbox properties of the element for webkit browsers */
+    -webkit-box-flex: 1;
+    /* sets the flexbox properties of the element for Microsoft browsers */
+    -ms-flex: 1 1 auto;
+    /* sets the flexbox properties of the element */
+    flex: 1 1 auto;
+}
+
+.bpw-header-title-container {
+    /* sets the vertical alignment of the element */
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    /* sets the display of the element to use flexbox for webkit browsers */
+    display: -webkit-box;
+    /* sets the display of the element to use flexbox for Microsoft browsers */
+    display: -ms-flexbox;
+    /* sets the display of the element to use flexbox */
+    display: flex;
+}
+
+.bpw-header-title-container .bpw-bot-avatar {
+    /* sets the display of the element to none */
+    display: none;
+}
+
+.bpw-header-title-container .bpw-bot-avatar svg {
+    /* sets the zoom level of the element */
+    zoom: 0.6;
+}
+
+.bpw-header-name {
+    /* sets the font weight of the element */
+    font-weight: 500;
+    /* sets the font size of the element */
+    font-size: 14px;
+    /* sets the color of the element */
+    color: var(--zinc-600);
+}
+
+.bpw-header-subtitle {
+    /* sets the overflow behavior of the element */
+    overflow: hidden;
+    /* sets the white space handling of the element */
+    white-space: nowrap;
+    /* sets the text overflow behavior of the element */
+    text-overflow: ellipsis;
+    /* sets the font weight of the element */
+    font-weight: 300;
+    /* sets the font size of the element */
+    font-size: 12px;
+    /* sets the color of the element */
+    color: var(--zinc-400);
+}
+
+.bpw-header-unread {
+    /* sets the display of the element to none */
+    display: none;
+}
+
+.sr-only {
+    /* sets the position of the element to absolute */
+    position: absolute;
+    /* sets the width of the element */
+    width: 1px;
+    /* sets the height of the element */
+    height: 1px;
+    /* sets the padding of the element */
+    padding: 0;
+    /* sets the margin of the element */
+    margin: -1px;
+    /* sets the overflow behavior of the element */
+    overflow: hidden;
+    /* clips the element to the given rectangle */
+    clip: rect(0, 0, 0, 0);
+    /* sets the border of the element */
+    border: 0;
+}
+```
+
+<br />
+3. Menu items. (Use these values in the init object)
+<Table>
+  <Tr>
+    <Td>**Customization Variable**</Td>
+    <Td>**Variable type**</Td>
+    <Td>**Default value**</Td>
+    <Td>**Description**</Td>
+  </Tr>
+  <Tr>
+    <Td>`showConversationsButton`</Td>
+    <Td>boolean</Td>
+    <Td>`true`</Td>
+    <Td>If false, will hide the conversation list pane</Td>
+  </Tr>
+  <Tr>
+    <Td>`enableTranscriptDownload`</Td>
+    <Td>boolean</Td>
+    <Td>`true`</Td>
+    <Td>Allows the user to download the conversation history</Td>
+  </Tr>
+  <Tr>
+    <Td>`enableConversationDeletion`</Td>
+    <Td>boolean</Td>
+    <Td>`false`</Td>
+    <Td>Allows the user to delete its conversation history</Td>
+  </Tr>
+  <Tr>
+    <Td>`showCloseButton`</Td>
+    <Td>boolean</Td>
+    <Td>`true`</Td>
+    <Td>Display's the web chat close button when the web chat is opened</Td>
+  </Tr>
+</Table>
+
+<br/>
+4. Styles the Header Container
+```typescript
+.bpw-header-container {
+    /* sets the border radius of the element */
+    border-radius: var(--spacing-large);
+    /* sets the background color of the element */
+    background: var(--white);
+    /* sets the border of the element */
+    border: 1px solid var(--zinc-200);
+    /* sets the border radius of the element (repeated declaration) */
+    border-radius: var(--spacing-medium);
+    /* sets the padding of the element */
+    padding: var(--spacing-large) var(--spacing-x-large);
+}
+```
+
+
+### User Input Area
+
+![Styling Webchat](/docs/content/chat-input-cover.png)
+
+You can Customize the User Input(text-area and send button) using below CSS
+
+```css filename="input.css" copy
+/* Style for the composer section */
+.bpw-composer {
+  padding: 0; /* Remove any padding */
+  position: relative; /* Set the position to relative */
+  outline: none; /* Remove any outline */
+  border: none; /* Remove any border */
+}
+
+/* Style for the composer inner section */
+.bpw-composer-inner {
+  padding: 0; /* Remove any padding */
+  line-height: 0; /* Remove any line-height */
+  position: relative; /* Set the position to relative */
+
+  /* Set the display property for different browsers */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  justify-content: space-between; /* Align items to the start and end of the container */
+}
+
+/* Style for the composer textarea */
+.bpw-composer-textarea {
+  flex-grow: 2; /* Allow the textarea to grow to fill the available space */
+}
+
+/* Styles for the textarea element in the composer */
+.bpw-composer textarea {
+  /* Sets the background color to a variable named "--white" */
+  background: var(--white);
+  /* Sets the border to a 1-pixel solid line using a variable named "--zinc-200" */
+  border: 1px solid var(--zinc-200);
+  /* Sets the border radius to a variable named "--spacing-medium" to make the edges rounded */
+  border-radius: var(--spacing-medium);
+  /* Sets the text color to a variable named "--zinc-900" */
+  color: var(--zinc-900);
+  /* Inherits the font family from the parent element */
+  font-family: inherit;
+  /* Sets the font size to 12 pixels */
+  font-size: 12px;
+  /* Sets the height of the textarea to 54 pixels */
+  height: 54px;
+  /* Sets the padding on the top to 19 pixels, and on the right and left to a variable named "--spacing-large" */
+  padding: 19px var(--spacing-large) var(--spacing-large);
+  /* Disables the ability to resize the textarea */
+  resize: none;
+  /* Adds a 0.2-second transition effect to the border when the focus changes */
+  transition: border 0.2s;
+  /* Sets the width of the textarea to 100% */
+  width: 100%;
+  /* Sets the margin on the right side to a variable named "--spacing-small" */
+  margin-right: var(--spacing-small);
+}
+
+/* Styles for the textarea element when it is in focus */
+.bpw-composer textarea:focus {
+  /* Changes the border color to a variable named "--zinc-300" */
+  border-color: var(--zinc-300);
+}
+
+/* Styles for the textarea element when it is in right-to-left mode */
+.bpw-composer.rtl .bpw-composer-inner textarea {
+  /* Sets the text direction to right-to-left */
+  direction: rtl;
+}
+
+/* Styles for the textarea element when it is in left-to-right mode */
+.bpw-composer.ltr .bpw-composer-inner textarea {
+  /* Sets the text direction to left-to-right */
+  direction: ltr;
+}
+
+/* Styles for the quick reply dropdown menu */
+.bpw-keyboard-quick_reply-dropdown {
+  /* Sets a margin of 0.2rem on the top and bottom and 0.5rem on the right and left */
+  margin: 0.2rem 0.5rem;
+}
+
+/* Styles for the send button when it is disabled */
+.bpw-send-button:disabled,
+.bpw-send-button:disabled:hover {
+  /* Sets the opacity to 0.4 to make the button appear slightly transparent */
+  opacity: 0.4;
+  /* Sets the background color to a variable named "--theme-primary" */
+  background-color: var(--theme-primary);
+  /* Changes the cursor to the default cursor */
+  cursor: default;
+}
+
+/* Styles for the container holding the send buttons */
+.bpw-send-buttons {
+  /* Sets the display mode to flex and the direction to horizontal */
+  display: flex;
+  flex-direction: row;
+  /* Aligns the items to the center */
+  align-items: center;
+}
+/* This is the CSS style for the button that sends a message */
+
+.bpw-send-button {
+  display: flex; /* Set the button to be arranged using flexible layout */
+  justify-content: center; /* Center the button's content horizontally */
+  align-items: center; /* Center the button's content vertically */
+  border-radius: var(
+    --spacing-medium
+  ); /* Make the corners of the button slightly rounded */
+  background-color: var(
+    --theme-primary
+  ); /* Give the button a primary color background */
+  padding: 20px; /* Add some extra space around the button's content */
+  width: 24px; /* Set the button's width to be 24 pixels */
+  height: 24px; /* Set the button's height to be 24 pixels */
+  color: transparent; /* Hide any text that might appear inside the button */
+  cursor: pointer; /* Show the pointer cursor when the button is hovered over */
+  background-image: url(./button.png) !important; /* Add an image to the button */
+  background-repeat: no-repeat !important; /* Don't repeat the image */
+  background-position: center !important; /* Center the image inside the button */
+  transition: background-color 0.2s; /* Make the button's background color change smoothly over a short period of time */
+}
+
+/* This is the CSS style for the button that sends a message when it's not disabled and is being hovered over */
+
+.bpw-send-button:not(:disabled):hover {
+  background-color: var(
+    --theme-primary-hover
+  ); /* Change the button's background color to a different color when it's being hovered over */
+}
+
+/* This is the CSS style for the voice recorder */
+
+.bpw-voice-recorder {
+  display: flex; /* Set the voice recorder to be arranged using flexible layout */
+  flex-direction: row; /* Arrange the voice recorder's content horizontally */
+  align-items: center; /* Center the voice recorder's content vertically */
+}
+```
+
+
+### Bot information page
+
+![Styling Webchat](/docs/content/chat-info-cover.png)
+
+You can Customize the Chatbot's Information Page using below CSS
+
+<br />
+To show bot information page, you will need to add **showBotInfoPage : true** in
+your webchat init object
+
+<br />
+```typescript
+
+/_ Styling for the bot summary section _/
+.bpw-botinfo-summary {
+margin-top: -32px; /_ Move the section up by 32px _/
+border-bottom: solid 1px rgba(0, 0, 0, 0.1); /_ Add a 1px solid border to the bottom _/
+box-shadow: 0px 4px 5px -5px var(--gray); /_ Add a box shadow effect _/
+text-align: center; /_ Center align the text _/
+}
+
+/_ Styling for the bot avatar _/
+.bpw-botinfo-summary .bpw-bot-avatar.default {
+margin: 0 auto var(--spacing-medium); /_ Center the avatar image and add some margin at the bottom _/
+}
+
+/_ Styling for the bot information container _/
+.bpw-botinfo-container {
+margin: 0 auto; /_ Center the container _/
+max-width: 800px; /_ Set a maximum width of 800px _/
+width: 100%; /_ Set the width to 100% _/
+text-align: center; /_ Center align the text _/
+color: #1e1e1e; /_ Set the font color to a dark gray _/
+overflow-y: auto; /_ Add a vertical scroll bar if the content overflows _/
+height: 100%; /_ Set the height to 100% _/
+}
+
+/_ Styling for the bot cover picture wrapper _/
+.bpw-botinfo-cover-picture-wrapper {
+height: 50%; /_ Set the height to 50% _/
+overflow: hidden; /_ Hide any content that overflows the container _/
+}
+
+/_ Styling for the bot cover picture _/
+.bpw-botinfo-cover-picture {
+width: 100%; /_ Set the width to 100% _/
+object-fit: cover; /_ Scale the image to fit the container and maintain its aspect ratio _/
+}
+
+/_ Styling for buttons and links _/
+.bpw-botinfo-container button,
+.bpw-botinfo-container a {
+font-size: 0.9em; /_ Set the font size to 0.9em _/
+color: rgb(102, 102, 102); /_ Set the font color to a light gray _/
+text-decoration: none; /_ Remove any text decoration _/
+}
+
+/_ Styling for the bot description section _/
+.bpw-botinfo-description {
+margin-top: 0.4em; /_ Add some margin at the top _/
+margin-bottom: 1em; /_ Add some margin at the bottom _/
+}
+
+/_ Styling for the bot summary header _/
+.bpw-botinfo-summary h3 {
+margin: 0; /_ Remove any margin _/
+}
+
+/_ Styling for the bot links section _/
+.bpw-botinfo-links {
+border-bottom: solid 1px rgba(0, 0, 0, 0.1); /_ Add a 1px solid border to the bottom _/
+}
+
+/_ Styling for each bot link _/
+.bpw-botinfo-link {
+padding-left: 25%; /_ Add some padding to the left _/
+display: flex; /_ Use flexbox to align the content _/
+margin: 20px 0; /_ Add some margin at the top and bottom _/
+}
+
+/_ Styling for the bot link icon _/
+.bpw-botinfo-link i {
+margin-right: 10px; /_ Add some margin to the right _/
+}
+
+/_ Styling for the preferred language section _/
+.bpw-botinfo-preferred-language {
+margin: 20px 0; /_ Add some margin at the top and bottom _/
+}
+/_ This section defines the styling for the user's preferred language dropdown select box _/
+.bpw-botinfo-preferred-language select {
+/_ Adds 10 pixels of margin to the left of the select element _/
+margin-left: 10px;
+}
+
+/_ This section defines the styling for the terms and conditions link _/
+.bpw-botinfo-terms {
+/_ Adds 0 pixels of padding to the top and bottom, and 20 pixels of padding to the left and right _/
+padding: 0px 20px;
+/_ Aligns the text to the left _/
+text-align: left;
+}
+
+.bpw-botinfo-terms a {
+/_ Makes the anchor element a block-level element that is inline with the rest of the text _/
+display: inline-block;
+/_ Sets the width of the anchor element to 100% _/
+width: 100%;
+/_ Sets the height of each line of text within the anchor element to 2.5 times the font size _/
+line-height: 2.5;
+/_ Adds a solid 1 pixel border to the bottom of the anchor element with a slightly transparent black color _/
+border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+/_ This section defines the styling for the start button _/
+.bpw-botinfo-start-button {
+/_ Sets the font of the element to inherit from the parent element _/
+font: inherit;
+/_ Sets the text color of the element to inherit from the parent element _/
+color: inherit;
+/_ Sets the background color of the element to be transparent _/
+background-color: transparent;
+/_ Changes the mouse cursor to a pointer when hovering over the element _/
+cursor: pointer;
+/_ Adds a 20 pixel border radius to the corners of the element _/
+border-radius: 20px;
+/_ Sets the height of each line of text within the element to 24 pixels _/
+line-height: 24px;
+/_ Adds 5 pixels of padding to the top and bottom, and 10 pixels of padding to the left and right of the element _/
+padding: 5px 10px;
+/_ Adds 25 pixels of margin to the top of the element _/
+margin-top: 25px;
+/_ Adds a solid 1 pixel border to the element with a gray color _/
+border: 1px solid rgb(100, 100, 100);
+}
+
+/_ This section defines the styling for the start button when it has focus _/
+.bpw-botinfo-start-button:focus {
+/_ Changes the border color of the element to black when it has focus _/
+border: 1px solid black;
+/_ Changes the text color of the element to black when it has focus _/
+color: black;
+}
+```
+
+### Chatbot inside a &#60;div&#62;
+
+The chatbot is embedded inside a div with class `center-div` and is rendered inside this div.
+
+Make sure to use your own `botId` and `clientId`.
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Botpress in a div</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        color: white;
+        background-color: #000000;
+        font-family: Arial, sans-serif;
+      }
+
+      .center-div {
+        width: 50vw;
+        height: 80vh;
+        background-color: rgb(102, 71, 255);
+        border-radius: 15px;
+        padding: 5px;
+        box-sizing: border-box;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .center-div {
+          height: 40vh;
+          width: 80vw;
+          background-color: rgb(102, 71, 255);
+          border-radius: 15px;
+          padding: 5px;
+          box-sizing: border-box;
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <p style="text-align: center;">Botpress Chatbot in a <span><</span><span>div></span></p>
+      <div class="absolute inset-4 ">
+        <div
+          class="center-div relative h-full w-full overflow-clip rounded-md border border-zinc-200 bg-white p-2 px-0 py-0"
+        >
+          <iframe
+            style="border: none;"
+            srcdoc="<body><script src='https://cdn.botpress.cloud/webchat/v0/inject.js'></script>
+            <script>
+              window.botpressWebChat.init({
+                  'composerPlaceholder': 'Chat with bot',
+                  'botConversationDescription': 'This chatbot was built surprisingly fast with Botpress',
+                  'botName': 'Name',
+                  'botId': 'f87c4530-e481-49dd-8841-236d83aa1389',
+                  'hostUrl': 'https://cdn.botpress.cloud/webchat/v0',
+                  'messagingUrl': 'https://messaging.botpress.cloud',
+                  'clientId': 'f87c4530-e481-49dd-8841-236d83aa1389',
+                  'enableConversationDeletion': true,
+                  'showPoweredBy': true,
+                  'className': 'webchatIframe',
+                  'containerWidth': '100%25',
+                  'layoutWidth': '100%25',
+                  'hideWidget': true,
+                  'showCloseButton': false,
+                  'disableAnimations': true,
+                  'closeOnEscape': false,
+                  'showConversationsButton': false,
+                  'enableTranscriptDownload': false,
+                  'stylesheet':'https://webchat-styler-css.botpress.app/prod/code/3fcd3e4e-d5bc-4bf5-8699-14b621b3ada2/v31782/style.css'
+                  
+              });
+            window.botpressWebChat.onEvent(function () { window.botpressWebChat.sendEvent({ type: 'show' }) }, ['LIFECYCLE.LOADED']);
+            </script></body>"
+            width="100%"
+            height="100%"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+```
+
+[Test in codepen](https://codepen.io/rohankokkulabp/pen/NWELmQM) and use it in your website.
+
+### Full Screen Chatbot
+
+![Styling Webchat](/docs/content/chat-full-cover.png)
+
+You can Customize the Chatbot to be Full Screen by default using below CSS
+
+```typescript
+// Import the Botpress WebChat JavaScript file
+<script src="https://cdn.botpress.cloud/webchat/v0/inject.js"></script>
+
+// Initialize the Botpress WebChat with the required parameters
+<script>
+    window.botpressWebChat.init({
+        // Replace <your-bot-id> and <your-client-id> with your actual bot and client IDs
+        "botId": "<your-bot-id>",
+        "clientId": "<your-client-id>",
+
+        // Set the URL for the Botpress WebChat JavaScript file and the messaging server
+        "hostUrl": "https://cdn.botpress.cloud/webchat/v0",
+        "messagingUrl": "https://messaging.botpress.cloud",
+
+        // Set the name of the bot that will be displayed in the WebChat interface
+        "botName": "Test",
+
+        // Set the width of the WebChat container and layout to 100% (Full Screen)
+        "containerWidth": "100%25",
+        "layoutWidth": "100%25",
+
+        // Hide the widget and disable animations
+        "hideWidget": true,
+        "disableAnimations": true,
+    });
+
+    // Opens up the Chatbot by default
+    // This lets users start chatting with the Chatbot without needing to click any buttons or menus.
+    window.botpressWebChat.onEvent(
+        function () {
+            window.botpressWebChat.sendEvent({ type: "show" });
+        },
+        ["LIFECYCLE.LOADED"]
+    );
+</script>
+
+```

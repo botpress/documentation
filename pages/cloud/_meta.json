@@ -5,6 +5,6 @@
   "generative-ai": "Generative AI",
   "studio": "Studio Interface",
   "toolbox": "Toolbox",
-  "webchat-customization": "Webchat Customization",
-  "channels": "Messaging Channels"
+  "webchat-customizations": "Webchat Customizations",
+  "channels": "Integrations"
 }

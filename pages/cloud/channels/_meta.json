@@ -1,5 +1,6 @@
 {
   "overview": "",
+  "webchat": "Web Chat",
   "webhook": "Webhook",
   "whatsapp": "WhatsApp",
   "messenger": "",
@@ -9,7 +10,6 @@
   "telegram": "",
   "twilio": "",
   "vonage": "",
-  "webchat": "Web Chat",
   "viber": "",
   "line": "",
   "gmail": "",
