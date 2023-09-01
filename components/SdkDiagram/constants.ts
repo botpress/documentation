@@ -143,7 +143,7 @@ export const gmail = new NodeCreator(
 
 export const bot = new NodeCreator(
   {
-    position: { x: 300, y: 610 },
+    position: { x: 300, y: 540 },
     type: BOTPRESS_NODE,
 
     data: {
