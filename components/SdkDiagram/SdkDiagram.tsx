@@ -14,7 +14,9 @@ const initialEdges = [
   google.connectWithSubNode(botpressApi, 'webhook', 'handler'),
   botpressApi.connectWithSubNode(gmail, 'handler', 'handler'),
   botpressApi.connectWithSubNode(gmail, 'Webhook handler', 'channels.message.text'),
-  bot.connectWithSubNode(botpressApi, 'Trigger', 'Webhook handler', { hasLabel: false }),
+  bot.connectWithSubNode(botpressApi, 'Trigger', 'Webhook handler', {
+    color: '#95c2ff',
+  }),
 ]
 const edgeTypes = { [SMOOTH_STEP_WITH_LABEL_EDGE]: SmoothStepWithLabelEdge }
 const nodeTypes = { [BOTPRESS_NODE]: BotpressNode, [EXTERNAL_API_NODE]: ExternalApiNode }

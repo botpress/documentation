@@ -2,8 +2,6 @@ import { BotIcon } from './BotIcon'
 import { BotpressIcon } from './BotpressIcon'
 import { IntegrationIcon } from './IntegrationIcon'
 import { BOTPRESS_NODE, EXTERNAL_API_NODE, NodeCreator, getSubNodeBuilder } from './Node'
-const INTEGRATION_SOURCE_MARKER_ID = 'source-marker-integration'
-const BOT_SOURCE_MARKER_ID = 'source-marker-bot'
 
 export const google = new NodeCreator(
   {
@@ -53,7 +51,7 @@ export const google = new NodeCreator(
 export const botpressApi = new NodeCreator(
   {
     type: BOTPRESS_NODE,
-    position: { x: 80, y: 280 },
+    position: { x: 110, y: 280 },
     data: {
       label: 'Botpress Cloud',
       icon: BotpressIcon,
@@ -61,11 +59,9 @@ export const botpressApi = new NodeCreator(
       labelColorClass: 'text-gray-900 dark:text-gray-100',
       infoCardTitleClass: 'text-gray-600 dark:text-gray-200',
       headerBgClass: 'bg-gray-50/50 dark:bg-gray-50/10',
-      sourceMarkerId: INTEGRATION_SOURCE_MARKER_ID,
     },
   },
   getSubNodeBuilder({
-    markerId: INTEGRATION_SOURCE_MARKER_ID,
     title: 'handler',
     value: 'onNewEmail',
     targetHandle: 'handler-t',
@@ -83,7 +79,6 @@ export const botpressApi = new NodeCreator(
       ],
     },
   }).appendSubNode({
-    markerId: INTEGRATION_SOURCE_MARKER_ID,
     title: 'Webhook handler',
     value: 'webhookHandler',
     targetHandle: 'channel-t',
@@ -107,11 +102,9 @@ export const gmail = new NodeCreator(
       labelColorClass: 'text-fuchsia-800 dark:text-fuchsia-100',
       infoCardTitleClass: 'text-fuchsia-600 dark:text-fuchsia-200',
       headerBgClass: 'bg-fuchsia-50/50 dark:bg-fuchsia-50/10',
-      sourceMarkerId: INTEGRATION_SOURCE_MARKER_ID,
     },
   },
   getSubNodeBuilder({
-    markerId: INTEGRATION_SOURCE_MARKER_ID,
     title: 'handler',
     value: 'onNewEmail',
     targetHandle: 'handler-t',
@@ -129,7 +122,6 @@ export const gmail = new NodeCreator(
       ],
     },
   }).appendSubNode({
-    markerId: INTEGRATION_SOURCE_MARKER_ID,
     title: 'channels.message.text',
     value: 'sendEmail',
     targetHandle: 'channel-t',
@@ -151,7 +143,7 @@ export const gmail = new NodeCreator(
 
 export const bot = new NodeCreator(
   {
-    position: { x: 70, y: 610 },
+    position: { x: 300, y: 610 },
     type: BOTPRESS_NODE,
 
     data: {
@@ -161,7 +153,6 @@ export const bot = new NodeCreator(
       labelColorClass: 'text-blue-800 dark:text-blue-100',
       infoCardTitleClass: 'text-blue-600 dark:text-blue-200',
       headerBgClass: 'bg-blue-50/50 dark:bg-blue-50/10',
-      sourceMarkerId: BOT_SOURCE_MARKER_ID,
       subNodes: [],
     },
   },
@@ -169,7 +160,7 @@ export const bot = new NodeCreator(
     title: 'Event',
     value: 'OnNewEmail',
     targetHandle: 'event-t',
-    markerId: BOT_SOURCE_MARKER_ID,
+    inverted: true,
     details: {
       title: 'Handler',
       bodyMarkDown: `When the Gmail integration receives a new message it passes it over to the bot where it's received as an *event trigger*. The uses can use the event triggers to start a series of node to process and react on the incoming event, in this case, a new incoming email.`,
@@ -181,8 +172,8 @@ export const bot = new NodeCreator(
   }).appendSubNode({
     title: 'Trigger',
     value: 'createMessage',
-    markerId: BOT_SOURCE_MARKER_ID,
     sourceHandle: 'trigger-s',
+    inverted: true,
     details: {
       title: 'Handler',
       bodyMarkDown: `The handler function is used to handle the incoming requests from the integration. Which means that this

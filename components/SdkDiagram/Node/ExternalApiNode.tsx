@@ -2,9 +2,10 @@ import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import classNames from 'classnames'
 import { Position } from 'reactflow'
 import { SubNodeContent } from '../SubNodeContent'
-import { NodeProps } from './Node'
+import { NodeProps, SubNodeBuilder } from './Node'
 import { SourceHandle } from './SourceHandle'
 import { TargetHandle } from './TargetHandle'
+import { camelCase } from 'lodash'
 
 export type ExternalApiNodeData = {
   label: string
@@ -33,30 +34,37 @@ export function ExternalApiNode({ data }: NodeProps<ExternalApiNodeData>) {
         </div>
         <div className="flex gap-4">
           <div className={classNames('relative flex flex-col items-center py-5 pl-4')}>
+            <SourceMarker id={SubNodeBuilder.getMarkerId(subNodes[0])} />
             <SubNodeContent titleClass="text-zinc-400" {...subNodes[0]} />
             <div className={classNames('full absolute left-1 top-[49px] h-[5px] w-[5px] rounded bg-current')}></div>
           </div>
           <div className={classNames('relative flex flex-col items-center justify-center py-5 pr-4')}>
             <div className="absolute -right-[1px] h-[18px] w-[10px] rounded-bl-full rounded-tl-full border border-current dark:border-zinc-600/50"></div>
+            <SourceMarker id={SubNodeBuilder.getMarkerId(subNodes[1])} />
             <SubNodeContent titleClass="text-zinc-400" {...subNodes[1]} />
           </div>
         </div>
       </div>
       <div className={classNames('text-zinc-300 dark:text-zinc-600')}>
-        <svg
-          style={{ position: 'absolute', top: 0, left: 0, width: 0, height: 0 }}
-          className="text-zinc-300 dark:text-zinc-500"
-        >
-          <defs>
-            <marker id="external" refX={7} refY={4} markerHeight={16} markerWidth={16}>
-              <ellipse cx="4" cy="4" rx="3" ry="3" className="fill-white stroke-current dark:fill-dark" />
-            </marker>
-          </defs>
-        </svg>
-
         <SourceHandle position={Position.Left} id={subNodes[0].sourceHandle ?? ''} top={133} />
         <TargetHandle position={Position.Right} id={subNodes[0].targetHandle ?? ''} top={133} />
       </div>
     </>
+  )
+}
+type SourceMarkerProps = { id: string }
+
+export function SourceMarker(props: SourceMarkerProps) {
+  return (
+    <svg
+      style={{ position: 'absolute', top: 0, left: 0, width: 0, height: 0 }}
+      className="text-zinc-300 dark:text-zinc-500"
+    >
+      <defs>
+        <marker id={props.id} refX={7} refY={4} markerHeight={16} markerWidth={16}>
+          <ellipse cx="4" cy="4" rx="3" ry="3" className="fill-white stroke-current dark:fill-dark" />
+        </marker>
+      </defs>
+    </svg>
   )
 }

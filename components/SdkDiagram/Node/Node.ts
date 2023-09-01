@@ -2,6 +2,7 @@ import { Edge, Node, NodeProps as ReactFlowNodeProps } from 'reactflow'
 import { v4 as uuid } from 'uuid'
 import { DocumentationCardProps } from '../DocumentationCard'
 import { EdgeData, SMOOTH_STEP_WITH_LABEL_EDGE } from '../SmoothStepLabelEdge'
+import { camelCase } from 'lodash'
 
 type WithNodeCreatorInstance<T extends {}> = T & {
   nodeCreatorInstance: NodeCreator<T, SubNode<string>, any>
@@ -50,13 +51,13 @@ export class NodeCreator<T extends {}, SubNodes extends SubNode<SubNodeTitle>, S
     if (!sourceSubNode.sourceHandle) throw new Error(`No source handle found for source subnode ${sourceSubNodeTitle}`)
 
     return {
-      id: `${this.node.id}-${targetNodeCreator.node.id}`,
+      id: uuid(),
       source: this.node.id,
       target: targetNodeCreator.node.id,
       targetHandle: targetSubNode.targetHandle,
       sourceHandle: sourceSubNode.sourceHandle,
       type: SMOOTH_STEP_WITH_LABEL_EDGE,
-      markerStart: sourceSubNode?.markerId ?? 'external',
+      markerStart: SubNodeBuilder.getMarkerId(sourceSubNode),
       data: edgeData,
     }
   }
@@ -72,13 +73,20 @@ export type SubNode<Title extends string> = {
   sourceHandle?: string
   value?: string
   details?: DocumentationCardProps
-  markerId?: string
+  /**
+   * Flips the source and target handles
+   */
+  inverted?: boolean
 }
 
-class SubNodeBuilder<T extends SubNode<Title>, Title extends string> {
+export class SubNodeBuilder<T extends SubNode<Title>, Title extends string> {
   subNodes: T[] = []
   constructor(_initialSubNode: T, _parent?: SubNodeBuilder<T, Title>) {
     this.subNodes = [...(_parent?.subNodes ?? []), _initialSubNode]
+  }
+
+  static getMarkerId<T extends SubNode<Title>, Title extends string>(subNode: T) {
+    return camelCase(subNode.title)
   }
 
   appendSubNode<U extends SubNode<NewTitle>, NewTitle extends string>(s: U) {
