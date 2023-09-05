@@ -37,7 +37,7 @@ _The **Feedback** and **Edit this page** links can be found on the bottom right 
 
 ### Authoring Commits
 
-At Botpress Engineering, and by extension in this repository, we follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#examples) standard. This makes sure that each commit clearly describes what the
+At Botpress Engineering, and by extension in this repository, we follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#examples) standard. This makes sure that each commit clearly describes what it is about.
 
 ### Previews
 
@@ -45,7 +45,7 @@ When you raise a PR, after a few minutes you can inspect the preview link of the
 
 ### Approval Process
 
-Before your change is reflected on the live documentation website, your PR has to be approved by two members of the Botpress Engineering team. Though we try to act on every PR as soon as possible, in some cases this process might take upto two weeks.
+Before your change is reflected on the live documentation website, your PR has to be approved by two members of the Botpress Engineering team. Though we try to act on every PR as soon as possible, in some cases this process might take up to two weeks.
 
 ## Known issues
 
