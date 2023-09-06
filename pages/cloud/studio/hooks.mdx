@@ -16,7 +16,7 @@ Hooks are differentiated using the point in the event engine when they are execu
 
 ## After Incoming Message
 
-This hook is called right after all incoming middlewares have processed the event but before the Dialogue Engine starts processing it. You can access all the required data (including NLU intent) for special processing and decide what happens to the event.
+This hook is called right after all incoming middleware have processed the event but before the Dialogue Engine starts processing it. You can access all the required data (including NLU intent) for special processing and decide what happens to the event.
 Parameters: bp, event
 A typical operation here is to tell Botpress to ignore the event and not process it (e.g., not send it to the dialogue engine).
 

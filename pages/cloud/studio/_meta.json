@@ -14,5 +14,6 @@
   "botpress-hub": "",
   "shortcuts": "Keyboard Shortcuts",
   "chatbot-settings": "",
-  "preferences": "Studio Preferences"
+  "preferences": "Studio Preferences",
+  "import-export": "Import & Export"
 }
