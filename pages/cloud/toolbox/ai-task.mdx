@@ -26,6 +26,9 @@ on what they want the AI engine to generate. This can be done using the **Task I
 Users should provide a clear and detailed description of the task they want the AI
 engine to perform, including any relevant constraints or guidelines that should be
 followed.
+
+<br />
+There is a certain date beyond which the information is not available to the AI model. You can find that date on the model you use (for example [GPT-3-5](https://platform.openai.com/docs/models/gpt-3-5)). If you want to get around this, please use a Knowledge Base and add its answer as an input to give context to the AI Task.
 <br />
 
 ## AI Task Input
@@ -58,6 +61,9 @@ where the variableName is a variable you have previously defined in this workflo
 In addition to free text, depending on your use case and what you are trying to achieve.</Td>
   </Tr>
 </Table>
+
+<br/>
+To make your AI task take into account the current date, you need to include it in the input by using this code snippet that shows the current date in javascript format Today's date: {{ new Date().toLocaleString()}}
 <br/>
 
 ## Storing result in variables
