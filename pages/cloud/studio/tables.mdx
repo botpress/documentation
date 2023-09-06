@@ -161,7 +161,124 @@ await Data1Table.deleteRecords([7, 8, 9])
 
 ### findRecords
 
-To find records in a table, use the `findRecords` function. You need to specify the query selector to use to find the records.
+To find records in a table, use the `findRecords` function. You can add filters or just query everything. 
+
+#### Filtering results
+
+You can filter results using filters. Similar to MongoDB, this code provides methods to filter results. The filtering mechanism can be divided into two main categories: Primitive and Logical.
+
+Don't want to deal with code? Skip to the [next section](#using-ai-to-generate-filters) for AI generated filters. 
+
+**Primitive Filter**
+
+Primitive filters are easy and simple to use, allowing you to match the exact values you are looking for. Here are some of the primitives you can use:
+
+- `$eq`: Matches values that are equal to a specified value.
+   ```
+   { "name": { "$eq": "John" } }
+   ```
+- `$gt`: Matches values that are greater than a specified value.
+   ```
+   { "age": { "$gt": 20 } }
+   ```
+
+- `$gte`: Matches values that are greater than or equal to a specified value.
+   ```
+   { "age": { "$gte": 20 } }
+   ```
+
+- `$lt`: Matches values that are less than a specified value.
+   ```
+   { "age": { "$lt": 20 } }
+   ```
+
+- `$lte`: Matches values that are less than or equal to a specified value.
+   ```
+   { "age": { "$lte": 20 } }
+   ```
+
+- `$ne`: Matches all values that are not equal to a specified value.
+   ```
+   { "name": { "$ne": "John" } }
+   ```
+   
+- `$in`: Matches any of the values specified in an array.
+   ```
+   { "name": { "$in": ["Alice", "Bob", "John"] } }
+   ```
+
+- `$nin`: Matches none of the values specified in an array.
+   ```
+   { "name": { "$nin": ["Alice", "Bob", "John"] } }
+   ```
+   
+- `$exists`: Matches documents that have the specified field.
+   ```
+   { "name": { "$exists": true } }
+   ```
+
+- `$mod`: Performs modulo operation on the value of field and matches documents where field % divisor equals the specified remainder. 
+   ```
+   { "qty": { "$mod": [4, 0] } }
+   ```
+
+- `$size`: Matches any document where an array field contains a specified number of elements.
+   ```
+   { "tags": { "$size": 3 } }
+   ```
+   
+- `$regex`: Provides regular expression capabilities for pattern matching strings in queries. It uses a placeholder to prevent SQL injections.
+   ```
+   { "name": { "$regex": "[a-z]" } }
+   ```
+   
+- `$options`: Modifies the `$regex` operator to enable options. Currently, there are two options, 'i' for case insensitive and 'c' for case sensitive.
+   ```
+   { "name": { "$regex": "[a-z]", "$options": 'i' } } // case insensitive
+   
+   { "name": { "$regex": "[a-z]", "$options": 'c' } } // case sensitive
+   ```
+   
+**Logical Filter**
+
+Logical operators allow you to connect more filtering clauses.
+
+- `$and`: Joins query clauses with a logical AND. Returns all documents that match the conditions of both clauses.
+   ```
+   { "$and": [{ "price": { "$ne": 1.99 } }, { "price": { "$exists": true } }] }
+   ```
+
+- `$or`: Joins query clauses with a logical OR. Returns all documents that match the conditions of either clause.
+   ```
+   { "$or": [{ "price": { "$eq": 1.99 } }, { "price": { "$exists": false } }] }
+   ```
+
+- `$not`: Inverts the effect of a query expression and returns documents that do not match the query expression.
+   ```
+   { "$not": { "price": { "$eq": 1.99 } } }
+   ```
+
+Please note that these filters and operators can be used together to create complex queries to exactly fit your needs.
+
+#### Using AI to generate filters
+
+Thankfully, Botpress comes with artificial intelligence (AI) capabilities when it comes to filtering records. This means you can provide a human-like query, and the AI will intelligently decipher it and create the right filters for your query.
+
+This can significantly simplify the construction of complex queries and reduce the likelihood of human errors in the process.
+
+```javascript
+const leads = await LeadsTable.findRecords({
+  filter: AI`works either at ${workflow.company} OR is not in IT`,
+  limit: 10,
+  offset: 0
+})
+```
+
+The query is written inside the backticks (\`) that come after \`filter: AI\`. The AI expects a query string, and that's why backticks are used. 
+
+
+#### Re-using filters (selectors)
+Selectors are filters that you can re-use. They don't have to be written again and again.
 
 For example, you might use the query selector "People with age greater than 18" to find all users who are above 18.
 
@@ -170,7 +287,7 @@ For example, you might use the query selector "People with age greater than 18" 
 3. use below code to find records and save it in a variable called `adults`
 
 <video width="100%"  controls>
- <source src="/docs/content/findrecords.mov" type="video/mp4"/>
+ <source src="/docs/content/findrecord.mov" type="video/mp4"/>
  </video>
 
 ```javascript

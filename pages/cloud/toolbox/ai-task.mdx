@@ -4,9 +4,8 @@ import { Table, Td, Tr } from '@components/WrapperElements'
 # AI Task
 
 <Callout>
- **Generative AI Task** <br/>
-  The **AI Task Card** in Botpress is designed to enable users to perform tasks
-  using generative artificial intelligence.
+  **Generative AI Task** <br />
+  The **AI Task Card** in Botpress is designed to enable users to perform tasks using generative artificial intelligence.
 </Callout>
 
 It is a tool for generating content using Artificial Intelligence and can be used to automate a wide range of tasks. By providing clear instructions, specific inputs, and well-named variables, users can leverage the full capabilities of this tool to improve their workflows and boost their productivity.
@@ -23,9 +22,13 @@ To accomplish a generative task using the **AI Task Card**, users will need to p
 on what they want the AI engine to generate. This can be done using the **Task Instructions** parameter.
 
 <br />
-Users should provide a clear and detailed description of the task they want the AI
-engine to perform, including any relevant constraints or guidelines that should be
-followed.
+Users should provide a clear and detailed description of the task they want the AI engine to perform, including any relevant
+constraints or guidelines that should be followed.
+
+<br />
+There is a certain date beyond which the information is not available to the AI model. You can find that date on the model
+you use (for example [GPT-3-5](https://platform.openai.com/docs/models/gpt-3-5)). If you want to get around this, please
+use a Knowledge Base and add its answer as an input to give context to the AI Task.
 <br />
 
 ## AI Task Input
@@ -58,6 +61,9 @@ where the variableName is a variable you have previously defined in this workflo
 In addition to free text, depending on your use case and what you are trying to achieve.</Td>
   </Tr>
 </Table>
+
+<br/>
+To make your AI task take into account the current date, you need to include it in the input by using this code snippet that shows the current date in javascript format: `Today's date: {{ new Date().toLocaleString()}}`
 <br/>
 
 ## Storing result in variables
@@ -75,9 +81,8 @@ to solve real-world problems and generate useful content. This can ultimately le
 for users who are targeting the power of artificial intelligence in their workflows.
 
 <br />
-The Task Example allows you to provide example text that the AI Task can expect to
-receive from the user, as well as examples of the outputs the AI Task should generate
-as a response. These examples help the AI Task to better understand the instruction
+The Task Example allows you to provide example text that the AI Task can expect to receive from the user, as well as examples
+of the outputs the AI Task should generate as a response. These examples help the AI Task to better understand the instruction
 that was provided to it as well as its output format.
 
 ## Displaying result (optional)
@@ -109,9 +114,8 @@ Other practical examples would include the following:
 - Generating a complex chatbot response by chaining together AI Task Cards for intent recognition, entity extraction, and response generation
 
 <br />
-Prompt chaining can also help to improve the accuracy and relevance of generated
-content, as each AI Task Card can be optimized to perform a specific task, and the
-output of one AI Task Card can be used to inform the input of the next.
+Prompt chaining can also help to improve the accuracy and relevance of generated content, as each AI Task Card can be optimized
+to perform a specific task, and the output of one AI Task Card can be used to inform the input of the next.
 
 Finally, here are some guidelines and best practices for prompt chaining effectively in Botpress:
 

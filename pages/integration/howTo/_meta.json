@@ -4,5 +4,6 @@
   "actions": "Actions",
   "events": "Events",
   "handler": "Handler",
-  "logging": "Logging"
+  "logging": "Logging",
+  "build-integration": "Building a Custom Integration"
 }
