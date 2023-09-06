@@ -62,10 +62,6 @@ window.botpressWebChat.sendPayload({
 
 Webchat lifecycle events are specific stages in the lifecycle of the bot's interaction with the user. These stages include when the bot is loaded, ready, when the UI is opened, closed, resized, or when the user is connected, among others.
 
-On the other hand, webchat events are different actions that can be invoked for the bot. These include showing or hiding the webchat, toggling the webchat state, sending a custom event, or changing the bot's configuration.
-
-#### Webchat Lifecycle Events
-
 These are specific stages in the lifecycle of the bot's interaction with the user:
 
 | Event Name         | Description                                                          |
@@ -87,27 +83,6 @@ These are specific stages in the lifecycle of the bot's interaction with the use
   Whether 'UI.RESIZE' and 'UI.SET-CLASS' are necessary depends on the specific needs of your bot interface and how you want
   to handle different UI events.
 </Callout>
-
-#### Webchat Events
-
-These events allow for direct interaction with the webchat UI:
-
-Webchat Visibility:
-| Event Name | Description |
-|------------------|-----------------------------------------------------------------------------|
-| `show` | Opens up the webchat. |
-| `hide` | Closes the webchat. |
-| `toggle` | If the webchat is open, it closes it and vice versa. |
-
-Custom Event:
-| Event Name | Description |
-|------------------|-----------------------------------------------------------------------------|
-| `custom-event` | A custom event sent by the website/developer, handled in the studio. |
-
-Webchat Config:
-| Event Name | Description |
-|------------------|-----------------------------------------------------------------------------|
-| `webchat-config` | Changes bot configuration, like the CSS file path to follow access standards.|
 
 ### Webchat Integration
 
