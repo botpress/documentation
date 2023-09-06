@@ -5,5 +5,5 @@
   "events": "Events",
   "handler": "Handler",
   "logging": "Logging",
-  "create-integrations": "Creating an Integration",
+  "build-integration": "Building a Custom Integration"
 }
