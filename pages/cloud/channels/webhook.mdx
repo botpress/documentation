@@ -47,8 +47,8 @@ await axios.post(webhookUrl, data, header)
 2. Set the request type to `POST`
 3. Set the URL to the Webhook URL you got from the integration page in the Botpress Dashboard.
 4. Set the `Content-Type` header to `application/json`
-5. (Optional) Set the `x-bp-secret` header to the secret token you created in the Botpress Hub
-6. Set the body to the following JSON:
+5. (Optional) Set the `x-bp-secret` header to the secret token you set in the Botpress Hub
+6. [Example] Set the body to the following JSON:
 
 ```json
 {
@@ -88,7 +88,14 @@ Webhook requests make available four properties that you can read in your bot:
 - You could also add Expression cards that transition to different nodes or workflows based on the data. For example, the `event.payload.body.category === 'Business'` condition could transition to a different flow that handles business articles.
 
 <Callout type="info">
+  Note 
+  </br>
   Remember that the contents of the `event.payload` property received via Webhook will be replaced as soon as the bot or
   the user sends a new message. So you should save important information in workflow variables if you want to use it
   later in the conversation.
 </Callout>
+
+- You can also add `/user` or any other path to the WebhookURL to record events specific to this URL. 
+- You can then add a filter to the Webhook Event to only receive events from this URL. 
+  - For example, if you want to receive only the events that have a `type` equal to `text` and a `user.id` equal to `user-id`, you can use the following filter: 
+  - `event.payload.body.type === 'text' && event.payload.body.user.id === 'user-id'`

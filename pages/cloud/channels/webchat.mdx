@@ -6,66 +6,6 @@ import { Callout } from 'nextra/components'
 
 The Web Chat is a widget that you can add to your website to allow your users to interact with your chatbot. It's a great way to provide support to your users and answer their questions.
 
-## Settings
-
-### General Settings
-
-These will be displayed on the webchat page.
-
-#### Bot name
-
-The name of your bot that will be displayed in the web chat.
-
-#### Avatar URL
-
-The URL of the Avatar that webchat will use for your bot.
-
-#### Bot description
-
-A short description of your bot that will be displayed below the bot name in the web chat.
-
-#### Composer placeholder
-
-The placeholder text that will be displayed in the composer(input) of the web chat.
-
-#### Stylesheet URL
-
-The URL of the stylesheet that will be used to style the web chat. You can customize your web chat by creating your own stylesheet in CSS and uploading it to a CDN or your own server.
-
-You can also use the [Styler](https://styler.botpress.app/) to create your own stylesheet.
-
-### Bot information
-
-These will be displayed when the user clicks on the bot information page. You can enable or disable the bot information page using the toggle button from the Features section.
-
-#### Terms & Conditions
-
-The terms and conditions of your bot that will be displayed in the bot information page.
-
-#### Privacy Policy
-
-The privacy policy of your bot that will be displayed in the bot information page.
-
-### Features
-
-These will add options to the header of the webchat page.
-
-#### Show Bot Information
-
-This will add a button to the header of the webchat page that will open the bot information page.
-
-#### Show "Created with Botpress"
-
-White label your webchat by disabling this option. This will remove the **Created with Botpress** link from the footer of the webchat page. This is ON by default.
-
-#### Clear conversation on exit
-
-If you enable this option `useSessionStorage=true` will be added to your webchat configuration, the conversation will be stored in the browser's session storage. This means that the conversation will be cleared when the user closes the browser tab.
-
-#### Show delete conversation
-
-This will add a button to the header of the webchat page that will delete the conversation.
-
 ## Prerequisites for adding Web Chat to your website
 
 1. Make sure you've [published your chatbot](../getting-started/create-and-publish-your-chatbot/#publishing-your-bot) to Botpress Cloud.
@@ -280,7 +220,6 @@ You can also click on the **Configurable** option if you want to customize the w
 import React from 'react'
 import Chatbot from './Chatbot'
 
-![Messaging channels](/docs/content/custom-config.png)
 const App = () => {
   return (
     <div>
@@ -289,6 +228,5 @@ const App = () => {
   )
 }
 
-Learn more about [customizing your chatbot](../webchat-customization/overview/)
 export default App
 ```
