@@ -88,8 +88,7 @@ Webhook requests make available four properties that you can read in your bot:
 - You could also add Expression cards that transition to different nodes or workflows based on the data. For example, the `event.payload.body.category === 'Business'` condition could transition to a different flow that handles business articles.
 
 <Callout type="info">
-  Note 
-  <br/>
+  **Note**<br/>
   Remember that the contents of the `event.payload` property received via Webhook will be replaced as soon as the bot or
   the user sends a new message. So you should save important information in workflow variables if you want to use it
   later in the conversation.
