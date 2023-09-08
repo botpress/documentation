@@ -77,13 +77,16 @@ const logo = (
   </div>
 )
 
+const docsRepositoryBase = 'https://github.com/botpress/documentation/tree/master'
+const nonEditablePages = ['pages/api-documentation/index.mdx']
+
 const config: DocsThemeConfig = {
   feedback: { content: 'Feedback →' },
   project: {
     link: undefined,
   },
   logo,
-  docsRepositoryBase: 'https://github.com/botpress/documentation/tree/master',
+  docsRepositoryBase,
   primaryHue: { dark: 217, light: 217 },
   head: function useHead() {
     return (
@@ -117,6 +120,14 @@ const config: DocsThemeConfig = {
         <Footer />
       </div>
     ),
+  },
+  editLink: {
+    component: ({ filePath, className }) =>
+      !filePath || nonEditablePages?.includes(filePath) ? null : (
+        <a href={`${docsRepositoryBase}/${filePath}`} className={className}>
+          Edit this page
+        </a>
+      ),
   },
 }
 

@@ -136,3 +136,15 @@ The Knowledge Bases that are searched are the ones that are in the same folder a
 The agent will only answer when the user asks a question and the chatbot is either on the Start Node or when the workflow is on a Capture Card inside a node that has Knowledge Bases enabled.
 
 To enable Knowledge Bases on a node, click on the node in the workflow editor and then enable the **Knowledge Bases** option in the right inspector panel.
+
+### Configuration
+
+- **Answer on Start Node**: When enabled, the chatbot will answer questions on the Start Node. 
+- **Answer Manually**: Your chatbot will not answer automatically. When this option is enabled, you need to manually reply to the user with `{{turn.KnowledgeAgent.answer}}`. This can be done with a Say node, on a Capture Card or with a Hook (advanced).
+- **Context**: Providing context helps knowledge bases give better answers. We recommend including the transcript of the conversation and/or the summary of the conversation provided by the Summary Agent. You can also include any other information that you think might be relevant to the KB.
+
+### Exposed Variables
+
+- **turn.KnowledgeAgent.answer**: This variable represents the answer from the Knowledge Base. It is set to `null` if no answer is found.
+- **turn.KnowledgeAgent.responded**: This variable is set to `true` if the Knowledge Agent has answered the user's question **automatically**. It is set to `false` otherwise if manual answering is enabled. 
+- **turn.KnowledgeAgent.citations**: This variable represents the citations from the Knowledge Base. It is set to `null` if no citations are found.

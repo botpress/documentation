@@ -1,0 +1,100 @@
+import { Callout } from 'nextra/components'
+
+# Webhook
+
+![Messaging channels](/docs/content/webhook-banner.png)
+
+Webhooks provide a powerful way to integrate Botpress with other services. This guide will walk you through how to set up a webhook in Botpress to allow your bot to receive external updates in real-time.
+
+## Enabling the Webhook Integration
+
+1. Go to the [Botpress Hub](https://app.botpress.cloud/hub) and install the Webhook Integration to your chatbot
+2. Enable the Webhook in the `Integrations` tab of your bot.
+3. You will get a URL that you can use to make requests to send data to your Botpress bot.
+4. (Optional) You can also create a secret token to secure your webhook, which will be required in all requests to the URL.
+
+## Sending data to your Webhook from Javascript
+
+You can make requests to your webhook from any environment that supports HTTP requests, such as a Node.js app, a React app, a Javascript script running in a browser, a Zapier zap, a curl script, etc.
+
+This code example uses the Axios library to make a POST request to the Webhook URL, in a simulated Node.js app.
+
+```js
+import axios from 'axios'
+
+const webhookUrl = 'https://your-webhook.url'
+const data = {
+  article: {
+    id: '123',
+    content: 'Hello Webhooks!',
+  },
+  category: 'Business',
+}
+const headers = {
+  'Content-Type': 'application/json',
+  // this is optional
+  // `x-bp-secret`: 'your-secret'
+}
+await axios.post(webhookUrl, data, header)
+
+// You should get a 200 OK response
+// Webhooks don't return any data in the response body
+```
+
+## Sending data to your Webhook from a HTTP client (for testing)
+
+1. Open a HTTP client like Postman or Insomnia and create a new request
+2. Set the request type to `POST`
+3. Set the URL to the Webhook URL you got from the integration page in the Botpress Dashboard.
+4. Set the `Content-Type` header to `application/json`
+5. (Optional) Set the `x-bp-secret` header to the secret token you set in the Botpress Hub
+6. [Example] Set the body to the following JSON:
+
+```json
+{
+  "article": {
+    "id": "123",
+    "content": "Hello Webhooks!"
+  },
+  "category": "Business"
+}
+```
+
+7. Send the request and you should see a `200 OK` success response.
+
+## Using the Webhook Event data in your bot
+
+1. Go to the Botpress Studio and right-click the editor to add a Trigger node, that triggers on `Webhook Event`.
+   - This is where the conversation will start when the webhook received data, instead of following the regular path of beginning with the `Start` node.
+2. Connect the Trigger node to the rest of you conversation.
+3. Click on `Discover Events` button to see the events that were received. You can choose an event and save it as an example to trigger the conversation for testing.
+4. You can access the data from the request using the `event.payload` variable.
+
+## Webhook Event Payload
+
+Webhook requests make available four properties that you can read in your bot:
+
+- `event.payload.body`: The body of the request - it is usually a JSON object
+- `event.payload.query`: A JSON object containing the URL params of the request
+  - For example if you make a request to `https://your-webhook.url/?param1=hello&param2=world` the query object will look like this: `{ param1: 'hello', param2: 'world' }`
+  - Then you can access the params using this notation: `event.payload.query.param1`
+- `event.payload.method`: The HTTP method of the request - usually `POST`
+- `event.payload.path`: The path of the request - usually `/`
+
+## Additional Information
+
+- You can create filters to manage when the trigger will be actually activated and also create alternative flows by using Expressions that consider the request data.
+- For example, you can add a filter that checks if the request path is new-comment (`event.payload.path === '/new-comment'`), in which case the conversation will only start if the request is made to this url - `https://your-webhook.url/new-comment`
+- You could also add Expression cards that transition to different nodes or workflows based on the data. For example, the `event.payload.body.category === 'Business'` condition could transition to a different flow that handles business articles.
+
+<Callout type="info">
+  **Note**<br/>
+  Remember that the contents of the `event.payload` property received via Webhook will be replaced as soon as the bot or
+  the user sends a new message. So you should save important information in workflow variables if you want to use it
+  later in the conversation.
+</Callout>
+
+- You can also add `/user` or any other path to the WebhookURL to record events specific to this URL. 
+- You can then add a filter to the Webhook Event to only receive events from this URL. 
+  - For example, if you want to receive only the events that have a `type` equal to `text` and a `user.id` equal to `user-id`, you can use the following filter: 
+  - `event.payload.body.type === 'text' && event.payload.body.user.id === 'user-id'`

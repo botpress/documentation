@@ -1,5 +1,7 @@
 // TODO: Write as MDX and import it in the script
 export const API_DOCS_INTRO = `
+## Introduction
+
 The Botpress API is a RESTful set of HTTP endpoints that allow you to create, deploy, and run chatbots on the [Botpress Cloud](https://botpress.com/).
 
 It can be used to create and manage bots, handle conversations and messages, as well as to manage their content, users, and configuration.
@@ -9,7 +11,15 @@ The base URL of the Botpress Cloud API is: \`https://api.botpress.cloud\`
 The API endpoints will expect the \`Content-type: application/json\` HTTP header to be present in the request and  the request body (if any) to be in JSON format, and will send back the same header in the response and return a JSON response body as well.
 `
 
+export const API_DOCS_CLIENT = `
+## Using the Botpress Client
+
+If you're using JavaScript or TypeScript, we recommend using our official [Botpress Client](https://www.npmjs.com/package/@botpress/client) to call our API, but if you're using another programming language or just want direct access to our REST API you can use this documentation as reference.
+`
+
 export const API_DOCS_AUTHENTICATION = `
+## Authentication
+
 To authenticate with the Botpress Cloud API, you'll need to use one of the methods below to obtain an access token.
 
 These tokens can be used as a Bearer token to call all the endpoints of the API, by passing the following HTTP header to the API endpoints:
@@ -24,7 +34,21 @@ Authorization: Bearer {ACCESS_TOKEN}
 - **Integration Token**: This will be provided to the integration (once deployed) in the \`BP_TOKEN\` environment variable.
 `
 
+export const API_REQUIRED_WORKSPACE_ID_HEADER = (resourceLabel: string) => `
+- \`x-workspace-id\`: The ID of the workspace that the ${resourceLabel} belongs to.
+`
+
+export const API_REQUIRED_BOT_ID_HEADER = (resourceLabel: string) => `
+- \`x-bot-id\`: The ID of the bot that the ${resourceLabel} belongs to.
+`
+
+export const API_REQUIRED_INTEGRATION_ID_HEADER = `
+- \`x-integration-id\`: When the endpoint is being called as an Integration, this should be the ID of the integration that's calling it.
+`
+
 export const API_DOCS_PAGINATION = `
+## Pagination
+
 The "List" endpoints of our API will return paginated results based on the creation date of the resource, with a default limit of 20 results per page.
 
 When the number of results exceeds the limit, the response body will include a \`meta.nextToken\` property that can be passed as a query string parameter (e.g. \`endpoint?nextToken={nextToken}\`) to retrieve the next page of results.
@@ -65,6 +89,8 @@ If there are no more results, the endpoint will not provide a \`nextToken\` valu
 `
 
 export const API_DOCS_ERROR_DESCRIPTION = `
+## Errors
+
 If an error occurs when calling an API endpoint, the response will return the appropriate HTTP status code
 as indicated below and the response body will be one of the following JSON objects indicating the nature
 of the error:

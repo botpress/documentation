@@ -1,0 +1,74 @@
+import { Callout } from 'nextra/components'
+
+# Import & Export Bots
+
+![Debugger](/docs/content/studio-import-export.png)
+
+You may want to import or export a bot for various reasons, such as:
+
+- Sharing the bot with others - friends, clients, etc.
+- Contributing the bot to the community
+- Seeking help to fix issues
+- Creating a backup of the bot
+- Transferring the bot to a different workspace or account
+
+And with Botpress Cloud, you can do that with just a few clicks!
+
+## How to Export a Bot
+
+On the left panel in your Botpress Studio, click the Botpress icon and select Import / Export. Then click Export as.
+
+Studio will start preparing the export, which may take some time, depending on how much content you have in your tables and knowledge bases. When it is done, the download will start automatically.
+
+The exported file will be a `.bpz` file (which is a special archive format for Botpress Cloud bots). It will have the name of your bot and the current date (for example: recipe-bot - 2023 Sep 06.bpz).
+
+<Callout>
+  Do not attempt to extract the file or modify its content, otherwise you may not be able to import your bot again!
+</Callout>
+
+The exported file contains your whole bot, including:
+
+- Bot information and settings
+- Agents settings
+- Knowledge bases - with sources (files are stored on our servers and only linked in the export to keep it small)
+- Tables - with records
+- Intents and entities
+- Hooks
+- Variables (workflow, user, bot, config) - names and default values
+- Folders
+- Workflows and nodes
+- Cards - with content
+- Transition lines
+
+So you can rest assured that all of your data is included!
+
+## How to Import a Bot
+
+On the left panel in your Botpress Studio, click the Botpress icon and select Import / Export. Then click Import. Next, click "Select bot archive to upload" and the explorer window will open. Find the `.bpz` file you want to import on your computer and click Open.
+
+<Callout type="error">Importing a bot will overwrite the current bot, including media, documents and tables!</Callout>
+
+<Callout type="info">You can import bots up to 120 MB!</Callout>
+
+You have now successfully imported your bot!
+
+You can test it using the Emulator or publish it to make it available to your users.
+
+<Callout type="info">
+  **Restoring the Integrations** <br />
+  Remember to set up the desired integrations again in the Dashboard, so that it works on the channels exactly as it did
+  before you exported it!
+</Callout>
+
+## Video tutorial
+
+<iframe
+  data-youtube-iframe
+  width="720"
+  height="360"
+  src="https://www.youtube.com/embed/garalsWay1U?si=S9J8kk6WckEAmxaw"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
