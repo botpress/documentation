@@ -109,6 +109,48 @@ Using the Text Document Knowledge Base, the team creates a series of Text Docume
 
 So, when users search for a specific problem like **My refrigerator is not cooling**, Botpress's Natural Language Understanding (NLU) functionality will retrieve the relevant response from the Text Document Knowledge Base, providing users with the necessary troubleshooting information.
 
+## 5. Tables: Organized Information
+
+You can connect your tables of data to a knowledge base, allowing users to directly search for information. This can be especially invaluable for vast datasets, as it provides a straightforward and user-friendly method to retrieve data. 
+
+**Benefits**
+
+By integrating tables into your knowledge base, end-users can readily ask for and receive information straight from your table data. As a bot builder, you will appreciate the ease with which this can be implemented on Botpress.
+
+**Requirements**
+
+Prior to proceeding, ensure you have the following:
+
+1. A table of data 
+2. Knowledge Agent should be enabled 
+3. Mark at least one column in your data table with a `Searchable` property.
+4. Have a Knowledge Base with a source set to `Table`, and select the table that will be utilized for this feature.
+
+The `Searchable` property can be enabled either during the creation of a column or later on by right-clicking the column, selecting "Edit", and toggling on `Searchable`. 
+
+**Usage Example**
+
+If you have a table of organized data, users can ask questions like:
+
+- "How many X are there?"
+- "What is the Y of X?"
+- "Show me X that have Y."
+- "How X is Y?"
+
+For instance, if you're running a chair e-shop, users can get product information by asking:
+
+- "How many chairs are there?"
+- "What is the price of your red velvet chair?"
+- "Show me products priced at $20."
+
+**Manual Answer Option**
+
+If you prefer to review and curate answers before they get sent, you can toggle on the "Answer Manually" option in the Knowledge Agent.
+
+**Limitations**
+
+Keep in mind that the feature may not provide accurate counts for "How many [products / items / rows]"-type questions. Internally, the Knowledge Base runs a search before delivering answers, and since not all results are returned, the actual counts might be off.
+
 ## Storage Quota
 
 The Knowledge Base feature in Botpress is designed to provide users with quick access to information on various topics. However, the amount of information that can be stored in the Knowledge Base is limited by the storage quota.
