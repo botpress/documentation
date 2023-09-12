@@ -1,9 +1,7 @@
 import { Callout } from 'nextra/components'
 import { Table, Td, Tr } from '@components/WrapperElements'
 
-
-# Transition to
-
+# Transitions
 
 A Transition is like a "decision point" in a conversation with a chatbot, where the bot has to decide what to do next based on what the user has said or done. It's like a set of instructions that the bot follows to determine which "path" to take in the conversation.
 
@@ -24,10 +22,10 @@ You can use a combination of these checks to create complex conditions that will
 to next.
 <br />
 
-<Callout >
-  **Generative AI Transitions** <br/>
-  You can use generative AI to generate your conditions using plain text. In order to achieve what you exactly want,
-  here are some examples that should guide you, but you are not limited to it:
+<Callout>
+  **Generative AI Transitions** <br />
+  You can use generative AI to generate your conditions using plain text. In order to achieve what you exactly want, here
+  are some examples that should guide you, but you are not limited to it:
 </Callout>
 <br />
 
@@ -73,10 +71,9 @@ Example: *user language is <u>English</u>*
 
 There is two ways to make sure that a transition will always happen:
 
-1. Adding an Expression card with the label "Always" and the generated code `true`. When the conversation reach this card, it will always flow to the node that you connected the Expression to, since the expression value is always true.
-<br />
-2. Creating a node and adding a transition line from the default port (that's next to the "Add Card" button) to the desired node. When the conversation reaches the end of the first node, it will always flow to the one that you connected the default port to.
+1. The main one: Creating a node and adding a transition line from the default port (that's next to the "Add Card" button) to the desired node. When the conversation reaches the end of the first node, it will always flow to the one that you connected the default port to.
 
+2. Adding an Expression card with the label "Always" and the generated code `true`. When the conversation reach this card, it will always flow to the node that you connected the Expression to, since the expression value is always true.
 
 ## Intent
 
