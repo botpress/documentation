@@ -161,7 +161,49 @@ await Data1Table.deleteRecords([7, 8, 9])
 
 ### findRecords
 
-To find records in a table, use the `findRecords` function. You can add filters or just query everything. 
+To find records in a table, use the `findRecords` function. You can add filters, just query everything or search using semantic search (like a Google Search!). 
+
+#### Basic usage and pagination
+
+To retrieve data from a table in Botpress, you can use the `findRecords` function. This function allows you to specify the limit (number of records to return) and the offset (number of rows to start from).
+
+For instance, if you want the first 10 records, you can set the limit to 10 and the offset to 0. To fetch the next 10 records, you can set the limit to 10 and the offset to 10.
+
+To determine if there are more records available, you can check the length of the array returned. If the length is greater than 0, it indicates the presence of additional records.
+
+Here's an example:
+
+```javascript
+const limit = 10;
+const startRow = 0;
+
+workflow.records = await DataTable1.findRecords({ 
+   limit,
+   offset: startRow
+});
+
+// Checking the second page
+const secondPage = await Data1Table.findRecords({
+  limit,
+  filter: AI`everything`,
+  offset: startRow + limit
+})
+
+workflow.hasNextPage = secondPage.length > 0 // This flag can be consumed in your bot flow to handle pagination
+```
+
+You can apply a similar approach to determine if there are previous pages as well.
+
+#### Searching fields with natural language
+
+To perform a traditional search, use the search parameter when calling the DataTable1.findRecords() function in Botpress. Here is an example:
+
+```javascript
+workflow.records = await DataTable1.findRecords({ search: 'red velvet chairs' })
+```
+
+You can pass variables like event.preview to the search parameter to search for user input or any other variable. This allows you to preprocess the user's input before performing the search.
+
 
 #### Filtering results
 
@@ -295,6 +337,14 @@ For example, you might use the query selector "People with age greater than 18" 
 const data = await Data1Table.findRecords({ selectorName: 'adults' })
 workflow.adults = data
 ```
+
+#### Difference between search and AI filters
+
+A standard `Search` in Botpress is employed to identify specific strings like a user's name. It gives precision-based results by matching specific sets of characters. 
+
+On the other hand, an `AI Filter` broadens the scope and is used primarily for filtering results rather than explicitly searching them. It helps you track down users based on certain criteria, such as age above 25.
+
+Although the AI Filter is not primarily designed for exact string hunting, it's flexible enough to allow it. For instance, you could use it to filter results for `Canada` as a country.
 
 ### getRecord
 
