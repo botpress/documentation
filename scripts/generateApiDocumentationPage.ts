@@ -17,15 +17,7 @@ import { getContext } from './openApiContext'
 const HiddenSections = ['file']
 const SectionsWithRequiredWorkspaceIdHeader = ['bot', 'integration', 'workspaceMember']
 const SectionsWithRequiredBotIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'action']
-const SectionsWithRequiredIntegrationIdHeader = [
-  'user',
-  'conversation',
-  'event',
-  'message',
-  'file',
-  'state',
-  'action',
-]
+const SectionsWithRequiredIntegrationIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'action']
 
 type Section = {
   name: string
@@ -46,7 +38,6 @@ async function getApiDocumetationPageContent(): Promise<string> {
   md += '## Explorer \n\n'
   md += '<ApiExplorer /> \n\n'
   md += '<br /> \n'
-  md += '## Introduction \n\n'
   md += API_DOCS_INTRO
   md += API_DOCS_CLIENT
   md += API_DOCS_AUTHENTICATION
@@ -228,4 +219,4 @@ getApiDocumetationPageContent()
   .then((context) => {
     fs.writeFileSync('./pages/api-documentation/index.mdx', context)
   })
-  .catch(() => { })
+  .catch(() => {})
