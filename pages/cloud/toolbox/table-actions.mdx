@@ -1,0 +1,64 @@
+import { Callout } from 'nextra/components'
+import { Table, Td, Tr } from '@components/WrapperElements'
+
+# Introduction
+
+Tables serve as a structured data storage mechanism that plays a crucial role in organizing information within your conversation flow.
+
+# Cards
+
+While you have the option to read and write to tables using code within Execute Code cards, which provides significant flexibility, there's a simpler method available: using Table cards. These cards are designed to streamline the creation, update, deletion, and retrieval of records from tables.
+
+<Callout type="info">
+  Please note that none of the cards below directly display the result. You'll always need to save the result in a
+  variable first and then utilize it in the conversation.
+</Callout>
+
+## Get Record
+
+This card is used to retrieve a specific record (row) from a table. It should be employed when you are certain
+that the record exists and you possess its ID.
+
+To use the card, begin by selecting the table from which you want to retrieve the record. Subsequently, choose the record ID you wish to retrieve. You can either select a default ID or toggle the input to allow for the use of variables.
+
+Now, simply select the result variable that will store the record data. (You can create a new variable in the dropdown selection or employ an existing one, but remember that it needs to be of type Object since table records are objects.)
+
+## Insert Record
+
+This card is intended for inserting a new record (row) into a table. It should be used when you already possess the data to be saved and simply need to store it.
+
+To utilize the card, initially select the table into which you want to insert the record. Once you do so, you will see a list of inputs representing all the columns in the table. For each column, you can define a default value or toggle the input to allow for the use of variables.
+
+This card does not return any value, so there is no need to select a result variable.
+
+## Update Record
+
+This card is designed for updating an existing record (row) within a table. It is useful when you have both the record ID and the new data to be saved.
+
+To utilize the card, first select the table in which you wish to update the record. Then, choose the record ID that requires updating. You can select a default ID or toggle the input to allow for the use of variables.
+
+Click the "Add properties to update" button to select the columns you want to modify. For each column, you can define a default value or toggle the input to allow for the use of variables.
+
+This card does not return any value, so there is no need to select a result variable.
+
+## Delete Record
+
+This card is for deleting an existing record (row) from a table. It should be employed when you already possess the record ID and wish to delete it.
+
+To use this card, first select the table from which you want to delete the record. Then, choose the record ID you intend to delete. You can select a default ID or toggle the input to allow for the use of variables.
+
+This card does not return any value, so there is no need to select a result variable.
+
+<Callout type="error">
+  Please exercise caution when using this card. Ensure that you are deleting the correct record (by identifying its ID
+  in the Tables interface) and that you no longer require the record. Deleted records cannot be recovered!
+</Callout>
+
+## Find Records
+
+This card is designed for locating records (rows) within a table. It is useful when you need to retrieve multiple
+records based on specific criteria.
+
+To employ this card, begin by selecting the table from which you want to retrieve records. Then, compose a filter expression in natural language to define the criteria for the records you wish to retrieve. You can also use variables in the Filter input to enable dynamic queries.
+
+Now, simply select the result variable that will store the record data. (You can create a new variable in the dropdown selection or employ an existing one, but remember that it needs to be of type Array since table records are arrays.)

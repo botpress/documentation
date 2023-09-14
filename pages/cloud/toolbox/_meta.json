@@ -1,9 +1,10 @@
 {
   "send-message": "",
-  "execute-code": "",
   "capture-information": "",
+  "execute-code": "",
   "transition-to": "",
-  "ai-task": "AI Task",
+  "ai-task": "",
   "events-triggers": "Events & Triggers",
-  "query-kb": "Query Knowledge Bases"
+  "query-kb": "Query Knowledge Bases",
+  "table-actions": ""
 }
