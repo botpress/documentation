@@ -1,64 +1,51 @@
 import { Callout } from 'nextra/components'
 import { Table, Td, Tr } from '@components/WrapperElements'
 
-# Introduction
-
-Tables serve as a structured data storage mechanism that plays a crucial role in organizing information within your conversation flow.
-
-# Cards
-
-While you have the option to read and write to tables using code within Execute Code cards, which provides significant flexibility, there's a simpler method available: using Table cards. These cards are designed to streamline the creation, update, deletion, and retrieval of records from tables.
+# Working with Tables
+In Botpress, tables allow you to store and manage structured data that can be used in the conversation flow. The data in these tables can be read and written using Execute Code cards or Table cards. This guide provides an overview of how to use Table cards to create, read, update, delete, and find records in tables.
 
 <Callout type="info">
-  Please note that none of the cards below directly display the result. You'll always need to save the result in a
-  variable first and then utilize it in the conversation.
+  Table cards do not directly display the result. You'll need to first save the result in a variable and then use it in the conversation.
 </Callout>
 
-## Get Record
+## Retrieve a Record
 
-This card is used to retrieve a specific record (row) from a table. It should be employed when you are certain
-that the record exists and you possess its ID.
+To retrieve a specific record from a table, use the **Get Record** card. This is useful when you know the record ID. Here's how to do it:
 
-To use the card, begin by selecting the table from which you want to retrieve the record. Subsequently, choose the record ID you wish to retrieve. You can either select a default ID or toggle the input to allow for the use of variables.
+1. Select the table from which you want to retrieve the record.
+2. Select the record ID you want to retrieve. You can either select a default ID or use variables.
+3. Choose the result variable that will store the record data. (This variable needs to be an Object type as table records are objects.)
 
-Now, simply select the result variable that will store the record data. (You can create a new variable in the dropdown selection or employ an existing one, but remember that it needs to be of type Object since table records are objects.)
+## Add a New Record
 
-## Insert Record
+To insert a new record into a table, use the **Insert Record** card. Here's how:
 
-This card is intended for inserting a new record (row) into a table. It should be used when you already possess the data to be saved and simply need to store it.
+1. Select the table where you want to insert the record.
+2. Define a value for each column. You can either define a value manually or use variables.
 
-To utilize the card, initially select the table into which you want to insert the record. Once you do so, you will see a list of inputs representing all the columns in the table. For each column, you can define a default value or toggle the input to allow for the use of variables.
+## Update an Existing Record
 
-This card does not return any value, so there is no need to select a result variable.
+To update a record in a table, use the **Update Record** card. Here's how:
 
-## Update Record
+1. Select the table where the record is located.
+2. Select the record ID you want to update. You can either select a default ID or use variables.
+3. Click on "Add properties to update" and select the columns you want to change. For each column, you can define a value manually or use variables.
 
-This card is designed for updating an existing record (row) within a table. It is useful when you have both the record ID and the new data to be saved.
+## Delete a Record
 
-To utilize the card, first select the table in which you wish to update the record. Then, choose the record ID that requires updating. You can select a default ID or toggle the input to allow for the use of variables.
+To delete a record from a table, use the **Delete Record** card. Here's how:
 
-Click the "Add properties to update" button to select the columns you want to modify. For each column, you can define a default value or toggle the input to allow for the use of variables.
+1. Select the table where the record is located.
+2. Select the record ID you want to delete. You can either select a default ID or use variables.
 
-This card does not return any value, so there is no need to select a result variable.
-
-## Delete Record
-
-This card is for deleting an existing record (row) from a table. It should be employed when you already possess the record ID and wish to delete it.
-
-To use this card, first select the table from which you want to delete the record. Then, choose the record ID you intend to delete. You can select a default ID or toggle the input to allow for the use of variables.
-
-This card does not return any value, so there is no need to select a result variable.
-
-<Callout type="error">
-  Please exercise caution when using this card. Ensure that you are deleting the correct record (by identifying its ID
-  in the Tables interface) and that you no longer require the record. Deleted records cannot be recovered!
+<Callout type="warning">
+ Be careful when using this card. Ensure you are deleting the correct record and that you no longer need this record. Deleted records cannot be recovered.
 </Callout>
 
 ## Find Records
 
-This card is designed for locating records (rows) within a table. It is useful when you need to retrieve multiple
-records based on specific criteria.
+To retrieve multiple records based on specific criteria, use the **Find Records** card. Here's how:
 
-To employ this card, begin by selecting the table from which you want to retrieve records. Then, compose a filter expression in natural language to define the criteria for the records you wish to retrieve. You can also use variables in the Filter input to enable dynamic queries.
-
-Now, simply select the result variable that will store the record data. (You can create a new variable in the dropdown selection or employ an existing one, but remember that it needs to be of type Array since table records are arrays.)
+1. Select the table where you want to find records.
+2. Define your criteria with a filter expression in natural language. You can also use variables for dynamic queries.
+3. Choose the result variable that will store the records data. (This variable needs to be an Array type as table records are arrays.)
