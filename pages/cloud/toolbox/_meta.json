@@ -2,9 +2,9 @@
   "send-message": "",
   "capture-information": "",
   "execute-code": "",
-  "transition-to": "",
   "ai-task": "",
+  "table-actions": "",
+  "transition-to": "Transitions",
   "events-triggers": "Events & Triggers",
-  "query-kb": "Query Knowledge Bases",
-  "table-actions": ""
+  "query-kb": "Query Knowledge Bases"
 }
