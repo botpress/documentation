@@ -69,11 +69,11 @@ Example: *user language is <u>English</u>*
 
 ### Always transition to another node
 
-There is two ways to make sure that a transition will always happen:
+There are two ways to make sure that a transition always triggers:
 
-1. The main one: Creating a node and adding a transition line from the default port (that's next to the "Add Card" button) to the desired node. When the conversation reaches the end of the first node, it will always flow to the one that you connected the default port to.
+The recommended approach is to click and drag starting from the circle on the bottom-right of nodes, next to the "Add Card" button. Transitions created this way always trigger when the user reaches the end of the node.
 
-2. Adding an Expression card with the label "Always" and the generated code `true`. When the conversation reach this card, it will always flow to the node that you connected the Expression to, since the expression value is always true.
+You can also add an Expression card by creating an `Expression Transition` with the label "Always" and by pressing `Enter`. The code generator will insert `true` in the expression input. Anything below this `Transition` in the `Node` will never run. 
 
 ## Intent
 
