@@ -1,15 +1,9 @@
 import { ClientProps } from '@botpress/client/dist/config'
 import { BoltIcon } from '@heroicons/react/24/outline'
+import { toast } from '@utils/toast'
 import * as monacoEditor from 'monaco-editor'
 import { useEffect, useRef, useState } from 'react'
-import { FailureResponse } from 'types/error'
 import { CLIENT_LIB_SOURCE } from './ApiExplorer.constants'
-import {
-  executePromptChain,
-  getResponseFromPrompt,
-  getResponseFromPrompt1,
-  getResponseFromPrompt2,
-} from './ApiExplorer.http'
 import { ClientPropsForm } from './client-props-form'
 import { CLIENT_PROPS_KEY, CodeExecuter, getClientCodeBlock } from './code-executer'
 import { CodeEditor, EditorWithExtensions, Extension, copyCode } from './monaco'
@@ -17,7 +11,6 @@ import { actionButton } from './monaco/action-button'
 import { formatDocument } from './monaco/helpers'
 import { SAMPLE_PROMPTS } from './prompts/prompts.constants'
 import { DEFAULT_THEME } from './theme'
-import { toast } from '@utils/toast'
 
 export function ApiExplorer() {
   const codeExecuterRef = useRef<CodeExecuter>()
@@ -70,13 +63,19 @@ export function ApiExplorer() {
 
   function generate() {
     setAwaitingResponse(true)
-    executePromptChain(query, [getResponseFromPrompt, getResponseFromPrompt1, getResponseFromPrompt2])
+    fetch(`https://lheo9dza55.execute-api.us-east-1.amazonaws.com/prod/`, {
+      method: 'POST',
+      body: JSON.stringify({
+        query,
+      }),
+    })
+      .then((response) => response.json())
       .then((response) => {
-        if (response instanceof FailureResponse) {
-          console.log(response.getHumanizedErrorMessage(), response.context)
-          toast.error(response.getHumanizedErrorMessage())
+        if (!response.success) {
+          console.log('Error while generating code', response)
+          toast.error('Error while generating code')
         } else {
-          setResponse(response?.[0] ?? '')
+          setResponse(response?.response?.[0] ?? '')
         }
       })
       .finally(() => {
