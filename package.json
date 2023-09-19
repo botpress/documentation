@@ -18,7 +18,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@botpress/api": "^0.5.4",
+    "@botpress/api": "^0.7.1",
     "@heroicons/react": "^2.0.18",
     "@vercel/og": "^0.5.0",
     "classnames": "^2.3.2",
