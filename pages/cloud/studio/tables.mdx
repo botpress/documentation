@@ -9,13 +9,13 @@ Tables are an essential feature in the explorer, functioning as a local database
 
 They are particularly useful for storing information that needs to be persisted across multiple sessions, such as user profiles, transaction histories, and other types of data that need to be retrieved and updated over time.
 
-<Callout type="note">
+<Callout type="info">
   **Note** <br />
-  You can create upto **10 tables** with **20 columns** and **10,000 rows** in the **Free Plan**. <br />
+  You can create up to **10 tables** with **20 columns** and **10,000 rows** in the **Free Plan**. <br />
   [Get in touch](https://botpress.com/contact-us) if you want to increase the limits.
 </Callout>
 
-## Adding a Table
+## Creating a Table
 
 To add a new table, go to the explorer menu and select `Add Table`. You can then give your table a name and add fields to it. Each field has a name and a type. The type determines the kind of data that can be stored in the field. For example, a field with the type `String` can store any text value, while a field with the type `Number` can only store numeric values.
 
@@ -29,78 +29,26 @@ A Query Selector is the query you use to select or filter data from your table. 
 
 To add a Query Selector, click on the table in the explorer menu. You'll then see a list of all the records in the table. Click on the `Add Query Selector` button from the right panel to add a new query selector. You can then enter the query selector in the text field.
 
-## Operations on Tables - Manual
+## Operations on Tables - via the Interface
 
-### Add Records (Rows) to a table
+### Add records to a table
 
 Once you've created a table, you can add records to it. To do this, click on the table in the explorer menu. You'll then see a list of all the records in the table. Click on the `Add Record` button to add a new record. You can then enter the values for each field in the record.
 
-### Delete Records (Rows) from a table
+### Update records in a table
+
+Double click on a a table cell or press click it and press `Enter` to see an input that allows you to change the cell value. Once you are done, press `Enter` again or click away to save the new value. 
+
+### Delete records from a table
 
 `Right Click` on the Record and select `Delete Record` to delete a record from a table.
 
+
 ## Operations on Tables - via Cards
 
-In the context of the studio, there are several operations you can perform on table records.
+Check out the [Table Cards documentation](../toolbox/table-cards) to learn more about operations with cards.
 
-### Get Record
-
-The Get Record operation allows you to fetch a specific record from a table based on a unique identifier. For example, you might use the Get Record operation to retrieve a user's profile information based on their unique user ID.
-
-To get a record,
-
-1. Add the `Get Record` card
-2. Select the table you want to get the record from.
-3. You specify the unique identifier for the record (Record ID). For example, if you want to get a user's profile information, you can specify their user ID as the unique identifier.
-4. Create or select a variable to store the record in.
-5. You can then use the variable in subsequent cards to access the record's fields.
-
-### Insert Record
-
-The Insert Record operation is used to add a new record to a table. You can specify the values for each field in the record. This operation can be particularly useful when you need to store new information, such as a new user's details or a newly completed transaction.
-
-To insert a record,
-
-1. Add the `Insert Record` card
-2. Select the table you want to insert the record into.
-3. Specify the values for each field in the record.
-
-### Update Record
-
-The Update Record operation enables you to modify a specific record in a table. You can update a specific field in the record. For example, you might use this operation to update a user's profile information or to update the status of a transaction.
-
-To update a record,
-
-1. Add the `Update Record` card
-2. Select the table you want to update the record in.
-3. Specify the unique identifier for the record (Record ID). For example, if you want to update a user's profile information, you can specify their user ID as the unique identifier.
-4. Click on `+ Add Properties to update` button and specify the values for each field in the record.
-
-### Delete Record
-
-The Delete Record operation enables you to remove a specific record from a table based on a unique identifier. For instance, you might use this operation to delete a user's data if they choose to deactivate their account.
-
-To delete a record,
-
-1. Add the `Delete Record` card
-2. Select the table you want to delete the record from.
-3. Specify the unique identifier for the record (Record ID).
-
-### Find Records
-
-The Find Records operation allows you to search for and fetch multiple records that match certain criteria. This operation is beneficial when you need to handle multiple related records at once, such as fetching all transactions made by a specific user.
-
-To find records,
-
-1. Add the `Find Records` card
-2. Select the table you want to find the records from.
-3. Specify the query selector to use to find the records. For example, you might use the query selector "Find all records where 'user_id' equals '123'" to find all transactions made by a specific user.
-4. Create or select a variable to store the records in.
-5. You can then use the variable in subsequent cards to access the records' fields.
-
-Tables, therefore, provide a robust way to manage data within your chatbot, offering flexibility to handle a wide variety of scenarios that involve data persistence, retrieval, and manipulation.
-
-## Operations on Table Records - via Code
+## Operations on Tables - via Code
 
 ![Studio Explorer](/docs/content/table-operations.png)
 
@@ -109,8 +57,6 @@ Tables, therefore, provide a robust way to manage data within your chatbot, offe
 To create a new record in a table, use the `createRecord` function. You can specify the values for each field in the record.
 This function can be particularly useful when you need to store new information, such as a new user's details or a newly
 completed transaction.
-
-
 
 <video width="100%"  controls>
  <source src="/docs/content/createrecord.mov" type="video/mp4"/>
