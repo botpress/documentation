@@ -1,9 +1,7 @@
 import { Callout } from 'nextra/components'
 import { Table, Td, Tr } from '@components/WrapperElements'
 
-
-# Transition to
-
+# Transitions
 
 A Transition is like a "decision point" in a conversation with a chatbot, where the bot has to decide what to do next based on what the user has said or done. It's like a set of instructions that the bot follows to determine which "path" to take in the conversation.
 
@@ -22,18 +20,14 @@ expressions to determine which node the bot should transition to next.
 <br />
 You can use a combination of these checks to create complex conditions that will determine which node the bot will transition
 to next.
+<br />
 
-### Adding an "Always" Transition
-
-An "Always" transition is a transition that will always be transitioned, regardless of the user's input.
-
-Drag the Transition Card and set condition to `true` to create an "Always" transition.
-
-<Callout >
-  **Generative AI Transitions** <br/>
-  You can use generative AI to generate your conditions using plain text. In order to achieve what you exactly want,
-  here are some examples that should guide you, but you are not limited to it:
+<Callout>
+  **Generative AI Transitions** <br />
+  You can use generative AI to generate your conditions using plain text. In order to achieve what you exactly want, here
+  are some examples that should guide you, but you are not limited to it:
 </Callout>
+<br />
 
 <Table>
   <Tr>
@@ -72,6 +66,14 @@ Example: *user language is <u>English</u>*
 
 </Table>
 <br/>
+
+### Always transition to another node
+
+There are two ways to make sure that a transition always triggers:
+
+The recommended approach is to click and drag starting from the circle on the bottom-right of nodes, next to the "Add Card" button. Transitions created this way always trigger when the user reaches the end of the node.
+
+You can also add an Expression card by creating an `Expression Transition` with the label "Always" and by pressing `Enter`. The code generator will insert `true` in the expression input. Anything below this `Transition` in the `Node` will never run. 
 
 ## Intent
 
