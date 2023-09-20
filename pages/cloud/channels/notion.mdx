@@ -1,0 +1,82 @@
+import { Callout } from 'nextra/components'
+
+# Notion
+
+![Messaging channel - Notion](/docs/content/notion-banner.png)
+
+
+## Prerequisites
+
+- You need to have a [Notion account](https://www.notion.so/signup) and a [Notion Workspace](https://www.notion.so/create-workspace)
+- You need to have a [Botpress Cloud account](https://app.botpress.cloud/signup) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
+
+## Enabling the Notion Integration
+
+1. Go to the [Botpress Hub](https://app.botpress.cloud/hub) and install the Notion Integration to your chatbot.
+2. Go to the **Integrations** tab for your bot and enable the Notion integration.
+3. Auth Token - Go to [My Integrations](https://www.notion.so/my-integrations) and Create a new integration. Select workspace and give it a name. Copy the `Internal Integration Secret` and paste it in the `Auth Token` field for Notion integration under the **Integrations** tab for your bot.
+
+![Messaging channel - Notion](/docs/content/notion-secrets.png)
+
+4. Enable Notion Comment Capabilities - Go to the **Capabilities** tab for your bot and enable the Comment Capabilities for Notion.
+
+![Messaging channel - Notion](/docs/content/notion-capabilities.png)
+
+<Callout type="info">
+  **Note**<br/>
+ To perform certain actions, you'll need the IDs of Notion entities (e.g., pages, databases). You can find these IDs in the URL when viewing the entity in a browser or by selecting "Copy Link" from the (...) menu. For more, see [Get a Database Id - Notion Developers](https://developers.notion.com/docs/create-a-notion-integration#step-3-save-the-database-id).
+</Callout>
+
+## Notion Cards
+
+The Notion Integration for Botpress Studio allows you to do the following actions.
+
+### Add Comment to a Discussion
+
+This action allows you to add a comment to an existing discussion. You can get the discussion ID from the URL when you are viewing the discussion in a browser. See [Create a Comment](https://developers.notion.com/reference/create-a-comment) for more info.
+
+| Input             | Description                                                                                       |
+|-------------------|---------------------------------------------------------------------------------------------------|
+| **Discussion ID** | To get the Discussion ID, look for the `d` parameter in the URL. The format is notion.so/pageTitle-pageID?d=**DiscussionID**&pvs=4  |
+| **Comment Body**  | The comment body can be a simple text that you want to add as a comment.                          | 
+
+### Add Comment to a Page
+
+You can add page level comments with this action.
+
+| Input          | Description                                                                                   | 
+|----------------|-----------------------------------------------------------------------------------------------|
+| **Page ID**    |   To get the Page ID, go to the page and copy the ID from the URL. The format is often notion.so/pageTitle-**pageID**                       | 
+| **Comment Body** | The comment body can be a simple text that you want to add as a comment.                    | 
+
+### Get a Database
+
+This allows you to get the details of a Database. This is ideally used with the `Add Page to a Database` action. In addition to the response from the Notion API ([Retreive a Database - Notion Developers](https://developers.notion.com/reference/retrieve-a-database)), this action also returns a optimized `structure` property (technically a type decleration) that can be used as an input for an AI task to instruct it to generate a payload for adding or updating a page in a Notion Database based on a user input.
+
+| Input          | Description                                                                                      | Format                | 
+|----------------|--------------------------------------------------------------------------------------------------|-----------------------|
+| **Database ID**| To retrieve the Database ID, navigate to the database and copy the ID from the URL.               | notion.so/**databaseID** | 
+
+### Add Page to a Database
+
+This action should ideally be used in tandem with `Get a Database` that returns the structure of the Database that you can use to instruct an [AI task](https://botpress.com/docs/cloud/generative-ai/ai-task-card/) to generate a payload. See [Working with Databases - Notion Developers](https://developers.notion.com/docs/working-with-databases) for more info.
+
+| Input          | Description                                                                                      | Format                                | 
+|----------------|--------------------------------------------------------------------------------------------------|---------------------------------------|
+| **Database ID**| To retrieve the Database ID, navigate to the database and copy the ID from the URL.               | notion.so/**databaseID**         | 
+| **Page ID**    | To get the Page ID, go to the page and copy the ID from the URL.                                  | notion.so/pageTitle-**pageID**                  | 
+
+
+
+### Delete a block
+
+You can delete the following entities:
+
+- a page in a database
+- a page
+- a block
+
+| Input          | Description                                                                                       | Format                                  | 
+|----------------|---------------------------------------------------------------------------------------------------|-----------------------------------------|
+| **Block ID**   | Blocks also have unique IDs. To find the Block ID, right-click on the block and choose "Copy Link". The ID is often at the end of the link. | notion.so/pageTitle-pageID?pvs=4#**BlockID**                |
+
