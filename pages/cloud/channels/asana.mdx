@@ -31,17 +31,19 @@ You can obtain your workspace ID by visiting [this link](https://app.asana.com/a
 5. Ignore the Webhook URL input
 
 
+## Capabilities
+
 With the Asana Integration, you can interact with Asana directly from your Botpress chatbot. The integration introduces various actions, including `createTask`, `updateTask`, `findUser`, and `addCommentToTask`, making the task and user management processes more efficient.
 
 <Callout type="warning">
 The Asana API rate limits are applicable. Also, note that certain advanced Asana features tied to paid plans may not be accessible.
 </Callout>
 
-## Functions 
+### Cards 
 
 Here's a breakdown of the Cards / functions provided by Asana Integration and their input fields. You need to make sure the integration is enabled before being able to add them.
 
-### Create task
+#### Create task
 
 This function is used to create a new task in Asana. The input fields include:
 
@@ -55,7 +57,7 @@ This function is used to create a new task in Asana. The input fields include:
 
 You can store the output of this to a variable to access the permalink.
 
-### Update task
+#### Update task
 
 This function is used to update an existing task in Asana. The input fields include:
 
@@ -64,13 +66,13 @@ This function is used to update an existing task in Asana. The input fields incl
 - **assignee**: The ID of the user who will be assigned to the task or "me" to assign to the current user (optional).
 - **completed**: If the task is completed, enter "true" (without quotes), otherwise, it will keep its previous status (optional).
 
-### Find user
+#### Find user
 
 This function is used to find a user, and all their associated metadata in Asana. The input field is:
 
 - **userId**: The email of the user.
 
-### Add comment to task
+#### Add comment to task
 
 This function is used to add a comment to a task in Asana. The input fields include:
 
