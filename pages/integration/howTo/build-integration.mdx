@@ -1,3 +1,5 @@
+import { Callout } from 'nextra/components'
+
 # Building a Custom Integration
 
 ## Prerequisites
@@ -111,6 +113,24 @@ Prerequisites
 
 ### Setting up the integration files
 
+#### Understanding Constant Declaration - src/const.ts
+
+In the given code snippet, a constant is being exported which will be used throughout the integration. Naming conventions and the declaration of constants are important in maintaining the codebase and ensuring consistency across different parts of the application.
+
+##### What this Line Does?
+This line declares and exports a constant named `INTEGRATION_NAME`, and assigns it the string value `'clickupnew'`.
+
+##### Code
+
+```ts
+// Declaring and exporting a constant named INTEGRATION_NAME with the value 'clickupnew'.
+export const INTEGRATION_NAME = 'clickupnew'
+```
+
+<Callout type="info" >
+  **Note** <br/>
+  Make sure to set the value of INTEGRATION_NAME unique to your integration. This will be used to identify your integration in Botpress.
+</Callout>
 
 
 #### Understanding the Integration Logic - integration.definition.ts
