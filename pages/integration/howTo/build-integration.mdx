@@ -19,7 +19,7 @@ Are you keen to leverage the powerful capabilities of Botpress combined with you
 
 This guide will primarily focus on integrating with ClickUp, a highly-respected project management tool. By creating this integration, you can automate task assignments, boost team collaboration, and streamline project management in your organization. If you're ready to unlock a whole new level of productivity, let's dive in!
 
-## Video Series:
+## Video Series
 
 Kickstart your journey by watching our comprehensive video series on building a ClickUp integration with Botpress. Our in-house experts walk you through the entire process, from the initial setup to handling outgoing messages.
 
@@ -75,3 +75,319 @@ In the concluding video of our three-part series, see how we tie everything toge
 ></iframe>
 
 So, that's basically it folks! Happy integration-building!
+
+## Building Integration From Scratch
+
+This integration allows Botpress to communicate with ClickUp and perform various actions like creating tasks and comments and listening to ClickUp events through webhooks. Follow the steps below to set up and utilize the integration.
+Prerequisites
+
+- Ensure Node is installed. Check with `node --version`. Please use Node version `18`.
+- Ensure pnpm is installed and is on version 8. Check with `pnpm --version`. If not, install with `brew install pnpm`.
+
+### Setup
+
+1. `pnpm dlx @botpress/cli init`  - For Initialising the integrations template
+2. `pnpm init`  - to initialise empty project. Copy **tsconfig.json** from template to the root of this project
+
+### Installing Necessary Packages
+    - `pnpm install @botpress/sdk @botpress/client zod axios` - sdk for botpress, client for clickup, zod for validation, axios for http requests
+    - `pnpm install -D @botpress/cli typescript @types/node ts-node` - dev dependencies for botpress cli, typescript, node, ts-node
+```json
+"scripts": {
+    "version": "bp --version",
+    "login": "bp login",
+    "dev": "bp dev",
+    "gen": "bp gen",
+    "deploy": "bp deploy"
+  },
+```
+
+### Important CLI Commands
+
+- `pnpm dlx @botpress/cli build` - Use this to build the integration
+- `pnpm run deploy` - Use this to deploy the integration. 
+- `pnpm run deploy -y` - Use this to deploy the integration without confirmation.
+- `pnpm dlx @botpress/cli login`  - Use this to login to your botpress account. You will need to generate a personal access token from your botpress account. Go to Admin Dashboard → Profile → Personal Access Token. Generate a new one and paste it in the CLI.
+
+### Setting up the integration files
+
+
+
+#### Understanding the Integration Logic - integration.definition.ts
+
+This file, named **integration.definition.ts**, acts as a blueprint for our integration with Botpress. It meticulously outlines the structure and defines how our integration should behave, interact, and appear within the Botpress platform. Below is an in-depth description and comments in plain English for each part of this file to help understand its role and purpose in building this integration.
+
+### What this file does?
+It specifies the integration's name, version, configuration, events, actions, icon, channels, messages, and user tags. It acts as a contract between our service and Botpress, ensuring that the integration adheres to the expected structure and functionalities, allowing seamless interaction within the Botpress environment.
+
+### The Role in Building Integration
+This definition file is pivotal while building integration as it shapes the integration's behavior and interaction within Botpress. It ensures that all components of the integration are correctly configured and interact cohesively.
+
+### Code
+
+```ts
+// Import necessary modules and definitions
+import { IntegrationDefinition } from '@botpress/sdk'; // This imports the IntegrationDefinition class from Botpress SDK.
+import z from 'zod'; // This imports zod, a library used for building schemas.
+import {INTEGRATION_NAME} from './src/const'; // This imports the integration name from constants file located in src folder.
+
+// This is where we define our integration using the IntegrationDefinition class.
+export default new IntegrationDefinition({
+    // The name and version of the integration are defined here.
+    name: INTEGRATION_NAME, 
+    version: '0.2.0',
+    
+    // This is where we define the configuration schema for our integration.
+    configuration: {
+        schema: z.object({
+            apiKey: z.string(), // Defines that apiKey should be a string.
+            teamId: z.string(), // Defines that teamId should be a string.
+        })
+    },
+    
+    // Events that our integration can handle are defined here.
+    events: {
+        taskCreated: {
+            schema: z.object({id: z.string()}) // Defines the schema for taskCreated event.
+        },
+    },
+    
+    // Actions that our integration can perform are defined here.
+    actions: {
+        createTask: {
+            input: {
+                schema: z.object({
+                  // Defines the input schema for creating a task.
+                  listId: z.string(), 
+                  name: z.string(), 
+                  description: z.string().optional() // Description is optional.
+                })
+            },
+            output: {
+                schema: z.object({id: z.string()}) // Defines the output schema of creating a task.
+            }
+        }
+    },
+    
+    // Specifies the icon of the integration.
+    icon: 'icon.svg',
+    
+    // This is where we define channels and their messages, tags, etc.
+    channels: {
+        comment: {
+            messages: {
+                text: {
+                    schema: z.object({text: z.string()}) // Defines the schema for text messages.
+                }
+            },
+            message: {
+                tags: {
+                    id: {
+                        title: "Message ID", // The title of the Message ID tag.
+                        description: "Message ID from ClickUp", // Describes what the Message ID tag is.
+                    }
+                }
+            },
+            conversation: {
+                tags: {
+                    taskId: {
+                        title: "Task ID", // The title of the Task ID tag.
+                        description: "Task ID from ClickUp", // Describes what the Task ID tag is.
+                    }
+                }
+            }
+        }
+    },
+    
+    // Defines the user tags for our integration.
+    user: {
+        tags: {
+            id: {
+                title: "User ID", // The title of the User ID tag.
+                description: "User ID from ClickUp", // Describes what the User ID tag is.
+            }
+        }
+    }
+});
+```
+
+#### Understanding the Integration Logic - src/index.ts
+
+This file, **index.ts**, located in the **src** folder is pivotal and acts as the nerve center of our integration, handling various operations, interactions, and logic between Botpress and ClickUp. Below is a comprehensive commentary and explanation in plain English for each segment of this file, aiding in understanding its functions and roles in driving this integration.
+
+##### What this file does?
+This file handles the creation of tasks, registration, and unregistration of the integration, webhook handling, and sending messages to ClickUp. It encapsulates the logic needed for the integration to function cohesively and seamlessly within the Botpress environment.
+
+##### The Role in Building Integration
+This file is essential in building the integration as it contains the functions and logic that dictate how the integration will interact, behave, and perform its designated operations within Botpress and ClickUp.
+
+##### Code
+
+```ts
+// Importing necessary modules, classes, and types.
+import { Integration } from ".botpress";
+import { ClickUpClient } from "./client";
+import { comment } from ".botpress/implementation/channels";
+
+// Declaring and exporting the Integration instance with defined actions, register methods, handlers, and channels.
+export default new Integration({
+    // Declaring actions that the integration can perform.
+    actions: {
+        createTask: async({ ctx, input }) => { 
+            // Initializing ClickUpClient with necessary configurations.
+            const clickup = new ClickUpClient(ctx.configuration.apiKey, ctx.configuration.teamId)
+            // Creating a task and returning its ID.
+            const task = await clickup.createTask(input)
+            return { id: task.id }
+        }
+    },
+    // Declaring the register method to enable and save the integration.
+    register: async ({ctx, logger, webhookUrl}) => { 
+        logger.forBot().info('ClickUp integration enabled')
+        const clickup = new ClickUpClient(ctx.configuration.apiKey, ctx.configuration.teamId)
+        
+        // Fetching the user and registering the webhook.
+        await clickup.getUser()
+        await setWebhook(clickup, webhookUrl)
+    },
+    // Declaring the unregister method to delete the integration (not disable).
+    unregister: async () => { },
+    // Declaring the handler to manage incoming events from ClickUp.
+    handler: async ({ctx, req, client, logger}) => { 
+        if (!req.body) return;
+        const body = JSON.parse(req.body)
+
+        // Processing taskCommentPosted events.
+        if (body.event === "taskCommentPosted") {
+            const clickup = new ClickUpClient(ctx.configuration.apiKey, ctx.configuration.teamId)
+            const botUser = await clickup.getUser()
+
+            // Processing history items from ClickUp.
+            for (const historyItem of body.history_items) {
+                if(botUser.id === historyItem.user.id) continue;
+                
+                // Creating or fetching users, conversations, and messages from Botpress.
+                const { user } = await client.getOrCreateUser({ tags: {"id": historyItem.user.id.toString()} })
+                const { conversation } = await client.getOrCreateConversation({ channel: "comment", tags: {"taskId": body.task_id.toString()} })
+                const { message } = await client.getOrCreateMessage({
+                    conversationId: conversation.id,
+                    userId: user.id,
+                    type: "text",
+                    payload: { text: historyItem.comment.text_content },
+                    tags: {"id": historyItem.comment.id.toString()}
+                })
+
+                logger.forBot().debug(`Received comment from ClickUp: ${message.payload.text}`)
+            }
+        }
+    },
+    // Declaring channels and their message handling logic.
+    channels: {
+        comment: {
+            messages: {
+                text: async ({ctx, conversation, ack, payload, logger}) => { 
+                    // Sending a text message to ClickUp from Botpress.
+                    const clickup = new ClickUpClient(ctx.configuration.apiKey, ctx.configuration.teamId)
+                    const comment = await clickup.createComment({ text: payload.text, taskId: conversation.tags["clickupnew:taskId"]! })
+                    
+                    logger.forBot().debug(`Comment Logs: ${comment}`)
+                    logger.forBot().debug(`Logs:${payload.text}`)
+                    await ack({tags: {"clickupnew:id": comment.id.toString()}})
+                }
+            }
+        }
+    }
+})
+
+// Function to set webhook for the ClickUp events.
+async function setWebhook(clickup: ClickUpClient, webhookUrl: string) {
+    const webhooks = await clickup.listWebhooks()
+  
+    for (const webhook of webhooks) {
+        if (webhook.endpoint === webhookUrl) {
+            await clickup.updateWebhook({
+              endpoint: webhookUrl,
+              status: 'active',
+              webhookId: webhook.id,
+              events: ['taskCommentPosted', 'taskCreated']
+            })
+            return
+        }
+    }
+    await clickup.createWebhook({ endpoint: webhookUrl, events: ['taskCommentPosted', 'taskCreated'] })
+}
+```
+
+#### Understanding the Client Logic - client.ts
+
+The **client.ts** file is crucial in our integration, containing a set of predefined functions acting as the middleman between our Botpress integration and the ClickUp API. These functions are tailored to simplify and streamline the interaction process, making API calls more manageable and organized.
+
+##### What this file does?
+This file establishes a class, **ClickUpClient**, that encompasses methods to interact with various ClickUp API endpoints, thereby allowing the retrieval and manipulation of data such as user information, webhooks, comments, and tasks.
+
+##### The Role in Building Integration
+The predefined functions in this file facilitate interaction with the ClickUp API by handling requests and responses, making it an essential component in building and maintaining the robustness of the integration.
+
+##### Code
+
+```ts
+// Importing necessary modules and defining the baseURL of the ClickUp API.
+import axios, { AxiosInstance } from 'axios'
+const baseURL = 'https://api.clickup.com/api/v2'
+
+// Declaring the ClickUpClient class.
+export class ClickUpClient {
+  private axios: AxiosInstance  // Instance of Axios to make HTTP requests.
+
+  // Constructor to initialize the ClickUpClient with token and teamId.
+  constructor(private token: string, private teamId: string) {
+    this.axios = axios.create({
+      baseURL,  // Setting the base URL for the API.
+      headers: { Authorization: this.token },  // Setting the Authorization header with the token.
+    })
+  }
+
+  // Method to get user information.
+  async getUser() {
+    const { data } = await this.axios.get('/user')
+    return data.user
+  }
+
+  // Method to list all the webhooks.
+  async listWebhooks() {
+    const { data } = await this.axios.get(`/team/${this.teamId}/webhook`)
+    return data.webhooks
+  }
+
+  // Method to create a new webhook.
+  async createWebhook(body: { endpoint: string, events: string[] }) {
+    const { data } = await this.axios.post(`/team/${this.teamId}/webhook`, body)
+    return data
+  }
+
+  // Method to update an existing webhook.
+  async updateWebhook({ webhookId, ...body }: { webhookId: string, endpoint: string, events: string[]; status: 'active' }) {
+    const { data } = await this.axios.put(`/webhook/${webhookId}`, body)
+    return data
+  }
+
+  // Method to create a new comment on a task.
+  async createComment({ taskId, text }: { taskId: string, text: string }) {
+    const user = await this.getUser()
+    const { data } = await this.axios.post(`/task/${taskId}/comment`, { comment_text: text, notify_all: false, assignee: user.id })
+    return data
+  }
+
+  // Method to create a new task in a list.
+  async createTask({ name, description, listId }: { listId: string; name: string, description?: string }) {
+    const { data } = await this.axios.post(`/list/${listId}/task`, { name, description })
+    return data
+  }
+
+  // Method to get information about a task.
+  async getTask(taskId: string) {
+    const { data } = await this.axios.get(`/task/${taskId}`)
+    return data
+  }
+}
+```
