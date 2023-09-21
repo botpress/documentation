@@ -1,3 +1,5 @@
+import { Callout } from 'nextra/components'
+
 # Trello Integration
 
 ![Trello Integration Banner](/docs/content/trello-banner.png)
@@ -7,6 +9,7 @@ This integration allows you to connect your Botpress chatbot with Trello, a lead
 ## Prerequisites
 
 Before leveraging this integration, ensure you have:
+
 1. A [Trello account](https://trello.com/)
 2. A board in Trello, with at least one list
 3. The ID of the list where cards will be created. Refer to [this article](https://community.atlassian.com/t5/Trello-questions/How-do-I-find-the-LIST-ID/qaq-p/2272862) to locate it.
@@ -19,9 +22,9 @@ Before leveraging this integration, ensure you have:
 4. Provide your Trello API key and your Trello API token to complete the Trello integration.
 5. Visit the [Power-Ups Admin Page](https://trello.com/power-ups/admin) and click the **New** button to obtain the API key. Name the Power-Up as "Botpress Connector", fill in the email and author fields, then click **Create**.
 6. Once the Power-Up is created, you will be redirected to API Key settings page, displayed below. Generate a new API key, then copy and paste this key into the **API Key** field in Botpress.
-![Power-Up API Key Settings](/docs/content/trello-docs-1.png)
+   ![Power-Up API Key Settings](/docs/content/trello-docs-1.png)
 7. Click on the "Token" link (marked in the image below) and authorize the Power-Up access to your Trello account by selecting **Allow**.
-![Power-Up Token Link](/docs/content/trello-docs-2.png)
+   ![Power-Up Token Link](/docs/content/trello-docs-2.png)
 8. After authorization, copy the displayed token and paste it into the **Token** field in Botpress.
 9. Make sure the integration is enabled then press the button "Save configuration".
 
@@ -77,4 +80,8 @@ This operation allows you to add a comment to an existing card. For example, thi
 
 You can save the new comment information by selecting a variable to store the output in. The output will be an object with the key: `text`.
 
-<Callout type="note">This Trello Integration aims to extend the capabilities of your Botpress chatbot by aligning it with Trello's functionalities, providing a harmonized and interactive user experience. Explore, interact, and get creative with how you utilize this amalgamation to optimize task and project management.</Callout>
+<Callout type="note">
+  This Trello Integration aims to extend the capabilities of your Botpress chatbot by aligning it with Trello's
+  functionalities, providing a harmonized and interactive user experience. Explore, interact, and get creative with how
+  you utilize this amalgamation to optimize task and project management.
+</Callout>
