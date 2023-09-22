@@ -2,15 +2,6 @@ import { Callout } from 'nextra/components'
 
 # Building a Custom Integration
 
-## Prerequisites
-
-To follow this guide and build your own integration, ensure you have the following:
-
-- A Botpress account
-- A ClickUp account
-- A code editor, such as Visual Studio Code or Sublime Text
-- Node.js Package Manager (npm) installed
-
 ## Introduction
 
 Are you keen to leverage the powerful capabilities of Botpress combined with your favorite applications? You're in the right place. This step-by-step guide will take you through the procedure of crafting a customized integration in Botpress. Integrations like these can supercharge your business operations, streamlining tasks, automating workflows, and enhancing productivity. For instance, you could:
@@ -21,79 +12,29 @@ Are you keen to leverage the powerful capabilities of Botpress combined with you
 
 This guide will primarily focus on integrating with ClickUp, a highly-respected project management tool. By creating this integration, you can automate task assignments, boost team collaboration, and streamline project management in your organization. If you're ready to unlock a whole new level of productivity, let's dive in!
 
-## Video Series
+## Prerequisites
 
-Kickstart your journey by watching our comprehensive video series on building a ClickUp integration with Botpress. Our in-house experts walk you through the entire process, from the initial setup to handling outgoing messages.
+To follow this guide and build your own integration, ensure you have the following:
 
----
+- A Botpress account
+- A ClickUp account
+- A code editor, such as Visual Studio Code or Sublime Text
+- Node.js Package Manager (npm) installed. Please use Node version `18`. You can check your Node version by running `node --version` in your terminal.
+- Ensure pnpm is installed and is on version 8. Check with `pnpm --version`. If not, install it following [these instructions](https://pnpm.io/installation).
 
-### Part 1: Setup and Definitions
-
-In the first part of this series, we delve deep into the process of laying the groundwork for a successful ClickUp-Botpress integration. Learn how to properly set up your environment, define your channels, messages, and tags, as well as generate the required code using the intuitive Botpress Command Line Interface (CLI).
-
-<iframe
-  data-youtube-iframe
-  width="720"
-  height="360"
-  src="https://www.youtube.com/embed/uXRQuBl1r2U?si=SgPFtY2WWTETTr0f"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
-
----
-
-### Part 2: Setting Up Webhooks and Handling Messages
-
-Join us in the second portion of our series as we delve deeper into the complexities of building an effective integration. Learn expert techniques on setting up webhooks, managing incoming messages from ClickUp, and priming your system for sending responses back to the platform.
-
-<iframe
-  data-youtube-iframe
-  width="720"
-  height="360"
-  src="https://www.youtube.com/embed/Q-wV112_rOw?si=HbeJOP7Iom8tZCww"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
-
----
-
-### Part 3: ClickUp Integration Final Build
-
-In the concluding video of our three-part series, see how we tie everything together to finish building a seamless ClickUp integration. Gain insights on how to handle outgoing messages, create tasks, and set up listeners for events within ClickUp. This is an all-inclusive tutorial that offers a thorough exploration of building powerful integrations in Botpress.
-
-<iframe
-  data-youtube-iframe
-  width="720"
-  height="360"
-  src="https://www.youtube.com/embed/1D3aC_asXYA?si=hpFdcIYnWVKEkgbT"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
-
-So, that's basically it folks! Happy integration-building!
-
-## Building Integration From Scratch
-
-This integration allows Botpress to communicate with ClickUp and perform various actions like creating tasks and comments and listening to ClickUp events through webhooks. Follow the steps below to set up and utilize the integration.
-Prerequisites
-
-- Ensure Node is installed. Check with `node --version`. Please use Node version `18`.
-- Ensure pnpm is installed and is on version 8. Check with `pnpm --version`. If not, install with `brew install pnpm`.
 
 ### Setup
 
-1. `pnpm dlx @botpress/cli init`  - For Initialising the integrations template
-2. `pnpm init`  - to initialise empty project. Copy **tsconfig.json** from template to the root of this project
+These steps should be done for every integration you create and are not specific to the ClickUp example.
 
-### Installing Necessary Packages
-    - `pnpm install @botpress/sdk @botpress/client zod axios` - sdk for botpress, client for clickup, zod for validation, axios for http requests
-    - `pnpm install -D @botpress/cli typescript @types/node ts-node` - dev dependencies for botpress cli, typescript, node, ts-node
+1. `pnpm dlx @botpress/cli init`  - For Initialising the integrations template
+2. select `integration` when prompted, and give it a name
+3. `cd <integration-name>` - to go into the integration folder
+4. `pnpm install @botpress/sdk @botpress/client zod axios` - sdk for botpress, client for clickup, zod for validation, axios for http requests
+5. `pnpm install -D @botpress/cli typescript @types/node ts-node` - dev dependencies for botpress cli, typescript, node, ts-node
+6. (recommended) initialize git and commit. This will help you track changes and revert if needed.
+7. Add the following scripts to your package.json file:
+
 ```json
 "scripts": {
     "version": "bp --version",
@@ -104,14 +45,18 @@ Prerequisites
   },
 ```
 
-### Important CLI Commands
-
-- `pnpm dlx @botpress/cli build` - Use this to build the integration
-- `pnpm run deploy` - Use this to deploy the integration. 
-- `pnpm run deploy -y` - Use this to deploy the integration without confirmation.
-- `pnpm dlx @botpress/cli login`  - Use this to login to your botpress account. You will need to generate a personal access token from your botpress account. Go to Admin Dashboard → Profile → Personal Access Token. Generate a new one and paste it in the CLI.
-
 ### Setting up the integration files
+
+Here we will be setting up the files that are required for the Clickup integration to work. You will be able to adapt these files based on the integration you are building.
+
+There are two files you will work with.
+- The main logic of your application lies in `index.ts`. This will be used to handle the creation of tasks, registration, and unregistration of the integration, webhook handling, and sending messages to ClickUp.
+- The second important file is `integration.definition.ts`. This will be used to define the integration's name, version, configuration, events, actions, channels, messages, and user tags. This allows bot builders to have code completion within the Botpress Studio. 
+
+
+
+
+
 
 #### Understanding Constant Declaration - src/const.ts
 
@@ -411,3 +356,71 @@ export class ClickUpClient {
   }
 }
 ```
+
+
+### Important CLI Commands
+
+- `pnpm dlx @botpress/cli build` - Use this to build the integration
+- `pnpm run deploy` - Use this to deploy the integration. 
+- `pnpm run deploy -y` - Use this to deploy the integration without confirmation.
+- `pnpm dlx @botpress/cli login`  - Use this to login to your botpress account. You will need to generate a personal access token from your botpress account. Go to Admin Dashboard → Profile → Personal Access Token. Generate a new one and paste it in the CLI.
+
+
+
+
+## Video Series
+
+Kickstart your journey by watching our comprehensive video series on building a ClickUp integration with Botpress. Our in-house experts walk you through the entire process, from the initial setup to handling outgoing messages.
+
+---
+
+### Part 1: Setup and Definitions
+
+In the first part of this series, we delve deep into the process of laying the groundwork for a successful ClickUp-Botpress integration. Learn how to properly set up your environment, define your channels, messages, and tags, as well as generate the required code using the intuitive Botpress Command Line Interface (CLI).
+
+<iframe
+  data-youtube-iframe
+  width="720"
+  height="360"
+  src="https://www.youtube.com/embed/uXRQuBl1r2U?si=SgPFtY2WWTETTr0f"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+---
+
+### Part 2: Setting Up Webhooks and Handling Messages
+
+Join us in the second portion of our series as we delve deeper into the complexities of building an effective integration. Learn expert techniques on setting up webhooks, managing incoming messages from ClickUp, and priming your system for sending responses back to the platform.
+
+<iframe
+  data-youtube-iframe
+  width="720"
+  height="360"
+  src="https://www.youtube.com/embed/Q-wV112_rOw?si=HbeJOP7Iom8tZCww"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+---
+
+### Part 3: ClickUp Integration Final Build
+
+In the concluding video of our three-part series, see how we tie everything together to finish building a seamless ClickUp integration. Gain insights on how to handle outgoing messages, create tasks, and set up listeners for events within ClickUp. This is an all-inclusive tutorial that offers a thorough exploration of building powerful integrations in Botpress.
+
+<iframe
+  data-youtube-iframe
+  width="720"
+  height="360"
+  src="https://www.youtube.com/embed/1D3aC_asXYA?si=hpFdcIYnWVKEkgbT"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+So, that's basically it folks! Happy integration-building!
