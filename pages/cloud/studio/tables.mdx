@@ -19,6 +19,18 @@ They are particularly useful for storing information that needs to be persisted 
 
 To add a new table, go to the explorer menu and select `Add Table`. You can then give your table a name and add fields to it. Each field has a name and a type. The type determines the kind of data that can be stored in the field. For example, a field with the type `String` can store any text value, while a field with the type `Number` can only store numeric values.
 
+### Import a Table
+
+You can import a table from a CSV file. Click on the `Import Table` button and select the CSV file you want to import. Botpress will automatically detect the column names and types from the CSV file and create the table for you.
+
+#### Making Fields Searchable
+
+You can make a field searchable by checking the `Searchable` checkbox. This will allow you to search for records based on the values in the field. For example, if you have a field called `Name` and you make it searchable, you can search for records based on the name of the person. This is only available for fields with the type `String`.
+
+### Export a Table
+
+Click on the `Export Table` button to export the table. This will download the table as a CSV file to your computer.
+
 ## Types of Fields (Columns)
 
 There are several types of fields you can add to a table. Each field type has a specific purpose and can only store certain types of data. These are the field types you can choose from: `String`, `Number`, `Boolean`, `Date`, and `Object`.
