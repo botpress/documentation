@@ -1,5 +1,6 @@
 {
   "overview": "",
+  "asana": "",
   "gmail": "",
   "instagram": "",
   "line": "",
@@ -16,5 +17,6 @@
   "webhook": "Webhook",
   "whatsapp": "WhatsApp",
   "zapier": "Zapier",
+  "trello": "",
   "handling-production-issues": "Debugging Bot Behavior in Production"
 }

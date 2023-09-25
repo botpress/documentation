@@ -1,0 +1,84 @@
+
+
+
+import {Callout} from 'nextra/components'
+
+# Asana Integration
+
+![Asana Integration banner](/docs/content/Asana-integration-banner.png)
+
+Asana Integration allows you to seamlessly connect your Botpress and Asana, a well-established project management platform. This integration equips your chatbot with the ability to manage projects and tasks right from its interface. 
+
+To get started, you'll need to provide your Asana API token and workspace ID. After the setup, you can leverage the built-in functionalities to perform actions such as task creation, task updates, task comment addition, and more.
+
+## Prerequisites
+
+Before you can use Asana Integration, make sure you have the following:
+
+- Access to an existing Asana workspace. 
+- A valid API token generated from Asana (Personal Access Token). 
+
+To obtain a Personal Access Token (PAT) from Asana, follow the instructions provided [here](https://developers.asana.com/docs/personal-access-token).
+
+You can obtain your workspace ID by visiting [this link](https://app.asana.com/api/1.0/workspaces) while logged in to your Asana account. The workspace ID corresponds to the `gid` parameter of the workspace you want to use.
+
+## Enabling the Asana Integration
+
+1. Go to the Botpress Hub and install the Asana Integration to your chatbot
+2. Go to the Integrations tab for your bot and enable the Asana integration
+3. For the API Token input, add the token taken from prerequisites
+4. For the Workspace Gid input, add the workspace id taken from prerequisites
+5. Ignore the Webhook URL input
+
+
+## Capabilities
+
+With the Asana Integration, you can interact with Asana directly from your Botpress chatbot. The integration introduces various actions, including `createTask`, `updateTask`, `findUser`, and `addCommentToTask`, making the task and user management processes more efficient.
+
+<Callout type="warning">
+The Asana API rate limits are applicable. Also, note that certain advanced Asana features tied to paid plans may not be accessible.
+</Callout>
+
+### Cards 
+
+Here's a breakdown of the Cards / functions provided by Asana Integration and their input fields. You need to make sure the integration is enabled before being able to add them.
+
+#### Create task
+
+This function is used to create a new task in Asana. The input fields include:
+
+- **name**: The name of the task.
+- **notes**: The description of the task (optional).
+- **assignee**: The ID of the user who will be assigned to the task or "me" to assign to the current user (optional).
+- **projects**: The project IDs should be strings separated by commas (optional).
+- **parent**: The ID of the parent task (optional).
+- **start_on**: The start date of the task in `YYYY-MM-DD` format (optional).
+- **due_on**: The due date of the task without a specific time in `YYYY-MM-DD` format (optional).
+
+You can store the output of this to a variable to access the permalink.
+
+#### Update task
+
+This function is used to update an existing task in Asana. The input fields include:
+
+- **taskId**: The ID of the task to update.
+- **name**: The name of the task (optional).
+- **assignee**: The ID of the user who will be assigned to the task or "me" to assign to the current user (optional).
+- **completed**: If the task is completed, enter "true" (without quotes), otherwise, it will keep its previous status (optional).
+
+#### Find user
+
+This function is used to find a user, and all their associated metadata in Asana. The input field is:
+
+- **userId**: The email of the user.
+
+#### Add comment to task
+
+This function is used to add a comment to a task in Asana. The input fields include:
+
+- **taskId**: The ID of the task to comment.
+- **comment**: The content of the comment to be added.
+
+---
+
+With Asana Integration, your Botpress chatbot becomes a powerful project management tool that can interact with Asana directly. This facilitates efficient task and user management processes, saving you time and improving your productivity. Whether you're creating a task, updating an existing one, finding a user, or adding a comment to a task, Botpress Asana Integration makes it all possible right from your chatbot interface.
