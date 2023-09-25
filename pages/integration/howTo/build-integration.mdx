@@ -45,56 +45,27 @@ These steps should be done for every integration you create and are not specific
   },
 ```
 
-### Setting up the integration files
+### Writing the Integration
 
-Here we will be setting up the files that are required for the Clickup integration to work. You will be able to adapt these files based on the integration you are building.
+Building an integration with Botpress is a straightforward process. It involves setting up a few key files that define the integration's behavior and interactions. In this guide, we'll walk you through the process of creating an integration with ClickUp, a popular project management tool. 
 
 There are two files you will work with.
 - The main logic of your application lies in `index.ts`. This will be used to handle the creation of tasks, registration, and unregistration of the integration, webhook handling, and sending messages to ClickUp.
 - The second important file is `integration.definition.ts`. This will be used to define the integration's name, version, configuration, events, actions, channels, messages, and user tags. This allows bot builders to have code completion within the Botpress Studio. 
 
+#### The Blueprint: integration.definition.ts
 
+Every integration starts with a blueprint, a file that outlines the structure and behavior of the integration. In Botpress, this blueprint is the `integration.definition.ts` file. This file specifies the integration's name, version, configuration, events, actions, icon, channels, messages, and user tags. 
 
-
-
-
-#### Understanding Constant Declaration - src/const.ts
-
-In the given code snippet, a constant is being exported which will be used throughout the integration. Naming conventions and the declaration of constants are important in maintaining the codebase and ensuring consistency across different parts of the application.
-
-##### What this Line Does?
-This line declares and exports a constant named `INTEGRATION_NAME`, and assigns it the string value `'clickupnew'`.
-
-##### Code
-
-```ts
-// Declaring and exporting a constant named INTEGRATION_NAME with the value 'clickupnew'.
-export const INTEGRATION_NAME = 'clickupnew'
-```
-
-<Callout type="info" >
-  **Note** <br/>
-  Make sure to set the value of INTEGRATION_NAME unique to your integration. This will be used to identify your integration in Botpress.
-</Callout>
-
-
-#### Understanding the Integration Logic - integration.definition.ts
-
-This file, named **integration.definition.ts**, acts as a blueprint for our integration with Botpress. It meticulously outlines the structure and defines how our integration should behave, interact, and appear within the Botpress platform. Below is an in-depth description and comments in plain English for each part of this file to help understand its role and purpose in building this integration.
-
-### What this file does?
-It specifies the integration's name, version, configuration, events, actions, icon, channels, messages, and user tags. It acts as a contract between our service and Botpress, ensuring that the integration adheres to the expected structure and functionalities, allowing seamless interaction within the Botpress environment.
-
-### The Role in Building Integration
-This definition file is pivotal while building integration as it shapes the integration's behavior and interaction within Botpress. It ensures that all components of the integration are correctly configured and interact cohesively.
-
-### Code
+Let's take a look at the `integration.definition.ts` file for our ClickUp integration:
 
 ```ts
 // Import necessary modules and definitions
 import { IntegrationDefinition } from '@botpress/sdk'; // This imports the IntegrationDefinition class from Botpress SDK.
 import z from 'zod'; // This imports zod, a library used for building schemas.
-import {INTEGRATION_NAME} from './src/const'; // This imports the integration name from constants file located in src folder.
+
+// Note: if you have issues related to the name of the integration, try importing it from another file.
+const INTEGRATION_NAME = "clickup"
 
 // This is where we define our integration using the IntegrationDefinition class.
 export default new IntegrationDefinition({
@@ -176,17 +147,11 @@ export default new IntegrationDefinition({
 });
 ```
 
-#### Understanding the Integration Logic - src/index.ts
+#### The Engine: index.ts
 
-This file, **index.ts**, located in the **src** folder is pivotal and acts as the nerve center of our integration, handling various operations, interactions, and logic between Botpress and ClickUp. Below is a comprehensive commentary and explanation in plain English for each segment of this file, aiding in understanding its functions and roles in driving this integration.
+The `index.ts` file is the engine of your integration. It contains the logic that drives the integration's behavior, handling tasks such as creating tasks, registering and unregistering the integration, handling webhooks, and sending messages to ClickUp.
 
-##### What this file does?
-This file handles the creation of tasks, registration, and unregistration of the integration, webhook handling, and sending messages to ClickUp. It encapsulates the logic needed for the integration to function cohesively and seamlessly within the Botpress environment.
-
-##### The Role in Building Integration
-This file is essential in building the integration as it contains the functions and logic that dictate how the integration will interact, behave, and perform its designated operations within Botpress and ClickUp.
-
-##### Code
+Here's what the `index.ts` file looks like for our ClickUp integration:
 
 ```ts
 // Importing necessary modules, classes, and types.
@@ -282,18 +247,11 @@ async function setWebhook(clickup: ClickUpClient, webhookUrl: string) {
     await clickup.createWebhook({ endpoint: webhookUrl, events: ['taskCommentPosted', 'taskCreated'] })
 }
 ```
+Notice we import a client.ts module. We'll cover that next.
 
-#### Understanding the Client Logic - client.ts
+#### The Helper: client.ts
 
-The **client.ts** file is crucial in our integration, containing a set of predefined functions acting as the middleman between our Botpress integration and the ClickUp API. These functions are tailored to simplify and streamline the interaction process, making API calls more manageable and organized.
-
-##### What this file does?
-This file establishes a class, **ClickUpClient**, that encompasses methods to interact with various ClickUp API endpoints, thereby allowing the retrieval and manipulation of data such as user information, webhooks, comments, and tasks.
-
-##### The Role in Building Integration
-The predefined functions in this file facilitate interaction with the ClickUp API by handling requests and responses, making it an essential component in building and maintaining the robustness of the integration.
-
-##### Code
+The `client.ts` file is an optional helper file that manages the interaction with the ClickUp API. It contains a set of predefined functions that handle requests and responses, making API calls more manageable and organized. If you are using an external library to handle your external service, you could call that from index.ts and skip this file.
 
 ```ts
 // Importing necessary modules and defining the baseURL of the ClickUp API.
@@ -357,6 +315,9 @@ export class ClickUpClient {
 }
 ```
 
+And that's it! You've now set up the main files required for a Botpress integration. With these files in place, you can start building out your integration's functionality and interactions. Happy coding!
+
+
 
 ### Important CLI Commands
 
@@ -368,7 +329,7 @@ export class ClickUpClient {
 
 
 
-## Video Series
+## Video Tutorials
 
 Kickstart your journey by watching our comprehensive video series on building a ClickUp integration with Botpress. Our in-house experts walk you through the entire process, from the initial setup to handling outgoing messages.
 
