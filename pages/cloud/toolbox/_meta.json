@@ -2,8 +2,10 @@
   "send-message": "",
   "capture-information": "",
   "execute-code": "",
-  "ai-task": "",
-  "table-cards": "",
+  "ai-task": "AI Task",
+  "ai-transition": "AI Transition",
+  "ai-generate-text": "AI Generate Text",
+  "table-actions": "",
   "transition-to": "Transitions",
   "events-triggers": "Events & Triggers",
   "query-kb": "Query Knowledge Bases"

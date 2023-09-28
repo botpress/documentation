@@ -1,0 +1,34 @@
+import { Callout } from 'nextra/components'
+
+# AI Generate Text
+
+## Introduction
+
+The AI Generate Text card is a specific type of AI Task that helps you generate text based on a prompt and a few settings. This is useful for countless different use cases such as:
+
+- Generating catchy blog titles from a topic or keyword
+- Summarizing long texts or documents in a few sentences
+- Creating articles from bullet points or outlines
+- Writing product descriptions that highlight the features and benefits
+- Crafting creative content such as stories, poems, lyrics, and more!
+
+## How to use it
+
+You have a few settings in the AI Generate Text card:
+
+- Prompt: the text you want to use as a starting point for the AI to generate content, you can use variables here (like `{{event.preview}}` to get the last user message)
+- Output variable: the variable where the generated text will be stored
+- Advanced settings > Model: the LLM model you want to use to generate the text (the current options are GPT-3 and GPT-4)
+- Advanced settings > Temperature: the higher the temperature, the more creative the text will be
+- Advanced settings > Output length: the length of the generated text in tokens. Check out [this article by OpenAI](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) to learn more about LLM tokens.
+
+## Tips
+
+<Callout type="info">
+  If you don't like the generated text, you can always try to change the temperature or the output length to see if you
+  get better results.
+</Callout>
+
+<Callout type="info">
+  Use variables in the prompt to make the generated text more dynamic. For example, `{{event.preview}}` to get the last user message or `{{conversation.SummaryAgent.transcript}}` to get the history of the conversation and use it as a starting point for the AI.
+</Callout>

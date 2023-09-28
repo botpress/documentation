@@ -2,7 +2,8 @@
   "best-practices": "",
   "chatbot-personality": "",
   "ai-task-card": "AI Task Card",
-  "ai-transitions": "AI Based Transitions",
-  "ai-execute-code": "Generate code using AI",
+  "ai-generate-text-card": "AI Generate Text Card",
+  "generate-code": "Generate Code using AI",
+  "generate-conditions": "Generate Conditions using AI",
   "ai-prompt-chaining": "AI Prompt Chaining"
 }
