@@ -8,13 +8,19 @@ import { Image } from '@components/Image'
 
 ![Zapier channel](/docs/content/zapier-banner.png)
 
-## Setup Instructions
+## Prerequisites
 
-1. If you don't have a bot yet [open your Botpress Cloud dashboard](https://app.botpress.cloud/) and create one first by clicking on the "Create Bot" button.
-1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud.
-1. Click on the Zapier integration and then click on the "Install" button and follow the steps provided to install this integration on your bot, then go to your bot and make sure the Zapier integration is enabled and configured.
-1. If you don't have a Zapier account yet sign-up for one at: https://zapier.com/
-1. Request BETA access to the Botpress app in Zapier by [clicking here](https://zapier.com/developer/public-invite/179950/2d89a44be6d7ddcae4ae23df0be19b3c/).
+- A [Zapier](https://zapier.com/) account
+- BETA access to the Botpress app in Zapier [request here](https://zapier.com/developer/public-invite/179950/2d89a44be6d7ddcae4ae23df0be19b3c/)
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
+
+## Setting up the Zapier integration in Botpress
+
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the Zapier integration then click on the "Install to Bot" button, now go back to your bot.
+
+## Setting up a Zapier workflow
+
 1. Create a new zap in your Zapier account and search for "Botpress" either in the Trigger or Action of your zap.
 1. Zapier will guide you through the process of authenticating to your Botpress account, follow the steps provided there.
 1. Once you have authenticated, when setting up the Trigger or Action of your zap to use Botpress you'll be asked for the "Webhook URL", which you can find in your Botpress Cloud dashboard inside the "Integrations" tab of your bot and then clicking on the Zapier integration.

@@ -2,23 +2,25 @@
 
 ![Messaging channels](/docs/content/vonage-banner.png)
 
-## Requirements
+## Prerequisites
 
-### Create Vonage Application
+- A [Vonage Account](https://dashboard.nexmo.com/sign-up)
+- A [Vonage Application](https://dashboard.nexmo.com/applications/new)
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
 
-You will need a Vonage Account and a Vonage Application to connect Vonage to Botpress
+## Setting up the Vonage integration in Botpress
 
-- [Create a Vonage Account](https://dashboard.nexmo.com/sign-up)
-- [Create a Vonage Application](https://dashboard.nexmo.com/applications/new)
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the Vonage integration then click on the "Install to Bot" button, now go back to your bot.
 
-## Channel Configuration
+## Setting up Vonage
 
 ### API credentials
 
 1. Go to your [API Settings](https://dashboard.nexmo.com/settings).
-1. Copy paste the API key to the **API Key** channel configuration
-1. Copy paste the API secret from the **Account credentials** section to the **API Secret** channel configuration
-1. Copy paste the signature secret from the **Signed webhooks** section to the **Signature Secret** channel configuration
+2. Copy paste the API key to the **API Key** channel configuration
+3. Copy paste the API secret from the **Account credentials** section to the **API Secret** channel configuration
+4. Copy paste the signature secret from the **Signed webhooks** section to the **Signature Secret** channel configuration
 
 ### Save Configuration
 
@@ -31,5 +33,7 @@ Channel configuration is complete, you can now click **Save**
 You can use the Vonage sandbox to test you channel with WhatsApp
 
 1. Check the **Use Testing API** box in your channel configuration
-1. Go to your [Sandbox Settings](https://dashboard.nexmo.com/messages/sandbox)
-1. Copy paste the webhook url provided in the channel configuration UI to the **Inbound** and **Status** fields in the **Webhooks** section
+2. Go to your [Sandbox Settings](https://dashboard.nexmo.com/messages/sandbox)
+3. Copy paste the webhook url provided in the channel configuration UI to the **Inbound** and **Status** fields in the **Webhooks** section
+
+That's it, you may now start chatting with your bot on Vonage!

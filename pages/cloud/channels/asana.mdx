@@ -1,45 +1,45 @@
-
-
-
-import {Callout} from 'nextra/components'
+import { Callout } from 'nextra/components'
 
 # Asana Integration
 
 ![Asana Integration banner](/docs/content/Asana-integration-banner.png)
 
-Asana Integration allows you to seamlessly connect your Botpress and Asana, a well-established project management platform. This integration equips your chatbot with the ability to manage projects and tasks right from its interface. 
-
-To get started, you'll need to provide your Asana API token and workspace ID. After the setup, you can leverage the built-in functionalities to perform actions such as task creation, task updates, task comment addition, and more.
+Asana Integration allows you to seamlessly connect your Botpress and Asana, a well-established project management platform. This integration equips your chatbot with the ability to manage projects and tasks right from its interface. After the setup, you will be able to perform actions such as task creation, task updates, task comment addition, and more.
 
 ## Prerequisites
 
-Before you can use Asana Integration, make sure you have the following:
+- An [Asana account](https://asana.com/)
+- Access to an existing Asana workspace.
 
-- Access to an existing Asana workspace. 
-- A valid API token generated from Asana (Personal Access Token). 
+## Setting up the Asana integration in Botpress
 
-To obtain a Personal Access Token (PAT) from Asana, follow the instructions provided [here](https://developers.asana.com/docs/personal-access-token).
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the Asana integration then click on the "Install to Bot" button, now go back to your bot settings.
 
-You can obtain your workspace ID by visiting [this link](https://app.asana.com/api/1.0/workspaces) while logged in to your Asana account. The workspace ID corresponds to the `gid` parameter of the workspace you want to use.
+The Asana integration has the following settings:
 
-## Enabling the Asana Integration
+- **Enabled**: Whether Botpress will communicate with Asana
+- **Webhook URL**: The URL for receiving data in Botpress. (You shall not be using it)
+- **API Token**: The API token generated from Asana
+- **Workspace Gid**: The workspace ID obtained from Asana
 
-1. Go to the Botpress Hub and install the Asana Integration to your chatbot
-2. Go to the Integrations tab for your bot and enable the Asana integration
-3. For the API Token input, add the token taken from prerequisites
-4. For the Workspace Gid input, add the workspace id taken from prerequisites
-5. Ignore the Webhook URL input
+## Setting up Asana
 
+1. Generate a Personal Access Token on Asana. Follow [these instructions](https://developers.asana.com/docs/personal-access-token) to get your token. Once you have it, paste it in the API Token input in Botpress.
+2. Get the workspace ID. You can obtain your workspace ID by visiting [this link](https://app.asana.com/api/1.0/workspaces) while logged in to your Asana account. The workspace ID corresponds to the `gid` parameter of the workspace you want to use. Paste it in the Workspace Gid input in Botpress.
+
+That's it! Now the Asana integration is operational and ready for use within your bot.
+
+<Callout type="warning">
+  The Asana API rate limits are applicable. Also, note that certain advanced Asana features tied to paid plans may not
+  be accessible.
+</Callout>
 
 ## Capabilities
 
-With the Asana Integration, you can interact with Asana directly from your Botpress chatbot. The integration introduces various actions, including `createTask`, `updateTask`, `findUser`, and `addCommentToTask`, making the task and user management processes more efficient.
+With the Asana Integration, you can interact with Asana directly from your Botpress chatbot. The integration introduces various actions, including task creation, task updates, task comment addition, and more, making the task and user management processes more efficient.
 
-<Callout type="warning">
-The Asana API rate limits are applicable. Also, note that certain advanced Asana features tied to paid plans may not be accessible.
-</Callout>
-
-### Cards 
+### Cards
 
 Here's a breakdown of the Cards / functions provided by Asana Integration and their input fields. You need to make sure the integration is enabled before being able to add them.
 

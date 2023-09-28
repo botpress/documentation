@@ -13,73 +13,72 @@
   allowfullscreen
 ></iframe>
 
-## Requirements
+## Prerequisites
 
-You will need a Facebook app and a Facebook page to connect your bot to messenger
+- A [Meta developer app](https://developers.facebook.com/apps/create/)
+- A [Facebook page](https://www.facebook.com/pages/create/) that you own or has the developer role to connect your bot to messenger
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
 
-## Enabling Messenger in Botpress Cloud Dashboard
+## Setting up the Messenger integration in Botpress
 
-Go to the chatbot settings in your cloud dashboard and enable messenger. We will get the APP ID, App Secret, Verify Token, Page ID and Access Token from the following steps.
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the Messenger integration then click on the "Install to Bot" button, now go back to your bot settings.
 
-### Create a Facebook App
+The Messenger integration has the following settings:
 
-To create a Facebook App, log in to your Facebook account and go to the [Facebook for Developers website](https://developers.facebook.com/). Select **My Apps** from the top menu, and create a new app. For more details and assistance, visit the [Facebook developer documentation](https://developers.facebook.com/docs/development)
+- **Enabled**: Whether Botpress will communicate with Messenger
+- **Webhook URL**: The URL for receiving data in Botpress
+- **App Id**: The id of your Meta App
+- **App Secret**: The secret of your Meta App
+- **Verify Token**: The token used to verify the webhook requests
+- **Page Id**: The id of your Facebook page
+- **Access Token**: The access token used to send messages to the Messenger API
 
-### Create a Facebook Page
+## Setting up Messenger
 
-If you do not already have a Facebook page you will need to create one. [You can find details on how to create a new Facebook page here](https://www.facebook.com/pages/creation/)
+### Messenger API version
 
-To link your chatbot to a pre-existing page, you must have an administrator or developer role
+Botpress can only interact with the version 15.0 or higher of the Messenger API. It is not the default version in the app settings so it must be changed.
 
-## Channel Configuration
-
-### API version
-
-The messenger channel is made to interact with version 12.0 or higher of the Messenger API. It is not the default version so it must be changed in your app's settings
-
-1. Go to your Facebook App
+1. Go to your Meta app start page
 1. In the left sidebar, expand the **Settings** menu and select **Advanced**
-1. In the **Upgrade API version** section, select v12.0 or higher as the API version
+1. In the **Upgrade API version** section, select v15.0 or higher as the API version
 1. Click on **Save changes**
 
 ### Add Messenger Product
 
-Messenger is not added by default in your Facebook App, so it must be added manually
+Messenger is not added by default in your Meta app, so it must be added manually
 
 1. In the left sidebar, click on **Add Product**
 1. In the Facebook Messenger section click **Set Up**
 
 ### App Id and Secret
 
-The app id and secret are used to validate webhook requests
-
 1. In the left sidebar, expand the **Settings** menu and select **Basic**. Here you can find the App ID and App Secret
 1. Click on the **Show** button in the **App Secret** text box. Copy the App Id and App Secret to your channel configuration
 
-### Page Id and Access Token
+### Verify Token
 
-The page id and access token are used to send messages to the Messenger API
+The verify token is used by Facebook to verify that you are the real owner of the provided webhook
+
+You can generate any random alphanumerical string for this configuration. Paste it in your **Verify Token** channel configuration
+
+### Page Id and Access Token
 
 1. In the left sidebar, expand the **Messenger** menu and select **Settings**
 1. In the **Access Tokens** section, click **Add or remove Pages** and add your facebook page
 1. Copy the number under your page name and paste it in your **Page Id** channel configuration
 1. Click on **Generate token**. Copy this token and paste it in the **Access Token** channel configuration
 
-### Verify Token
-
-The verify token is used by facebook to verify that you are the real owner of the provided webhook
-
-You can generate any random alphanumerical string for this configuration. Paste it in your **Verify Token** channel configuration
-
 ### Save Configuration
 
-Channel configuration is complete, you can now click **Save**. It is important to save your configuration before configuring the webhook, otherwise Messenger will be unable to validate the webhook url
+Channel configuration is complete, you can now click **Save**. It is important to save your configuration before configuring the webhook, otherwise Messenger will be unable to validate the Webhook URL.
 
 ## Webhook Configuration
 
 To receive messages from Messenger, you will need to setup a webhook
 
-1. Go to your Facebook App.
+1. Go to your Meta app.
 1. In the left sidebar, expand the **Messenger** menu and select **Settings**
 1. In the **Webhooks** section, click **Add Callback URL**
 1. Copy paste the webhook url provided in the channel configuration UI
@@ -94,6 +93,7 @@ When your app is in Development Mode, your bot will work for admins, developers,
 Read more about the [App Approval process](https://github.com/microsoft/botframework-sdk/issues/1465)
 
 ## Send Greeting/Welcome Message
-You can create a customised greeting from your Page that will appear in Facebook messages and in the Messenger app when someone begins a conversation with your Page for the first time. Your Page's greeting will appear before any messages are sent.
+
+You can create a customized greeting from your Page that will appear in Facebook messages and in the Messenger app when someone begins a conversation with your Page for the first time. Your Page's greeting will appear before any messages are sent.
 
 Read more about the [Messenger Greeting/Welcome Message](https://www.facebook.com/help/1698046970464236)

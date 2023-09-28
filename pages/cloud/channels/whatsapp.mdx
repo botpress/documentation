@@ -1,3 +1,5 @@
+import { Callout } from 'nextra/components'
+
 # WhatsApp
 
 ![Messaging channels](/docs/content/whatsapp-banner.png)
@@ -13,21 +15,18 @@
   allowfullscreen
 ></iframe>
 
-## Requirements
+## Prerequisites
 
-You will need a [Meta app](https://developers.facebook.com/apps/create/) and a WhatsApp Business Account to connect your bot to WhatsApp
+- A [Meta developer app](https://developers.facebook.com/apps/create/). Check out [this article](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started#set-up-developer-assets) to learn more about the setup.
+- A WhatsApp Business Account to be your bot's interface on WhatsApp
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
 
-### Create a Meta App & Business Account
+## Setting up the WhatsApp integration in Botpress
 
-To create a Meta App, log in to your Meta account and follow Step (1) & Step (2) in this [article](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started#set-up-developer-assets).
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the WhatsApp integration then click on the "Install to Bot" button, now go back to your bot.
 
-Before going to Step (3), we will configure the WhatsApp channel on Botpress.
-
-## Channel Configuration
-
-To add **WhatsApp** integration configuration, go to your bot’s configuration screen, then go to the channel tab, and click on **WhatsApp**.
-
-A screen will pop up asking for the following details:
+The WhatsApp integration will have the following settings:
 
 ### 1. Verify Token
 
@@ -37,9 +36,10 @@ You can generate any random alphanumeric string for this configuration. Paste it
 ### 2. Phone Number ID
 
 1. In your Meta App's left sidebar, expand the **WhatsApp** menu and select **Getting Started**
-2.  In the **Send and receive messages** section, beside the label **Phone Number ID** click **Copy** then paste it in the **Phone Number ID** field in Botpress
+2. In the **Send and receive messages** section, beside the label **Phone Number ID** click **Copy** then paste it in the **Phone Number ID** field in Botpress
 
 ### 3. Access Token
+
 The **Phone Number ID** and **Access Token** are used to send and receive messages to/from the WhatsApp API.
 
 1.  In your Meta App's left sidebar, expand the **WhatsApp** menu and select **Getting Started**
@@ -56,7 +56,7 @@ The **Phone Number ID** and **Access Token** are used to send and receive messag
 5. Click on `Create Asset` and select `Apps` from the asset type Tab.
 6. Select your app and toggle `Manage App (full control)`.
 7. Click `Generate New Token` and select `whatsapp_business_messaging` and `whatsapp_business_management` permission.
-9. Copy and save your token.
+8. Copy and save your token.
 
 ## Finalizing Channel Configuration
 
@@ -89,6 +89,7 @@ Now we can go back to Step (3) & Step (4) in this [article](https://developers.f
 Choices (buttons), dropdowns, cards, and carousels are all mapped to [Interactive List Objects.](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#interactive-object)
 
 This comes with a few restrictions and behaviors specific to WhatsApp:
+
 - When there are 3 or fewer choices as buttons or in a dropdown, they will be rendered as buttons.
 - When there are more than 3 choices as buttons or in a dropdown, they will be rendered as a dropdown.
 - If there are more than 10 choices in a dropdown, the multiple dropdown messages will be sent with up to 10 choices in each messsage.
@@ -100,6 +101,7 @@ This comes with a few restrictions and behaviors specific to WhatsApp:
 - Each card in a carousel will be sent individually.
 - Whatsapp requires cards to only use "reply" buttons, and doesn't support URLs. If the card only has URL actions, a card won't be able to be displayed and it will be downrendered using normal text/image messages.
 - When files are sent over Whatsapp, the Studio doesn't store the original filename (for security reasons) but only the file extension, so the file will be sent with a generic filename ("file") followed by the extension of the file. For example, if you send a PNG file, it will be sent as "file.png".
+
 ### From WhatsApp to Botpress
 
 - Text is mapped to Text Object
@@ -125,5 +127,16 @@ const response = await client.createConversation({
 })
 ```
 
-> **Note**: The `client` in the code example above is an instance of the [Botpress Client](https://www.npmjs.com/package/@botpress/client) that is always provided as a prop to the bot handlers (e.g. message handler, event, conversation, state expiry, etc.)
+<Callout type="info">
+  **Note**
+  <br />
+  If you are using the Botpress SDK, the `client` in the code example above is an instance of the [Botpress
+  Client](https://www.npmjs.com/package/@botpress/client) that is always provided as a prop to the bot handlers (e.g.
+  message handler, event, conversation, state expiry, etc.). But if you you can also run this code on a Node.js
+  environment where you can install the client package.
+</Callout>
 
+## Tips
+
+- To get the phone number of the user, use the variable `{{event.tags.conversation['whatsapp:userPhone']}}`. This number also contains the country code and has no spaces, dashes or signs.
+- To get the phone number id of the user, read the variable `{{event.tags.conversation['whatsapp:phoneNumberId']}}`

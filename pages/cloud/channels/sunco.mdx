@@ -2,9 +2,26 @@
 
 ![Messaging channels](/docs/content/smooch-banner.png)
 
-## Requirements
+## Prerequisites
 
-You will need a Smooch app with a channel configured before connecting Smooch to Botpress
+- A [Smooch app](https://app.smooch.io) with a channel configured
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
+
+## Setting up the Sunshine Conversations integration in Botpress
+
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the Sunshine Conversations integration then click on the "Install to Bot" button, now go back to your bot settings.
+
+The Sunshine Conversations integration has the following settings:
+
+- **Enabled**: Whether Botpress will communicate with this channel
+- **Webhook URL**: The URL for receiving data in Botpress
+- **App Id**: The App Id of your bot in Azure
+- **Key Id**: The Key Id of your bot in Azure
+- **Key Secret**: The Key Secret of your bot in Azure
+- **Webhook Secret**: The Webhook Secret of your bot in Azure
+
+## Setting up Sunshine Conversations
 
 ### Smooch App
 
@@ -37,7 +54,7 @@ The webhook secret is needed to validate webhooks requests. You get a webhook se
 1. Go to the **Integration** section of your app
 1. In the **API & Webhooks** section, click on **Webhooks**
 1. Click **Connect**, then **Create a webhook**
-1. Copy paste the webhook url provided in the UI
+1. Pase the Webhook URL provided in Botpress
 1. Select `v2` as your webhook version
 1. Select **Conversation message** and **Postbacks** in the basic triggers
 1. Click **Create Webhook**. You will see the webhook you created in the table, and the secret in the last column
@@ -46,3 +63,5 @@ The webhook secret is needed to validate webhooks requests. You get a webhook se
 ### Save Configuration
 
 Channel configuration is complete, you can now click **Save**
+
+That's it, you may now start chatting with your bot on Sunshine Conversations!

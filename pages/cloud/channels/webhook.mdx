@@ -6,16 +6,26 @@ import { Callout } from 'nextra/components'
 
 Webhooks provide a powerful way to integrate Botpress with other services. This guide will walk you through how to set up a webhook in Botpress to allow your bot to receive external updates in real-time.
 
-## Enabling the Webhook Integration
+## Prerequisites
 
-1. Go to the [Botpress Hub](https://app.botpress.cloud/hub) and install the Webhook Integration to your chatbot
-2. Enable the Webhook in the `Integrations` tab of your bot.
-3. You will get a URL that you can use to make requests to send data to your Botpress bot.
-4. (Optional) You can also create a secret token to secure your webhook, which will be required in all requests to the URL.
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
+
+## Setting up the Webhook integration in Botpress
+
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the Webhook integration then click on the "Install to Bot" button, now go back to your bot.
+
+The Webhook integration will have the following settings:
+
+- **Enabled**: Whether Botpress will communicate with the Webhook.
+- **Webhook URL**: The URL that you will use to send data to your bot.
+- **Secret**: A secret password that you can use to secure your webhook. It can be any string you want, but make it random and hard to guess.
+
+That's it! Now the Webhook integration is operational and ready for use within your bot.
 
 ## Sending data to your Webhook from Javascript
 
-You can make requests to your webhook from any environment that supports HTTP requests, such as a Node.js app, a React app, a Javascript script running in a browser, a Zapier zap, a curl script, etc.
+You can make requests to your webhook from any environment that supports HTTP requests, such as a Node.js app, a React app, a Javascript script running in the browser, a Zapier zap, a curl script, etc.
 
 This code example uses the Axios library to make a POST request to the Webhook URL, in a simulated Node.js app.
 
@@ -88,13 +98,14 @@ Webhook requests make available four properties that you can read in your bot:
 - You could also add Expression cards that transition to different nodes or workflows based on the data. For example, the `event.payload.body.category === 'Business'` condition could transition to a different flow that handles business articles.
 
 <Callout type="info">
-  **Note**<br/>
+  **Note**
+  <br />
   Remember that the contents of the `event.payload` property received via Webhook will be replaced as soon as the bot or
   the user sends a new message. So you should save important information in workflow variables if you want to use it
   later in the conversation.
 </Callout>
 
-- You can also add `/user` or any other path to the WebhookURL to record events specific to this URL. 
-- You can then add a filter to the Webhook Event to only receive events from this URL. 
-  - For example, if you want to receive only the events that have a `type` equal to `text` and a `user.id` equal to `user-id`, you can use the following filter: 
+- You can also add `/user` or any other path to the WebhookURL to record events specific to this URL.
+- You can then add a filter to the Webhook Event to only receive events from this URL.
+  - For example, if you want to receive only the events that have a `type` equal to `text` and a `user.id` equal to `user-id`, you can use the following filter:
   - `event.payload.body.type === 'text' && event.payload.body.user.id === 'user-id'`
