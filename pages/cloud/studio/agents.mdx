@@ -34,7 +34,6 @@ This would then output a brief summary of the conversation so far.
 
 There are no known conflicts with the Summary Agent and other Botpress functionalities or agents. However, please remember that the output from the Summary Agent (`conversation.SummaryAgent.summary`) is updated after each conversation turn. Therefore, ensure that you use it in context and check the summary only when it is updated.
 
-
 ## Translator Agent
 
 <iframe
@@ -87,12 +86,12 @@ You can do this in Execute Code card as well:
   Spanish, English & French within the same flow.
 </Callout>
 
-
 ### Conflicts
 
 It is important to note that the Translator Agent may conflict with the Personality Agent. The Personality Agent is designed to manipulate chatbot responses according to pre-set personalities and could overwrite the translations done by the Translator Agent. If both the Translator Agent and the Personality Agent are enabled, the Personality Agent will take priority. If you want the Translator Agent to take effect, you may need to adjust the settings of the Personality Agent or turn it off.
 
 ## Personality Agent
+
 <iframe
   data-youtube-iframe
   width="720"
@@ -104,7 +103,11 @@ It is important to note that the Translator Agent may conflict with the Personal
   allowfullscreen
 ></iframe>
 
-The Personality Agent enables you to provide your chatbot with a unique personality. It tailors the bot's behavior and responses according to the defined personality traits, providing a more engaging and human-like interaction for the users.
+The Personality Agent enables you to provide your chatbot with a unique personality. It tailors the bot's behavior and responses according to the defined personality traits, providing a more engaging and human-like interaction for the users. Learn more at [Chatbot Personality](../generative-ai/chatbot-personality).
+
+### Activate Personality Rewriting
+
+To activate the Personality Agent, you need to enable the **Personality Rewriting** option of the agent.
 
 ### Personality Description
 
@@ -112,18 +115,27 @@ This is where you define the personality of your chatbot. You should describe ho
 
 The Personality Agent, once enabled, will automatically rewrite all the messages sent by your bot to align with the described personality. For instance, if your bot is described as having a humorous and friendly personality, its responses may contain light-hearted quips or friendly salutations such as "Hello, my friend!"
 
-This may add some latency to your bot's responses as it takes time to process and rewrite the messages according to the defined personality traits.
-
-For instance, if you want your bot to behave like a professional consultant, you might write:
+For example, if you want your bot to behave like a professional consultant, you might add this text or something similar to the Personality Description:
 
 ```text
-Personality Description = 'You are a professional consultant who always uses formal language.
-You avoid slang and emojis and always address the user respectfully.'
+You are a professional consultant who always uses formal language.
+You avoid slang and emojis and always address the user respectfully.
 ```
+
+<Callout>
+  Enabling this Agent may add some latency to your bot's responses as it takes time to process and rewrite the messages
+  according to the defined personality traits.
+</Callout>
+
+<Callout type="info">
+  You can disable the Personality Agent in specific nodes by disabling the <b>Personality Rewriting</b> option in the
+  node's settings. This will make all the messages contained in Text or Capture cards to be sent as-is, without any
+  rewriting.
+</Callout>
 
 ### Conflicts
 
-Be aware that the Personality Agent can conflict with the Translator Agent. If both are enabled, the Personality Agent has higher priority and may overwrite the translations done by the Translator Agent. Thus, if you want to ensure the effectiveness of translations, you should adjust the settings of the Personality Agent or turn it off.
+Be aware that the Personality Agent might conflict with the Translator Agent. If both are enabled, the Personality Agent has higher priority and may overwrite the translations done by the Translator Agent. Thus, if you want to ensure the effectiveness of translations, you should adjust the settings of the Personality Agent or turn it off.
 
 ## Knowledge Agent
 
@@ -139,12 +151,12 @@ To enable Knowledge Bases on a node, click on the node in the workflow editor an
 
 ### Configuration
 
-- **Answer on Start Node**: When enabled, the chatbot will answer questions on the Start Node. 
+- **Answer on Start Node**: When enabled, the chatbot will answer questions on the Start Node.
 - **Answer Manually**: Your chatbot will not answer automatically. When this option is enabled, you need to manually reply to the user with `{{turn.KnowledgeAgent.answer}}`. This can be done with a Say node, on a Capture Card or with a Hook (advanced).
 - **Context**: Providing context helps knowledge bases give better answers. We recommend including the transcript of the conversation and/or the summary of the conversation provided by the Summary Agent. You can also include any other information that you think might be relevant to the KB.
 
 ### Exposed Variables
 
 - **turn.KnowledgeAgent.answer**: This variable represents the answer from the Knowledge Base. It is set to `null` if no answer is found.
-- **turn.KnowledgeAgent.responded**: This variable is set to `true` if the Knowledge Agent has answered the user's question **automatically**. It is set to `false` otherwise if manual answering is enabled. 
+- **turn.KnowledgeAgent.responded**: This variable is set to `true` if the Knowledge Agent has answered the user's question **automatically**. It is set to `false` otherwise if manual answering is enabled.
 - **turn.KnowledgeAgent.citations**: This variable represents the citations from the Knowledge Base. It is set to `null` if no citations are found.

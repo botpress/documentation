@@ -1,21 +1,35 @@
+import { Callout } from 'nextra/components'
+
 # Chatbot Personality
 
 ![Shortcuts](/docs/content/generative-ai-personality-cover.png)
 
-![Chatbot personality](/docs/content/chatbot-personality.png)
+![Personality Agent settings](/docs/content/personality-agent-settings.png)
 
-## Steps for Customizing your Chatbot's Personality
+In Botpress you can give your chatbot a personality that will customize all messages and questions sent. This will help your chatbot engage with users and convey your brand's voice. For example, if your brand is fun and playful, your chatbot's personality should reflect that. If your brand is more serious, your chatbot should be too.
 
-1. Open Botpress Studio and click on the Botpress Icon located at the top-left corner.
+## Setting up Personality
 
-2. Select [Chatbot Settings](../studio/chatbot-settings/) from the dropdown menu.
+1. Open Botpress Studio and click on the Agents tab (robot head) located at the top-left corner.
 
-3. Enable Personality Rewrite and add a description of the personality you want your bot to embody.
+2. Select Personality Agent from the list.
 
-4. Specify the tone you want your chatbot to convey, for example, "friendly but professional".
+3. Enable the Agent and the Personality Rewriting option. Now add a description of the personality you want your bot to embody. You can use variables to make it dynamic.
 
-5. Decide how often you want to use emojis, if at all.
+4. That's it, your bot's personality is now set up!
 
-6. Consider the context in which the bot will be used and adjust the personality accordingly. For example, if the bot is for a tech startup, the personality might be dynamic and forward-thinking.
+<Callout type="info">
+  All of your bot's messages in Text cards and questions in Capture cards will be rewritten to match the personality you
+  defined.
 
-7. Test the bot's personality to ensure it aligns with your brand and effectively engages with users.
+If you don't want the Personality Agent to change the content in certain nodes, click on the Node to open the Inspector view and then disable the "Personality Rewriting" option. Now the content of this node will be left
+untouched.
+
+</Callout>
+
+## Tips
+
+- In the personality description, make sure to specify the tone you want your chatbot to convey, for example, "friendly but professional". You can also instruct it on how often it should use emojis or slangs.
+- Also consider the context in which the bot will be used and adjust the personality accordingly. For instance, if the bot is for a tech startup, the personality might be dynamic and forward-thinking.
+- Test the bot's personality to ensure it aligns with your brand and effectively engages with users.
+- Using the Personality Agent is a great way to have your bot say or ask something in different ways without having to add the variations yourself. The Agent will usually slightly change the message wording on every interaction, but it will always convey the same meaning.

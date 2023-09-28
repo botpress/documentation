@@ -1,0 +1,73 @@
+import { Callout } from 'nextra/components'
+import { Table, Td, Tr } from '@components/WrapperElements'
+
+# Table Cards
+
+In Botpress, tables allow you to store and manage structured data that can be used in the conversation flow. The data in these tables can be read and written using the Tables interface, Execute Code cards and also Table cards.
+
+This guide provides an overview of how to use Table cards to create, read, update, delete, and find records in tables.
+
+<Callout type="info">
+  Table cards do not directly display their result. You'll need to first save the data in variables to be able to use
+  them in the conversation.
+</Callout>
+
+## Get Record
+
+To retrieve a specific record from a table, use the **Get Record** card. For example, you might use the Get Record operation to retrieve a user's profile information based on their unique user ID. Here's how to do it:
+
+1. Add the `Get Record` card to the desired node
+2. Select the table you want to get the record from.
+3. Select the record ID you want to retrieve. You can either select a default ID or use variables. For example, if you want to get a user's profile information, you can specify their user ID as the unique identifier here.
+4. Choose the result variable that will store the record data. (This variable needs to have the Object type since table records are objects.)
+5. Now you use the variable in subsequent cards to access the record data.
+
+## Insert Record
+
+To create a new record in a table, use the **Insert Record** card. This operation can be particularly useful when you need to store new information, such as a new user's details or a newly completed transaction. Here's how to do it:
+
+1. Add the `Insert Record` card to the desired node
+2. Select the table where you want to insert the record.
+3. Define a value for each field. You can either define a value manually or use variables.
+4. You're done, once the conversation goes through this card, the record will be created in the table.
+
+## Update Record
+
+To update a record in a table, use the **Update Record** card. For example, you might use this operation to update a user's profile information or to update the status of a transaction. Here's how to do it:
+
+1. Add the `Update Record` card to the desired node
+2. Select the table where you want to update the record in.
+3. Select the record ID you want to update. You can either select a default ID or use variables. For example, if you want to update a user's profile information, you can specify their user ID as the unique identifier.
+4. Click on "Add properties to update" and select the columns you want to change. For each column, you can define a value manually or use variables.
+5. You're done, once the conversation goes through this card, the record will be updated in the table.
+
+## Delete Record
+
+The Delete Record operation enables you to remove a specific record from a table based on a unique identifier. For instance, you might use this operation to delete a user's data if they choose to deactivate their account. Here's how to do it:
+
+1. Add the `Delete Record` card to the desired node
+2. Select the table where you want to delete the record from.
+3. Select the ID of the record you want to delete. You can either select a default ID or use variables.
+4. You're done, once the conversation goes through this card, the record will be deleted from the table.
+
+<Callout type="warning">
+  Be careful when using this card. Ensure you are deleting the correct record and that you no longer need it. Deleted
+  records cannot be recovered!
+</Callout>
+
+## Find Records
+
+The Find Records operation allows you to search for and fetch multiple records that match certain criteria. This operation is beneficial when you need to handle multiple related records at once, such as fetching all transactions made by a specific user. Here's how to do it:
+
+1. Add the `Find Records` card to the desired node
+2. Select the table where you want to find records.
+3. Define your filter criteria in natural language. You can also use variables to make this query dynamic like: `Price is below ${workflow.maxPrice}`.
+4. Choose the result variable that will store the records data. (This variable needs to have the Array type because multiple table records are stored in arrays)
+5. Now you can use the variable in subsequent cards to access the records data.
+
+---
+
+<Callout type="note">
+  Tables provide a robust way to manage data within your chatbot, offering flexibility to handle a wide variety of
+  scenarios that involve data persistence, retrieval, and manipulation.
+</Callout>
