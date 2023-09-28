@@ -1107,11 +1107,11 @@ The **Retries** setting helps the bot handle situations when it doesn't understa
 
 **Number of retries**
 
-This is the maximum number of times the bot will ask the user to provide the information again before giving up and sending the conversation to a failure transition.
+This is the maximum number of times the bot will ask the user to provide the information again before giving up and moving to the next card in the conversation or triggering the failure transition if enabled.
 
 **Retry message**
 
-This is the message that the bot will show to the user each time they fail to answer the question. It will ask the user to provide the information again in a different way.
+This is the message that the bot will show to the user each time they fail to answer the question. It will ask the user to provide the information again in a different way. If the capture has predefined choices the retry message will contain the buttons again.
 
 **Pro Tip**
 
