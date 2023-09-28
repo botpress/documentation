@@ -2,35 +2,41 @@
 
 ![Messaging channels](/docs/content/slack-banner.png)
 
-## Requirements
+## Prerequisites
 
-### Create a Slack App
+- A [Slack App](https://api.slack.com/apps) to connect your bot to Slack. Create one from scratch.
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
 
-You will need a Slack App to connect your bot to Slack
+## Setting up the Slack integration in Botpress
 
-1. Go to your [apps page](https://api.slack.com/apps)
-1. Click **Create new app**, select **From scratch** then give it a name. Remember your App's name, you'll need it in a few minutes
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the Slack integration then click on the "Install to Bot" button, now go back to your bot.
 
-## Channel Configuration
+The Slack integration has the following settings:
+
+- **Enabled**: Whether Botpress will communicate with Slack
+- **Webhook URL**: The URL for receiving data in Botpress
+- **Bot Token**: The token used to authenticate requests made to Slack
+- **Signing Secret**: The secret used to verify the requests
+
+## Setting up Slack
+
+### Bot Token
+
+1. In the left sidebar, click on **Features** > **OAuth & Permissions**
+1. Scroll down to the **Scope** > **Bot Token Scopes** section, click **Add an OAuth Scope**. Select the `chat:write` option from the list.
+1. Scroll up and click the **Install to Workspace** button in the **OAuth Tokens for Your Workspace** section
+1. In the next screen, your app will request access to your Slack workspace. Click **Allow**.
+1. In the **OAuth & Permissions > OAuth Tokens for Your Workspace** section, copy the **Bot User OAuth Token**.
+1. Copy the token and paste it in the **Bot Token** input in Botpress.
 
 ### Signing Secret
 
 The signing secret is used to verify webhook requests
 
-1. In the left sidebar, click on **Settings** > **Basic Information**
-1. Scroll down to **App Credentials** section. Next to **Signing Secret**, click **Show** to reveal the signing secret.
-1. In Botpress, copy the signing secret from the previous step in the **Signing Secret** box.
-
-### Bot Token
-
-The bot token is used to authenticate requests made to the Slack API
-
-1. In the left sidebar, click on **Features** > **OAuth & Permissions**
-1. Under the **Scope** > **Bot Token Scopes** section, click **Add an OAuth Scope**. Select the `chat:write` option from the list.
-1. Near the top of the page, click on **Install to Workspace** in the **OAuth Tokens for Your Workspace** section
-1. In the next screen, your app will request access to your Slack workspace. Click **Allow**.
-1. In the **OAuth & Permissions > OAuth Tokens for Your Workspace** section, copy the **Bot User OAuth Token**.
-1. In Botpress, copy the **Bot User OAuth Token** from the previous step in the **Bot Token** box.
+1. In the left sidebar of the app details page, click on **Settings** > **Basic Information**
+1. Scroll down to **App Credentials** section. Next to **Signing Secret**, click **Show** to reveal the secret.
+1. Copy the secret to the **Signing Secret** input in Botpress.
 
 ### Save Configuration
 
@@ -67,4 +73,6 @@ Your Slack app needs to be added to your workspace to allow Slack users to commu
 
 1. In the left sidebar, click on **Features** > **App Home**
 1. Scroll down and in the **Show Tabs > Messages Tab** section, tick **Allow users to send Slash commands and messages from the messages tab**
-1. In Slack, under the **Apps** section of the sidebar, click the **+ Add apps** button. In the search bar, type the name of your Slack app. Click on your Slack app in the search results. You can now chat with your Slack App
+1. In Slack, under the **Apps** section of the sidebar, click the **+ Add apps** button. In the search bar, type the name of your Slack app. Click on your Slack app in the search results.
+
+That's it, you may now start chatting with your bot on Slack!

@@ -10,13 +10,13 @@
   "sunco": "Sunshine conversations",
   "teams": "Microsoft Teams",
   "telegram": "",
+  "trello": "",
   "twilio": "",
   "viber": "",
   "vonage": "",
-  "webchat": "Web Chat",
-  "webhook": "Webhook",
+  "webchat": "",
+  "webhook": "",
   "whatsapp": "WhatsApp",
   "zapier": "Zapier",
-  "trello": "",
   "handling-production-issues": "Debugging Bot Behavior in Production"
 }

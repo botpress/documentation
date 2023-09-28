@@ -2,42 +2,53 @@
 
 ![Messaging channels](/docs/content/teams-banner.png)
 
-## Requirements
+## Prerequisites
 
-### Configure Microsoft Account
+- A [Microsoft account](https://www.microsoft.com/pt-br/)
+- Access to Azure and Teams. Please check out the [Azure](https://docs.microsoft.com/en-us/azure/devops/) and [Teams](https://docs.microsoft.com/en-us/microsoftteams/) documentation to learn more.
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
 
-Your Microsoft Account should have access to Azure and Teams. You can check out the [Azure](https://docs.microsoft.com/en-us/azure/devops/?view=azure-devops) and [Teams](https://docs.microsoft.com/en-us/microsoftteams/) documentation for information on how to make these connections
+## Setting up the Microsoft Teams integration in Botpress
 
-## Channel Configuration
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the Microsoft Teams integration then click on the "Install to Bot" button, now go back to your bot settings.
 
-### Register App
+The Microsoft Teams integration has the following settings:
+
+- **Enabled**: Whether Botpress will communicate with Microsoft Teams
+- **Webhook URL**: The URL for receiving data in Botpress. (You shall not be using it)
+- **App Id**: The App Id of your bot in Azure
+- **App Password**: The App Secret of your bot in Azure
+
+### Setting up Microsoft Teams
+
+#### Register App
 
 1. In the Azure portal, open the [App registrations](https://portal.azure.com#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade) page
-1. Click **New registration**, then choose a name for your application
-1. In the section **Supported account types**, choose **Accounts in any organizational directory and personal Microsoft accounts**, then click **Register**
-1. Copy paste the value of `Application (client) ID` to the **App Id** channel configuration
+2. Click **New registration**, then choose a name for your application
+3. In the section **Supported account types**, choose **Accounts in any organizational directory and personal Microsoft accounts**, then click **Register**
+4. Copy paste the value of `Application (client) ID` to the **App Id** channel configuration in Botpress
 
-### App Password
+#### App Password
 
-1. Click **Certificates & secrets**, then click **New client secret**, then fill in the required fields
-1. Copy paste the the value in the **Value** column to the **App Secret** channel configuration
+5. Find the **Certificates & secrets** page, click **New client secret**, then fill in the required fields
+6. Copy the value from the **Value** column and paste it in the **App Secret** channel configuration in Botpress
+7. Save the settings by clicking the "Save configuration" button
 
-### Save Configuration
-
-Channel configuration is complete, you can now click **Save**
-
-## Create Your Bot
+### Create Your Microsoft Bot
 
 1. Navigate to the [Bot Framework Registration Page](https://dev.botframework.com/bots/new)
-1. Fill the **Display name** and **Bot handle** fields with whatever value
-1. Copy paste you **App Id** to the app id field
-1. Copy paste the webhook url provided in the channel configuration UI to the **Messaging endpoint** field
-1. Click **Register**
-1. On the next page (**Connect to channels**), under the section, **Add a featured channel**, click **Configure Microsoft Teams Channel**, then click **Save**
+2. Fill the **Display name** and **Bot handle** fields with whatever value
+3. Copy paste you **App Id** to the app id field
+4. Copy paste the webhook url provided in the channel configuration UI to the **Messaging endpoint** field
+5. Click **Register**
+6. On the next page (**Connect to channels**), under the section, **Add a featured channel**, click **Configure Microsoft Teams Channel**, then click **Save**
 
-## Opening your Bot in MS Teams
+### Opening your Bot in MS Teams
 
 1. Navigate to the [My Bots Page](https://dev.botframework.com/bots/)
-1. Click on your bot's name
-1. Under the **Connect to channels** section, click on **Microsoft Teams**
-1. The bot should open in your MS Teams and you can chat with it
+2. Click on your bot's name
+3. Under the **Connect to channels** section, click on **Microsoft Teams**
+4. The bot should open in your MS Teams
+
+That's it, you may now start chatting with your bot on Microsoft Teams!

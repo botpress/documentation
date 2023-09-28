@@ -1,42 +1,45 @@
-# Line 
+# Line
 
 ![LINE](/docs/content/line-banner.png)
 
-## Requirements
+## Prerequisites
 
-You will need to create a channel on the LINE Developers Console, and then add that channel to your LINE official account.
+- A channel created on the [LINE Developers Console](https://developers.line.biz/).
+- The same channel added to your LINE official account
 
-### Create a Meta App & Business Account
+## Setting up the LINE integration in Botpress
 
-To create a channel and add it to your official account, you can read the [Getting started with the Messaging API](https://developers.line.biz/en/docs/messaging-api/getting-started/). The next step is configuring the Messaging API [Webhook Settings](https://developers.line.biz/en/docs/messaging-api/building-bot).
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the LINE integration then click on the "Install to Bot" button, now go back to your bot settings.
 
-When you have created everything and are ready for the next step, go to the next section.
+The LINE integration has the following settings:
 
-## Channel Configuration
+- **Enabled**: Whether Botpress will communicate with LINE
+- **Webhook URL**: The URL for receiving data in Botpress
+- **Channel Access Token**: The token used to authenticate the channel
+- **Channel Secret**: The secret used to verify the signature between LINE and Botpress
 
-To add LINE integration configuration, go to your bot's configuration screen. Then go to the channel tab, and click on LINE.
+## Setting up Line
 
-A screen will pop up asking for the following details:
+### Channel Access Token
 
-### 1. Channel Access Token
-
-The **Channel Access Token** is the means of authentication for the channel. You are deemed to have permission to use the channel if the Access Token is correct.
-
-To get the **Channel Access Token**: in your channel configuration, open the **Messaging API** tab, scroll to the bottom to the **Channel Access Token** section, and then generate a new one or copy it if the Channel access token was already issued.
+To get this token, open the **Messaging API** tab in your channel settings in LINE, scroll to the bottom to the **Channel Access Token** section, and then generate a new one or copy it if the Channel access token was already issued, then paste it in Botpress.
 
 For Long-Lived Channel Access Token: read this [LINE documentation](https://developers.line.biz/en/docs/messaging-api/channel-access-tokens/#long-lived-channel-access-tokens).
 
-### 2. Channel Secret
+### Channel Secret
 
 The **Channel Secret** is used to [verify the signature](https://developers.line.biz/en/docs/messaging-api/receiving-messages/#verifying-signatures) between LINE and Botpress.
 
-To get the **Channel Secret**: in your channel configuration, open the **Basic settings** tab, scroll to the bottom to the **Channel Secret** section, and then copy the secret.
+To get the secret, open the **Basic settings** tab in your channel configuration in LINE, scroll to the bottom to the **Channel Secret** section, and then copy the secret.
 
 ## Finalizing Channel Configuration
 
 The next step is to **Enable** the channel from the top of the screen and copy the webhook URL from the button below the webhook URL. Then click **Save**.
 
 Now, we proceed to the last step by [setting your webhook URL](https://developers.line.biz/en/docs/messaging-api/building-bot/#setting-webhook-url) in LINE.
+
+That's it, you may now start chatting with your bot on LINE!
 
 ## Content Types Mapping
 

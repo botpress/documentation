@@ -2,11 +2,27 @@
 
 ![Messaging channels](/docs/content/twilio-banner.png)
 
-## Requirements
+## Prerequisites
 
-Create a Twilio account and purchase a Twilio phone number
+- A [Twilio](https://www.twilio.com/) account
+- A Twilio phone number. Check out [this article](https://support.twilio.com/hc/en-us/articles/223135247-How-to-Search-for-and-Buy-a-Twilio-Phone-Number-from-Console) to learn how to get one.
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
 
-## Channel Configuration
+## Setting up the Twilio integration in Botpress
+
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the Twilio integration then click on the "Install to Bot" button, now go back to your bot.
+
+The Twilio integration has the following settings:
+
+- **Enabled**: Whether Botpress will communicate with Twilio
+- **Webhook URL**: The URL for receiving data in Botpress
+- **Account SID**: Your Twilio Account SID
+- **Auth Token**: Your Twilio Auth Token
+
+- **Enabled**: Wether
+
+## Setting up Twilio
 
 ### Account SID and Auth Token
 
@@ -29,3 +45,5 @@ To receive messages from Twilio, you will need to setup a webhook
 1. Click on your phone number
 1. Scroll down the phone number settings page
 1. Copy paste the webhook url provided in the channel configuration UI to the **A Message Comes In** field
+
+That's it! Now the Twilio integration is operational and ready for use within your bot.

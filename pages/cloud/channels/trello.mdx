@@ -8,27 +8,34 @@ This integration allows you to connect your Botpress chatbot with Trello, a lead
 
 ## Prerequisites
 
-Before leveraging this integration, ensure you have:
+- A [Trello account](https://trello.com/)
+- A board in Trello, with at least one list
+- The ID of the list where cards will be created. Refer to [this article](https://community.atlassian.com/t5/Trello-questions/How-do-I-find-the-LIST-ID/qaq-p/2272862) to locate it.
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
 
-1. A [Trello account](https://trello.com/)
-2. A board in Trello, with at least one list
-3. The ID of the list where cards will be created. Refer to [this article](https://community.atlassian.com/t5/Trello-questions/How-do-I-find-the-LIST-ID/qaq-p/2272862) to locate it.
+## Setting up the Trello integration in Botpress
 
-## Enabling the Trello Integration
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the Trello integration then click on the "Install to Bot" button, now go back to your bot settings.
 
-1. Navigate to the [Botpress Hub](https://app.botpress.cloud/hub) and locate Trello.
-2. Access the Trello page and select the **Install** button. Here, designate the workspace and bot to install the integration in.
-3. Either select "Go to bot" or return to the Integrations tab of your bot. Locate and click on Trello in the list.
-4. Provide your Trello API key and your Trello API token to complete the Trello integration.
-5. Visit the [Power-Ups Admin Page](https://trello.com/power-ups/admin) and click the **New** button to obtain the API key. Name the Power-Up as "Botpress Connector", fill in the email and author fields, then click **Create**.
-6. Once the Power-Up is created, you will be redirected to API Key settings page, displayed below. Generate a new API key, then copy and paste this key into the **API Key** field in Botpress.
+The Trello integration has the following settings:
+
+- **Enabled**: Whether Botpress will communicate with Trello
+- **Webhook URL**: The URL for receiving data in Botpress
+- **API Key**: The API key for the Trello Power-Up
+- **Token**: The token for the Trello Power-Up
+
+## Setting up Trello
+
+1. Visit the [Power-Ups Admin Page](https://trello.com/power-ups/admin) and click the **New** button to obtain the API key. Name the Power-Up as "Botpress Connector", fill in the email and author fields, then click **Create**.
+2. Once the Power-Up is created, you will be redirected to API Key settings page, displayed below. Generate a new API key, then copy and paste this key into the **API Key** field in Botpress.
    ![Power-Up API Key Settings](/docs/content/trello-docs-1.png)
-7. Click on the "Token" link (marked in the image below) and authorize the Power-Up access to your Trello account by selecting **Allow**.
+3. Click on the "Token" link (marked in the image below) and authorize the Power-Up access to your Trello account by selecting **Allow**.
    ![Power-Up Token Link](/docs/content/trello-docs-2.png)
-8. After authorization, copy the displayed token and paste it into the **Token** field in Botpress.
-9. Make sure the integration is enabled then press the button "Save configuration".
+4. After authorization, copy the displayed token and paste it into the **Token** field in Botpress.
+5. Make sure the integration is enabled then press the button "Save configuration".
 
-That's it! Now the Trello Integration is operational and ready for use within your bot.
+That's it! Now the Trello integration is operational and ready for use within your bot.
 
 ## Functionality
 
