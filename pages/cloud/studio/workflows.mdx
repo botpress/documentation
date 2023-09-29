@@ -37,7 +37,7 @@ The Error Flow should provide clear feedback to the user that their input was no
 Depending on the design of the chatbot, the Error Flow may offer suggestions for alternative input, or it may direct the user to a specific resource or human representative for further assistance.
 
 <Callout>
-  This flow will be triggered when there's technical issues and irrecoverable errors in the bot. <br />
+  This flow will be triggered when there's technical issues including irrecoverable errors in the bot. <br />
   For example, if you have an Execute Code card with invalid Javascript code like `workflow. = 'some value'`, or custom choices
   for Captures or Carousels in the wrong format, the Error flow shall be triggered.
 </Callout>
@@ -53,21 +53,19 @@ It's also recommended to save these occurrences somehow so you can troubleshoot 
 
 The **Timeout Flow** is triggered when the chatbot doesn't receive a response from the user for a certain period of time. Check out [this article about the Timeout settings](./chatbot-settings/#inactivity-timeout-minutes) to learn more.
 
-This can happen if the user is distracted or if there is a delay in their internet connection.
+This can happen if the user gets distracted with something else or if there is a delay in their internet connection.
 
-The Timeout Flow should provide a prompt or question to the user to encourage them to continue the conversation, and it may also include a message explaining why the chatbot has paused the conversation.
+<Callout type="info">
+  To improve the user experience, you can add a Text card in this flow that lets the user know the conversation is
+  ending, alternatively add a Confirmation card asking if the user wants to continue the conversation. The timeout will
+  then be reset and start counting down again. If the user says yes, you can redirect them to the Main flow (there is no
+  way to know the previous flow), otherwise you can flow to the End node which will end the conversation.
+</Callout>
 
 The Timeout Flow is important because it helps prevent the chatbot from appearing unresponsive or disconnected, which can lead to user frustration and disengagement.
 
 <Callout type="note">
   The default timeout is 30 minutes. So if the user doesn't respond for 30 minutes, this flow will be triggered.
-</Callout>
-
-<Callout type="info">
-  To improve the user experience, you can add a Text card in this flow that lets the user know the conversation is
-  ending, alternatively add a Capture card of type Confirmation asking if the user wants to continue the conversation.
-  The timeout will be reset and start counting down again. If the user says yes, you can redirect them to the Main flow,
-  otherwise you can flow to the End node which will end the conversation.
 </Callout>
 
 ### Conversation End
