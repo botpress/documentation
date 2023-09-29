@@ -1,4 +1,5 @@
 import { Callout } from 'nextra/components'
+import { Image } from '@components/Image'
 
 # WhatsApp
 
@@ -108,33 +109,42 @@ This comes with a few restrictions and behaviors specific to WhatsApp:
 - Interactive feedbacks are mapped to Text Object.
 - The rest of the types are not currently processed by Botpress
 
-## Creating Conversations
+## Starting a Conversation Proactively
 
-WhatsApp conversations can be proactively initiated with a user only by using [Message Templates](https://developers.facebook.com/docs/whatsapp/message-templates/guidelines/) which need to be created in your [WhatsApp Manager](https://business.facebook.com/wa/manage/message-templates/) dashboard and need to be reviewed and approved first by WhatsApp in order to use them.
+WhatsApp conversations can be proactively initiated with a user only by using [Message Templates](https://developers.facebook.com/docs/whatsapp/message-templates/guidelines/) which need to be created in your [WhatsApp Manager](https://business.facebook.com/wa/manage/message-templates/) dashboard first and then reviewed and approved by WhatsApp in order to use them.
 
-Once you have a message template approved by WhatsApp, it's very easy to have your bot initiate a conversation with a user by running the following code inside your bot:
+Once you have a message template approved by WhatsApp, it's very easy to have your bot start a conversation with a user by just using the Whatsapp "**Start Conversation**" card in the Studio:
+
+<Image src="/docs/content/whatsapp-startConversation.png" alt="Screenshot of 'Start Conversation' card in the Studio" />
+
+Then you just need to pass the user's phone number, Whatsapp template name, template language (optional), and template variables (if any, optional) as JSON to proactively start a Whatsapp conversation with a user:
+
+<Image
+  src="/docs/content/whatsapp-startConversation-fields.png"
+  alt="Options for the Whatsapp 'Start Conversation' card"
+/>
+
+Once the conversation is created, if the user replies back it will be processed by your bot as a normal incoming message, so nothing else needs to be done.
+
+> **Tip**: If you need access to the ID of the Botpress conversation created by this action, you can choose to store the output value of this action in a variable. For example, if you choose to store the output in a variable named `whatsappResult`, you can use `{{ workflow.whatsappResult.conversationId }}` in input fields of the Studio (where supported) or use `workflow.whatsappResult.conversationId` to access the conversation ID in code.
+
+#### Creating the conversation using the Botpress Client
+
+If you're not using the Botpres Studio but building a bot as code, you can use the Botpress Client to call this action programatically as shown in the following example:
 
 ```ts
-const response = await client.createConversation({
-  integrationName: 'whatsapp',
-  channel: 'channel',
-  tags: {
-    'whatsapp:userPhone': '+1 504 123 456 78', // The full phone number of the user you want to initiate the conversation with.
-    'whatsapp:templateName': 'test_message', // This is the name (identifier) of your WhatsApp message template.
-    'whatsapp:templateLanguage': 'en_US', // Optional (defaults to `en_US`)
-    'whatsapp:templateVariables': JSON.stringify(['John']), // Optional (only needed if your message template uses variables)
+const result = await client.callAction({
+  type: 'whatsapp:startConversation',
+  input: {
+    userPhone: '+1 504 123 456 78', // The full phone number of the Whatsapp user you want to initiate the conversation with.
+    templateName: 'test_message', // This is the name (identifier) of your WhatsApp message template.
+    templateLanguage: 'en_US', // Optional (defaults to `en_US`)
+    templateVariablesJson: JSON.stringify(['John', '12345']), // Optional (only needed if your message template uses variables)
   },
 })
-```
 
-<Callout type="info">
-  **Note**
-  <br />
-  If you are using the Botpress SDK, the `client` in the code example above is an instance of the [Botpress
-  Client](https://www.npmjs.com/package/@botpress/client) that is always provided as a prop to the bot handlers (e.g.
-  message handler, event, conversation, state expiry, etc.). But if you you can also run this code on a Node.js
-  environment where you can install the client package.
-</Callout>
+console.log('Botpress conversation ID: ' + result.conversationId)
+```
 
 ## Tips
 
