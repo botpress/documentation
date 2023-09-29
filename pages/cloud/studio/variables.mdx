@@ -2,7 +2,7 @@ import { Callout } from 'nextra/components'
 
 # Variables
 
-Botpress uses variables to store information from one place and use it in other parts of a flow. Variables help make conversations more personalized, and help track information about users. They can also help connect with third-party APIs and data sources.
+Botpress uses variables to store information from one place and use it in other parts of a flow. Variables help make conversations more personalized and help track information about users. They can also help connect with third-party APIs and data sources.
 
 ## Data Types for Variables
 
@@ -10,18 +10,18 @@ Botpress variables are typed, meaning they are limited in what data they can hol
 
 | Type    | Description                                                                                                                                                                                                                                                                     |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| String  | Values that are treated as text. Strings can contain any amount of letters, numbers, or special characters. <br/> <br/> Example uses: Storing a user's name, store an AI task's generated message.                                                                              |
-| Boolean | Variables can either be true or false, with a lowercase 't' or 'f'. <br/> <br/>Example uses: Storing if a user is a returning customer, storing whether the bot has greeted the user or not                                                                                     |
+| String  | Values that are treated as text. Strings can contain any amount of letters, numbers, or special characters. <br/> <br/> Example uses: Storing a user's name, storing an AI task's generated message.                                                                              |
+| Boolean | Variables can be true or false, with a lowercase 't' or 'f'. <br/> <br/>Example uses: Storing if a user is a returning customer, storing whether the bot has greeted the user or not                                                                                     |
 | Number  | Variables that are numeric, either with or without decimal places. <br/> <br/>Example uses: Storing a user's phone number, storing an address's area code                                                                                                                       |
-| Date    | Variables that are a single date or date and time. Botpress uses ISO 8601 date/time format, such as `20220921T10:34:14` for `21 September 2023 at 10:34 AM` (with 14 seconds). <br/> <br/>Example uses: Storing when the user started a chat, storing a user's appointment date |
+| Date    | Variables that are a single date or date and time. Botpress uses ISO 8601 date/time format, such as `20220921T10:34:14` for `21 September 2023 at 10:34 AM` (with 14 seconds). <br/> <br/>Example uses: Storing when the user starts a chat, storing a user's appointment date |
 | Object  | Variable that is a collection of key-value pairs. Useful when dealing with code and written like `{key: value}`. <br/> <br/>Example uses: Storing a user's profile, storing the results of an API call                                                                          |
 | Array   | Variable that is a collection of other, similar variables. Arrays can contain strings, like `[“a”, “b”, “c”]`, or Objects like `[{key:value},{key:value}]`. <br/> <br/>Example uses: Storing a user's past messages, storing options for the user to choose from                |
 | Enum    | Variable that can be one of a set number of choices. <br/> <br/>Example uses: Storing days of the week, storing items available from a food menu                                                                                                                                |
-| Pattern | Variable that uses Regular Expressions/Regex to store a special pattern. This pattern can match with certain words or numbers.<br/> <br/>Example uses: Storing account numbers, storing flight numbers                                                                          |
+| Pattern | Variable that uses Regular Expressions/Regex to store a special pattern. This pattern can match certain words or numbers.<br/> <br/>Example uses: Storing account numbers, storing flight numbers                                                                          |
 
 ## Variable Scopes
 
-Botpress also includes different types of variables. These variable types differ in their scope, or where they can be accessed in your bot's flows. Let's start with the most limited scoped variables and then end with the broadest scoped.
+Botpress also includes different types of variables. These variable types differ in scope or where they can be accessed in your bot's flows. Let's start with the most limited scoped variables and then end with the broadest scoped.
 
 ## Workflow Variables
 
@@ -66,7 +66,7 @@ Workflows can have inputs and outputs to help pass information throughout the bo
 1. Go into your workflow and create the variable
 2. Click on the **Exit** node
 3. In the inspector panel, click on the variable you want to make an output. It should get a blue border and appear in the **Exit** node.
-4. When you call this workflow from another flow, the output variable will be accessible by typing `{{workflow.<workflowname>.<variablename>}}`, replacing `<workflowname>` and `<variablename>` with the name of your workflow and variable respectively.
+4. When you call this workflow from another flow, the output variable will be accessible by typing `{{workflow.<workflow-cardName>.<variablename>}}`, replacing `<workflow-cardName>` and `<variablename>` with the name of the card that represents your workflow and variable respectively.
 
 ## Session Variables
 
