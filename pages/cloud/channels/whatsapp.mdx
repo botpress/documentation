@@ -123,13 +123,13 @@ This comes with a few restrictions and behaviors specific to WhatsApp:
 
 ## Starting a Conversation Proactively
 
-WhatsApp conversations can be proactively initiated with a user only by using [Message Templates](https://developers.facebook.com/docs/whatsapp/message-templates/guidelines/) which need to be created in your [WhatsApp Manager](https://business.facebook.com/wa/manage/message-templates/) dashboard first and then reviewed and approved by WhatsApp in order to use them.
+As required by WhatsApp, a conversation with a user can be proactively initiated only by using [Message Templates](https://developers.facebook.com/docs/whatsapp/message-templates/guidelines/), which need to be created in your [WhatsApp Manager](https://business.facebook.com/wa/manage/message-templates/) dashboard first and then reviewed and approved by WhatsApp in order to use them.
 
 Once you have a message template approved by WhatsApp, it's very easy to have your bot start a conversation with a user by just using the Whatsapp "**Start Conversation**" card in the Studio:
 
 <Image src="/docs/content/whatsapp-startConversation.png" alt="Screenshot of 'Start Conversation' card in the Studio" />
 
-Then you just need to pass the user's phone number, Whatsapp template name, template language (optional), and template variables (if any, optional) as JSON to proactively start a Whatsapp conversation with a user:
+Then you just need to pass the user's phone number, Whatsapp template name, template language (optional), and template variables as JSON (if any, optional) to proactively start a Whatsapp conversation with a user:
 
 <Image
   src="/docs/content/whatsapp-startConversation-fields.png"
@@ -158,7 +158,7 @@ If you're building a bot as code (instead of using Botpress Studio), you can use
 const result = await client.callAction({
   type: 'whatsapp:startConversation',
   input: {
-    userPhone: '+1 504 123 456 78', // The full phone number of the Whatsapp user you want to initiate the conversation with.
+    userPhone: '+1 123 456 7890', // The full phone number of the Whatsapp user you want to initiate the conversation with.
     templateName: 'test_message', // This is the name (identifier) of your WhatsApp message template.
     templateLanguage: 'en_US', // Optional (defaults to `en_US`)
     templateVariablesJson: JSON.stringify(['John', '12345']), // Optional (only needed if your message template uses variables)
