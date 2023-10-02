@@ -109,6 +109,18 @@ This comes with a few restrictions and behaviors specific to WhatsApp:
 - Interactive feedbacks are mapped to Text Object.
 - The rest of the types are not currently processed by Botpress
 
+## Tips
+
+- To get the phone number of the user, use the variable:
+
+  `{{ event.tags.conversation['whatsapp:userPhone'] }}`.
+
+  This number also contains the country code and has no spaces, dashes or signs.
+
+- To get the phone number ID of the user, use the variable:
+
+  `{{ event.tags.conversation['whatsapp:phoneNumberId'] }}`
+
 ## Starting a Conversation Proactively
 
 WhatsApp conversations can be proactively initiated with a user only by using [Message Templates](https://developers.facebook.com/docs/whatsapp/message-templates/guidelines/) which need to be created in your [WhatsApp Manager](https://business.facebook.com/wa/manage/message-templates/) dashboard first and then reviewed and approved by WhatsApp in order to use them.
@@ -126,19 +138,21 @@ Then you just need to pass the user's phone number, Whatsapp template name, temp
 
 Once the conversation is created, if the user replies back it will be processed by your bot as a normal incoming message, so nothing else needs to be done.
 
-> **Tip**: If you need to access the ID of the Botpress conversation created by this action, you can choose to store the output value of this action in a variable. The output value of this action will be an object with the following structure:
+#### Accessing the Conversation ID
 
-```json
+If you need to access the ID of the Botpress conversation created by this action, you can choose to store the output value of this action in a variable. The output value of this action will be an object with the following structure:
+
+```js
 {
-  "conversationId": "[UUID-of-conversation]"
+  conversationId: 'ffa09762-6c37-4ebd-a82f-307048929c97'
 }
 ```
 
-So for example, if you choose to store the output in a variable named `whatsappResult`, you can use `{{ workflow.whatsappResult.conversationId }}` in input fields of the Studio (where supported) or use `workflow.whatsappResult.conversationId` to access the conversation ID in code.
+So for example, if you choose to store the output value of this action in a variable named `whatsappResult`, you can use `{{ workflow.whatsappResult.conversationId }}` in input fields of the Studio (where supported) to insert the conversation ID, or use `workflow.whatsappResult.conversationId` to access it in code.
 
 #### Creating the conversation using the Botpress Client
 
-If you're not using the Botpres Studio but building a bot as code, you can use the Botpress Client to call this action programatically as shown in the following example:
+If you're building a bot as code (instead of using Botpress Studio), you can use the Botpress Client instance provided to your bot's handlers to call this action programatically as shown in the following example:
 
 ```ts
 const result = await client.callAction({
@@ -153,8 +167,3 @@ const result = await client.callAction({
 
 console.log('Botpress conversation ID: ' + result.conversationId)
 ```
-
-## Tips
-
-- To get the phone number of the user, use the variable `{{event.tags.conversation['whatsapp:userPhone']}}`. This number also contains the country code and has no spaces, dashes or signs.
-- To get the phone number id of the user, read the variable `{{event.tags.conversation['whatsapp:phoneNumberId']}}`
