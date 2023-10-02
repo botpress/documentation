@@ -129,12 +129,14 @@ Once you have a message template approved by WhatsApp, it's very easy to have yo
 
 <Image src="/docs/content/whatsapp-startConversation.png" alt="Screenshot of 'Start Conversation' card in the Studio" />
 
-Then you just need to pass the user's phone number, Whatsapp template name, template language (optional), and template variables as JSON (if any, optional) to proactively start a Whatsapp conversation with a user:
+Then you just need to pass the user's phone number, Whatsapp template name, template language (optional), and list of template variable values as JSON (if any, optional) to proactively start a Whatsapp conversation with a user:
 
 <Image
   src="/docs/content/whatsapp-startConversation-fields.png"
   alt="Options for the Whatsapp 'Start Conversation' card"
 />
+
+> **Note**: Template variables need to be passed as a JSON array of string or numeric values representing the list of variable values, as Whatsapp only allows referring to them by their position in your message template (e.g. `{{1}}` for the first variable, `{{2}}` for the second variable, and so on).
 
 Once the conversation is created, if the user replies back it will be processed by your bot as a normal incoming message, so nothing else needs to be done.
 
