@@ -55,14 +55,14 @@ The **Timeout Flow** is triggered when the chatbot doesn't receive a response fr
 
 This can happen if the user gets distracted with something else or if there is a delay in their internet connection.
 
+The Timeout Flow is important because it helps prevent the chatbot from appearing unresponsive or disconnected, which can lead to user frustration and disengagement.
+
 <Callout type="info">
   To improve the user experience, you can add a Text card in this flow that lets the user know the conversation is
   ending, alternatively add a Confirmation card asking if the user wants to continue the conversation. The timeout will
   then be reset and start counting down again. If the user says yes, you can redirect them to the Main flow (there is no
   way to know the previous flow), otherwise you can flow to the End node which will end the conversation.
 </Callout>
-
-The Timeout Flow is important because it helps prevent the chatbot from appearing unresponsive or disconnected, which can lead to user frustration and disengagement.
 
 <Callout type="note">
   The default timeout is 30 minutes. So if the user doesn't respond for 30 minutes, this flow will be triggered.
@@ -75,6 +75,10 @@ The **Conversation End Flow** is designed to wrap up the conversation in a way t
 Depending on the context and purpose of the chatbot, this may involve thanking the user for their input and inviting them to provide feedback or continue the conversation later, or it may involve providing specific next steps for the user to take.
 
 The Conversation End Flow is an important part of the chatbot design, as it helps create a positive user experience and encourages users to return in the future.
+
+<Callout>
+  The bot will only enter the End flow if the conversation explicitly transitions to an End node. If the conversation ends because there are no valid transitions in a node it won't trigger the End flow.
+</Callout>
 
 ## Custom Workflow
 
