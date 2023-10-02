@@ -126,7 +126,15 @@ Then you just need to pass the user's phone number, Whatsapp template name, temp
 
 Once the conversation is created, if the user replies back it will be processed by your bot as a normal incoming message, so nothing else needs to be done.
 
-> **Tip**: If you need access to the ID of the Botpress conversation created by this action, you can choose to store the output value of this action in a variable. For example, if you choose to store the output in a variable named `whatsappResult`, you can use `{{ workflow.whatsappResult.conversationId }}` in input fields of the Studio (where supported) or use `workflow.whatsappResult.conversationId` to access the conversation ID in code.
+> **Tip**: If you need to access the ID of the Botpress conversation created by this action, you can choose to store the output value of this action in a variable. The output value of this action will be an object with the following structure:
+
+```json
+{
+  "conversationId": "[UUID-of-conversation]"
+}
+```
+
+So for example, if you choose to store the output in a variable named `whatsappResult`, you can use `{{ workflow.whatsappResult.conversationId }}` in input fields of the Studio (where supported) or use `workflow.whatsappResult.conversationId` to access the conversation ID in code.
 
 #### Creating the conversation using the Botpress Client
 
