@@ -10,7 +10,7 @@ Botpress also includes different types of variables. These Variable types differ
 
 ### Creating Variables in Botpress
 
-1. Open up the Flows section and navigate to the **+** icon in the Variables section, situated at the bottom.
+1. Open up the Variables tab from the sidebar and click the **+** icon in the Variables section.
 2. A new window will appear, allowing you to formulate a new Variable.
 4. Assign a suitable scope (Workflow, Bot or User) to your Variable, select the Data Type (see below table), give it a name, and click **Add** to create the Variable.
 5. (Optional) From the Additional Settings, you can also initialize your Variable with a default value.
@@ -70,8 +70,7 @@ Workflows can have inputs and outputs to help pass information throughout the bo
 
 #### To mark an Output Variable
 
-1. Go into your new workflow(not Main) and create a Variable
-2. Click on the **Exit** node
+1. Go into your new workflow(not Main) and create a Variable and click on the **Exit** node.
 3. In the inspector panel, click on the Variable you want to make an output. It should get a blue border and appear in the **Exit** node.
 4. When you call this workflow from another flow, the output Variable will be accessible by typing `{{workflow.<workflow-cardName>.<variablename>}}`, replacing `<workflow-cardName>` and `<variablename>` with the name of the card that represents your workflow and Variable respectively.
 
@@ -86,7 +85,7 @@ Storing users' personal details or id numbers
 
 ### Creating a User Variable
 
-1. Open up the Flows section and navigate to the **+** icon in the Variables section, situated at the bottom.
+1. Open up the Variables tab and navigate to the **+** icon in the Variables section.
 2. Change the scope to **User**, select the Data Type, give it a name, and click **Add** to create the Variable.
 
 ### Using User Variables
@@ -106,7 +105,7 @@ Bot variables are not encrypted or stored securely. Do not save secrets like API
 
 ### Creating a Bot Variable
 
-1. Open up the Flows section and navigate to the **+** icon in the Variables section, situated at the bottom.
+1. Open up the Variables tab and navigate to the **+** icon in the Variables section.
 2. Change the scope to **Bot**, select the Data Type, give it a name, and click **Add** to create the Variable.
 
 ### Using Bot Variables
