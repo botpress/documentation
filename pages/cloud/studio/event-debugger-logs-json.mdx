@@ -6,7 +6,6 @@
 
 The Event Debugger provides information on how your bot understood the user's message and why it made specific decisions. It also displays the complete event payload, including NLU metadata, state, and raw responses.
 
-<br />
 To open or close the Debugger, you can use the keyboard shortcut **cmd/ctrl + j**.
 This will toggle the Debugger on and off and allow you to access the information
 it provides.
@@ -15,10 +14,43 @@ it provides.
 
 By using logs, you can see what happened step-by-step before an error occurred. This can help you understand what went wrong and how to fix it.
 
-<br />
 It's important to include enough logging in your bot to ensure that you have enough
 information to find and fix issues. By analyzing the Botpress Logs, you can pinpoint
 exactly where the problem occurred and take the necessary steps to resolve it.
+
+### How to log in Botpress
+
+Logging in Botpress is similar to logging in JavaScript. You can use the `console.log()` function to print messages to the Botpress Logs. This function takes a string as an argument and prints it to the Botpress Logs.
+
+#### Logging User Information
+
+If you're interested in understanding what user data is being processed, you might want to log their first name. This could help you trace if the correct user data is being accessed and used in your workflow.
+
+**Example use-case**: Understanding which user's data is being processed especially if your bot offers personalized experiences.
+```javascript
+console.log("User's First Name:", user.firstName);
+```
+
+#### Logging Workflow Data
+
+You might want to know which phone number is being used in a specific workflow. By logging this, you can ensure that the correct numbers are being pulled from your database or user input.
+
+**Example use-case**: Debugging workflows that might involve sending SMS messages or making phone calls. Ensuring that the correct phone numbers are used can be critical.
+
+```javascript
+console.log("Workflow Phone Number:", workflow.phoneNumber);
+```
+
+#### Logging Environment Configurations
+
+If your bot accesses external APIs or databases, the API key or endpoint might change depending on the environment (development, staging, production, etc.). Logging the env variables can help ensure that the bot is using the correct configurations.
+
+**Example use-case**: Troubleshooting connectivity or access issues with external services. By logging the API key or endpoint, you can ensure you're using the correct configurations and not accidentally hitting a production database during development or vice versa.
+
+```javascript
+console.log("Current API Key:", env.apiKey);
+```
+
 
 ## State
 
@@ -34,7 +66,6 @@ By using the state effectively, you can create more personalized and engaging bo
 
 This tab displays the raw information that is processed during each conversation exchange in the Botpress Emulator. The information can be accessed through **event.property**, where "property" refers to one of the properties listed in the table below.
 
-<br />
 Here is a table that describes each property in detail:
 | Property | Description |
 | :--- | :--- |
