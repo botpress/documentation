@@ -1,0 +1,88 @@
+import { Callout } from 'nextra/components'
+
+Focus on the result, the use case instead of the integration, invert structure
+
+# Accessing bot data outside Botpress
+
+![Accessing bot data outside Botpress](/docs/content/accessing-bot-data-outside-botpress.png)
+
+Botpress Cloud allows you to create, manage, and deploy chatbots with little to no coding or infrastructure. However, you may want to access your bot data outside of Botpress for various purposes, such as reporting, analysis, backup, or integration. In this article, we will show you how to use the Botpress API to retrieve your bot data and use it in different ways.
+
+## Listing messages of a conversation
+
+-- exporting
+
+## See the bot analytics
+
+## Get detailed flow/choices analytics
+
+## Prerequisites
+
+- A [Botpress Cloud account](https://botpress.com/)
+- A bot deployed on Botpress Cloud
+- A Personal Access Token to your Botpress account. To generate one, go to [Admin Dashboard](https://app.botpress.cloud/) → Account → Personal Access Token. Generate a new one and save it somewhere safe to be used later.
+
+## Accessing the data
+
+There are a few ways to access your bot data outside Botpress. You can use the Botpress API, the Botpress HTTP Client, send information from Botpress to an external service, or use the Webhook integration. We will cover each of these methods in the following sections.
+
+### Using the Botpress API
+
+The Botpress API is a REST API that provides endpoints to which you can make HTTP requests to retrieve your bot data. You could make this request from several different places, such as a web application, a serverless function, a Zapier zap, an HTTP client, etc.
+
+<Callout type="info">
+**A few things to understand about the API**<br />
+All requests require an `Authorization` header with the value in this format: `Bearer <your-token-here>`
+
+Most requests require an `x-bot-id` header with the value being the ID of the bot you want to access. You can find the bot ID in the URL of the bot's page in the Botpress Cloud dashboard.
+
+All list requests return only the first 20 items of a resource. If there are more items, the response will include a `meta` property with a nested `nextToken` property that holds a string that you should use as a `nextToken` query parameter in following requests to get the next 20 items. If there are no more items, the `meta` property will be an empty object.
+
+</Callout>
+
+Here's an example of a Typescript code that uses fetch (the structure would be the same with Axios) to list the messages of a conversation:
+
+```ts
+const listRequest = fetch(`https://api.botpress.cloud/v1/chat/messages?conversationId=${conversationId}`, {
+  method: 'GET',
+  headers: {
+    Authorization: `Bearer ${token}`,
+    'x-bot-id': botId,
+  },
+})
+
+const messages = listRequest.data.messages
+const nextToken = listRequest.data.meta.nextToken
+```
+
+### Using the Botpress HTTP Client
+
+The Botpress HTTP Client is an [npm package](https://www.npmjs.com/package/@botpress/client) that you can install in your JavaScript project to make requests easily to the Botpress API. It is a wrapper around the Botpress API that handles the authentication and the pagination for you.
+
+Here's an example of a Typescript code that uses the client to list the messages of a conversation:
+
+```ts
+const listRequest = await client.listMessages({
+  conversationId,
+  nextToken,
+})
+
+const messages = listRequest.messages
+const nextToken = listRequest.meta.nextToken
+```
+
+<Callout type="info">
+  Notice how easier it is to use the client compared to fetch/Axios. You don't have to worry about authentication, bot
+  selection and pagination. You just need to create the client once and then use it to make requests throughout your
+  application.
+</Callout>
+
+### Sending information from Botpress
+
+### Listing conversations
+
+### Listing messages of a conversation
+
+### Listing users
+
+### Reading the bot analytics

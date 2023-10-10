@@ -1,0 +1,147 @@
+import { Callout } from 'nextra/components'
+
+Focus on the result, the use case instead of the integration, invert structure
+
+# Accessing bot data outside Botpress
+
+![Accessing bot data outside Botpress](/docs/content/accessing-bot-data-outside-botpress.png)
+
+Botpress Cloud allows you to create, manage, and deploy chatbots with little to no coding or infrastructure. In the natural course of maintaining a bot you may want to access its data outside of Botpress for various purposes, such as reporting, analysis, backup, or integration. This article will cover some of the use cases and the different methods for each.
+
+## Use cases
+
+### Exporting conversations
+
+There are a few different ways to have access to your bot conversations outside of Botpress.
+
+### 1. Using the Botpress API
+
+Make a request to `https://api.botpress.cloud/v1/chat/conversations` adding the following headers: `Authorization: Bearer <your-personal-access-token>` and `x-bot-id: <your-bot-id>`.
+
+<Callout type="note">
+  You can find your personal access token in your [Botpress Dashboard](https://app.botpress.cloud/). You can find your
+  bot ID in the URL of your bot's dashboard, it's the letters and numbers right after `chatbots/`
+</Callout>
+
+This is how the request would look like using Axios in a Javascript application:
+
+```js
+const requestConfig = {
+  headers: {
+    Authorization: `Bearer ${process.env.BOTPRESS_PERSONAL_ACCESS_TOKEN}`,
+    'x-bot-id': process.env.BOTPRESS_BOT_ID,
+  },
+}
+
+const allConversations = []
+const paginationToken
+
+do {
+const getConversations = await axios.get('https://api.botpress.cloud/v1/chat/conversations', requestConfig)
+
+  allConversations.push(...getConversations.data.conversations)
+  paginationToken = getConversations.data.meta.nextToken
+} while (paginationToken)
+```
+
+The same logic but using the [Botpress Client library](https://www.npmjs.com/package/@botpress/client) in a Node.js application:
+
+```js
+// This configuration contains necessary information for making an authenticated API request.
+const requestConfig = {
+  headers: {
+    // Authorization header with a Bearer token for authentication.
+    Authorization: `Bearer ${process.env.BOTPRESS_PERSONAL_ACCESS_TOKEN}`,
+    // The unique identifier of the bot for which we want to retrieve conversations.
+    'x-bot-id': process.env.BOTPRESS_BOT_ID,
+  },
+}
+
+// An empty array to store all retrieved conversations.
+const allConversations = []
+
+// A variable to store the token for the next set of conversations.
+let paginationToken
+
+// This loop will continue fetching conversations until there are no more left to retrieve.
+do {
+  // Send an HTTP GET request to the specified API endpoint to get conversations.
+  const getConversations = await axios.get('https://api.botpress.cloud/v1/chat/conversations', requestConfig)
+
+  // Add the retrieved conversations to the 'allConversations' array.
+  allConversations.push(...getConversations.data.conversations)
+
+  // Retrieve the token for the next set of conversations, if available.
+  paginationToken = getConversations.data.meta.nextToken
+} while (paginationToken)
+```
+
+<Callout type="warning">
+  The code snippets above allow you to get all conversations at once by running a loop until there are no more
+  conversations to fetch. This is not recommended for bots with a large number of conversations as it may take a long
+  time to complete and may cause timeouts. If you have a large number of conversations, you should create a loader
+  function and use the `paginationToken` property to fetch conversations in batches. [Learn more about
+  Pagination](https://botpress.com/docs/api-documentation/#pagination)
+</Callout>
+
+This is how a loader function would look like using Axios only:
+
+```js
+async function getConversations(paginationToken) {
+  const getConversations = await axios.get(
+    `https://api.botpress.cloud/v1/chat/conversations?nextToken=${paginationToken}`,
+    {
+      ...requestConfig,
+    }
+  )
+
+  return getConversations.data
+}
+```
+
+<Callout type="note">
+  This function will return an object with the properties `conversations` and `meta`. Add the conversations to the
+  existing list and save the token to be used in the next request.
+</Callout>
+
+#### 2. Sending the conversation history from a card in the bot
+
+You can also export the conversation when it ends directly from the bot.
+
+1. Create a hook under "Before Incoming Message" in the "Hooks" section with the following code:
+
+```js
+if (!event.state.session.fullHistory) {
+  event.state.session.fullHistory = ''
+}
+event.state.session.fullHistory = event.state.session.fullHistory + `user :  ${event.payload.text}` + '\n'
+```
+
+2. Create a hook under "Before Outgoing Message" in the "Hooks" section with the following code:
+
+```js
+if (!event.state.session.fullHistory) {
+  event.state.session.fullHistory = ''
+}
+event.state.session.fullHistory = event.state.session.fullHistory + `bot : ${outgoingEvent.payload.text}` + '\n'
+```
+
+3. Create an [Execute Code card](../toolbox/execute-code) with the following code:
+
+```js
+await axios.post('https://my-api-url.com', {
+	conversation: event.state.session.fullHistory
+	user: user.name
+})
+```
+
+<Callout type="info">
+  You could add this card to the end of your bot's flow to get the full history or add it to the [Conversation
+  End](../studio/workflows/#conversation-end) workflow so that it is automatically send when the conversation ends.
+</Callout>
+
+### Getting usage analytics
+
+In order to understand where in the conversation your users are
+
+Every message---
