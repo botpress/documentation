@@ -1,0 +1,30 @@
+## Exporting Bot Analytics
+
+payload, (flow, node, card), user and conversation id
+
+The Botpress Cloud dashboard provides you with an Analytics page with counters for the total number of users, new users, returning users, sessions and messages. It also shows a chart with the data and allows you to filter by date range.
+
+While this interface is useful for understanding reach and engagement, it doesn't show information about the [conversations themselves](./exporting-conversations) and which path your users take when interacting with the bot. So in this tutorial we will show you how to export the analytics data from your chatbot to a third-party service.
+
+## 1. Using the Botpress API
+
+Make a request to `https://api.botpress.cloud/v1/admin/bots/<your-bot-id>/analytics` adding the following header: `Authorization: Bearer <your-personal-access-token>`.
+
+<Callout type="note">
+  You can find your personal access token in your [Botpress Dashboard](https://app.botpress.cloud/). Click your avatar
+  and select "Personal Access Tokens". Generate a new one and copy it.
+</Callout>
+
+This is how the request would look like using Axios in a Javascript application:
+
+```js
+const requestConfig = {
+  headers: {
+    Authorization: `Bearer ${process.env.BOTPRESS_PERSONAL_ACCESS_TOKEN}`,
+  },
+}
+
+const getAnalytics = await axios.get(`https://api.botpress.cloud/v1/admin/${botId}/analytics`, requestConfig)
+
+}
+```

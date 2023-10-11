@@ -1,20 +1,8 @@
-import { Callout } from 'nextra/components'
-
-Focus on the result, the use case instead of the integration, invert structure
-
-# Accessing bot data outside Botpress
-
-![Accessing bot data outside Botpress](/docs/content/accessing-bot-data-outside-botpress.png)
-
-Botpress Cloud allows you to create, manage, and deploy chatbots with little to no coding or infrastructure. In the natural course of maintaining a bot you may want to access its data outside of Botpress for various purposes, such as reporting, analysis, backup, or integration. This article will cover some of the use cases and the different methods for each.
-
-## Use cases
-
-### Exporting conversations
+## Exporting conversations
 
 There are a few different ways to have access to your bot conversations outside of Botpress.
 
-### 1. Using the Botpress API
+## 1. Using the Botpress API
 
 Make a request to `https://api.botpress.cloud/v1/chat/conversations` adding the following headers: `Authorization: Bearer <your-personal-access-token>` and `x-bot-id: <your-bot-id>`.
 
@@ -104,7 +92,7 @@ async function getConversations(paginationToken) {
   existing list and save the token to be used in the next request.
 </Callout>
 
-#### 2. Sending the conversation history from a card in the bot
+## 2. Sending the conversation history from a card in the bot
 
 You can also export the conversation when it ends directly from the bot.
 
@@ -139,9 +127,3 @@ await axios.post('https://my-api-url.com', {
   You could add this card to the end of your bot's flow to get the full history or add it to the [Conversation
   End](../studio/workflows/#conversation-end) workflow so that it is automatically send when the conversation ends.
 </Callout>
-
-### Getting usage analytics
-
-In order to understand where in the conversation your users are
-
-Every message---
