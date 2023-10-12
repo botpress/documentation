@@ -106,8 +106,9 @@ This comes with a few restrictions and behaviors specific to WhatsApp:
 ### From WhatsApp to Botpress
 
 - Text is mapped to Text Object
-- Interactive feedbacks are mapped to Text Object.
-- The rest of the types are not currently processed by Botpress
+- Location is mapped to Location Object
+- Interactive feedback is mapped to Text Object.
+- Botpress does not currently process the rest of the types
 
 ## Tips
 
@@ -120,6 +121,16 @@ This comes with a few restrictions and behaviors specific to WhatsApp:
 - To get the phone number ID of the user, use the variable:
 
   `{{ event.tags.conversation['whatsapp:phoneNumberId'] }}`
+
+## Receiving a Location
+
+When WhatsApp shares a location it is mapped to the Botpress Location object; hence the best way to capture the WhatsApp location object is using the "Wait for Message" card.
+
+You can access the properties of the location using the below:
+- Location Title: `{{event.payload.title}}`
+- Location Address: `{{event.payload.address}}`
+- Location Longitude: `{{event.payload.longitude}}`
+- Location Latitude: `{{event.payload.latitude}}`
 
 ## Starting a Conversation Proactively
 
@@ -154,7 +165,7 @@ So for example, if you choose to store the output value of this action in a vari
 
 #### Creating the conversation using the Botpress Client
 
-If you're building a bot as code (instead of using Botpress Studio), you can use the Botpress Client instance provided to your bot's handlers to call this action programatically as shown in the following example:
+If you're building a bot as code (instead of using Botpress Studio), you can use the Botpress Client instance provided to your bot's handlers to call this action programmatically as shown in the following example:
 
 ```ts
 const result = await client.callAction({
