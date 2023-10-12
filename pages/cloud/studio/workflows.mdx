@@ -1,3 +1,5 @@
+import { Callout } from 'nextra/components'
+
 # Workflows
 
 ![Studio Explorer](/docs/content/studio-workflows.png)
@@ -34,15 +36,37 @@ The Error Flow should provide clear feedback to the user that their input was no
 
 Depending on the design of the chatbot, the Error Flow may offer suggestions for alternative input, or it may direct the user to a specific resource or human representative for further assistance.
 
+<Callout>
+  This flow will be triggered when there's technical issues including irrecoverable errors in the bot. <br />
+  For example, if you have an Execute Code card with invalid Javascript code like `workflow. = 'some value'`, or custom choices
+  for Captures or Carousels in the wrong format, the Error flow shall be triggered.
+</Callout>
+
+<Callout type="info">
+  To improve the user experience, you can add a Capture card of type Confirmation that asks the user if they want to resume the conversation. If the user says yes, you can redirect them to the Main flow (remember to reset the state to avoid entering an error loop), otherwise you can flow to the End node which will end the conversation.
+
+It's also recommended to save these occurrences somehow so you can troubleshoot them later. You could use [Tables](./tables) to create a database of these occurrences, containing the conversation history provided by the [Summary Agent](./agents/#summary-agent) and other relevant information.
+
+</Callout>
+
 ### Timeout
 
-The **Timeout Flow** is triggered when the chatbot doesn't receive a response from the user for a certain period of time.
+The **Timeout Flow** is triggered when the chatbot doesn't receive a response from the user for a certain period of time. Check out [this article about the Timeout settings](./chatbot-settings/#inactivity-timeout-minutes) to learn more.
 
-This can happen if the user is distracted or if there is a delay in their internet connection.
-
-The Timeout Flow should provide a prompt or question to the user to encourage them to continue the conversation, and it may also include a message explaining why the chatbot has paused the conversation.
+This can happen if the user gets distracted with something else or if there is a delay in their internet connection.
 
 The Timeout Flow is important because it helps prevent the chatbot from appearing unresponsive or disconnected, which can lead to user frustration and disengagement.
+
+<Callout type="info">
+  To improve the user experience, you can add a Text card in this flow that lets the user know the conversation is
+  ending, alternatively add a Confirmation card asking if the user wants to continue the conversation. The timeout will
+  then be reset and start counting down again. If the user says yes, you can redirect them to the Main flow (there is no
+  way to know the previous flow), otherwise you can flow to the End node which will end the conversation.
+</Callout>
+
+<Callout type="note">
+  The default timeout is 30 minutes. So if the user doesn't respond for 30 minutes, this flow will be triggered.
+</Callout>
 
 ### Conversation End
 
@@ -51,6 +75,10 @@ The **Conversation End Flow** is designed to wrap up the conversation in a way t
 Depending on the context and purpose of the chatbot, this may involve thanking the user for their input and inviting them to provide feedback or continue the conversation later, or it may involve providing specific next steps for the user to take.
 
 The Conversation End Flow is an important part of the chatbot design, as it helps create a positive user experience and encourages users to return in the future.
+
+<Callout>
+  The bot will only enter the End flow if the conversation explicitly transitions to an End node. If the conversation ends because there are no valid transitions in a node it won't trigger the End flow.
+</Callout>
 
 ## Custom Workflow
 
@@ -81,4 +109,3 @@ Learn more about using [workflow variables](./variables/#workflow-variables)
 ## Limits
 
 In order to keep workflows readable, we recommend you keep the number of nodes per flow low. We display a warning when you reach a great amount of nodes in a workflow.
-
