@@ -1,10 +1,10 @@
+import { Callout } from 'nextra/components'
+
 ## Exporting Bot Analytics
 
-payload, (flow, node, card), user and conversation id
+The Botpress Cloud dashboard provides you with an Analytics page with counters for the total number of users, new users, returning users, sessions and messages. It also shows a chart with the data and allows you to filter by date range. You can also access the Conversations history.
 
-The Botpress Cloud dashboard provides you with an Analytics page with counters for the total number of users, new users, returning users, sessions and messages. It also shows a chart with the data and allows you to filter by date range.
-
-While this interface is useful for understanding reach and engagement, it doesn't show information about the [conversations themselves](./exporting-conversations) and which path your users take when interacting with the bot. So in this tutorial we will show you how to export the analytics data from your chatbot to a third-party service.
+While this interface is useful for understanding reach and engagement, it doesn't show which path your users take when interacting with the bot. So in this tutorial we will show you how to export the analytics data from your chatbot to a third-party service.
 
 ## 1. Using the Botpress API
 
@@ -28,3 +28,93 @@ const getAnalytics = await axios.get(`https://api.botpress.cloud/v1/admin/${botI
 
 }
 ```
+
+## 2. Using Hooks to export conversation analytics
+
+You can also use [Hooks](../studio/hooks) to export the analytics data to a third-party service like Mixpanel. This is useful if you want to send the data in real-time or if you need detailed information about user behavior and the paths they take when interacting with the bot.
+
+In this tutorial we are going to use Mixpanel but you can apply the same concepts to other services like Hotjar, Segment or Amplitude. They just need to have an REST API with a endpoint to send events.
+
+### Setting up Mixpanel
+
+1. Create an account and a project in [Mixpanel](https://mixpanel.com/).
+2. Go to your project settings and copy the project token.
+
+### Setting up the Hooks
+
+1. Open Botpress Studio, go to the Hooks tab and click on the `+` button next to **Before Incoming Message** to create a new hook.
+2. Name it `send-user-analytics` for example
+3. Add the following Javascript code:
+
+```js
+const userAnalyticsData = {
+  time: event.createdOn.getTime(), // Mixpanel event datetime
+  $insert_id: event.id, // Mixpanel unique event
+  distinct_id: event.userId, // Mixpanel preventing duplicates
+  bot_id: event.botId,
+  conversation_id: event.conversationId,
+  payload: event.payload,
+  text: event.preview,
+  current_flow: event.state.context.currentFlow,
+  current_node: event.state.context.currentNode,
+  current_card: event.state.context.currentCard,
+}
+
+const projectToken = '<your token>'
+
+await axios.post(
+  'https://api.mixpanel.com/import',
+  [
+    {
+      event: 'Inbound Message',
+      properties: userAnalyticsData,
+    },
+  ],
+  {
+    headers: {
+      Authorization: `Basic ${btoa(projectToken + ':')}`,
+    },
+  }
+)
+```
+
+4. Click on the `+` button next to **Before Outgoing Message** to create a new hook.
+5. Name it `send-bot-analytics` for example
+6. Add the following Javascript code:
+
+```js
+const botAnalyticsData = {
+  time: event.createdOn.getTime(), // Mixpanel event datetime
+  $insert_id: event.id, // Mixpanel unique event
+  distinct_id: event.userId, // Mixpanel preventing duplicates
+  bot_id: event.botId,
+  conversation_id: event.conversationId,
+  payload: event.payload,
+  text: event.preview,
+  current_flow: event.state.context.currentFlow,
+  current_node: event.state.context.currentNode,
+  current_card: event.state.context.currentCard,
+}
+
+const projectToken = '<your token>'
+
+await axios.post(
+  'https://api.mixpanel.com/import',
+  [
+    {
+      event: 'Outbound Message',
+      properties: botAnalyticsData,
+    },
+  ],
+  {
+    headers: {
+      Authorization: `Basic ${btoa(projectToken + ':')}`,
+    },
+  }
+)
+```
+
+<Callout type="info">
+  Now every time a user or the bot sends a message, Mixpanel will be notified with the event data. You can use this data
+  to create funnels, analyze user behavior and understand the paths they take when interacting with the bot.
+</Callout>
