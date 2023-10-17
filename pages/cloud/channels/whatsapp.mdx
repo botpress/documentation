@@ -124,13 +124,19 @@ This comes with a few restrictions and behaviors specific to WhatsApp:
 
 ## Receiving a Location
 
-When WhatsApp shares a location it is mapped to the Botpress Location object; hence the best way to capture the WhatsApp location object is using the "Wait for Message" card.
+When WhatsApp shares a location it is mapped to the Botpress Location object and the location information is found in the event.payload object. In the conversation, you could send a text message card asking to send the location using the built-in feature, then have a  "Wait for Message" card to await the user response. 
 
-You can access the properties of the location using the below:
+Once you get the response, you can access the properties of the location using the below:
 - Location Title: `{{event.payload.title}}`
 - Location Address: `{{event.payload.address}}`
 - Location Longitude: `{{event.payload.longitude}}`
 - Location Latitude: `{{event.payload.latitude}}`
+
+For instance your node could have: 
+[Text card]: `Where are you? Please use Whatsapp's send location feature.`
+[Wait for Message card]
+[Text card]: `Thank you! You live at {{event.payload.title}}, {{event.payload.address}} with longitude {{event.payload.longitude}} and latitude {{event.payload.latitude}}`
+
 
 ## Starting a Conversation Proactively
 
