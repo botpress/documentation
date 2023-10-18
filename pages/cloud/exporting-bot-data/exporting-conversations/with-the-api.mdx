@@ -1,12 +1,12 @@
 import { Callout } from 'nextra/components'
 
-## Exporting conversations
+## Exporting Raw Conversations with the Botpress API
 
 There are a few different ways to have access to your bot conversations outside of Botpress.
 
-## 1. Using the Botpress API
+## Making a request to the API
 
-Make a request to `https://api.botpress.cloud/v1/chat/conversations` adding the following headers: `Authorization: Bearer <your-personal-access-token>` and `x-bot-id: <your-bot-id>`.
+Send a `GET` request to `https://api.botpress.cloud/v1/chat/conversations` adding the following headers: `Authorization: Bearer <your-personal-access-token>` and `x-bot-id: <your-bot-id>`.
 
 <Callout type="note">
   You can find your personal access token in your [Botpress Dashboard](https://app.botpress.cloud/). You can find your
