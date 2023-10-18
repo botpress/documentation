@@ -1,3 +1,5 @@
+import { Callout } from 'nextra/components'
+
 # Chatbot Settings
 
 ![Styling Webchat](/docs/content/chatbot-settings-cover.png)
@@ -15,7 +17,12 @@ For example, if you have a chatbot designed to assist customers with travel book
 On the other hand, if your chatbot is focused on providing technical support for software products, you might opt for a more professional-sounding Avatar Name like **TechAssist**, **SupportBot**, or **TechGenius**.
 
 ### Inactivity Timeout (minutes)
+
 The Inactivity Timeout feature is a setting that you can find under the chatbot's settings menu. This feature allows you to specify the number of minutes of inactivity (i.e., no interaction between the user and the chatbot) after which the chatbot session will automatically end. The time frame is adjustable and is measured in minutes. When the session ends due to inactivity, the chatbot's position within the current workflow and all workflow variables are reset and cleared. This ensures that when the user returns for a new session, they can start afresh, and any unsaved progress or data from the previous session is not retained. This feature helps maintain the chatbot's efficiency, especially in scenarios where users may only sometimes remember to manually end their sessions.
+
+<Callout type="info">
+  The minimum value for the Inactivity Timeout is 1 minute, and the maximum value is 1440 minutes (24 hours).
+</Callout>
 
 ## Variables
 
