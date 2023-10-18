@@ -24,6 +24,12 @@ The Inactivity Timeout feature is a setting that you can find under the chatbot'
   The minimum value for the Inactivity Timeout is 1 minute, and the maximum value is 1440 minutes (24 hours).
 </Callout>
 
+### Node Repetition Limit
+
+The **Node Repetition Limit** is the maximum number of times a conversation can go through the same node. An error will be triggered when the limit, defaulting to 3, is exceeded.
+
+You should increase this limit if you have workflows where there is a loop in the conversation that is expected to happen more than 3 times. For example, if you have a workflow that asks the user to confirm their input, and if the user does not confirm, the workflow will loop back to the beginning and ask the user to input their information again. In this case, you should increase the Node Repetition Limit to 4 or more.
+
 ## Variables
 
 ### User Variables
