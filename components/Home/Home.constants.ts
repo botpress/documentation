@@ -18,7 +18,7 @@ export const HERO_CARDS: NavigationCard[] = [
   {
     heading: 'For Developers',
     subHeading: 'Build your very own Botpress chat bot using our API',
-    link: '/integration',
+    link: '/developers',
     Icon: KeyboardIcon,
   },
   {
