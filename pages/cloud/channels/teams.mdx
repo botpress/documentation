@@ -1,12 +1,13 @@
+import { Callout } from 'nextra/components'
+
 # Microsoft Teams
 
 ![Messaging channels](/docs/content/teams-banner.png)
 
 ## Prerequisites
 
-- A [Microsoft account](https://www.microsoft.com/pt-br/)
-- Access to Azure and Teams. Please check out the [Azure](https://docs.microsoft.com/en-us/azure/devops/) and [Teams](https://docs.microsoft.com/en-us/microsoftteams/) documentation to learn more.
-- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
+- A [Microsoft 365 Business account](https://www.microsoft.com/en-us/microsoft-365/business/)
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
 
 ## Setting up the Microsoft Teams integration in Botpress
 
@@ -31,24 +32,54 @@ The Microsoft Teams integration has the following settings:
 
 #### App Password
 
-5. Find the **Certificates & secrets** page, click **New client secret**, then fill in the required fields
+5. Find the **Certificates & secrets** page in the sidebar, click **New client secret**, then fill in the required fields
 6. Copy the value from the **Value** column and paste it in the **App Secret** channel configuration in Botpress
 7. Save the settings by clicking the "Save configuration" button
 
 ### Create Your Microsoft Bot
 
-1. Navigate to the [Bot Framework Registration Page](https://dev.botframework.com/bots/new)
+1. Navigate to the [Bot Framework Creation page](https://dev.botframework.com/bots/new)
 2. Fill the **Display name** and **Bot handle** fields with whatever value
 3. Copy paste you **App Id** to the app id field
-4. Copy paste the webhook url provided in the channel configuration UI to the **Messaging endpoint** field
-5. Click **Register**
-6. On the next page (**Connect to channels**), under the section, **Add a featured channel**, click **Configure Microsoft Teams Channel**, then click **Save**
+4. Copy the Webhook URL provided in Botpress to the **Messaging endpoint** field
+5. Select "Multi Tenant" as the **App type**
+6. Paste the App ID from the Azure bot in the **Microsoft App ID** field
+7. Read and agree to the terms then click **Register**
+8. On the next page (**Connect to channels**), under the section, **Add a featured channel**, click **Configure Microsoft Teams Channel**, then click **Save**
 
-### Opening your Bot in MS Teams
+### Accessing the Bot in MS Teams
 
-1. Navigate to the [My Bots Page](https://dev.botframework.com/bots/)
+1. Navigate to the [My Bots page](https://dev.botframework.com/bots/)
 2. Click on your bot's name
 3. Under the **Connect to channels** section, click on **Microsoft Teams**
 4. The bot should open in your MS Teams
 
 That's it, you may now start chatting with your bot on Microsoft Teams!
+
+<Callout>
+  The bot will only be available to you if you have a Microsoft 365 Business account and if you are logged in to MS
+  Teams with that account.
+</Callout>
+
+## Making the bot available in your Organization
+
+1. Add the Developer Portal App to your Teams (or do it via the website)
+   ![Developer Portal App addon](/docs/content/teams-publish-1.png)
+2. Click the **Developer Portal App** tab in the sidebar, then **Apps**. Now click the **New app** button
+   ![Developer Portal Apps](/docs/content/teams-publish-2.png)
+3. In the left-side menu of the App, go to the **App Features** page under the **Configure** section then click "Bot"
+   ![App Features page](/docs/content/teams-publish-3.png)
+4. Select your existing bot from BotFramework in the dropdown. Check the desired scopes (at least **Personal** for 1:1 conversations)
+   ![Bot selection](/docs/content/teams-publish-4.png)
+5. Fill out all the required fields in the Basic Information page of the Configure section
+   ![Basic Information](/docs/content/teams-publish-5.png)
+6. Click **Publish**, then **Publish to your Org**
+   ![Publish to your Org](/docs/content/teams-publish-6.png)
+7. Go to your Team App store, search for your app, then add it
+   ![Add App to your Team](/docs/content/teams-publish-7.png)
+8. The bot is now available in the **App** section to all members of your organization!
+
+<Callout type="info">
+  In order to update your bot's behavior, just **Publish** the new version in Botpress. The changes will then be
+  reflected in MS Teams, there's no need to change any settings in the Microsoft apps.
+</Callout>

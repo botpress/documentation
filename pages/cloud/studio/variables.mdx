@@ -2,7 +2,22 @@ import { Callout } from 'nextra/components'
 
 # Variables
 
-Botpress uses variables to store information from one place and use it in other parts of a flow. Variables help make conversations more personalized, and help track information about users. They can also help connect with third-party APIs and data sources.
+Botpress uses variables to store information from one place and use it in other parts of a flow. Variables help make conversations more personalized and help track information about users. They can also help connect with third-party APIs and data sources.
+
+## Variable Scopes
+
+Botpress also includes different types of variables. These Variable types differ in scope or where they can be accessed in your bot's flows.
+
+### Creating Variables in Botpress
+
+1. Open up the Variables tab from the sidebar and click the **+** icon in the Variables section.
+2. A new window will appear, allowing you to formulate a new Variable.
+4. Assign a suitable scope (Workflow, Bot or User) to your Variable, select the Data Type (see below table), give it a name, and click **Add** to create the Variable.
+5. (Optional) From the Additional Settings, you can also initialize your Variable with a default value.
+
+### Using Variables in Botpress
+
+Once the Variable is established, employ `{{workflow.variablename}}` or `@workflow.variablename` to render it in a send message card.
 
 ## Data Types for Variables
 
@@ -10,18 +25,14 @@ Botpress variables are typed, meaning they are limited in what data they can hol
 
 | Type    | Description                                                                                                                                                                                                                                                                     |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| String  | Values that are treated as text. Strings can contain any amount of letters, numbers, or special characters. <br/> <br/> Example uses: Storing a user's name, store an AI task's generated message.                                                                              |
-| Boolean | Variables can either be true or false, with a lowercase 't' or 'f'. <br/> <br/>Example uses: Storing if a user is a returning customer, storing whether the bot has greeted the user or not                                                                                     |
+| String  | Values that are treated as text. Strings can contain any amount of letters, numbers, or special characters. <br/> <br/> Example uses: Storing a user's name, storing an AI task's generated message.                                                                              |
+| Boolean | Variables can be true or false, with a lowercase 't' or 'f'. <br/> <br/>Example uses: Storing if a user is a returning customer, storing whether the bot has greeted the user or not                                                                                     |
 | Number  | Variables that are numeric, either with or without decimal places. <br/> <br/>Example uses: Storing a user's phone number, storing an address's area code                                                                                                                       |
-| Date    | Variables that are a single date or date and time. Botpress uses ISO 8601 date/time format, such as `20220921T10:34:14` for `21 September 2023 at 10:34 AM` (with 14 seconds). <br/> <br/>Example uses: Storing when the user started a chat, storing a user's appointment date |
+| Date    | Variables that are a single date or date and time. Botpress uses ISO 8601 date/time format, such as `20220921T10:34:14` for `21 September 2023 at 10:34 AM` (with 14 seconds). <br/> <br/>Example uses: Storing when the user starts a chat, storing a user's appointment date |
 | Object  | Variable that is a collection of key-value pairs. Useful when dealing with code and written like `{key: value}`. <br/> <br/>Example uses: Storing a user's profile, storing the results of an API call                                                                          |
 | Array   | Variable that is a collection of other, similar variables. Arrays can contain strings, like `[“a”, “b”, “c”]`, or Objects like `[{key:value},{key:value}]`. <br/> <br/>Example uses: Storing a user's past messages, storing options for the user to choose from                |
 | Enum    | Variable that can be one of a set number of choices. <br/> <br/>Example uses: Storing days of the week, storing items available from a food menu                                                                                                                                |
-| Pattern | Variable that uses Regular Expressions/Regex to store a special pattern. This pattern can match with certain words or numbers.<br/> <br/>Example uses: Storing account numbers, storing flight numbers                                                                          |
-
-## Variable Scopes
-
-Botpress also includes different types of variables. These variable types differ in their scope, or where they can be accessed in your bot's flows. Let's start with the most limited scoped variables and then end with the broadest scoped.
+| Pattern | Variable that uses Regular Expressions/Regex to store a special pattern. This pattern can match certain words or numbers.<br/> <br/>Example uses: Storing account numbers, storing flight numbers                                                                          |
 
 ## Workflow Variables
 
@@ -33,57 +44,35 @@ Workflow Variables are created and used only within a single workflow. These var
 4. Saving flags or tags that track the conversation
 
 <Callout type="info">
-  **Workflow Variables**
-  <br />
+  **Workflow Variables**<br />
   Workflow variables are not accessible in any workflow other than the one they were created in. For example, a workflow
-  variable created in a separate workflow will not be accessible in **Main**.
+  Variable created in a separate workflow will not be accessible in **Main**.
 </Callout>
 
-### How to make workflow variables
+### Creating a Workflow Variable
 
 To create a Variable in your bot's workflow, you can follow these steps:
 
-1. Select the appropriate workflow from the Explorer menu.
-2. Double-click on the empty space in the workflow editor to open the Inspector panel.
-3. In the Inspector panel, navigate to the flow properties section.
-4. Give your variable a name, pick a type and click "Add" to create the variable.
-5. You can also add default(initial) value for a variable from the Additional Settings.
-6. Once the variable is created, you can use `{{workflow.variablename}}` or `@variablename` to display it in a send message card.
+1. Select the appropriate workflow from the Flows section in the Side Panel.
+2. Click on the **+** icon in the Variables section, at the bottom of the Side Panel.
+3. Give your Variable a name, pick a type and click **Add** to create the Variable. (Default scope is Workflow) 
+4. Once the Variable is created, you can use `{{workflow.variablename}}` or `@workflow.variablename` to display it in a send message card.
 
 ### Input and Output Workflow Variables
 
 Workflows can have inputs and outputs to help pass information throughout the bot. This can be useful if your workflow returns information like a verified phone number, or requires information like a user id.
 
-#### To mark an input variable
+#### To mark an Input Variable
 
-1. Go into your workflow and create the variable
-2. Click on the **Entry** node
-3. In the inspector panel, click on the variable you want to make an input. It should get a blue border and appear in the **Entry** node.
-4. When you call this workflow from another flow, there should be an input box for that variable in the workflow's card. This will let you pass information or another variable into that workflow.
+1. Go into your new workflow(not Main) and create a Variable and Click it's **Entry** node.
+2. In the inspector panel, click on the Variable you want to make an input. It should get a blue border and appear in the **Entry** node.
+4. When you call this workflow from another flow, there should be an input box for that Variable in the workflow's card. This will let you pass information or another Variable into that workflow.
 
-#### To mark an output variable
+#### To mark an Output Variable
 
-1. Go into your workflow and create the variable
-2. Click on the **Exit** node
-3. In the inspector panel, click on the variable you want to make an output. It should get a blue border and appear in the **Exit** node.
-4. When you call this workflow from another flow, the output variable will be accessible by typing `{{workflow.<workflowname>.<variablename>}}`, replacing `<workflowname>` and `<variablename>` with the name of your workflow and variable respectively.
-
-## Session Variables
-
-Session variables are available in all flows, but only for one conversation. These variables are great for data used throughout a conversation, such as:
-
-1. Collecting items in a virtual shopping cart for the user to order
-2. Saving raw data from an API call for further processing
-3. Storing chat history for that conversation
-4. Saving an order number or policy number
-
-### How to make session variables
-
-Session variables can only be created inside of an **Execute Code** card.
-
-To create one, simply write: `event.state.session.variablename = "Hello World"` or for short `session.variablename = "Hello World"`
-
-To use a session variable in a text or other card, enclose it in double curly brackets like `{{event.state.session.variablename}}` or for short `{{session.variablename}}`
+1. Go into your new workflow(not Main) and create a Variable and click on the **Exit** node.
+3. In the inspector panel, click on the Variable you want to make an output. It should get a blue border and appear in the **Exit** node.
+4. When you call this workflow from another flow, the output Variable will be accessible by typing `{{workflow.<workflow-cardName>.<variablename>}}`, replacing `<workflow-cardName>` and `<variablename>` with the name of the card that represents your workflow and Variable respectively.
 
 ## User Variables
 
@@ -94,14 +83,14 @@ Storing users' personal details or id numbers
 2. Storing extra flags like **VIP customer**
 3. Saving language preferences
 
-### How to make user variables
+### Creating a User Variable
 
-To create a user variable:
+1. Open up the Variables tab and navigate to the **+** icon in the Variables section.
+2. Change the scope to **User**, select the Data Type, give it a name, and click **Add** to create the Variable.
 
-1. Click the Botpress icon in the upper-left corner and select “Chatbot Settings\*\*
-2. Click on the tab for **Variables**
-3. Click on the button to add a user variable and fill in the variable's name and data type and click **Done**
-4. You can use your variable in a text card with either `@user.variablename` or in double curly brackets like `{{user.variablename}}`.
+### Using User Variables
+
+Once the User Variable is established, employ `{{user.variablename}}` or `@user.variablename` to render it in a send message card.
 
 ## Bot Variables
 
@@ -110,56 +99,143 @@ Bot Variables can be accessed by all users of the chatbot across all conversatio
 1. Storing the endpoint for the bot's API calls
 2. Saving bot's version number
 3. Storing the bot's name
+4. Metadata about the bot/services
 
-Bot variables are not encrypted or stored securely. Do not save secrets like API keys or passwords in bot variables- use configuration variables instead!
+Bot variables are not encrypted or stored securely. Do not save secrets like API keys or passwords in bot variables - use **configuration variables** instead!
 
-### How to make bot variables
+### Creating a Bot Variable
 
-To create a bot variable:
+1. Open up the Variables tab and navigate to the **+** icon in the Variables section.
+2. Change the scope to **Bot**, select the Data Type, give it a name, and click **Add** to create the Variable.
 
-1. Click the Botpress icon in the upper-left corner and select **Chatbot Settings**
-2. Click on the tab for **Variables**
-3. Click on the button to add a bot variable and fill in the variable's name and data type and select **Done**
+### Using Bot Variables
 
-Bot variables can be used in text and other cards just like user variables- with either `@bot.variablename` or `{{bot.variablename}}`.
+Bot variables can be used in text and other cards just like user variables - with either `@bot.variablename` or `{{bot.variablename}}`.
+
+## Session Variables
+
+Session variables are available in all flows, but only for one conversation. These variables are great for data used throughout a conversation, such as:
+
+1. Collecting items in a virtual shopping cart for the user to order
+2. Saving raw data from an API call for further processing
+3. Storing chat history for that conversation
+4. Saving an order number or policy number
+
+### Creating a Session Variable
+
+Session variables can only be created inside of an **Execute Code** card.
+
+To create one, simply write: `event.state.session.variablename = "Hello World"` or for short `session.variablename = "Hello World"`
+
+To use a Session Variable in a text or other card, enclose it in double curly brackets like `{{event.state.session.variablename}}` or for short `{{session.variablename}}`
 
 ## Configuration Variables
 
-Configuration variables are a special kind of secure bot variable. They can also be managed from the Cloud Dashboard without opening the bot. Configuration variables can store secrets like:
+Configuration variables are a special kind of secure bot Variable. They can also be managed from the Cloud Dashboard without opening the bot. Configuration variables can store secrets like:
 
 - API Tokens
 - Private IP Addresses
 - Database usernames and passwords
 
-### How to make configuration variables
-
-To create a configuration variable:
+### Creating a Configuration Variable (or Environment Variable)
 
 1. Click the Botpress icon in the upper-left corner and select **Chatbot Settings**
-2. Click on the tab for **Variables**
-3. Scroll down and click on the button to add a configuration variable. Fill in the variable's name and value and Select **Done**
+2. Scroll down and click on the button to add a Configuration Variable. Fill in the Variable's name and value and click **Done**.
 
-You can use env.key in your code to get the value of the Configuration Variable.To use it in an Execute Code Card, you can write env.key to access its value.
-Once a configuration variable is created, you can access and manage it from the cloud admin dashboard. Just select your bot and then click on the tab for **Configuration Variables.**
-
-## Using Variables in code
-
-You can use variables in code without any double curly brackets or `@` signs. Variables follow the pattern variabletype.variablename. For example:
-
-- `workflow.phoneNumber`
-- `session.userAcctId`
-- `user.firstName`
-- `bot.endpoint`
-- `env.apiKey`
-
-Variables can be assigned values or updated in code- just be aware of their types! Botpress will throw an error if you try to set a variable of one type equal to a different type.
-Displaying Variables
-
-You can either use `{{workflow.variablename}}` or `@variablename` in a text field to display a variable.
+You can use **env.key** in your code to get the value of the Configuration Variable. To use it in an Execute Code Card, you can write env.key to access its value.
+Once a configuration Variable is created, you can access and manage it from the cloud admin dashboard. Just select your bot and then click on the tab for **Configuration Variables.**
 
 ## Passing Variables between Flows
 
-1. In your target workflow, define an input variable from the workflow properties window.
+1. In your target workflow, define an input Variable from the workflow properties window.
 2. Toggle it `ON` on the `Entry node` of the target workflow.
-3. Now, on the `exit` node of the parent workflow, the one that brings the user to the target workflow, match the parent workflow variable with the target workflow input variable.
-4. Now, when you call the target workflow from the parent workflow, you will see the input variable in the card. You can pass a value or a variable to it.
+3. Now, on the `exit` node of the parent workflow, the one that brings the user to the target workflow, match the parent workflow Variable with the target workflow input Variable.
+4. Now, when you call the target workflow from the parent workflow, you will see the input Variable in the card. You can pass a value or a Variable to it.
+
+## Using Variables in Code Card
+
+Variables in code follow the pattern `variabletype.variablename`. Here's a breakdown and examples of how to use these:
+
+### 1. Assigning a Value to a Variable
+
+This is typically how you'd initialize a variable or change its value.
+
+```javascript
+workflow.orderNumber = 12345;
+session.cartTotal = 59.99;
+user.lastName = "Smith";
+bot.version = "1.2.3";
+env.databaseURL = "https://example.com/db";
+```
+
+### 2. Using Variables in Conditional Statements
+
+This checks the value of a variable and executes code accordingly.
+
+```javascript
+if (user.firstName === "John") {
+    console.log("Hello John!");
+} else {
+    console.log("Welcome, user!");
+}
+```
+
+### 3. Using Variables in Functions
+
+Here, you might pass a variable as a function argument or use it inside a function.
+
+```javascript
+function greetUser(firstName) {
+    console.log("Hello, " + firstName + "!");
+}
+
+greetUser(user.firstName);
+```
+
+### 4. Combining Variables
+
+You might want to combine or concatenate variables.
+
+```javascript
+var fullName = user.firstName + " " + user.lastName;
+
+//or
+
+var welcomeMessage = "Hello, " + user.firstName + " " + user.lastName + "!";
+```
+
+### 5. Checking Variable Type
+
+Botpress might throw an error if types don't match, you can use type checking before assigning values.
+
+```javascript
+if (typeof workflow.userAcctId === "number") {
+    workflow.userAcctId = 67890; // This is okay.
+} else {
+    console.error("Invalid type for userAcctId!");
+}
+```
+
+### 6. Using Variables with External APIs
+
+If your bot interacts with external services, you might use an environment variable like env.apiKey.
+
+```javascript
+const apiKey = env.API_KEY;
+const apiUrl = env.API_URL;
+
+const config = {
+  headers: {
+    Authorization: `Bearer ${apiKey}`,
+  },
+};
+
+const response = await axios.get(apiUrl, config);
+const data = response.data;
+
+// Process the data as needed
+// ...
+
+// Example: Log the response data
+console.log(data);
+```
