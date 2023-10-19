@@ -1113,6 +1113,13 @@ This is the maximum number of times the bot will ask the user to provide the inf
 
 This is the message that the bot will show to the user each time they fail to answer the question. It will ask the user to provide the information again in a different way. If the capture has predefined choices the retry message will contain the buttons again.
 
+You can also add variables to this message using the following syntax:
+
+```text
+Hello @workflow.userName.first, we did not get your number right, please enter it again!
+```
+
+
 **Pro Tip**
 
 To give your users the best experience, you can combine the **Retries** option with the **Add transition to handle failure** flag. This will help the bot gracefully handle situations when it can't understand the user's input.

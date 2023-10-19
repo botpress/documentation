@@ -5,5 +5,6 @@
   "cli": "CLI",
   "sdk": "SDK",
   "howTo":"How To",
-  "concepts": "Key Concepts"
+  "concepts": "Key Concepts",
+  "webchat": "Web Chat"
 }
