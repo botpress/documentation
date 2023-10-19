@@ -2,10 +2,12 @@ import { Callout } from 'nextra/components'
 
 # Execute Code
 
-This instruction is to execute custom code in a node. For example, fetching and displaying a user-submitted city’s weather information using an API.
+The Execute Code card allows you to execute code in the context of the current workflow. This is useful for making API calls, performing calculations, or any other custom logic you may need.
+
+## How to Use
 
 <Callout>
-  **Generative AI** <br/>
+  **Generative AI** <br />
   Using natural language you can instruct AI to generate the needed code for your bot.
 </Callout>
 
@@ -44,7 +46,7 @@ const jql = `status != Done AND updated >= "${now}" ORDER BY updated DESC`
 // set the request headers for Jira API
 const headers = {
   'Content-Type': 'application/json',
-  Authorization: `Basic ${Buffer.from(`${jiraUsername}:${jiraPassword}`).toString('base64')}`,
+  Authorization: `Basic ${btoa(`${jiraUsername}:${jiraPassword}`)}`,
 }
 
 // make the request to Jira API to get all issues that are not done
@@ -71,7 +73,7 @@ If you're transitioning from another programming language to Botpress, we've got
 
 Step 1: Take your existing code snippet from another programming language that performs an API request. This could be in a language like Python, C#, or any other language you're coming from.
 
-Step 2: Paste the code snippet you have into ChatGPT and add this below. 
+Step 2: Paste the code snippet you have into ChatGPT and add this below.
 
 ```text
 Convert the above to deno, using the axios library. Save the variable results to the workflow object (global object available in the code block). You can use await axios directly without the "async" keyword. Axios is already imported, no need to import it again.
