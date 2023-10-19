@@ -103,6 +103,10 @@ For example, if you ask the LLM "What is your favorite animal?", with a temperat
 
 In simpler terms, temperature is a way to control how much "imagination" the AI has when generating responses. A lower temperature means more consistency, while a higher temperature means more creativity and variability.
 
+### Add transition to handle failure
+
+You can enable this option to have your bot transition to another node when an issue happens with the AI Task. The possible issues are: Request Timeout (when the AI can't answer in a timely manner), Token Overflow (when the input or the output of the task exceeds the limit) and others.
+
 ## AI Prompt Chaining
 
 Prompt chaining is connecting multiple AI Task Cards together in a workflow, where the output of one AI Task Card becomes the input for the next. This can be a powerful technique for generating complex content, as it allows users to break down a large generative task into smaller, more manageable pieces.
