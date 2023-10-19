@@ -1,0 +1,93 @@
+import { Callout } from 'nextra/components'
+
+## Streaming Analytics from within your Bot with Hooks
+
+The Botpress Cloud dashboard provides you with an Analytics page with counters for the total number of users, new users, returning users, sessions and messages. It also shows a chart with the data and allows you to filter by date range.
+
+While this interface is great for understanding reach and engagement in a glance, you may need more in-depth data about user behavior and the paths they take when interacting with the bot, and you may need to have this data streamed to a third-party service like Hotjar, Segment or Amplitude. Luckily, you can use the Hooks feature to do just that!.
+
+In this tutorial we are going to use Mixpanel as an example, but you can use any service that has a REST API and an endpoint to receive events.
+
+### Setting up Mixpanel
+
+1. Create an account and a project in [Mixpanel](https://mixpanel.com/).
+2. Go to your project settings and copy the Project Token.
+
+### Setting up the Hooks
+
+1. Open Botpress Studio, go to the Hooks tab and click on the `+` button next to **Before Incoming Message** to create a new hook.
+2. Name it `send-user-analytics` for example
+3. Add the following Javascript code:
+
+```js
+const userAnalyticsData = {
+  time: event.createdOn.getTime(), // Mixpanel event datetime
+  $insert_id: event.id, // Mixpanel unique event
+  distinct_id: event.userId, // Mixpanel preventing duplicates
+  bot_id: event.botId,
+  conversation_id: event.conversationId,
+  payload: event.payload,
+  text: event.preview,
+  current_flow: event.state.context.currentFlow,
+  current_node: event.state.context.currentNode,
+  current_card: event.state.context.currentCard,
+}
+
+const projectToken = '<your token>'
+
+await axios.post(
+  'https://api.mixpanel.com/import',
+  [
+    {
+      event: 'Inbound Message',
+      properties: userAnalyticsData,
+    },
+  ],
+  {
+    headers: {
+      Authorization: `Basic ${btoa(projectToken + ':')}`,
+    },
+  }
+)
+```
+
+4. Click on the `+` button next to **Before Outgoing Message** to create a new hook.
+5. Name it `send-bot-analytics` for example
+6. Add the following Javascript code:
+
+```js
+const botAnalyticsData = {
+  time: event.createdOn.getTime(), // Mixpanel event datetime
+  $insert_id: event.id, // Mixpanel unique event
+  distinct_id: event.userId, // Mixpanel preventing duplicates
+  bot_id: event.botId,
+  conversation_id: event.conversationId,
+  payload: event.payload,
+  text: event.preview,
+  current_flow: event.state.context.currentFlow,
+  current_node: event.state.context.currentNode,
+  current_card: event.state.context.currentCard,
+}
+
+const projectToken = '<your token>'
+
+await axios.post(
+  'https://api.mixpanel.com/import',
+  [
+    {
+      event: 'Outbound Message',
+      properties: botAnalyticsData,
+    },
+  ],
+  {
+    headers: {
+      Authorization: `Basic ${btoa(projectToken + ':')}`,
+    },
+  }
+)
+```
+
+<Callout type="info">
+  Now every time a user or the bot sends a message, Mixpanel will be notified with the event data. You can use this data
+  to create funnels, analyze user behavior and understand the paths they take when interacting with the bot.
+</Callout>
