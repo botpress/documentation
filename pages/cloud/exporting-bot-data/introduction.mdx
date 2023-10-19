@@ -1,0 +1,24 @@
+import { Callout } from 'nextra/components'
+
+# Start Here
+
+![Exporting Bot data from Botpress](/docs/content/exporting-bot-data.png)
+
+Botpress Cloud allows you to create, manage, and deploy chatbots with little to no coding or infrastructure. In the natural course of maintaining a bot you may want to access its data outside of Botpress for various purposes, such as reporting, analysis, backup, or integration.
+
+This section covers some of the most important use cases for extracting bot data to third-parties software.
+
+| **Use Case**            |                                                                                                                        **Methods** |
+| :---------------------- | ---------------------------------------------------------------------------------------------------------------------------------: |
+| Exporting conversations | [Using the Botpress API](./exporting-conversations/with-the-api) <br /> [Using Studio Hooks](./exporting-conversations/with-hooks) |
+| Exporting analytics     |         [Using Studio Hooks](./exporting-analytics/with-hooks) <br /> [Using the Botpress API](./exporting-analytics/with-the-api) |
+
+<Callout type="info">
+**A few things to understand about the API**<br />
+All requests require an `Authorization` header with the value in this format: `Bearer <your-token-here>`
+
+Most requests require an `x-bot-id` header with the value being the ID of the bot you want to access. You can find the bot ID in the URL of the bot's page in the Botpress Cloud dashboard.
+
+All list requests return only the first 20 items of a resource. If there are more items, the response will include a `meta` property with a nested `nextToken` property that holds a string that you should use as a `nextToken` query parameter in following requests to get the next 20 items. If there are no more items, the `meta` property will be an empty object.
+
+</Callout>
