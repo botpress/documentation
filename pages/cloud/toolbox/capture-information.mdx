@@ -1225,32 +1225,12 @@ If you turn on the **Confirm before cancelling** option, the bot will ask the us
 
 ### Choices
 
-The **Choices** setting is used to offer a list of predefined options to the user as a response to a Capture Information card. This can be useful when you want to restrict the user's input to a specific set of values. 
-
-You could add fixed options or add variables to each choice to make them dynamic. You can also render the list of choices dynamically by toggling the SuperText input and adding an array with the following format:
-
-```js
-[
-  {
-	label: 'French',
-	value: 'fr'
-  },
-  {
-	label: 'English',
-	value: 'en'
-  }
-]
-```
-
-<Callout type="info">
-  **Limits** <br/>
- If you add more than 5 choices, they will be rendered as a Dropdown/List instead of buttons. This number may vary by channel. <br/>
- The choices labels should not be longer than 20 characters otherwise they will get cut in some channels. <br/>
-</Callout>
+The **Choices** setting is used to offer a list of predefined options to the user as a response to a Capture Information card. This can be useful when you want to restrict the user's input to a specific set of values.
 
 <Callout>
-  **Note** <br/>
-  Choices are only available for **Single Choice**, **Multiple Choice**, **Boolean**, **Confirmation** and **Raw Input** Capture cards.
+  **Tip** <br/>
+  Choices are only available for **Single Choice** & **Multi Choice** Prompt
+  types.
 </Callout>
 
 **Example**
