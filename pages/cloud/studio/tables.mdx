@@ -220,6 +220,7 @@ Primitive filters are easy and simple to use, allowing you to match the exact va
   { "name": { "$regex": "[a-z]" } }
   ```
 - `$options`: Modifies the `$regex` operator to enable options. Currently, there are two options, 'i' for case insensitive and 'c' for case sensitive.
+
   ```
   { "name": { "$regex": "[a-z]", "$options": 'i' } } // case insensitive
 
@@ -313,17 +314,24 @@ You can use the `updateRecord` function to modify a specific record in a table. 
 
 ```javascript
 // Update at record ID 8's Age to 45
-await Data1Table.updateRecord(8, {Age:45})
+await Data1Table.updateRecord(8, { Age: 45 })
 ````
 
-### upsertRecord
+### upsertRecords
 
-You can use the `upsertRecord` function to modify a specific record in a table or create it if it doesn't exist. This will be useful when you need to update a specific field in the record. For example, you might use this function to update a user's profile information or create the record.
+The `upsertRecords` function allows you to update or create records in a table in a single operation. It is useful for any situation where you need to update or insert data into a table without having to worry about whether the rows already exist.
+
+**Example:**
 
 ```javascript
-// Update at record ID 8's Age to 45 or create it if it doesn't exist
-await Data1Table.upsertRecord(8, { Age: 45 })
+// Update the name and address of the records with IDs 1 and 2.
+await CustomersTable.upsertRecords('id', [
+  { id: 1, name: 'John Doe', address: '123 Main Street' },
+  { id: 2, name: 'Jane Doe', address: '456 Elm Street' },
+])
 ```
+
+This code will upsert the records into the CustomersTable. If the records with IDs 1 and 2 already exist in the table, the function will update the existing rows with the new name and address values. If the records with IDs 1 and 2 don't already exist in the table, the function will insert new rows into the table with the new name and address values.
 
 ## Importing and Exporting
 
