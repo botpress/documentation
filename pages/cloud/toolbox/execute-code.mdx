@@ -75,14 +75,18 @@ Using the above packages, you will be able fetch and display the user-submitted 
 
 #### Transitioning from Another Language to Botpress
 
-If you're transitioning from another programming language to Botpress, we've got you covered. With the power of ChatGPT, converting simple code snippets, such as making API requests, is now easier than ever. We've prepared a sample snippet that you can adapt to your own code while working within Botpress.
+If you're transitioning from another programming language to Botpress, we've got you covered. With the power of ChatGPT, converting simple code snippets, such as making API requests, is now easier than ever.
 
-Step 1: Take your existing code snippet from another programming language that performs an API request. This could be in a language like Python, C#, or any other language you're coming from.
+Step 1: Take your existing code from another programming language. This could be in a language like Python, C#, or any other language you're coming from.
 
-Step 2: Paste the code snippet you have into ChatGPT and add this below.
+Step 2: Paste the code snippet you have into ChatGPT and add this instruction below it.
 
 ```text
-Convert the above to deno, using the axios library. Save the variable results to the workflow object (global object available in the code block). You can use await axios directly without the "async" keyword. Axios is already imported, no need to import it again.
+Convert the code above to deno. Save the variable results to the workflow object (global object available in the code block). Use axios for http requests and use it directly without the "async" keyword. For date management use the luxon library. For string manipulation use the lodash library. All of these libraries are already imported.
 ```
 
-Step 3: Paste the result of ChatGPT into the Execute Code Card.
+Step 3: Paste the result of ChatGPT into the Execute Code card.
+
+Step 4: Test your code and make sure it works as expected.
+
+Step 5: If you need to make any changes, you can do so by editing the code directly or by adding new instructions in the top input of the Execute Code card.
