@@ -8,5 +8,6 @@
   "table-cards": "",
   "transition-to": "Transitions",
   "events-triggers": "Events & Triggers",
-  "query-kb": "Query Knowledge Bases"
+  "query-kb": "Query Knowledge Bases", 
+  "utilities": "Utilities"
 }
