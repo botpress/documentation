@@ -25,8 +25,6 @@ const requestConfig = {
 }
 
 const getAnalytics = await axios.get(`https://api.botpress.cloud/v1/admin/${botId}/analytics`, requestConfig)
-
-}
 ```
 
 If you were to print the analytics (available at `getAnalytics.data.records`), the result would look like this:
@@ -58,4 +56,4 @@ If you were to print the analytics (available at `getAnalytics.data.records`), t
   favorite BI tool.
 </Callout>
 
-If you need advanced analytics about user behavior and the paths they take when interacting with the bot, you can use the [Hooks](./with-hooks) feature to export the data in real-time to a third-party service like Mixpanel, Hotjar, Segment or Amplitude.
+If you need advanced analytics about user behavior and the paths they take when interacting with the bot, you can use the [Hooks method](./from-the-bot) to export the data in real-time to a third-party service like Mixpanel, Hotjar, Segment or Amplitude.
