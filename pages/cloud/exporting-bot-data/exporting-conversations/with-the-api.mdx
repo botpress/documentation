@@ -11,7 +11,7 @@ The Botpress API allows you to access your bot's conversations from an external 
   case.
 </Callout>
 
-### Getting the Conversations list
+### 1. Getting the Conversations list
 
 Send a `GET` request to `https://api.botpress.cloud/v1/chat/conversations` adding the following headers: `Authorization: Bearer <your-personal-access-token>` and `x-bot-id: <your-bot-id>`.
 
@@ -109,7 +109,7 @@ async function loadConversations(paginationToken) {
   the conversations to the existing list and save the token to be used in the next request.
 </Callout>
 
-### Getting the Messages list
+### 2. Getting the Messages list
 
 Once you have gone through the list of conversations and found out the id of the desired conversation to export, you can then use the API to list the actual messages.
 
@@ -196,9 +196,9 @@ This is how the `allMessages` array is gonna look like:
   that when reading the `payload` property.
 </Callout>
 
-#### Formatting the Messages list
+### 3. Formatting the Messages list
 
-Now that you have the list of messages of a conversation it's time to format it so it becomes readable.
+Now that you have the list of messages of a conversation it's time to format it so it becomes readable. We are going to use a custom function for that:
 
 ```js
 function formatMessage(message) {

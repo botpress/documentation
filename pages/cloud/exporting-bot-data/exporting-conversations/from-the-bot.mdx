@@ -7,32 +7,37 @@ Botpress Cloud provides you with several different ways to export a conversation
 ### Using the Summary Agent
 
 The [Summary Agent](../../studio/agents/#summary-agent) listens to all new messages in the conversation to build a summary and a transcript.
-The summary is available at `conversation.SummaryAgent.summary` and contains an explanation of what happened in conversation, like "The user asked for the opening hours and the bot answered by saying the business works 24/7". You can choose how detailed the summary is by setting the max tokens in the Agent settings.
-The transcript is available at `conversation.SummaryAgent.transcript` and contains the history of the conversation going back up to 100 turns. You can set the amount of turns in the Summary Agent settings.
+
+- The summary is available at `conversation.SummaryAgent.summary` and contains an explanation of what happened in conversation, like "The user asked for the opening hours and the bot answered by saying the business works 24/7". You can choose how detailed the summary is by setting the max tokens in the Agent settings.
+- The transcript is available at `conversation.SummaryAgent.transcript` and contains the history of the conversation going back up to 100 turns. You can set the amount of turns in the Summary Agent settings.
+
+#### Advantages
 
 These variables are useful if you don't need to have many details about the conversation, especially because some of them get lengthy and if you may not want all that data. Using the Summary Agent for exporting conversations is also great because the export happens during the conversation (or when it ends) so you don't need to make manual or scheduled requests to our API from external services.
 
-<Callout type="info">
-  The disadvantage of using the Summary Agent for exporting conversations is that after the amount of messages surpasses
-  the max amount of turns for the transcript, you won't have the full conversation anymore. If you expect your users to
-  have long conversations, use the Hooks method below. Another disadvantage is that the Agent only has access to the
-  current session, so if the user is resuming a conversation, you won't have the previous messages. To get the whole
-  conversation at any moment, use the [API method for exporting conversations](./with-the-api)
-</Callout>
+#### Disadvantages
+
+The disadvantage of using the Summary Agent for exporting conversations is that after the amount of messages surpasses
+the max amount of turns for the transcript, you won't have the full conversation anymore. If you expect your users to
+have long conversations, use the Hooks method below. Another disadvantage is that the Agent only has access to the
+current session, so if the user is resuming a conversation, you won't have the previous messages. To get the whole
+conversation at any moment, use the [API method for exporting conversations](./with-the-api)
 
 ### Using Studio Hooks
 
 [Hooks](../../studio/hooks) are functions that are executed under the hood every time there's a new message from the user or from the bot. You can create hooks that build the conversation history as it happens. They work similarly to the Summary Agent but with hooks you can customize how the history is built and there's no limitation for its size.
 
+#### Advantages
+
 This solution is useful if you need to have all details about the conversation. Using the Hooks for exporting conversations is great because the export happens during the conversation (or when it ends) so you don't need to make manual or scheduled requests to our API from external services.
 
-<Callout type="info">
-  The disadvantage of using Hooks for exporting conversations is that the bot may get slow on conversation with a lot of
-  messages or with long messages, because all of those messages will be stored in the chatbot memory. Another
-  disadvantage is that the Hooks only have access to the current session, so if the user is resuming a conversation, you
-  won't have the previous messages. To get the whole conversation at any moment, use the [API method for exporting
-  conversations](./with-the-api)
-</Callout>
+#### Disadvantages
+
+The disadvantage of using Hooks for exporting conversations is that the bot may get slow on conversations with a lot of
+messages or with long messages, because all of those messages will be stored in the chatbot memory. Another
+disadvantage is that the Hooks only have access to the current session, so if the user is resuming a conversation, you
+won't have the previous messages. To get the whole conversation at any moment, use the [API method for exporting
+conversations](./with-the-api)
 
 #### Setting up the Hooks
 
@@ -54,7 +59,9 @@ if (!event.state.session.fullHistory) {
 event.state.session.fullHistory = event.state.session.fullHistory + `bot: ${outgoingEvent.payload.text}` + '\n'
 ```
 
-### Sending the Conversation History
+---
+
+## Sending the Conversation History
 
 Now that you have the conversation history, you can add an [Execute Code card](../toolbox/execute-code) to manipulate the variable as you prefer, for example sending it to an API or [via email](../../getting-sarted/tips-and-tricks/#send-emails-using-sendgrid-api):
 
