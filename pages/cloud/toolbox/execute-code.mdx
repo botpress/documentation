@@ -4,22 +4,44 @@ import { Callout } from 'nextra/components'
 
 The Execute Code card allows you to execute code in the context of the current workflow. This is useful for making API calls, performing calculations, or any other custom logic you may need.
 
-## How to Use
-
-1. Write in the input what you want to achieve and press `Enter`
-2. Check if the code satisfies your needs and Accept or Undo the changes
-3. Once you accept, you can write instructions in the input to refine the code
-4. Use the arrows to go back and forth between versions
-
 <Callout>
   **Generative AI** <br />
   Using this natural language feature you can instruct AI to generate the different pieces of code your bot needs to run,
   and it's contextual, considers your variables and your conversation flow.
 </Callout>
 
-Example 1:
+## Inbuilt Packages
 
-**"I want to find the difference between the variables startDate and the endDate"**
+The below packages are already imported and available for use in the Execute Code card.
+
+- [Axios](https://axios-http.com/docs/api_intro)
+- [Lodash](https://lodash.com/docs/4.17.15)
+- [Moment Luxon](https://moment.github.io/luxon/#/?id=luxon)
+
+
+## How to Use
+
+1. Drag and drop the Execute Code card into a Node or click on the **+ Add Card** button in the Node and select Execute Code.
+2. Write what you want to do in the input field. 
+
+For example, if you want to make an API call, you can write the following:
+```text
+  Make an API Call to weatherAPI and store the result in a workflow variable
+```
+3. Check if the Code satisfies your needs and **Accept** or **Undo** the changes.
+4. This will automatically generate the description of the code in the Code Card.
+
+## Versioning
+
+Versioning allows you to go back and forth between different versions of the code. This is useful if you want to try out different versions of the code and see which one works best.
+
+1. Once you **Accept**, you can rewrite the code and **Accept** again. This will create a new version of the code.
+2. You can check the changes between versions, and once you're satisfied with the code, you can **Accept** it or **Undo** it.
+3. Use the arrows to go back and forth between versions.
+
+## Examples
+
+Input: **I want to find the difference between the variables startDate and the endDate**
 
 Generated Output:
 
@@ -31,10 +53,10 @@ const diffInDays = endDate.diff(startDate, 'days').toObject().days // find the d
 workflow.dateDiff = diffInDays
 ```
 
-<br />
-Example 2:
+---
 
-**"I want to get all my issues from Jira filtered by what is not done"**<br/>
+
+Input: **I want to get all my issues from Jira filtered by what is not done**
 
 Generated Output:
 
@@ -62,18 +84,9 @@ const response = await axios.get(`${jiraUrl}/rest/api/2/search?jql=${jql}`, { he
 const issues = _.filter(response.data.issues, (issue) => issue.fields.status.name !== 'Done')
 ```
 
-<br />
-#### Advanced
 
-You can build your own code here, using below node packages:
 
-- [Axios](https://axios-http.com/docs/api_intro)
-- [Lodash](https://lodash.com/docs/4.17.15)
-- [Moment Luxon](https://moment.github.io/luxon/#/?id=luxon)
-
-Using the above packages, you will be able fetch and display the user-submitted city's weather information using an API.
-
-#### Transitioning from Another Language to Botpress
+## Transitioning from Another Language to Botpress
 
 If you're transitioning from another programming language to Botpress, we've got you covered. With the power of ChatGPT, converting simple code snippets, such as making API requests, is now easier than ever.
 
