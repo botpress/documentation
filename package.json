@@ -18,7 +18,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@botpress/api": "^0.6.0",
+    "@botpress/api": "^0.10.0",
     "@botpress/client": "^0.2.0",
     "@heroicons/react": "^2.0.18",
     "@monaco-editor/react": "^4.5.1",
