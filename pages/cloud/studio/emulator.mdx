@@ -5,9 +5,10 @@ import { Callout } from 'nextra/components'
 You can debug your bot conversation using the built-in Emulator in the right-side panel.
 
 <Callout type="info">
-  **Note** <br/>
-  To visualize the entire user experience, you should use the Web Channel directly. All the messages you send with the
-  Emulator come from the same user from the bot's perspective.
+  **Note** <br />
+  To visualize the actual user experience, use the Share button. All the messages you send with the Emulator come from the
+  same user from the bot's perspective. Conversations won't be saved and the [bot invocations](../admin-dashboard/usage/#invocation-calls)
+  won't be counted, but AI operations will.
 </Callout>
 
 ## Status Indicator
@@ -21,22 +22,70 @@ This indicates that the bot has been trained and is ready for testing in the emu
 🔴 **Error**<br/>
 This indicates that the bot could not be trained and has some errors.
 
-## Opening & Closing the Emulator
+## Shortcuts
+
+### Opening & Closing the Emulator
 
 Press cmd/ctrl + e to toggle the Emulator (Right Panel)
 
-## Resend the Same Messages
+### Resend the Same Messages
 
 Pressing ↑ or ↓ on your keyboard in the text input allows you to navigate and resend previously sent messages quickly.
 
-<Callout variant="neutral" title="Note">
-  The last 20 messages sent to this bot are persisted in your browser storage.
-</Callout>
+<Callout type="info">The last 20 messages sent are persisted in your browser storage.</Callout>
 
-## New Conversation
+## Options
 
-Go to the 3 dots at the top right corner of the emulator and click on New Conversation. This will erase the history and state from the old conversation and start a new conversation with the same user information.
+### New Conversation
 
-## Start as a new user
+The `New Conversation` button erases the history and state from the old conversation and start a new conversation with the same user information. It's available at the top right corner of the emulator.
 
-Go to the 3 dots at the top right corner of the emulator and click on Start as new user. This will erase the history and state from the old conversation and start a new conversation with different user information.
+### Start as a new user
+
+The `Start as new user` button erases the history and state from the old conversation and start a new conversation with different user information. It's available at the top right corner of the emulator behind the 3 dots.
+
+### Simulate timeout event
+
+The `Simulate timeout event` button triggers the [Timeout flow](./workflows/#timeout) so you can check how the bot behaves when the conversation expires. It's available at the top right corner of the emulator behind the 3 dots.
+
+## Logs
+
+The Emulator shows the status of the conversation and the different steps that are being or have been executed under the hood to get the bot's response. It's a simpler version of the [Event Debugger](./event-debugger-logs-json). Here's some possible statuses and steps:
+
+### Statuses
+
+- Conversation started: The user has started the conversation by sending a message or a [Trigger](../toolbox/events-triggers) Event has been triggered.
+- Conversation ended: The conversation flowed to an End node and has gone through the [Conversation End workflow](./workflows/#conversation-end), or it has ended by not having possible transitions.
+- Error ocurred: An irrecoverable error has ocurred and the conversation has flowed to the [Error](./workflows/#end) . The error message is visible by hovering the status.
+- Waiting for user input: The bot is waiting for the user to send a message in order to proceed with the conversation flow.
+
+### Steps
+
+#### Knowledge Base
+
+- Answer found in Knowledge Base: The bot has gone through the [Knowledge Bases](../studio/knowledge-base) and found an answer to the user's question. Clicking it will take you to the [Logs tab](./event-debugger-logs-json/#logs) where you can see in details what was sent to the AI and the raw output.
+- Knowledge disabled on that node: The bot won't try to find an answer in the Knowledge Base because this node doesn't expect or accept Knowledge questions.
+- No content matched the query: Accompanies the previous status. The bot didn't tru to find an answer in the Knowledge Base.
+- Knowledge Base answer: If a text is displayed automatically without the need of a Text card, it's a Knowledge Base answer. It will contain the citations to help you [debug](./knowledge-base/#debugging).
+
+#### Execute
+
+- Executing code: The bot is executing some custom code from an [Execute Code card](../toolbox/execute-code).
+- Executed code: The bot has finished executing the code. It is mentioned how many milliseconds it took to run.
+
+#### AI
+
+- AI Task Running: The bot is running an AI Task. This involves making a request to the selected LLM model, getting a response and then processing it.
+- AI Task Completed: The bot has finished running the AI Task. It is mentioned how many milliseconds it took to run.
+
+#### Flow Logic
+
+- Entered Workflow - The conversation has flowed to a different workflow. The workflow name is mentioned.
+- Transitioned: The conversation has flowed to another workflow or node. It is mentioned the name of the workflow and the node it transitioned to. Clicking it will lead you to the exact node.
+- Restarting from node: The conversation is being restarted from a specific node by user request. It is mentioned the name of the node it is restarting from.
+
+#### Capture Information
+
+- Capturing Variable: The bot is currently trying to extract information from the user message with a [Capture card](../toolbox/capture-information) to optionally save it in a [variable](../studio/variables).
+- Captured variable: The bot has successfully extracted information from the user message and saved it in a variable.
+- Capture variable failed: The bot wasn't able to extract information and has surpassed the limit of [retries](../toolbox/capture-information/#retries).

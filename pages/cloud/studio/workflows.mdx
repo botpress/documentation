@@ -28,19 +28,9 @@ The **Main Flow** is typically the most detailed and complex flow in the chatbot
 
 ### Error
 
-The **Error Flow** is designed to handle unexpected user inputs that don't fit within the parameters of the Main Flow.
+The **Error Flow** is designed to handle unexpected failures that may occur during the conversation. It will be triggered when there's technical issues including irrecoverable errors in the bot.
 
-This can include misspelled or misunderstood words, off-topic questions, or input that doesn't make sense in the context of the conversation.
-
-The Error Flow should provide clear feedback to the user that their input was not understood and prompt them to provide more specific or relevant information.
-
-Depending on the design of the chatbot, the Error Flow may offer suggestions for alternative input, or it may direct the user to a specific resource or human representative for further assistance.
-
-<Callout>
-  This flow will be triggered when there's technical issues including irrecoverable errors in the bot. <br />
-  For example, if you have an Execute Code card with invalid Javascript code like `workflow. = 'some value'`, or custom choices
-  for Captures or Carousels in the wrong format, the Error flow shall be triggered.
-</Callout>
+For example, if you have an Execute Code card with invalid Javascript code like `workflow. = 'some value'`, or custom choices for Captures or Carousels in the wrong format, the Error flow shall be triggered.
 
 <Callout type="info">
   To improve the user experience, you can add a Capture card of type Confirmation that asks the user if they want to resume the conversation. If the user says yes, you can redirect them to the Main flow (remember to reset the state to avoid entering an error loop), otherwise you can flow to the End node which will end the conversation.
@@ -77,7 +67,8 @@ Depending on the context and purpose of the chatbot, this may involve thanking t
 The Conversation End Flow is an important part of the chatbot design, as it helps create a positive user experience and encourages users to return in the future.
 
 <Callout>
-  The bot will only enter the End flow if the conversation explicitly transitions to an End node. If the conversation ends because there are no valid transitions in a node it won't trigger the End flow.
+  The bot will only enter the End flow if the conversation explicitly transitions to an End node. If the conversation
+  ends because there are no valid transitions in a node it won't trigger the End flow.
 </Callout>
 
 ## Custom Workflow
