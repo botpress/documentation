@@ -6,5 +6,6 @@
   "studio": "Studio Interface",
   "toolbox": "Toolbox",
   "channels": "Messaging Channels",
-  "exporting-bot-data": "Exporting Bot Data"
+  "exporting-bot-data": "Exporting Bot Data",
+  "issues": "Issues"
 }
