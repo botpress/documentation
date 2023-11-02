@@ -2,9 +2,60 @@
 
 Turn Botpress chats into Zendesk tickets, with a handy link added to the conversation notes. Zendesk agents can communicate directly through Botpress chats, like Whatsapp or any other supported Botpress Channel.
 
+## Getting Access
+
+The Zendesk Integration for human handoff is currently in beta.
+Contact our sales team for early access. Just click [here](https://botpress.com/contact-us/?s=docs) to ask for access.
+
+## Getting Started
+
+In this guide, we will demonstrate how to establish Zendesk integration in order to facilitate live-bot interactions.
+
+<iframe
+  data-youtube-iframe
+  width="720"
+  height="360"
+  src="https://www.youtube.com/embed/KR87xwsh33Y?si=KIv2yuNFwZxHtJzE"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
 
 
-## Get Access
-Installation instructions are coming soon.
+### Step 1: Add Zendesk Integration 
 
-Contact our sales team for early beta access. Just click [here](https://botpress.com/contact-us/?s=docs).
+Firstly, locate your bot's dashboard and click on the integrations tab. Use the search bar to find and select the Zendesk Integration. Once found, install this onto your bot.
+
+### Step 2: Setting up Zendesk Integration
+
+Switch to the Zendesk admin center, and find the Zendesk API menu. Ensure you have both password and token access enabled.
+
+You will then need to create a distinct API token. Copy this for later use.
+
+Return to your bot's dashboard. Here you will need to input your organizational subdomain (for this instance, we will use 'botpresst'), your consistent Zendesk account email, and the copied API token. Ensure to save this configuration and activate the newly installed integration.
+
+### Step 3: User Info Accumulation
+
+The bot will need the user's name and their email. This data will be saved to user variables.
+
+Create a 'user.name' and a 'user.email' variable. Confirmation of the information will be done using simple capture cards.
+
+### Step 4: Enabling HITL Agent
+
+From the agent's menu in the bot, enable HITL Agent.
+
+This menu will allow you to configure options such as choosing Zendesk as the desired integration. Also, you have the capability to design an 'end_conversation' intent that permits the user to opt out of speaking to a live agent.
+
+Most settings are default, you may choose to modify them to your preference.
+
+### Step 5: Activating HITL
+
+In a new node, insert a Start HITL card which triggers the bot into initiating a live agent.
+
+The card will automatically summarize the conversation and provide a transcript for the live agent in the Zendesk menu.
+
+### Step 6: Test the Configuration
+
+Now that everything has been configured accordingly, proceed to test the set-up. Prior to testing, ensure the most recent version of your bot is up and running.
+
