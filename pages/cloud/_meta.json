@@ -7,5 +7,6 @@
   "toolbox": "Toolbox",
   "channels": "Messaging Channels",
   "exporting-bot-data": "Exporting Bot Data",
-  "issues": "Issues"
+  "issues": "Issues",
+  "agent-handoff": "Live Agent Handoff"
 }
