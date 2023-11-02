@@ -6,9 +6,10 @@ You can debug your bot conversation using the built-in Emulator in the right-sid
 
 <Callout type="info">
   **Note** <br />
-  To visualize the actual user experience, use the Share button. All the messages you send with the Emulator come from the
-  same user from the bot's perspective. Conversations won't be saved and the [bot invocations](../admin-dashboard/usage/#invocation-calls)
-  won't be counted, but AI operations will.
+  To visualize the actual user experience, use the Share button to have a hosted easily shareable version of the [Web Chat](../channels/webchat)
+  (this is the production bot already, conversations will be saved) or ideally test the bot in the channel you intend to
+  deploy it on. Conversations in the Emulator won't be saved and the [bot invocations](../admin-dashboard/usage/#invocation-calls)
+  won't be counted against your usage quota, but AI operations will.
 </Callout>
 
 ## Status Indicator
@@ -50,7 +51,7 @@ The `Simulate timeout event` button triggers the [Timeout flow](./workflows/#tim
 
 ## Logs
 
-The Emulator shows the status of the conversation and the different steps that are being or have been executed under the hood to get the bot's response. It's a simpler version of the [Event Debugger](./event-debugger-logs-json). Here's some possible statuses and steps:
+The Emulator shows the status of the conversation and the different steps that are being or have been executed under the hood to get the bot's response. They are a simpler version of the [Event Debugger](./event-debugger-logs-json)'s summary. Here's some possible logs:
 
 ### Statuses
 
@@ -65,8 +66,8 @@ The Emulator shows the status of the conversation and the different steps that a
 
 - Answer found in Knowledge Base: The bot has gone through the [Knowledge Bases](../studio/knowledge-base) and found an answer to the user's question. Clicking it will take you to the [Logs tab](./event-debugger-logs-json/#logs) where you can see in details what was sent to the AI and the raw output.
 - Knowledge disabled on that node: The bot won't try to find an answer in the Knowledge Base because this node doesn't expect or accept Knowledge questions.
-- No content matched the query: Accompanies the previous status. The bot didn't tru to find an answer in the Knowledge Base.
-- Knowledge Base answer: If a text is displayed automatically without the need of a Text card, it's a Knowledge Base answer. It will contain the citations to help you [debug](./knowledge-base/#debugging).
+- No content matched the query: Accompanies the previous status. The bot didn't try to find an answer in the Knowledge Base.
+- Knowledge Base answer: Text displayed automatically after a question without the need of a Text card. It will contain the citations to help you [debug the answers](./knowledge-base/#debugging).
 
 #### Execute
 
@@ -88,4 +89,4 @@ The Emulator shows the status of the conversation and the different steps that a
 
 - Capturing Variable: The bot is currently trying to extract information from the user message with a [Capture card](../toolbox/capture-information) to optionally save it in a [variable](../studio/variables).
 - Captured variable: The bot has successfully extracted information from the user message and saved it in a variable.
-- Capture variable failed: The bot wasn't able to extract information and has surpassed the limit of [retries](../toolbox/capture-information/#retries).
+- Capture variable failed: The bot wasn't able to extract information and has reached the limit of [retries](../toolbox/capture-information/#retries).
