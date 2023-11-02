@@ -1,0 +1,78 @@
+import { Callout } from 'nextra/components'
+
+## Getting the Conversation History from within your Bot
+
+Botpress Cloud provides you with several different ways to export a conversation to external services, each one has its use cases and advantages. Let's take a look at them.
+
+### Using the Summary Agent
+
+The [Summary Agent](../../studio/agents/#summary-agent) listens to all new messages in the conversation to build a summary and a transcript.
+
+- The summary is available at `conversation.SummaryAgent.summary` and contains an explanation of what happened in conversation, like "The user asked for the opening hours and the bot answered by saying the business works 24/7". You can choose how detailed the summary is by setting the max tokens in the Agent settings.
+- The transcript is available at `conversation.SummaryAgent.transcript` and contains the history of the conversation going back a certain amount of turns. You can set that amount of turns in the Summary Agent settings. If you set it to 0, the transcript will contain all messages.
+
+#### Advantages
+
+The `summary` variable is useful if you don't need to have many details about the conversation, especially because some of them get lengthy and if you may not want all that data. The `transcript` variable is the best way to have the full history of the conversation in a single text without needing [Hooks](../../studio/hooks) or other workarounds. Using the Summary Agent for exporting conversations is also great because
+you have access to the history during the very conversation so you don't need to make manual or scheduled requests to our API from external services.
+
+#### Disadvantages
+
+The disadvantage of using the Summary Agent for exporting conversations is that after the amount of messages surpasses
+the max amount of turns for the transcript, you won't have the full conversation anymore (You can mitigate this by setting the max amount to 0). Another disadvantage is that the Agent only has access to the
+current session, so if the user is resuming a conversation, you won't have the previous messages in the history. To get the whole
+conversation at any moment, use the [API method for exporting conversations](./with-the-api)
+
+### Using Hooks
+
+[Hooks](../../studio/hooks) are functions that are executed under the hood every time there's a new message from the user or from the bot. You can create hooks that build the conversation history as it happens. They work similarly to the Summary Agent but with hooks you can customize how the history is built and there's no limitation for its size (with the exception of the 128KB max session size).
+
+#### Advantages
+
+This solution is useful if you need to have all details about the conversation. It also allows you to build the history however you like - adding more information than only the message and actor.
+
+#### Disadvantages
+
+The disadvantage of using Hooks is that it requires some work to set up and you only have access to the current session, so if the user is resuming a conversation, you
+won't have the previous messages in the history. To get the whole conversation at any moment, use the [API method for exporting
+conversations](./with-the-api)
+
+#### Setting up the Hooks
+
+1. Create a hook under "Before Incoming Message" in the "Hooks" section with the following code:
+
+```js
+if (!event.state.session.fullHistory) {
+  event.state.session.fullHistory = ''
+}
+event.state.session.fullHistory = event.state.session.fullHistory + `user:  ${event.payload.text}` + '\n'
+```
+
+2. Create a hook under "Before Outgoing Message" with the following code:
+
+```js
+if (!event.state.session.fullHistory) {
+  event.state.session.fullHistory = ''
+}
+event.state.session.fullHistory = event.state.session.fullHistory + `bot: ${outgoingEvent.payload.text}` + '\n'
+```
+
+---
+
+### Sending the Conversation History
+
+Now that you have the conversation history, you can add an [Execute Code card](../toolbox/execute-code) to manipulate the variable as you prefer, for example sending it to an API or [via email](../../getting-sarted/tips-and-tricks/#send-emails-using-sendgrid-api):
+
+```js
+await axios.post('https://my-api-url.com', {
+	// keep only the desired variable below
+	conversation: event.state.session.fullHistory OR conversation.SummaryAgent.summary OR conversation.SummaryAgent.transcript
+	user: user.name
+})
+```
+
+<Callout type="info">
+  You could add this card to the [Conversation End](../studio/workflows/#conversation-end) workflow so that the full
+  session is sent when the conversation ends. (The bot will only enter the End flow if there's a explicit Transition to
+  an End node)
+</Callout>

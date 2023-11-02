@@ -6,6 +6,6 @@
   "studio": "Studio Interface",
   "toolbox": "Toolbox",
   "channels": "Messaging Channels",
-  "webchat-customization": "Webchat Customization",
-  "embedding-webchat-options": "Embedding Webchat Options"
+  "exporting-bot-data": "Exporting Bot Data",
+  "issues": "Issues"
 }

@@ -3,6 +3,7 @@
   "asana": "",
   "gmail": "",
   "instagram": "",
+  "intercom": "",
   "line": "",
   "messenger": "",
   "notion": "",
@@ -14,9 +15,9 @@
   "twilio": "",
   "viber": "",
   "vonage": "",
-  "webchat": "",
+  "webchat": "Web Chat",
   "webhook": "",
   "whatsapp": "WhatsApp",
   "zapier": "Zapier",
-  "handling-production-issues": "Debugging Bot Behavior in Production"
+  "debugging-production-bot": "Debugging Bot Behavior in Production"
 }

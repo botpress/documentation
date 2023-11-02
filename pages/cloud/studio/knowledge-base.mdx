@@ -64,11 +64,11 @@ For instance, if a user searches for **"How to calibrate the XYZ device,"** Botp
 
 ## 2. Web Pages
 
-The **Web Pages** KB Source allows users to upload website URLs to their Knowledge Base. This feature enables users to create a comprehensive Knowledge Base by incorporating different types of web content, such as articles, blog posts, and online forums.
+The **Web Pages** KB Source allows users to upload website s to their Knowledge Base. This feature enables users to create a comprehensive Knowledge Base by incorporating different types of web content, such as articles, blog posts, and online forums.
 
 ### Add from URLs
 
-To add a web page to your Knowledge Base, you can simply enter the URLs (one URL per line) in the **Add from URLs** field. Botpress will automatically retrieve the content from the web page and add it to your Knowledge Base.
+To add a web page to your Knowledge Base, you can simply enter the URLs (one URL per line, max 350 character / url) in the **Add from URLs** field. Botpress will automatically retrieve the content from the web page and add it to your Knowledge Base.
 
 ### Add from Site Map
 
@@ -80,7 +80,7 @@ When using the Web Search Knowledge Base Source, you have the ability to specify
 
 ### On which websites should we search on?
 
-- **Search on specific websites**: You can provide a list of website domains that you want the Botpress NLU engine to include in its search. For example, if you want to focus on retrieving information from trusted sources within your organization, you can include domains like "yourcompany.com" or "internalknowledgebase.com". This ensures that the search is targeted to specific websites relevant to your Knowledge Base.
+- **Search on specific websites**: You can provide a list of website domains that you want the Botpress NLU engine to include in its search. For example, if you want to focus on retrieving information from trusted sources within your organization, you can include domains and subdirectories like "yourcompany.com" or "internalknowledgebase.com/specific-section". This ensures that the search is targeted to specific websites relevant to your Knowledge Base.
 - **Search the entire web**: If you select this option, the Botpress NLU engine will conduct searches across the entire web. This is useful when you want to gather information from a wide range of sources, including external websites and online communities. It enables you to access a broader set of information that may be helpful to your Knowledge Base.
 - **Exclude specific websites from the search**: Sometimes, you may want to exclude certain websites from the search results. This option allows you to specify a list of website domains that should be excluded from the search. For example, if you want to filter out unreliable sources or competitor websites, you can exclude their domains from the search. This ensures that the search focuses on credible and relevant information.
 
@@ -111,7 +111,7 @@ So, when users search for a specific problem like **My refrigerator is not cooli
 
 ## 5. Tables: Organized Information
 
-You can connect your tables of data to a knowledge base, allowing users to directly search for information. This can be especially invaluable for vast datasets, as it provides a straightforward and user-friendly method to retrieve data. 
+You can connect your tables of data to a knowledge base, allowing users to directly search for information. This can be especially invaluable for vast datasets, as it provides a straightforward and user-friendly method to retrieve data.
 
 **Benefits**
 
@@ -121,12 +121,12 @@ By integrating tables into your knowledge base, end-users can readily ask for an
 
 Prior to proceeding, ensure you have the following:
 
-1. A table of data 
-2. Knowledge Agent should be enabled 
+1. A table of data
+2. Knowledge Agent should be enabled
 3. Mark at least one column in your data table with a `Searchable` property.
 4. Have a Knowledge Base with a source set to `Table`, and select the table that will be utilized for this feature.
 
-The `Searchable` property can be enabled either during the creation of a column or later on by right-clicking the column, selecting "Edit", and toggling on `Searchable`. 
+The `Searchable` property can be enabled either during the creation of a column or later on by right-clicking the column, selecting "Edit", and toggling on `Searchable`.
 
 **Usage Example**
 
@@ -155,11 +155,12 @@ Keep in mind that the feature may not provide accurate counts for "How many [pro
 
 The Knowledge Base feature in Botpress is designed to provide users with quick access to information on various topics. However, the amount of information that can be stored in the Knowledge Base is limited by the storage quota.
 
-The storage quota is the maximum amount of data that can be stored in the Knowledge Base. 
+The storage quota is the maximum amount of data that can be stored in the Knowledge Base.
 
 <Callout type="info">
   **Limit** <br />
-  All chatbots have a limit of **5000** vectors - which is the equivalent to approximately 200 blog articles or 1000 PDF pages.
+  All chatbots have a limit of **5000** vectors - which is the equivalent to approximately 200 blog articles or 1000 PDF
+  pages.
 </Callout>
 
 ## Enabling/Disabling KB on Nodes
@@ -223,3 +224,9 @@ workflow.kbAnswerWithoutRef = event.preview.split("References:")[0].
 ```
 
 Then, input `@kbAnswerWithoutRef` into your text or capture card. Make sure to create the variable `kbAnswerWithoutRef` in your workflow.
+
+## Scoping the Knowledge Base by Folders
+
+You can scope the Knowledge Base by folders to limit the search to specific folders. This allows you to focus on a particular area of interest and retrieve relevant information from the Knowledge Base.
+
+Learn more about [Scoping the Knowledge Base with Folders](./studio/explorer/knowledge-base/)

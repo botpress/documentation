@@ -1,0 +1,28 @@
+import { Callout } from 'nextra/components'
+
+## Preventing Abuse
+
+At Botpress, we prioritize the security and integrity of your chatbots by implementing a range of robust measures to counteract fraud and malicious usage. Our strategy includes:
+
+### Rate Limits
+
+Rate limits serve as a fundamental safeguard for your bot's resources. Each bot is assigned a maximum rate of messages it can process per second. For users on the "Team" plan, a higher rate limit is applied. Enterprise customers can further customize these limits to align with their specific requirements.
+
+Rate limiting prevents the excessive influx of messages, ensuring that your bot operates efficiently and consistently. This is an essential component of our abuse prevention strategy.
+
+### Web Application Firewall (WAF)
+
+Our Web Application Firewall, often referred to as WAF, is a powerful layer of defense against various cyber threats. WAF can protect your bot from Distributed Denial of Service (DDoS) attacks, SQL injection, cross-site scripting, and many other malicious activities.
+
+By using WAF, Botpress takes advantage of AWS's robust security mechanisms, which are detailed in [AWS WAF Documentation](https://docs.aws.amazon.com/waf/latest/developerguide/ddos-responding.html). This means that your bot is shielded from a wide range of web-based threats, allowing it to perform at its best without disruption.
+
+### Billing Limits
+
+To provide an additional layer of protection, you have the ability to set monthly spending limits. This feature ensures that even if an abuse attempt were to circumvent the rate limits and WAF, your financial exposure remains under control. By defining a spending limit, you can prevent unexpectedly high bills resulting from excessive bot usage.
+
+In summary, our abuse prevention strategy combines rate limits, WAF protection, and billing limits to keep your chatbots safe and efficient. This multi-faceted approach is designed to mitigate potential abuse scenarios and maintain the integrity of your bot's operation.
+
+<Callout type="info">
+  You can watch the [Usage tab](../admin-dashboard/usage) in the Admin Dashboard to continuously verify the usage of
+  Botpress computational resources by your bot, ensuring that it is operating within the expected limits.
+</Callout>
