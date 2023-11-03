@@ -85,22 +85,30 @@ Now we can go back to Step (3) & Step (4) in this [article](https://developers.f
 - File is mapped to [Media File Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#media-object)
 - Location is mapped to [Location Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#location-object)
 
-**Special behaviors for choices, cards, and carousels**
+### Special behaviors to consider
 
 Choices (buttons), dropdowns, cards, and carousels are all mapped to [Interactive List Objects.](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#interactive-object)
 
 This comes with a few restrictions and behaviors specific to WhatsApp:
 
+##### Choices (buttons) and Dropdowns
+
 - When there are 3 or fewer choices as buttons or in a dropdown, they will be rendered as buttons.
 - When there are more than 3 choices as buttons or in a dropdown, they will be rendered as a dropdown.
 - If there are more than 10 choices in a dropdown, the multiple dropdown messages will be sent with up to 10 choices in each messsage.
   - For example, if your bot has a dropdown with 10 choices, the user will receive two messages: the first message will have a dropdown with 10 choices, and the second messge will have a dropdown with two choices.
-- Each dropdown requires a label but the Studio currently doesn’t support that, so the label “Choose…” is used for all dropdowns.
+- Each dropdown requires a label but the Studio currently doesn’t support specifying one, so the label _“Choose…”_ is used for all dropdowns by default.
 - Button labels are limited to 20 characters, and dropdown labels are limited to 24 characters.
   - Labels exceeding these limits are automatically truncated. For example, the label "This button label is very long" would become "This button label i…" on a button and "This button label is ve…" on a dropdown.
-- There is a limit of 3 URL action buttons on each cards
+
+##### Carousels and Cards
+
 - Each card in a carousel will be sent individually.
-- Whatsapp requires cards to only use "reply" buttons, and doesn't support URLs. If the card only has URL actions, a card won't be able to be displayed and it will be downrendered using normal text/image messages.
+- There is a limit of 3 action buttons on each card.
+- Whatsapp requires cards to only use "reply" buttons. If the card has a URL action or no action at all, it won't be able to be displayed and will be down-rendered using multiple text/image messages instead.
+
+##### Files
+
 - When files are sent over Whatsapp, the Studio doesn't store the original filename (for security reasons) but only the file extension, so the file will be sent with a generic filename ("file") followed by the extension of the file. For example, if you send a PNG file, it will be sent as "file.png".
 
 ### From WhatsApp to Botpress
@@ -112,13 +120,13 @@ This comes with a few restrictions and behaviors specific to WhatsApp:
 
 ## Tips
 
-- To get the phone number of the user, use the variable:
+- To get the phone number of the user you can read the following variable:
 
   `{{ event.tags.conversation['whatsapp:userPhone'] }}`.
 
   This number also contains the country code and has no spaces, dashes or signs.
 
-- To get the phone number ID of the user, use the variable:
+- To get the Whatsapp Phone Number ID of your bot that the user is interacting with _(useful when pointing multiple Phone Number IDs to the same bot)_:
 
   `{{ event.tags.conversation['whatsapp:phoneNumberId'] }}`
 
@@ -147,7 +155,13 @@ Once you have a message template approved by WhatsApp, it's very easy to have yo
 
 <Image src="/docs/content/whatsapp-startConversation.png" alt="Screenshot of 'Start Conversation' card in the Studio" />
 
-Then you just need to pass the user's phone number, Whatsapp template name, template language (optional), and list of template variable values as JSON (if any, optional) to proactively start a Whatsapp conversation with a user:
+Then you just need to pass the following fields to proactively start a Whatsapp conversation with a user:
+
+1. **User Phone**: The phone number of the user, including the country code (e.g. `+1 123 456 7890`).
+2. **Template Name**: The name of your WhatsApp message template to use for the first message of the conversation. The template should be already approved by WhatsApp in order to use it.
+3. **Template Language** _(optional)_: The language code of your WhatsApp message template ([see below](#template-language) for more details).
+4. **Template Variables JSON** _(optional)_: The values of the variables for your WhatsApp message template, specified as a JSON array representing the list of values ([see below](#template-variables) for more details).
+5. **Sender Phone Number ID** _(optional)_: The Whatsapp Phone Number ID you want to use as sender of the message if you have multiple phone numbers available in your Meta Developers dashboard. If you don't specify this field, the Default Phone Number ID specified in the Whatsapp configuration of your bot in your Botpress Cloud dashboard will be used by default.
 
 <Image
   src="/docs/content/whatsapp-startConversation-fields.png"
