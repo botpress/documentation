@@ -1,0 +1,56 @@
+# Zendesk Agent Handoff (Beta)
+
+Turn Botpress chats into Zendesk tickets, with a handy link added to the conversation notes. A Zendesk agent can communicate directly with the user on the same conversation initially handled by the bot on any channels supported by Botpress (e.g. web chat, Whatsapp, Messenger, etc.)
+
+## Getting Started
+
+In this guide, we will demonstrate how to set up the Zendesk integration to facilitate live interactions through the bot.
+
+<iframe
+  data-youtube-iframe
+  width="720"
+  height="360"
+  src="https://www.youtube.com/embed/KR87xwsh33Y?si=KIv2yuNFwZxHtJzE"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+
+### Step 1: Add Zendesk Integration 
+
+Firstly, locate your bot's dashboard and click on the integrations tab. Use the search bar to find and select the Zendesk Integration. Once found, install this onto your bot.
+
+### Step 2: Setting up Zendesk Integration
+
+Switch to the Zendesk admin center, and find the Zendesk API menu. Ensure you have both password and token access enabled.
+
+You will then need to create a distinct API token. Copy this for later use.
+
+Return to your bot's dashboard. Here you will need to input your organizational subdomain, your consistent Zendesk account email, and the copied API token. Ensure to save this configuration and activate the newly installed integration.
+
+### Step 3: User Info Accumulation
+
+The bot will need the user's name and their email. This data will be saved to user variables.
+
+Create a 'user.name' and a 'user.email' variable on the bottom-left variables panel. Make sure to select "User" as the scope. Confirmation of the information will be done using simple capture cards.
+
+### Step 4: Enabling HITL Agent
+
+From the "Agents" menu of the bot in Botpress Studio, click on the "HITL Agent" option, and then turn on the "Enable Agent" option.
+
+This menu will allow you to configure options such as choosing Zendesk as the desired integration. Also, you have the capability to design an 'end_conversation' intent that permits the user to opt out of speaking to a live agent. To do so, pick a global intent from the dropdown, for instance "Cancel". 
+
+Most settings are default, you may choose to modify them to your preference.
+
+### Step 5: Activating HITL
+
+Add a new node to your bot in Botpress Studio and then insert a "Start HITL" card, which will trigger the bot into initiating a live agent.
+
+The card will automatically summarize the conversation and provide a transcript for the live agent in the Zendesk menu.
+
+### Step 6: Test the Configuration
+
+Now that everything has been configured accordingly, proceed to test the set-up. Prior to testing, ensure the most recent version of your bot is up and running.
+
