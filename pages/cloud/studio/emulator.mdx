@@ -49,18 +49,18 @@ The `Start as new user` button erases the history and state from the old convers
 
 The `Simulate timeout event` button triggers the [Timeout flow](./workflows/#timeout) so you can check how the bot behaves when the conversation expires. It's available at the top right corner of the emulator behind the 3 dots.
 
-## Logs
+## In-line Logs
 
-The Emulator shows the status of the conversation and the different steps that are being or have been executed under the hood to get the bot's response. They are a simpler version of the [Event Debugger](./event-debugger-logs-json)'s summary. Here's some possible logs:
+The Emulator shows the status of the conversation and the different steps that are being or have been executed under the hood to get the bot's response. They are a simpler version of the [Event Debugger](./event-debugger-logs-json)'s summary. Bot events, and card-processing results are shown this way, only in the emulator.
 
-### Statuses
+### Bot-events
 
 - Conversation started: The user has started the conversation by sending a message or a [Trigger](../toolbox/events-triggers) Event has been triggered.
 - Conversation ended: The conversation flowed to an End node and has gone through the [Conversation End workflow](./workflows/#conversation-end), or it has ended by not having possible transitions.
 - Error ocurred: An irrecoverable error has ocurred and the conversation has flowed to the [Error](./workflows/#end) . The error message is visible by hovering the status.
 - Waiting for user input: The bot is waiting for the user to send a message in order to proceed with the conversation flow.
 
-### Steps
+### Card-processing results
 
 #### Knowledge Base
 
