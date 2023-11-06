@@ -230,3 +230,21 @@ Then, input `@kbAnswerWithoutRef` into your text or capture card. Make sure to c
 You can scope the Knowledge Base by folders to limit the search to specific folders. This allows you to focus on a particular area of interest and retrieve relevant information from the Knowledge Base.
 
 Learn more about [Scoping the Knowledge Base with Folders](./studio/explorer/knowledge-base/)
+
+## Debugging
+
+If your bot is not returning the expected results you can try debugging it in a few different ways:
+
+### 1. Check the [Logs](./event-debugger-logs-json/#logs)
+
+The logs will show you the exact query that was sent to the Knowledge Base and the results (including source name, content preview, amount of tokens used by the content, row metadata if the source is a table) if there are any matches.
+
+With that information you can try refining what is sent to the Knowledge Base or the content itself.
+
+### 2. Check the [Emulator](./emulator) answers
+
+Automatic answers from the Knowledge Base - answers that the bot displays without the need of a Text card - contain citations in their body.
+
+By hovering a citation you can see the source name (or its type if unnamed), the page, document or table name, the exact page number (for documents) or the row number (for tables), and a preview of the content.
+
+With that information you can try refining the Knowledge Base content or the associated metadata (names and descriptions).
