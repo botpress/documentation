@@ -1,7 +1,6 @@
 import { Callout } from 'nextra/components'
 import { Table, Td, Tr } from '@components/WrapperElements'
 
-
 # Capture Information
 
 ![Shortcuts](/docs/content/capture-info-banner.png)
@@ -118,19 +117,14 @@ Here's the list of all the Prompt Fields available in Capture Information Card.
     </Td>
   </Tr>
   <Tr>
+    <Td>[TimeMeasurement](#time-measurement)</Td>
     <Td>
-      [TimeMeasurement](#time-measurement)
-    </Td>
-    <Td>
-      Extracts a time measurement as (ns, mu, ms, s, min, h, d, week, month,
-      year) Units
+      Extracts a time measurement as (ns, mu, ms, s, min, h, d, week, month, year) Units
       <br /> Variable Type: Boolean
     </Td>
   </Tr>
   <Tr>
-    <Td>
-      [WeightMeasurement](#weight-measurement)
-    </Td>
+    <Td>[WeightMeasurement](#weight-measurement)</Td>
     <Td>
       Extracts a Weight Measurement as (mcg, mg, g, kg, oz, lb, mt, t) Units
       <br /> Variable Type: Boolean
@@ -139,44 +133,34 @@ Here's the list of all the Prompt Fields available in Capture Information Card.
   <Tr>
     <Td>[CronSchedule](#cron-schedule)</Td>
     <Td>
-      Extracts a one-time or recurring schedule as a CRON Expression from the
-      Query
+      Extracts a one-time or recurring schedule as a CRON Expression from the Query
       <br /> Variable Type: Boolean
     </Td>
   </Tr>
   <Tr>
+    <Td>[OperatingSystem](#operating-system)</Td>
     <Td>
-      [OperatingSystem](#operating-system)
-    </Td>
-    <Td>
-      Extracts the name of an Operating System (Windows, OSX, IOS, Android,
-      Linux)
+      Extracts the name of an Operating System (Windows, OSX, IOS, Android, Linux)
       <br /> Variable Type: Boolean
     </Td>
   </Tr>
   <Tr>
-    <Td>
-      [QuantityofPeople](#quantity-of-people)
-    </Td>
+    <Td>[QuantityofPeople](#quantity-of-people)</Td>
     <Td>
       Extracts the Number of People in a Query
       <br /> Variable Type: Boolean
     </Td>
   </Tr>
   <Tr>
+    <Td>[VolumeMeasurement](#volume-measurement)</Td>
     <Td>
-      [VolumeMeasurement](#volume-measurement)
-    </Td>
-    <Td>
-      Extracts a volume measurement as (mm3, cm3, ml, l, kl, m3, km3, tsp, Tbs,
-      in3, fl-oz, cup, pnt, qt, gal, ft3, yd3) Units
+      Extracts a volume measurement as (mm3, cm3, ml, l, kl, m3, km3, tsp, Tbs, in3, fl-oz, cup, pnt, qt, gal, ft3, yd3)
+      Units
       <br /> Variable Type: Boolean
     </Td>
   </Tr>
   <Tr>
-    <Td>
-      [TemperatureMeasurement](#temperature-measurement)
-    </Td>
+    <Td>[TemperatureMeasurement](#temperature-measurement)</Td>
     <Td>
       Extracts a Temperature Measurement as (C, K, F) Units
       <br /> Variable Type: Boolean
@@ -207,7 +191,8 @@ The **Single Choice** is a type of input field that presents the user with a lis
 
 <Callout>
   **Tip** <br />
-  If the user enters text instead of clicking a button, the AI will search their text for any of the button options, and, if there is an option the user's text will be treated as if they clicked the button.
+  If the user enters text instead of clicking a button, the AI will search their text for any of the button options, and,
+  if there is an option the user's text will be treated as if they clicked the button.
 </Callout>
 
 An example of Single Choice would be a survey question with multiple options, where the user selects one answer from the list.
@@ -438,9 +423,8 @@ When the user enters their address, the FullAddress card will extract the inform
 Here's an example of how you can use the extracted information in a message:
 
 ```html
-Thank you for your order! Your shipping address is:
-{{workflow.shippingAddress.number}} {{workflow.shippingAddress.street}},
-{{workflow.shippingAddress.city}}, {{workflow.shippingAddress.country}},
+Thank you for your order! Your shipping address is: {{workflow.shippingAddress.number}}
+{{workflow.shippingAddress.street}}, {{workflow.shippingAddress.city}}, {{workflow.shippingAddress.country}},
 {{workflow.shippingAddress.zip}}
 ```
 
@@ -510,8 +494,8 @@ When the user enters the issue description, the Raw Input card will extract the 
 You can create a message node with the following text:
 
 ```html
-Thank you for reporting the issue: {{issueDescription}}. Our team will
-investigate the issue and get back to you with an update as soon as possible.
+Thank you for reporting the issue: {{issueDescription}}. Our team will investigate the issue and get back to you with an
+update as soon as possible.
 ```
 
 This will acknowledge the issue and provide the user with an estimated time frame for resolution.
@@ -577,8 +561,7 @@ When the user enters a valid quantity, the Quantity card will extract and save t
 Here's an example of how you can use the extracted information in a message:
 
 ```html
-Thank you for your order! Your total price is {{workflow.productQuantity *
-productPrice}}.
+Thank you for your order! Your total price is {{workflow.productQuantity * productPrice}}.
 ```
 
 This will display the total price to the user based on the quantity they entered and the price of the product.
@@ -611,10 +594,9 @@ When the user enters their favourite colour, the Color card will extract the inf
 Here's an example of how you can use the extracted information in a message:
 
 ```html
-Thank you for telling us your favourite colour! We love
-{{workflow.favoriteColor.colorName}} too. The hexadecimal code for
-{{workflow.favoriteColor.colorName}} is {{workflow.favoriteColor.hexCode}} and
-the RGB values are {{workflow.favoriteColor.rgb}}.
+Thank you for telling us your favourite colour! We love {{workflow.favoriteColor.colorName}} too. The hexadecimal code
+for {{workflow.favoriteColor.colorName}} is {{workflow.favoriteColor.hexCode}} and the RGB values are
+{{workflow.favoriteColor.rgb}}.
 ```
 
 This will display the user's favourite colour and its associated information in a personalised message, making the interaction with the bot more engaging and memorable.
@@ -967,10 +949,9 @@ The **DateTime** capture information type in Botpress. This type of capture info
 
 **Steps to use DateTime Field**
 
-1.  Create a new capture information card.
-2.  Set the Type property to **Datetime**.
-3.  Set the **Variable name** property to the name of the workflow variable you want to use to store the extracted date or duration value.
-4.  Set the **Prompt message** property to a message that prompts the user to enter a date or duration value.
+1.  Pick the **DateTime** Capture Information Card from the Cards.
+2.  (Optional) - Add a question to ask. (e.g. when would you like to book an appointment?)
+3.  Store the output in a variable.
 
 Once the card is used, it will automatically extract the date or duration value from the user's input and save it in the workflow variable you specified as an object. You can then use this variable in other parts of your workflow to make decisions or take actions based on the user's response.
 
@@ -987,6 +968,38 @@ Prompt message: When would you like to book the room? Please enter a date or dur
 When the user enters their response, the Datetime card will extract the date or duration value and save it in the **bookingDate** workflow variable as an object. You can then use this variable in other parts of your workflow to decide when to book the room or provide available dates for the user to choose from.
 
 You can check the user's preferred booking date against your available dates to ensure the room is available for booking on that day. If the room is not available, you can offer other available dates or suggest another hotel that is available on the preferred date.
+
+#### Formatting Date
+
+```javascript
+const date = luxon.DateTime.fromJSDate(workflow.date)
+// Default format of date is 2023-09-27T00:00:00.000Z
+
+// Example 1: Display a Friendly, Human-readable Date Format
+const friendlyFormat = date.toFormat('LLLL dd, yyyy')
+console.log(`📅 Your requested date is: ${friendlyFormat}.`)
+// Output: 📅 Your requested date is: September 27, 2023.
+
+// Example 2: Display the Day of the Week
+const dayOfWeek = date.toFormat('EEEE')
+console.log(`📆 It falls on a: ${dayOfWeek}.`)
+// Output: 📆 It falls on a: Wednesday.
+
+// Example 3: Display the Date in Numeric Format
+const numericDateFormat = date.toFormat('dd-MM-yyyy')
+console.log(`🗓 Numeric Format: ${numericDateFormat}.`)
+// Output: 🗓 Numeric Format: 27-09-2023.
+
+// Example 4: Display the Date with Slashes
+const slashDateFormat = date.toFormat('yyyy/MM/dd')
+console.log(`📌 Slash Format: ${slashDateFormat}.`)
+// Output: 📌 Slash Format: 2023/09/27.
+
+// Example 5: Display the Date with Day and Month Name
+const dayMonthNameFormat = date.toFormat('EEEE, dd of LLLL')
+console.log(`🌟 Day and Month Name Format: ${dayMonthNameFormat}.`)
+// Output: 🌟 Day and Month Name Format: Wednesday, 27 of September.
+```
 
 ### Wait for User Input
 
@@ -1076,11 +1089,17 @@ The **Retries** setting helps the bot handle situations when it doesn't understa
 
 **Number of retries**
 
-This is the maximum number of times the bot will ask the user to provide the information again before giving up and sending the conversation to a failure transition.
+This is the maximum number of times the bot will ask the user to provide the information again before giving up and moving to the next card in the conversation or triggering the failure transition if enabled.
 
 **Retry message**
 
-This is the message that the bot will show to the user each time they fail to answer the question. It will ask the user to provide the information again in a different way.
+This is the message that the bot will show to the user each time they fail to answer the question. It will ask the user to provide the information again in a different way. If the capture has predefined choices the retry message will contain the buttons again.
+
+You can also add variables to this message using the following syntax:
+
+```text
+Hello @workflow.userName.first, we did not get your number right, please enter it again!
+```
 
 **Pro Tip**
 
@@ -1141,8 +1160,8 @@ Suppose you have a Capture Information card that asks the user for their email a
 
 ```typescript
 function validate(input: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(input);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return emailRegex.test(input)
 }
 ```
 
@@ -1194,12 +1213,34 @@ If you turn on the **Confirm before cancelling** option, the bot will ask the us
 
 ### Choices
 
-The **Choices** setting is used to offer a list of predefined options to the user as a response to a Capture Information card. This can be useful when you want to restrict the user's input to a specific set of values.
+The **Choices** setting is used to offer a list of options to the user as a response to a Capture Information card. This can be useful when you want to restrict the user's input to a specific set of values or provide them with a list of options to choose from quickly.
+
+You could add fixed options or add variables to each choice to make them dynamic. You can also render the list of choices dynamically by toggling the SuperText input and adding an array variable with the following format:
+
+```js
+;[
+  {
+    label: 'French',
+    value: 'fr',
+  },
+  {
+    label: 'English',
+    value: 'en',
+  },
+]
+```
+
+<Callout type="info">
+  **Limits** <br />
+  If you add more than 5 choices, they will be rendered as a Dropdown/List instead of buttons. This number may vary by channel.{' '}
+  <br />
+  The choices labels should not be longer than 20 characters otherwise they will get cut in some channels. <br />
+</Callout>
 
 <Callout>
-  **Tip** <br/>
-  Choices are only available for **Single Choice** & **Multi Choice** Prompt
-  types.
+  **Note** <br />
+  Choices are only available for **Single Choice**, **Multiple Choice**, **Boolean**, **Confirmation** and **Raw Input**
+  Capture cards.
 </Callout>
 
 **Example**
@@ -1208,7 +1249,7 @@ Suppose you have a Capture Information card that asks the user to select their p
 
 ### Advanced
 
-**1. Add transition to handle failure
+\*\*1. Add transition to handle failure
 
 This is a yes/no flag that determines whether a transition should be added to handle cases where the Capture Information card fails to retrieve information from the user.
 
@@ -1216,7 +1257,7 @@ This is a yes/no flag that determines whether a transition should be added to ha
 
 If this flag is set to **Yes** and the Capture Information card fails to capture the required information, it will transition to the failure transition where a message can be displayed to the user, such as **Sorry, I didn't understand that. Please try again**.
 
-**2. Skip if variable is already filled
+\*\*2. Skip if variable is already filled
 
 This is a flag that determines whether the Capture Information card should be skipped if the variable assigned to it already has a value.
 

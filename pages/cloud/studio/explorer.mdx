@@ -18,6 +18,16 @@ Here are some ways folders can help workflows:
 2. **Ease of Navigation**: As your collection of workflows grows, it can become challenging to locate specific workflows quickly. Folders allow you to group workflows into different categories, making it easier to find and access the desired workflow when you need it.
 3. **Simplified Workflow Management**: With folders, you can perform actions on multiple workflows simultaneously. For example, you can move, copy, or delete entire folders, which in turn affects all the workflows contained within them. This saves time and effort when managing a large number of workflows.
 
+
+#### Scoping KB by Folders
+
+One important feature of folders in botpress is their ability to "scope" Knowledge Bases (KBs). While it's clear that KBs can be organized within folders, it's vital to understand the functional impact this has.
+
+- **Functional Impact**: When a workflow triggers a KB search, the search prioritizes KBs within the same folder as the initiating workflow. This scoping ensures that the most relevant knowledge is accessed first, enhancing the chatbot's efficiency and accuracy.
+- **Hierarchical Searching**: The KB search is hierarchical. It begins by searching in the current folder and then moves up the folder structure, all the way to the global “non-foldered” main flow. Notably, it won't search within sub-folders or folders at the same level, maintaining a clear search path and minimizing confusion.
+
+Utilizing folders for KB scoping is invaluable for users aiming to streamline their chatbot's response mechanism and improve overall user experience.
+
 ### Workflows
 
 ![Studio Explorer](/docs/content/add-workflow.png)

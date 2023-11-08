@@ -2,9 +2,12 @@
   "send-message": "",
   "capture-information": "",
   "execute-code": "",
-  "ai-task": "",
-  "table-actions": "",
+  "ai-task": "AI Task",
+  "ai-transition": "AI Transition",
+  "ai-generate-text": "AI Generate Text",
+  "table-cards": "",
   "transition-to": "Transitions",
   "events-triggers": "Events & Triggers",
-  "query-kb": "Query Knowledge Bases"
+  "query-kb": "Query Knowledge Bases", 
+  "utilities": "Utilities"
 }

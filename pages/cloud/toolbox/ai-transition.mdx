@@ -1,0 +1,27 @@
+import { Callout } from 'nextra/components'
+
+# AI Transition
+
+## Introduction
+
+The AI Transition card is a specific type of AI Task that helps you classify text into a set of predefined categories. This is useful for several different cases such as assessing the user intent without needing to create training phrases, or extracting the main topic of a text.
+
+## How to use it
+
+You have three fields in the AI Transition card:
+
+- Text to categorize: the text input you want to process, you can use variables here (like `{{event.preview}}` to get the last user message)
+- Categories: the list of categories you want to use to classify the text.
+- Store result in variable (Optional): allows you to select a variable to store the resulting category in. This is useful if you want to use the category later in the conversation.
+
+## Tips
+
+<Callout type="info">
+  You can use the AI Transition card to replace Intents entirely. You just need to create a category for each intent you
+  want to replace, and use the AI Transition card instead of adding multiple inline or Library intents.
+</Callout>
+
+<Callout type="info">
+  If you don't want your bot to transition to another node when the category is found, make sure to remove the
+  connections for each category and also save the result in a variable so you can use your own logic.
+</Callout>

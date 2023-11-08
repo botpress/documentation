@@ -3,7 +3,7 @@ import { Table, Td, Tr } from '@components/WrapperElements'
 
 # AI Task
 
-<Callout>
+<Callout type="info">
   **Generative AI Task** <br />
   The **AI Task Card** in Botpress is designed to enable users to perform tasks using generative artificial intelligence.
 </Callout>
@@ -102,6 +102,10 @@ When the temperature is set to 0, the AI will stick to the same answer most of t
 For example, if you ask the LLM "What is your favorite animal?", with a temperature of 1 it might respond with "My favorite animal is a cat because they are cute and cuddly", but it might also generate a response like "My favorite animal is a platypus because they're such odd creatures and so unique". Both responses are consistent with the LLM's training data (which includes information about cats and platypuses), but the second response is more creative and unexpected.
 
 In simpler terms, temperature is a way to control how much "imagination" the AI has when generating responses. A lower temperature means more consistency, while a higher temperature means more creativity and variability.
+
+### Add transition to handle failure
+
+You can enable this option to have your bot transition to another node when an issue happens with the AI Task. The possible issues are: Request Timeout (when the AI can't answer in a timely manner), Token Overflow (when the input or the output of the task exceeds the limit) and others.
 
 ## AI Prompt Chaining
 

@@ -1,0 +1,246 @@
+import { Callout } from 'nextra/components'
+
+## Exporting Raw Conversations with the Botpress API
+
+The Botpress API allows you to access your bot's conversations from an external service. This is very useful if you need to manage or analyze the conversations somehow. In this tutorial we give steps to use the API for this purpose and steps to format the response data. Let's get started!
+
+<Callout type="note">
+  Access the API documentation to verify the schema/structure of the
+  [Conversations](https://botpress.com/docs/api-documentation/#schema_conversation) and the
+  [Messages](https://botpress.com/docs/api-documentation/#schema_message) and see if the data is useful for your use
+  case.
+</Callout>
+
+### 1. Getting the Conversations list
+
+Send a `GET` request to `https://api.botpress.cloud/v1/chat/conversations` adding the following headers: `Authorization: Bearer <your-personal-access-token>` and `x-bot-id: <your-bot-id>`.
+
+<Callout type="note">
+  You can find your personal access token in your [Admin Dashboard](https://app.botpress.cloud/). You can find your bot
+  ID in the URL of your bot's dashboard, it's the letters and numbers right after `chatbots/`
+</Callout>
+
+This is how the request would look like using Axios in a Javascript application (e.g in a Execute Code in Botpress):
+
+```js
+const requestConfig = {
+  headers: {
+    // Authorization header with a Bearer token for authentication.
+    Authorization: `Bearer ${process.env.BOTPRESS_PERSONAL_ACCESS_TOKEN}`,
+    // The unique identifier of the bot for which we want to retrieve conversations.
+    'x-bot-id': process.env.BOTPRESS_BOT_ID,
+  },
+}
+
+// An empty array to store all retrieved conversations.
+const allConversations = []
+
+// A variable to store the token for the next set of conversations.
+let paginationToken
+
+// This loop will continue fetching conversations until there are no more left to retrieve.
+do {
+  // Send an HTTP GET request to the specified API endpoint to get conversations.
+  const getConversations = await axios.get(
+    `https://api.botpress.cloud/v1/chat/conversations?nextToken=${paginationToken}`,
+    requestConfig
+  )
+
+  // Add the retrieved conversations to the 'allConversations' array.
+  allConversations.push(...getConversations.data.conversations)
+
+  // Retrieve the token for the next set of conversations, if available.
+  paginationToken = getConversations.data.meta.nextToken
+
+  // As long as paginationToken has a value, this function will execute again
+} while (paginationToken)
+```
+
+The same logic but using the [Botpress Client library](https://www.npmjs.com/package/@botpress/client) in a Node.js application:
+
+```js
+import { Client } from '@botpress/client'
+
+const client = new Client({
+  token: process.env.BOTPRESS_ACCESS_TOKEN,
+  botId: process.env.BOTPRESS_BOT_ID,
+})
+
+const allConversations = []
+let paginationToken
+
+do {
+  const getConversations = await client.listConversations({
+    nextToken: paginationToken,
+  })
+
+  allConversations.push(getConversations.conversations)
+
+  paginationToken = getConversations.meta.nextToken
+} while (paginationToken)
+```
+
+<Callout type="warning">
+  The code snippets above allow you to get all conversations at once by running a loop until there are no more
+  conversations to fetch. This is not recommended for bots with a large number of conversations as it may take a long
+  time to complete and may cause timeouts. If you have a large number of conversations, you should create a loader
+  function and use the `paginationToken` property to fetch conversations in batches. [Learn more about
+  Pagination](https://botpress.com/docs/api-documentation/#pagination). The use of a library like
+  [p-retry](https://www.npmjs.com/package/p-retry) to retry requests automatically is also recommended.
+</Callout>
+
+This is how a loader function would look like using Axios:
+
+```js
+async function loadConversations(paginationToken) {
+  const getConversations = await axios.get(
+    `https://api.botpress.cloud/v1/chat/conversations?nextToken=${paginationToken}`,
+    {
+      ...requestConfig,
+    }
+  )
+
+  return getConversations.data
+}
+```
+
+<Callout type="note">
+  The `loadConversations` function will return an object with the properties `conversations` and `meta`. You must push
+  the conversations to the existing list and save the token to be used in the next request.
+</Callout>
+
+### 2. Getting the Messages list
+
+Once you have gone through the list of conversations and found out the id of the desired conversation to export, you can then use the API to list the actual messages.
+
+In the example below we are using the [Botpress Client library](https://www.npmjs.com/package/@botpress/client) and assume the client is set up already:
+
+```js
+const conversationId = 'the desired conversation id here'
+
+const allMessages = []
+let paginationToken
+
+do {
+  const getMessages = await client.listMessages({
+    conversationId,
+    nextToken: paginationToken,
+  })
+
+  allMessages.push(getMessages.messages)
+
+  paginationToken = getMessages.meta.nextToken
+} while (paginationToken)
+```
+
+This is how the `allMessages` array is gonna look like:
+
+```json
+[
+  {
+    "id": "503dda87-3e54-40b6-8167-55d685a85345",
+    "createdAt": "2023-10-24T20:20:44.812Z",
+    "conversationId": "ec669jj8-e465-482d-8fbe-cb348bf81212",
+    "payload": {
+      "text": "Pick one or many from the list",
+      "options": [
+        {
+          "label": "First option",
+          "value": "First option"
+        },
+        {
+          "label": "Second option",
+          "value": "Second option"
+        }
+      ]
+    },
+    "tags": {},
+    "userId": "efc0f8e8-7e51-4458-8907-ea1e43eb8852",
+    "type": "choice",
+    "direction": "outgoing"
+  },
+  {
+    "id": "41bb8564-e7ab-4113-c3d8-5fdhh27e4c34",
+    "createdAt": "2023-10-24T20:20:49.201Z",
+    "conversationId": "ec66ffb8-e465-482d-8fbe-csd348b81212",
+    "payload": {
+      "type": "quick_reply",
+      "text": "First option",
+      "payload": "First option"
+    },
+    "tags": {
+      "webchat:id": "cc70c21b-4g24-4f5c-8f52-43a900b7b047"
+    },
+    "userId": "f96da97d-4215-447f-86e2-b9e33232e6d3",
+    "type": "quick_reply",
+    "direction": "incoming"
+  },
+  {
+    "id": "c6ee8bd6-c862-54d2-97cb-998f555d4251",
+    "createdAt": "2023-10-24T20:20:49.795Z",
+    "conversationId": "ec669dd8-e465-482d-8fty-cb3348581212",
+    "payload": {
+      "imageUrl": "https://s3.us-east-1.amazonaws.com/cloud-studio-botsbca2d219-2316w6llinepa/f4b77ea0-d597-4d3f-988d-9c66f127d542/media/2360a7bb-162b-4ed1-8551-7000fdb0f7ef.png"
+    },
+    "tags": {},
+    "userId": "efb454t5-7e51-4458-8007-ea1e43eb8852",
+    "type": "image",
+    "direction": "outgoing"
+  }
+]
+```
+
+<Callout type="note">
+  In this example the bot sends a Multiple Choice card, then the user answers by clicking one of the options, and then
+  the bot sends an Image card. Notice how the message payload changes according to the message type, so be mindful of
+  that when reading the `payload` property.
+</Callout>
+
+### 3. Formatting the Messages list
+
+Now that you have the list of messages of a conversation it's time to format it so it becomes readable. We are going to use a custom function for that:
+
+```js
+function formatMessage(message) {
+  let messageText = ''
+
+  if (message.direction === 'incoming') {
+    messageText += 'User: '
+  } else {
+    messageText += 'Bot: '
+  }
+
+  if (message.type === 'text' || message.type === 'quick_reply') {
+    messageText += message.payload.text
+  } else if (message.type === 'choice') {
+    messageText += `${message.payload.text}: ${message.payload.options.map((option) => option.label).join(' / ')}`
+  } else {
+    messageText += `Media message of type ${message.type}`
+  }
+
+  messageText += `\n at ${new Date(message.createdAt).toLocaleString()}`
+
+  return messageText
+}
+
+const history = allMessages.map((message) => formatMessage(message)).join('\n\n')
+```
+
+The `history` string will end up looking like this:
+
+```mdx
+Bot: Pick one or many from the list: First Option / Second Option
+at 24/10/2023, 5:20:44 PM
+
+User: First Option
+at 24/10/2023, 5:21:00 PM
+
+Bot: Media message of type image
+at 24/10/2023, 5:21:09 PM
+```
+
+<Callout type="info">
+  You can customize the `formatMessage` function to have different formatting or to return more information of the
+  messages. <br /> Now use the `history` variable however you like - send it via email, add it to a Google Sheets
+  document, send it to Botpress to do further processing, etc.
+</Callout>

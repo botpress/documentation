@@ -13,6 +13,7 @@
   "event-debugger-logs-json": "Debugger, Logs & JSON",
   "botpress-hub": "",
   "shortcuts": "Keyboard Shortcuts",
+  "commands": "Studio Commands",
   "chatbot-settings": "",
   "preferences": "Studio Preferences",
   "import-export": "Import & Export"

@@ -1,0 +1,93 @@
+import { Callout } from 'nextra/components'
+
+# Notion
+
+![Messaging channel - Notion](/docs/content/notion-banner.png)
+
+The Notion Integration with Botpress enables seamless integration to boost productivity, allowing interactions such as commenting on discussions or pages and database manipulations right from your Botpress bot.
+
+Enhance your workflows and experience a streamlined interaction between Botpress and Notion.
+
+## Prerequisites
+
+- A [Notion Account](https://www.notion.so/signup) and a [Notion Workspace](https://www.notion.so/onboarding)
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
+
+## Setting up the Notion integration in Botpress
+
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the Notion integration then click on the "Install to Bot" button, now go back to your bot settings.
+
+The Notion integration has the following settings:
+
+- **Enabled**: Whether Botpress will communicate with Telegram
+- **Webhook URL**: The URL for receiving data in Botpress
+- **Auth Token**: The token for authenticating requests from Notion
+
+## Setting up Notion
+
+1. To get the **Auth Token**, visit [My Integrations](https://www.notion.so/my-integrations) in Notion. Initiate a new integration, associate it with a workspace, and note down the `Internal Integration Secret`. Insert this secret in the `Auth Token` field under the **Integrations** tab of your bot.
+
+   ![Messaging channel - Notion](/docs/content/notion-secrets.png)
+
+2. Enable Notion Comment Capabilities under the **Capabilities** tab of your bot.
+
+   ![Messaging channel - Notion](/docs/content/notion-capabilities.png)
+
+That's it! Now the Notion integration is operational and ready for use within your bot.
+
+<Callout type="info">
+  To execute certain actions, identification of Notion entities like pages or databases is essential. These IDs can be
+  derived from the URL while viewing the entity or by choosing "Copy Link" from the options menu. For more details,
+  refer to [Get a Database Id - Notion
+  Developers](https://developers.notion.com/docs/create-a-notion-integration#step-3-save-the-database-id).
+</Callout>
+
+## Functionality
+
+### Cards
+
+The integration offers various actions encapsulated in cards, providing an interactive way to communicate between Botpress and Notion.
+
+#### Add Comment to a Discussion
+
+Allows the bot to append a comment to an existing discussion in Notion.
+
+| Input             | Description                                                                                                                        |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **Discussion ID** | To get the Discussion ID, look for the `d` parameter in the URL. The format is notion.so/pageTitle-pageID?d=**DiscussionID**&pvs=4 |
+| **Comment Body**  | The comment body can be a simple text that you want to add as a comment.                                                           |
+
+#### Add Comment to a Page
+
+Facilitates adding comments at the page level in Notion.
+
+| Input            | Description                                                                                                         |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Page ID**      | To get the Page ID, go to the page and copy the ID from the URL. The format is often notion.so/pageTitle-**pageID** |
+| **Comment Body** | The comment body can be a simple text that you want to add as a comment.                                            |
+
+#### Get a Database
+
+Retrieve details of a specific database to synchronize with `Add Page to a Database` action.
+
+| Input           | Description                                                                         | Format                   |
+| --------------- | ----------------------------------------------------------------------------------- | ------------------------ |
+| **Database ID** | To retrieve the Database ID, navigate to the database and copy the ID from the URL. | notion.so/**databaseID** |
+
+#### Add Page to a Database
+
+Designed to work in combination with `Get a Database` to guide an [AI task](https://botpress.com/docs/cloud/toolbox/ai-task/) in generating payloads.
+
+| Input           | Description                                                                         | Format                         |
+| --------------- | ----------------------------------------------------------------------------------- | ------------------------------ |
+| **Database ID** | To retrieve the Database ID, navigate to the database and copy the ID from the URL. | notion.so/**databaseID**       |
+| **Page ID**     | To get the Page ID, go to the page and copy the ID from the URL.                    | notion.so/pageTitle-**pageID** |
+
+#### Delete a block
+
+Permits deletion of entities like pages, blocks, or pages within a database.
+
+| Input        | Description                                                                                                                                 | Format                                       |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| **Block ID** | Blocks also have unique IDs. To find the Block ID, right-click on the block and choose "Copy Link". The ID is often at the end of the link. | notion.so/pageTitle-pageID?pvs=4#**BlockID** |

@@ -2,13 +2,30 @@
 
 ![Messaging channels](/docs/content/viber-banner.png)
 
-## Enabling Viber in Botpress Cloud Dashboard
+## Prerequisites
 
-Go to the chatbot settings in your cloud dashboard and enable Viber. We will get the Authentication token from the following steps.
+- A [Viber account](https://www.viber.com/)
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
+
+## Setting up the Viber integration in Botpress
+
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the Viber integration then click on the "Install to Bot" button, now go back to your bot.
+
+The Viber integration has the following settings:
+
+- **Enabled**: Whether Botpress will communicate with Viber.
+- **Webhook URL**: The URL for receiving data in Botpress. (You shall not be using it)
+- **Auth Token**: The authentication token of your Viber bot.
+- **Bot Name**: The name of your Viber bot.
+- **Bot Avatar URL**: The URL of the avatar of your Viber bot.
+
+## Setting up Viber
 
 1. Visit the [Viber Admin panel](https://partners.viber.com/login/) and click on **Create a Bot Account**.
 2. Fill in the required details. Bot Avatar, Account Name, URI, Category, Subcategory, Language, Account Description, Email Address and Location.
-3. Copy the Authentication Token and paste it in Viber's channel settings in Botpress Cloud Dashboard.
-4. Add Bot Name (required) and Bot Avatar URL (optional).
+3. Copy the Authentication Token and paste it in the integration settings page in Botpress.
+4. Add a Bot Name (required) and a Bot Avatar URL (optional).
 5. Click **Save**.
-6. Start chatting with the bot!
+
+That's it, you may now start chatting with your bot on Viber!

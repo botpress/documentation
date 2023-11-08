@@ -1,0 +1,94 @@
+import { Callout } from 'nextra/components'
+
+# Trello Integration
+
+![Trello Integration Banner](/docs/content/trello-banner.png)
+
+This integration allows you to connect your Botpress chatbot with Trello, a leading project management platform. With this integration, you can easily manage your boards, lists and cards directly from your chatbot.
+
+## Prerequisites
+
+- A [Trello account](https://trello.com/)
+- A board in Trello, with at least one list
+- The ID of the list where cards will be created. Refer to [this article](https://community.atlassian.com/t5/Trello-questions/How-do-I-find-the-LIST-ID/qaq-p/2272862) to locate it.
+- A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
+
+## Setting up the Trello integration in Botpress
+
+1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
+2. Find and open the Trello integration then click on the "Install to Bot" button, now go back to your bot settings.
+
+The Trello integration has the following settings:
+
+- **Enabled**: Whether Botpress will communicate with Trello
+- **Webhook URL**: The URL for receiving data in Botpress
+- **API Key**: The API key for the Trello Power-Up
+- **Token**: The token for the Trello Power-Up
+
+## Setting up Trello
+
+1. Visit the [Power-Ups Admin Page](https://trello.com/power-ups/admin) and click the **New** button to obtain the API key. Name the Power-Up as "Botpress Connector", fill in the email and author fields, then click **Create**.
+2. Once the Power-Up is created, you will be redirected to API Key settings page, displayed below. Generate a new API key, then copy and paste this key into the **API Key** field in Botpress.
+   ![Power-Up API Key Settings](/docs/content/trello-docs-1.png)
+3. Click on the "Token" link (marked in the image below) and authorize the Power-Up access to your Trello account by selecting **Allow**.
+   ![Power-Up Token Link](/docs/content/trello-docs-2.png)
+4. After authorization, copy the displayed token and paste it into the **Token** field in Botpress.
+5. Make sure the integration is enabled then press the button "Save configuration".
+
+That's it! Now the Trello integration is operational and ready for use within your bot.
+
+## Functionality
+
+### Cards
+
+#### Create Card
+
+This operation allows you to create cards programmatically in Trello. For example, this can be useful to register user feedback, add support tickets or create tasks.
+
+- **Card Name**: The title of the card (e.g., "My Test Card").
+- **List ID**: The ID of the list to which the card will be added.
+- **Description** (Optional): Details or description of the card.
+- **Due Date** (Optional): The due date of the card in ISO format.
+- **Member IDs** (Optional): The IDs of the members, represented as strings separated by commas.
+- **Label IDs** (Optional): The IDs of the labels, represented as strings separated by commas.
+
+You can save the new card information by selecting a variable to store the output in. The output will be an object with the following keys: `id` and `url`.
+
+#### Update Card
+
+This operation allows you to update cards programmatically in Trello. For example, this can be useful to update the status of a support ticket or a task.
+
+- **Card ID**: The ID of the card to be updated.
+- **Card Name** (Optional): The updated name of the card.
+- **List ID** (Optional): The ID of the list to which the card is added.
+- **Closed** (Optional): Specify "true" to close the card and "false" to keep it open.
+- **Due Complete** (Optional): Specify "true" if the card is due complete and "false" if not.
+
+#### Get Member
+
+- **Username or ID**: The Trello username or Trello ID to retrieve member data
+
+You can save the member information by selecting a variable to store the output in. The output will be an object with several keys like: `avatarUrl`, `bioData`, `fullName`, `email` and more. Check out this [documentation page](https://developer.atlassian.com/cloud/trello/rest/api-group-members/) to learn more about the Member object.
+
+#### Get Board Members
+
+This operation allows you to get all the members of a board. For example, this can be useful to get the list of members of a project.
+
+- **Board ID**: The ID of the board to retrieve all its members.
+
+You can save the members information by selecting a variable to store the output in. The output will be an object with the key: `members`. The members property is an array of objects with the keys: `id`, `fullName`, and `username`.
+
+#### Add Comment
+
+This operation allows you to add a comment to an existing card. For example, this can be useful to add a comment to a support ticket or a task.
+
+- **Card ID**: The ID of the card to which the comment will be added.
+- **Comment**: The content of the comment to be added.
+
+You can save the new comment information by selecting a variable to store the output in. The output will be an object with the key: `text`.
+
+<Callout type="note">
+  This Trello Integration aims to extend the capabilities of your Botpress chatbot by aligning it with Trello's
+  functionalities, providing a harmonized and interactive user experience. Explore, interact, and get creative with how
+  you utilize this amalgamation to optimize task and project management.
+</Callout>
