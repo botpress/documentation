@@ -14,6 +14,9 @@ module.exports = {
     },
     extend: {
       colors: {
+        primary: 'hsl(218, 81.42%, 55%)',
+        'primary-dark': 'hsl(218, 81.42%, 40%)',
+        // @deprecated - use primary instead
         bpBlue: '#3276ea',
         bpBlueDark: '#134fb7',
         bpBlueLight: '#cad7f5',
@@ -74,10 +77,10 @@ module.exports = {
       importantLinks: 'linear-gradient(179.92deg, #FDFEFF 0.07%, #F8FBFF 110.26%)',
       'button-link': 'linear-gradient(157deg, #6f90fd, #515bf5)',
       'button-link-hover': 'linear-gradient(157deg, #5c82fd, #4a56f5)',
-      "button-link-dark":'linear-gradient(157deg, rgb(0 15 66), rgb(0 1 19))',
-      "button-link-dark-hover":'linear-gradient(157deg, rgb(16 41 122), rgb(3 6 51))',
-      "button-link-dark-2":'linear-gradient(0deg, rgb(0 15 66), rgb(0 1 19))',
-      "button-link-dark-2-hover":'linear-gradient(0deg, rgb(16 41 122), rgb(3 6 51))',
+      'button-link-dark': 'linear-gradient(157deg, rgb(0 15 66), rgb(0 1 19))',
+      'button-link-dark-hover': 'linear-gradient(157deg, rgb(16 41 122), rgb(3 6 51))',
+      'button-link-dark-2': 'linear-gradient(0deg, rgb(0 15 66), rgb(0 1 19))',
+      'button-link-dark-2-hover': 'linear-gradient(0deg, rgb(16 41 122), rgb(3 6 51))',
     },
   },
   plugins: [],

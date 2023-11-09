@@ -17,15 +17,7 @@ import { getContext } from './openApiContext'
 const HiddenSections = ['file']
 const SectionsWithRequiredWorkspaceIdHeader = ['bot', 'integration', 'workspaceMember']
 const SectionsWithRequiredBotIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'action']
-const SectionsWithRequiredIntegrationIdHeader = [
-  'user',
-  'conversation',
-  'event',
-  'message',
-  'file',
-  'state',
-  'action',
-]
+const SectionsWithRequiredIntegrationIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'action']
 
 type Section = {
   name: string
@@ -41,7 +33,11 @@ async function getApiDocumetationPageContent(): Promise<string> {
   md += 'import { EndpointBlock } from "@components/EndpointBlock"; \n\n'
   md += 'import { Collapsible } from "@components/Collapsible"; \n\n'
   md += 'import { H4 } from "@components/WrapperElements"; \n\n'
+  md += 'import { ApiExplorer } from "@components/ApiExplorer"; \n\n'
   md += '# Botpress API Documentation \n'
+  md += '## Explorer \n\n'
+  md += '<ApiExplorer /> \n\n'
+  md += '<br /> \n'
   md += API_DOCS_INTRO
   md += API_DOCS_CLIENT
   md += API_DOCS_AUTHENTICATION
