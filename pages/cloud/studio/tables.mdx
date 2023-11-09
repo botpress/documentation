@@ -248,7 +248,19 @@ Logical operators allow you to connect more filtering clauses.
   { "$not": { "price": { "$eq": 1.99 } } }
   ```
 
-Please note that these filters and operators can be used together to create complex queries to exactly fit your needs.
+Please note that these filters and operators can be used together to create complex queries to exactly fit your needs. You can also nest filters like so : 
+
+```{
+   "$and": [
+      { "price": { "$lte": 19.99 }},
+      { "$or":  [
+         {"category": { "$eq": "Shoes" }},
+         {"category": { "$eq": "Hats"}}
+        ]
+      }
+   ]                          
+ }
+```
 
 #### Using AI to generate filters
 
