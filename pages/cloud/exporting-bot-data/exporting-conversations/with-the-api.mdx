@@ -1,6 +1,6 @@
 import { Callout } from 'nextra/components'
 
-## Exporting Raw Conversations with the Botpress API
+# Exporting Raw Conversations with the Botpress API
 
 The Botpress API allows you to access your bot's conversations from an external service. This is very useful if you need to manage or analyze the conversations somehow. In this tutorial we give steps to use the API for this purpose and steps to format the response data. Let's get started!
 
@@ -11,16 +11,16 @@ The Botpress API allows you to access your bot's conversations from an external 
   case.
 </Callout>
 
-### 1. Getting the Conversations list
-
-Send a `GET` request to `https://api.botpress.cloud/v1/chat/conversations` adding the following headers: `Authorization: Bearer <your-personal-access-token>` and `x-bot-id: <your-bot-id>`.
-
 <Callout type="note">
   You can find your personal access token in your [Admin Dashboard](https://app.botpress.cloud/). You can find your bot
   ID in the URL of your bot's dashboard, it's the letters and numbers right after `chatbots/`
 </Callout>
 
-#### Using Axios
+## 1. Getting the Conversations list from the API
+
+### Using Axios
+
+Send a `GET` request to `https://api.botpress.cloud/v1/chat/conversations` adding the following headers: `Authorization: Bearer <your-personal-access-token>` and `x-bot-id: <your-bot-id>`.
 
 This is how the request would look like using Axios in a Javascript application (e.g in a Execute Code in Botpress):
 
@@ -47,7 +47,7 @@ const getConversations = await axios.get(
 allConversations.push(...getConversations.data.conversations)
 ```
 
-#### Using the Botpress Client library
+### Using the Botpress Client library
 
 The same logic to get conversations but using the [Botpress Client library](https://www.npmjs.com/package/@botpress/client) in a Node.js application:
 
@@ -74,9 +74,13 @@ allConversations.push(getConversations.conversations)
   ways to use this property: with a loader function or with a finite loop.
 </Callout>
 
-#### Using a loader function
+## 2. Getting all Conversations from the API
 
-Create a loader function that will fetch the next batch of conversations when called. You could use a button to trigger it or trigger it automatically with infinite scroll. Pass the `nextToken` property retrieved from the first request as a parameter to the function, then update it on subsequent calls. More about pagination [here](https://botpress.com/docs/api-documentation/#pagination).
+Now that you know the methods of getting the first conversations from the API, let's see how to get all of them. There are two ways to do this: using a custom loader function or using a finite loop. The first method is recommended for bots with a large number of conversations or if you are displaying the conversations in an user interface, while the second is recommended for bots with a small number of conversations or if you need to get all conversations at once in a backend.
+
+### Using a custom loader function
+
+Create a function that will fetch the next batch of conversations when called. You could use a button to trigger it or trigger it automatically with infinite scroll. Pass the `nextToken` property retrieved from the first request as a parameter to the function, then update it on subsequent calls. More about pagination [here](https://botpress.com/docs/api-documentation/#pagination).
 
 ```js
 async function loadConversations(paginationToken) {
@@ -92,7 +96,7 @@ async function loadConversations(paginationToken) {
 }
 ```
 
-#### Using a finite Loop (advanced)
+### Using a finite Loop (advanced)
 
 Use a loop to fetch all conversations at once. This is not recommended for bots with a large number of conversations as it may take a long time to complete and may cause timeouts. The use of a library like
 [p-retry](https://www.npmjs.com/package/p-retry) to retry requests automatically is recommended.
@@ -118,7 +122,7 @@ do {
 } while (paginationToken)
 ```
 
-### 2. Getting the Messages list
+## 2. Getting the Messages list
 
 Once you have gone through the list of conversations and found out the id of the desired conversation to export, you can then use the API to list the actual messages.
 
@@ -137,7 +141,8 @@ const getMessages = await client.listMessages({
 allMessages.push(getMessages.messages)
 ```
 
-You might create a loader function or a finite loop as shown above. This is how the `allMessages` array is gonna look like:
+You might create a loader function or a finite loop as shown above to get all the messages.
+This is how the `allMessages` array is gonna look like:
 
 ```json
 [
@@ -200,7 +205,7 @@ You might create a loader function or a finite loop as shown above. This is how 
   that when reading the `payload` property.
 </Callout>
 
-### 3. Formatting the Messages list
+## 3. Formatting the Messages list
 
 Now that you have the list of messages of a conversation it's time to format it so it becomes readable. We are going to use a custom function for that:
 
