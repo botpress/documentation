@@ -1,4 +1,6 @@
-# Zendesk Agent Handoff (Beta)
+import { Callout } from 'nextra/components'
+
+![zendesk](/docs/content/zendesk-banner.svg)
 
 Turn Botpress chats into Zendesk tickets, with a handy link added to the conversation notes. A Zendesk agent can communicate directly with the user on the same conversation initially handled by the bot on any channels supported by Botpress (e.g. web chat, Whatsapp, Messenger, etc.)
 
@@ -53,4 +55,71 @@ The card will automatically summarize the conversation and provide a transcript 
 ### Step 6: Test the Configuration
 
 Now that everything has been configured accordingly, proceed to test the set-up. Prior to testing, ensure the most recent version of your bot is up and running.
+
+## Zendesk Cards
+
+### Get Ticket
+
+Use this to retrieve details about a specific support ticket from Zendesk. When a user asks about their ticket, the bot can provide real-time updates on the status or details.
+
+This requires a `Ticket ID` to be provided. This can be obtained from the URL of the ticket in Zendesk. For example, if the URL of the ticket is `https://companyname.zendesk.com/agent/tickets/1`, the `Ticket ID` is `1`.
+
+
+### Find Customer
+
+This helps you search for a customer in your Zendesk account. It's useful when you need to look up customer information to provide personalized support.
+
+This requires a `Search Query` to be provided. This can be the customer's name, email address or phone number. The bot will return a list of matching customers and their details.
+
+
+### Create Ticket
+
+This allows the chatbot to open a new support ticket in Zendesk on behalf of a user. If a user has an issue that can't be solved by the bot, this card will let the bot create a ticket for human support.
+
+This requires the `Ticket subject`, `Ticket comment`, `Requester name` and `Requester email` to be provided. 
+
+The `Ticket subject` is the title of the ticket, the `Ticket comment` is the initial message that will be sent to the support agent, the `Requester name` is the name of the user who is requesting support and the `Requester email` is the email address of the user who is requesting support.
+
+### Close Ticket
+
+When a problem is resolved, this card can be used to close a ticket in Zendesk. This signifies that the issue has been dealt with and no further action is required.
+
+This requires a `Ticket ID` to be provided. This can be obtained from the URL of the ticket in Zendesk. For example, if the URL of the ticket is `https://companyname.zendesk.com/agent/tickets/1`, the `Ticket ID` is `1`.
+
+Optionally, you can provide a `Closing Comment` to be added to the ticket when it is closed. This can be used to provide a summary of the resolution or to thank the user for their patience.
+
+
+### List Agents
+
+This card provides a list of available support agents. It's useful for letting users know who is available to help or for assigning tickets to specific agents.
+
+You can tick off the `Is Online` checkbox to only show agents who are currently online. This can be used to prevent users from assigning tickets to agents who are not available.
+
+### Get Ticket Conversation
+
+With this, the bot can fetch recent comments on a ticket. This is handy for providing users with the latest updates or responses from support agents on their issues.
+
+This requires a `Ticket ID` to be provided. This can be obtained from the URL of the ticket in Zendesk. For example, if the URL of the ticket is `https://companyname.zendesk.com/agent/tickets/1`, the `Ticket ID` is `1`.
+
+### Set Conversation Requester
+
+This allows you to change the requester of a ticket. This is useful when a user is requesting support on behalf of someone else. For example, if a user is requesting support for their friend, you can use this card to change the requester of the ticket to the friend's name and email address.
+
+This requires a `Conversation ID` and a `Requester ID`. The `Conversation ID` of a Ticket can be obtained from the `Get Ticket Conversation` card and the `Requester ID` can be obtained from the URL of the requester's profile in Zendesk. For example, if the URL of the requester's profile is `https://companyname.zendesk.com/agent/users/1`, the `Requester ID` is `1`.
+
+## Zendesk Triggers
+
+### Assigned Ticket
+
+This trigger is fired when a ticket is assigned to an agent. This can be used to notify the agent that they have a new ticket to work on.
+
+### Ticket Solved
+
+This trigger is fired when a ticket is marked as solved. This can be used to notify the user that their issue has been resolved.
+
+
+<Callout type="info">
+  **Note** <br />
+You can add a message after these triggers to send a notification to the agent. For example, you can use the `Send Message` card to send a message to the agent's Slack channel.
+</Callout>
 
