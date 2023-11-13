@@ -17,7 +17,7 @@ import { Callout } from 'nextra/components'
 The Microsoft Teams integration has the following settings:
 
 - **Enabled**: Whether Botpress will communicate with Microsoft Teams
-- **Webhook URL**: The URL for receiving data in Botpress. (You shall not be using it)
+- **Webhook URL**: The URL for receiving data in Botpress.
 - **App Id**: The App Id of your bot in Azure
 - **App Password**: The App Secret of your bot in Azure
 
@@ -27,7 +27,7 @@ The Microsoft Teams integration has the following settings:
 
 1. In the Azure portal, open the [App registrations](https://portal.azure.com#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade) page
 2. Click **New registration**, then choose a name for your application
-3. In the section **Supported account types**, choose **Accounts in any organizational directory and personal Microsoft accounts**, then click **Register**
+3. In the section **Supported account types**, choose the type that's most appropriate for your use case. We support Single and Multi Tenant accounts. Check out [this article](https://learn.microsoft.com/en-us/security/zero-trust/develop/identity-supported-account-types) to learn more (in short, Single Tenant means the app will be available for your org only, and Multi Tenant will make it public). After selecting, click **Register**
 4. Copy paste the value of `Application (client) ID` to the **App Id** channel configuration in Botpress
 
 #### App Password
@@ -42,7 +42,7 @@ The Microsoft Teams integration has the following settings:
 2. Fill the **Display name** and **Bot handle** fields with whatever value
 3. Copy paste you **App Id** to the app id field
 4. Copy the Webhook URL provided in Botpress to the **Messaging endpoint** field
-5. Select "Multi Tenant" as the **App type**
+5. Choose a tenant for the **App type**. Follow the same type you chose in the **Register App** section
 6. Paste the App ID from the Azure bot in the **Microsoft App ID** field
 7. Read and agree to the terms then click **Register**
 8. On the next page (**Connect to channels**), under the section, **Add a featured channel**, click **Configure Microsoft Teams Channel**, then click **Save**
@@ -82,4 +82,9 @@ That's it, you may now start chatting with your bot on Microsoft Teams!
 <Callout type="info">
   In order to update your bot's behavior, just **Publish** the new version in Botpress. The changes will then be
   reflected in MS Teams, there's no need to change any settings in the Microsoft apps.
+</Callout>
+
+<Callout type="note">
+  Botpress verifies the signature of the requests coming to the Webhook URL so that only Microsoft Teams can send data
+  to your bot. Requests made from Postman or any other means will be rejected.
 </Callout>
