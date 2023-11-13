@@ -75,9 +75,9 @@ allConversations.push(getConversations.conversations)
 
 ## 2. Getting all Conversations from the API
 
-Now that you know the methods of getting the first conversations from the API, let's see how to get all of them. There are two ways to do this: using a custom loader function or using a finite loop. The first method is recommended for bots with a large number of conversations or if you are displaying the conversations in an user interface, while the second is recommended for bots with a small number of conversations or if you need to get all conversations at once in a backend.
+Now that you know the methods of getting the first conversations from the API, let's see how to get them. You can get them gradually or all at once, but you need to use the pagination token regardless. 
 
-### Using a custom loader function
+### Getting conversations gradually
 
 Create a function that will fetch the next batch of conversations when called. You could use a button to trigger it or trigger it automatically with infinite scroll. Pass the `nextToken` property retrieved from the first request as a parameter to the function, then update it on subsequent calls. More about pagination [here](https://botpress.com/docs/api-documentation/#pagination).
 
@@ -95,9 +95,9 @@ async function loadConversations(paginationToken) {
 }
 ```
 
-### Using a finite Loop (advanced)
+### Getting all conversations
 
-Use a loop to fetch all conversations at once. This is not recommended for bots with a large number of conversations as it may take a long time to complete and may cause timeouts. The use of a library like
+Use a loop to fetch all conversations at once using the above logic. This is not recommended for bots with a large number of conversations as it may take a long time to complete and may cause timeouts. The use of a library like
 [p-retry](https://www.npmjs.com/package/p-retry) to retry requests automatically is recommended.
 
 ```js
