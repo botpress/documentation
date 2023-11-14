@@ -19,8 +19,7 @@ In this guide, we will demonstrate how to set up the Zendesk integration to faci
   allowfullscreen
 ></iframe>
 
-
-### Step 1: Add Zendesk Integration 
+### Step 1: Add Zendesk Integration
 
 Firstly, locate your bot's dashboard and click on the integrations tab. Use the search bar to find and select the Zendesk Integration. Once found, install this onto your bot.
 
@@ -42,7 +41,7 @@ Create a 'user.name' and a 'user.email' variable on the bottom-left variables pa
 
 From the "Agents" menu of the bot in Botpress Studio, click on the "HITL Agent" option, and then turn on the "Enable Agent" option.
 
-This menu will allow you to configure options such as choosing Zendesk as the desired integration. Also, you have the capability to design an 'end_conversation' intent that permits the user to opt out of speaking to a live agent. To do so, pick a global intent from the dropdown, for instance "Cancel". 
+This menu will allow you to configure options such as choosing Zendesk as the desired integration. Also, you have the capability to design an 'end_conversation' intent that permits the user to opt out of speaking to a live agent. To do so, pick a global intent from the dropdown, for instance "Cancel".
 
 Most settings are default, you may choose to modify them to your preference.
 
@@ -56,70 +55,142 @@ The card will automatically summarize the conversation and provide a transcript 
 
 Now that everything has been configured accordingly, proceed to test the set-up. Prior to testing, ensure the most recent version of your bot is up and running.
 
-## Zendesk Cards
+## Cards
 
 ### Get Ticket
 
-Use this to retrieve details about a specific support ticket from Zendesk. When a user asks about their ticket, the bot can provide real-time updates on the status or details.
+- **Use**: Retrieve details about a specific support ticket.
+- **Input**: `Ticket ID` from the ticket URL (e.g., if the URL is `https://companyname.zendesk.com/agent/tickets/1`, the `Ticket ID` is `1`).
+- **Returns**: Real-time updates on the status and details of the ticket.
 
-This requires a `Ticket ID` to be provided. This can be obtained from the URL of the ticket in Zendesk. For example, if the URL of the ticket is `https://companyname.zendesk.com/agent/tickets/1`, the `Ticket ID` is `1`.
-
-
-### Find Customer
-
-This helps you search for a customer in your Zendesk account. It's useful when you need to look up customer information to provide personalized support.
-
-This requires a `Search Query` to be provided. This can be the customer's name, email address or phone number. The bot will return a list of matching customers and their details.
-
+```javascript
+// Return object example
+{"ticket":{
+  "id":4,
+  "subject":"Ticket Subject",
+  "description":"Ticket Description",
+  "priority":null,
+  "status":"open",
+  "tags":[],
+  "requesterId":11183521570160,
+  "assigneeId":11183526440284,
+  "createdAt":"2023-11-08T18:27:49Z",
+  "updatedAt":"2023-11-10T18:03:13Z"}}
+```
 
 ### Create Ticket
 
-This allows the chatbot to open a new support ticket in Zendesk on behalf of a user. If a user has an issue that can't be solved by the bot, this card will let the bot create a ticket for human support.
+- **Use**: Open a new support ticket.
+- **Inputs**:
+  - `Ticket subject`: Title of the ticket.
+  - `Ticket comment`: Initial message for the support agent.
+  - `Requester name`: Name of the user needing support.
+  - `Requester email`: Email of the user needing support.
+- **Returns**: Confirmation of ticket creation with details.
 
-This requires the `Ticket subject`, `Ticket comment`, `Requester name` and `Requester email` to be provided. 
-
-The `Ticket subject` is the title of the ticket, the `Ticket comment` is the initial message that will be sent to the support agent, the `Requester name` is the name of the user who is requesting support and the `Requester email` is the email address of the user who is requesting support.
+```javascript
+// Return object example
+{"ticket":{
+  "id":4,
+  "subject":"Ticket Subject",
+  "description":"Ticket Description",
+  "priority":null,
+  "status":"open",
+  "tags":[],
+  "requesterId":11183511570160,
+  "assigneeId":11183521440284,
+  "createdAt":"2023-11-08T18:27:49Z",
+  "updatedAt":"2023-11-10T18:03:13Z"}}
+```
 
 ### Close Ticket
 
-When a problem is resolved, this card can be used to close a ticket in Zendesk. This signifies that the issue has been dealt with and no further action is required.
+- **Use**: Close a resolved ticket in Zendesk.
+- **Input**: `Ticket ID` from the ticket URL.
+- **Optional**: `Closing Comment` for resolution summary or thanks.
+- **Returns**: Confirmation that the ticket is closed with optional comment.
 
-This requires a `Ticket ID` to be provided. This can be obtained from the URL of the ticket in Zendesk. For example, if the URL of the ticket is `https://companyname.zendesk.com/agent/tickets/1`, the `Ticket ID` is `1`.
-
-Optionally, you can provide a `Closing Comment` to be added to the ticket when it is closed. This can be used to provide a summary of the resolution or to thank the user for their patience.
-
-
-### List Agents
-
-This card provides a list of available support agents. It's useful for letting users know who is available to help or for assigning tickets to specific agents.
-
-You can tick off the `Is Online` checkbox to only show agents who are currently online. This can be used to prevent users from assigning tickets to agents who are not available.
+```javascript
+// Return object example
+{"ticket":{
+  "id":4,
+  "subject":"Ticket Subject",
+  "description":"Ticket Description",
+  "priority":null,
+  "status":"closed",
+  "tags":[],
+  "requesterId":11183511570160,
+  "assigneeId":11183521440284,
+  "createdAt":"2023-11-08T18:27:49Z",
+  "updatedAt":"2023-11-10T18:03:13Z"}}
+```
 
 ### Get Ticket Conversation
 
-With this, the bot can fetch recent comments on a ticket. This is handy for providing users with the latest updates or responses from support agents on their issues.
+- **Use**: Fetch recent comments on a ticket.
+- **Input**: `Ticket ID` from the ticket URL.
+- **Returns**: Latest updates or responses from support agents on the ticket.
 
-This requires a `Ticket ID` to be provided. This can be obtained from the URL of the ticket in Zendesk. For example, if the URL of the ticket is `https://companyname.zendesk.com/agent/tickets/1`, the `Ticket ID` is `1`.
+```javascript
+// Return object example
+{"conversationId":"5c9ea21d-3ce3-43fa-bd33-3fb7312f88b5",
+"tags":{"zendesk:id":"4","zendesk:requesterId":"11232621609372"}}
+```
 
-### Set Conversation Requester
+### Find Customer (WIP)
 
-This allows you to change the requester of a ticket. This is useful when a user is requesting support on behalf of someone else. For example, if a user is requesting support for their friend, you can use this card to change the requester of the ticket to the friend's name and email address.
+- **Use**: Search for a customer in Zendesk.
+- **Input**: `Search Query` which can be a name, email, or phone number.
+- **Returns**: A list of matching customers and their details.
 
-This requires a `Conversation ID` and a `Requester ID`. The `Conversation ID` of a Ticket can be obtained from the `Get Ticket Conversation` card and the `Requester ID` can be obtained from the URL of the requester's profile in Zendesk. For example, if the URL of the requester's profile is `https://companyname.zendesk.com/agent/users/1`, the `Requester ID` is `1`.
+```javascript
+// Return object example
+{"customers":[
+  {"id":11183521570160,
+  "name":"Customer Name",
+  "email":"Customer Email",
+  "phone":"Customer Phone",
+  "createdAt":"2023-11-08T18:27:49Z",
+  "updatedAt":"2023-11-10T18:03:13Z"}]}
+```
 
-## Zendesk Triggers
+### List Agents (WIP)
 
-### Assigned Ticket
+- **Use**: Provide a list of available support agents.
+- **Option**: `Is Online` checkbox to filter for agents currently online.
+- **Returns**: List of agents, optionally filtered by online status.
+
+```javascript
+// Return object example
+{"agents":[
+  {"id":11183521570160,
+  "name":"Agent Name",
+  "email":"Agent Email",
+  "phone":"Agent Phone",
+  "createdAt":"2023-11-08T18:27:49Z",
+  "updatedAt":"2023-11-10T18:03:13Z"}]}
+```
+
+### Set Conversation Requester (WIP)
+
+- **Use**: Change the requester of a ticket.
+- **Inputs**:
+  - `Conversation ID` from the `Get Ticket Conversation` card.
+  - `Requester ID` from the requester's profile URL in Zendesk (e.g., `https://companyname.zendesk.com/agent/users/1` for `Requester ID` `1`).
+- **Returns**: Does not return anything.
+
+
+### Trigger - Assigned Ticket
 
 This trigger is fired when a ticket is assigned to an agent. This can be used to notify the agent that they have a new ticket to work on.
 
-### Ticket Solved
+### Trigger - Ticket Solved
 
 This trigger is fired when a ticket is marked as solved. This can be used to notify the user that their issue has been resolved.
 
-
 <Callout type="info">
   **Note** <br />
-You can add a message after these triggers to send a notification to the agent. For example, you can use the `Send Message` card to send a message to the agent's Slack channel.
+  You can add a message after these triggers to send a notification to the agent. For example, you can use the `Send Message`
+  card to send a message to the agent.
 </Callout>
 
