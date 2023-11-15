@@ -158,3 +158,29 @@ Step 3: Test your chatbot in the Botpress Emulator to see if it's generating AI-
   However, it's a great way to get started with integrating AI-powered responses into your chatbot without needing any technical
   knowledge.
 </Callout>
+
+### Generate a random password for each user
+
+Create a variable user.generatedPassword
+
+```typescript
+const generateRandomPassword = (length: number): string => {
+  const charset: string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=<>?";
+
+  if (length <= 0) {
+    throw new Error("Password length must be greater than 0");
+  }
+
+  let password: string = "";
+  for (let i: number = 0; i < length; i++) {
+    const randomIndex: number = Math.floor(Math.random() * charset.length);
+    password += charset.charAt(randomIndex);
+  }
+
+  return password;
+};
+
+// Example: Generate a password of length 12
+const generatedPassword: string = generateRandomPassword(12);
+user.generatedPassword = generatedPassword;
+```
