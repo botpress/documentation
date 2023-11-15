@@ -1,6 +1,6 @@
 import { Callout } from 'nextra/components'
 
-## Exporting Raw Conversations with the Botpress API
+# Exporting Raw Conversations with the Botpress API
 
 The Botpress API allows you to access your bot's conversations from an external service. This is very useful if you need to manage or analyze the conversations somehow. In this tutorial we give steps to use the API for this purpose and steps to format the response data. Let's get started!
 
@@ -11,14 +11,16 @@ The Botpress API allows you to access your bot's conversations from an external 
   case.
 </Callout>
 
-### 1. Getting the Conversations list
-
-Send a `GET` request to `https://api.botpress.cloud/v1/chat/conversations` adding the following headers: `Authorization: Bearer <your-personal-access-token>` and `x-bot-id: <your-bot-id>`.
-
 <Callout type="note">
   You can find your personal access token in your [Admin Dashboard](https://app.botpress.cloud/). You can find your bot
   ID in the URL of your bot's dashboard, it's the letters and numbers right after `chatbots/`
 </Callout>
+
+## 1. Getting the Conversations list from the API
+
+### Using Axios
+
+Send a `GET` request to `https://api.botpress.cloud/v1/chat/conversations` adding the following headers: `Authorization: Bearer <your-personal-access-token>` and `x-bot-id: <your-bot-id>`.
 
 This is how the request would look like using Axios in a Javascript application (e.g in a Execute Code in Botpress):
 
@@ -35,28 +37,19 @@ const requestConfig = {
 // An empty array to store all retrieved conversations.
 const allConversations = []
 
-// A variable to store the token for the next set of conversations.
-let paginationToken
+// Send an HTTP GET request to the specified API endpoint to get conversations.
+const getConversations = await axios.get(
+  `https://api.botpress.cloud/v1/chat/conversations?nextToken=${paginationToken}`,
+  requestConfig
+)
 
-// This loop will continue fetching conversations until there are no more left to retrieve.
-do {
-  // Send an HTTP GET request to the specified API endpoint to get conversations.
-  const getConversations = await axios.get(
-    `https://api.botpress.cloud/v1/chat/conversations?nextToken=${paginationToken}`,
-    requestConfig
-  )
-
-  // Add the retrieved conversations to the 'allConversations' array.
-  allConversations.push(...getConversations.data.conversations)
-
-  // Retrieve the token for the next set of conversations, if available.
-  paginationToken = getConversations.data.meta.nextToken
-
-  // As long as paginationToken has a value, this function will execute again
-} while (paginationToken)
+// Add the retrieved conversations to the list.
+allConversations.push(...getConversations.data.conversations)
 ```
 
-The same logic but using the [Botpress Client library](https://www.npmjs.com/package/@botpress/client) in a Node.js application:
+### Using the Botpress Client library
+
+The same logic to get conversations but using the [Botpress Client library](https://www.npmjs.com/package/@botpress/client) in a Node.js application:
 
 ```js
 import { Client } from '@botpress/client'
@@ -67,29 +60,26 @@ const client = new Client({
 })
 
 const allConversations = []
-let paginationToken
 
-do {
-  const getConversations = await client.listConversations({
-    nextToken: paginationToken,
-  })
+const getConversations = await client.listConversations({
+  nextToken: paginationToken,
+})
 
-  allConversations.push(getConversations.conversations)
-
-  paginationToken = getConversations.meta.nextToken
-} while (paginationToken)
+allConversations.push(getConversations.conversations)
 ```
 
-<Callout type="warning">
-  The code snippets above allow you to get all conversations at once by running a loop until there are no more
-  conversations to fetch. This is not recommended for bots with a large number of conversations as it may take a long
-  time to complete and may cause timeouts. If you have a large number of conversations, you should create a loader
-  function and use the `paginationToken` property to fetch conversations in batches. [Learn more about
-  Pagination](https://botpress.com/docs/api-documentation/#pagination). The use of a library like
-  [p-retry](https://www.npmjs.com/package/p-retry) to retry requests automatically is also recommended.
+<Callout type="info">
+  The API returns a maximum of 20 conversations per request. You will need to use the `nextToken` property to fetch the
+  next batch of conversations. The `nextToken` property is returned in the `meta` object of the response. 
 </Callout>
 
-This is how a loader function would look like using Axios:
+## 2. Getting all Conversations from the API
+
+Now that you know the methods of getting the first conversations from the API, let's see how to get them. You can get them gradually or all at once, but you need to use the pagination token regardless. 
+
+### Getting conversations gradually
+
+Create a function that will fetch the next batch of conversations when called. You could use a button to trigger it or trigger it automatically with infinite scroll. Pass the `nextToken` property retrieved from the first request as a parameter to the function, then update it on subsequent calls. More about pagination [here](https://botpress.com/docs/api-documentation/#pagination).
 
 ```js
 async function loadConversations(paginationToken) {
@@ -101,15 +91,37 @@ async function loadConversations(paginationToken) {
   )
 
   return getConversations.data
+  // The returned value will be an object: `{ conversations: [...], meta: { nextToken: "string" } }`
 }
 ```
 
-<Callout type="note">
-  The `loadConversations` function will return an object with the properties `conversations` and `meta`. You must push
-  the conversations to the existing list and save the token to be used in the next request.
-</Callout>
+### Getting all conversations
 
-### 2. Getting the Messages list
+Use a loop to fetch all conversations at once using the above logic. This is not recommended for bots with a large number of conversations as it may take a long time to complete and may cause timeouts. The use of a library like
+[p-retry](https://www.npmjs.com/package/p-retry) to retry requests automatically is recommended.
+
+```js
+const allConversations = []
+let paginationToken
+
+do {
+  // Send an HTTP GET request to the specified API endpoint to get conversations.
+  const getConversations = await axios.get(
+    `https://api.botpress.cloud/v1/chat/conversations?nextToken=${paginationToken}`,
+    requestConfig
+  )
+
+  // Add the retrieved conversations to the list.
+  allConversations.push(...getConversations.data.conversations)
+
+  // Retrieve the token for the next set of conversations, if available.
+  paginationToken = getConversations.data.meta.nextToken
+
+  // As long as paginationToken has a value, this function will execute again
+} while (paginationToken)
+```
+
+## 2. Getting the Messages list
 
 Once you have gone through the list of conversations and found out the id of the desired conversation to export, you can then use the API to list the actual messages.
 
@@ -119,20 +131,16 @@ In the example below we are using the [Botpress Client library](https://www.npmj
 const conversationId = 'the desired conversation id here'
 
 const allMessages = []
-let paginationToken
 
-do {
-  const getMessages = await client.listMessages({
-    conversationId,
-    nextToken: paginationToken,
-  })
+const getMessages = await client.listMessages({
+  conversationId,
+  nextToken: paginationToken,
+})
 
-  allMessages.push(getMessages.messages)
-
-  paginationToken = getMessages.meta.nextToken
-} while (paginationToken)
+allMessages.push(getMessages.messages)
 ```
 
+You might create a loader function or a finite loop as shown above to get all the messages.
 This is how the `allMessages` array is gonna look like:
 
 ```json
@@ -196,7 +204,7 @@ This is how the `allMessages` array is gonna look like:
   that when reading the `payload` property.
 </Callout>
 
-### 3. Formatting the Messages list
+## 3. Formatting the Messages list
 
 Now that you have the list of messages of a conversation it's time to format it so it becomes readable. We are going to use a custom function for that:
 

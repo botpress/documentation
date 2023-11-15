@@ -76,3 +76,17 @@ Your Slack app needs to be added to your workspace to allow Slack users to commu
 1. In Slack, under the **Apps** section of the sidebar, click the **+ Add apps** button. In the search bar, type the name of your Slack app. Click on your Slack app in the search results.
 
 That's it, you may now start chatting with your bot on Slack!
+
+## Tips
+
+- To get the Slack conversation ID, you can read the following variable:
+  `{{ event.tags.conversation["slack:id"] }}`.
+
+- To get the Slack conversation thread ID (if it is a thread), you can read the following variable:
+  `{{ event.tags.conversation["slack:thread"] }}`.
+
+- To get the Slack user ID, you can read the following variable:
+  `{{ event.tags.user["slack:id"] }}`.
+
+- To get the Slack message ID, you can read the following variable:
+  `{{ event.tags.message["slack:id"] }}`.
