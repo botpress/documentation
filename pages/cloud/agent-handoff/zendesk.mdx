@@ -60,22 +60,26 @@ Now that everything has been configured accordingly, proceed to test the set-up.
 ### Get Ticket
 
 - **Use**: Retrieve details about a specific support ticket.
-- **Input**: `Ticket ID` from the ticket URL (e.g., if the URL is `https://companyname.zendesk.com/agent/tickets/1`, the `Ticket ID` is `1`).
+- **Input**:  
+  - `Ticket ID`: The ID of the ticket from the ticket URL. <br/>(e.g., `https://companyname.zendesk.com/agent/tickets/1` for `Ticket ID` `1`).
 - **Returns**: Real-time updates on the status and details of the ticket.
 
 ```javascript
 // Return object example
-{"ticket":{
-  "id":4,
-  "subject":"Ticket Subject",
-  "description":"Ticket Description",
-  "priority":null,
-  "status":"open",
-  "tags":[],
-  "requesterId":11183521570160,
-  "assigneeId":11183526440284,
-  "createdAt":"2023-11-08T18:27:49Z",
-  "updatedAt":"2023-11-10T18:03:13Z"}}
+{
+  "ticket": {
+    "id": 4,
+    "subject": "Ticket Subject",
+    "description": "Ticket Description",
+    "priority": null,
+    "status": "open",
+    "tags": [],
+    "requesterId": 11183521570160,
+    "assigneeId": 11183526440284,
+    "createdAt": "2023-11-08T18:27:49Z",
+    "updatedAt": "2023-11-10T18:03:13Z"
+  }
+}
 ```
 
 ### Create Ticket
@@ -90,95 +94,121 @@ Now that everything has been configured accordingly, proceed to test the set-up.
 
 ```javascript
 // Return object example
-{"ticket":{
-  "id":4,
-  "subject":"Ticket Subject",
-  "description":"Ticket Description",
-  "priority":null,
-  "status":"open",
-  "tags":[],
-  "requesterId":11183511570160,
-  "assigneeId":11183521440284,
-  "createdAt":"2023-11-08T18:27:49Z",
-  "updatedAt":"2023-11-10T18:03:13Z"}}
+{
+  "ticket": {
+    "id": 4,
+    "subject": "Ticket Subject",
+    "description": "Ticket Description",
+    "priority": null,
+    "status": "open",
+    "tags": [],
+    "requesterId": 11183511570160,
+    "assigneeId": 11183521440284,
+    "createdAt": "2023-11-08T18:27:49Z",
+    "updatedAt": "2023-11-10T18:03:13Z"
+  }
+}
+
 ```
 
 ### Close Ticket
 
 - **Use**: Close a resolved ticket in Zendesk.
-- **Input**: `Ticket ID` from the ticket URL.
+- **Input**: 
+  - `Ticket ID`: The ID of the ticket from the ticket URL. <br/>(e.g., `https://companyname.zendesk.com/agent/tickets/1` for `Ticket ID` `1`).
 - **Optional**: `Closing Comment` for resolution summary or thanks.
 - **Returns**: Confirmation that the ticket is closed with optional comment.
 
 ```javascript
 // Return object example
-{"ticket":{
-  "id":4,
-  "subject":"Ticket Subject",
-  "description":"Ticket Description",
-  "priority":null,
-  "status":"closed",
-  "tags":[],
-  "requesterId":11183511570160,
-  "assigneeId":11183521440284,
-  "createdAt":"2023-11-08T18:27:49Z",
-  "updatedAt":"2023-11-10T18:03:13Z"}}
+{
+  "ticket": {
+    "id": 4,
+    "subject": "Ticket Subject",
+    "description": "Ticket Description",
+    "priority": null,
+    "status": "closed",
+    "tags": [],
+    "requesterId": 11183511570160,
+    "assigneeId": 11183521440284,
+    "createdAt": "2023-11-08T18:27:49Z",
+    "updatedAt": "2023-11-10T18:03:13Z"
+  }
+}
+
 ```
 
 ### Get Ticket Conversation
 
 - **Use**: Fetch recent comments on a ticket.
-- **Input**: `Ticket ID` from the ticket URL.
+- **Input**: 
+  - `Ticket ID`: The ID of the ticket from the ticket URL. <br/>(e.g., `https://companyname.zendesk.com/agent/tickets/1` for `Ticket ID` `1`).
 - **Returns**: Latest updates or responses from support agents on the ticket.
 
 ```javascript
 // Return object example
-{"conversationId":"5c9ea21d-3ce3-43fa-bd33-3fb7312f88b5",
-"tags":{"zendesk:id":"4","zendesk:requesterId":"11232621609372"}}
+{
+  "conversationId": "5c9ea21d-3ce3-43fa-bd33-3fb7312f88b5",
+  "tags": {"zendesk:id": "4", "zendesk:requesterId": "11232621609372"}
+}
+
 ```
 
 ### Find Customer (WIP)
 
 - **Use**: Search for a customer in Zendesk.
-- **Input**: `Search Query` which can be a name, email, or phone number.
+- **Input**: 
+  - `Search Query`: You can search by name, email, or phone number of the customer.
 - **Returns**: A list of matching customers and their details.
 
 ```javascript
 // Return object example
-{"customers":[
-  {"id":11183521570160,
-  "name":"Customer Name",
-  "email":"Customer Email",
-  "phone":"Customer Phone",
-  "createdAt":"2023-11-08T18:27:49Z",
-  "updatedAt":"2023-11-10T18:03:13Z"}]}
+{
+  "customers": [
+    {
+      "id": 11183521570160,
+      "name": "Customer Name",
+      "email": "Customer Email",
+      "phone": "Customer Phone",
+      "createdAt": "2023-11-08T18:27:49Z",
+      "updatedAt": "2023-11-10T18:03:13Z"
+    }
+  ]
+}
+
 ```
 
 ### List Agents (WIP)
 
 - **Use**: Provide a list of available support agents.
-- **Option**: `Is Online` checkbox to filter for agents currently online.
+- **Input**: 
+  - `Is Online`: Select this option to filter the list of agents by online status.
 - **Returns**: List of agents, optionally filtered by online status.
 
 ```javascript
 // Return object example
-{"agents":[
-  {"id":11183521570160,
-  "name":"Agent Name",
-  "email":"Agent Email",
-  "phone":"Agent Phone",
-  "createdAt":"2023-11-08T18:27:49Z",
-  "updatedAt":"2023-11-10T18:03:13Z"}]}
+{
+  "agents": [
+    {
+      "id": 11183521570160,
+      "name": "Agent Name",
+      "email": "Agent Email",
+      "phone": "Agent Phone",
+      "createdAt": "2023-11-08T18:27:49Z",
+      "updatedAt": "2023-11-10T18:03:13Z"
+    }
+  ]
+}
+
 ```
 
 ### Set Conversation Requester (WIP)
 
 - **Use**: Change the requester of a ticket.
 - **Inputs**:
-  - `Conversation ID` from the `Get Ticket Conversation` card.
-  - `Requester ID` from the requester's profile URL in Zendesk (e.g., `https://companyname.zendesk.com/agent/users/1` for `Requester ID` `1`).
-- **Returns**: Does not return anything.
-
+  - `Conversation ID`: Get this from the `Get Ticket Conversation` card.
+  - `Requester ID`: Get this from the requester's profile URL in Zendesk (e.g., `https://companyname.zendesk.com/agent/users/1` for `Requester ID` `1`).
+- **Returns**: None. Does not return anything.
 
 ### Trigger - Assigned Ticket
 
@@ -193,4 +223,3 @@ This trigger is fired when a ticket is marked as solved. This can be used to not
   You can add a message after these triggers to send a notification to the agent. For example, you can use the `Send Message`
   card to send a message to the agent.
 </Callout>
-
