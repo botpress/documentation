@@ -59,7 +59,7 @@ Now that everything has been configured accordingly, proceed to test the set-up.
 
 ### Get Ticket
 
-- **Use**: Retrieve details about a specific support ticket.
+Retrieves details about a specific support ticket in Zendesk.
 - **Input**:  
   - `Ticket ID`: The ID of the ticket from the ticket URL. <br/>(e.g., `https://companyname.zendesk.com/agent/tickets/1` for `Ticket ID` `1`).
 - **Returns**: Real-time updates on the status and details of the ticket.
@@ -84,7 +84,7 @@ Now that everything has been configured accordingly, proceed to test the set-up.
 
 ### Create Ticket
 
-- **Use**: Open a new support ticket.
+Creates a new support ticket in Zendesk.
 - **Inputs**:
   - `Ticket subject`: Title of the ticket.
   - `Ticket comment`: Initial message for the support agent.
@@ -113,7 +113,7 @@ Now that everything has been configured accordingly, proceed to test the set-up.
 
 ### Close Ticket
 
-- **Use**: Close a resolved ticket in Zendesk.
+Closes the ticket of the provided Ticket ID in Zendesk.
 - **Input**: 
   - `Ticket ID`: The ID of the ticket from the ticket URL. <br/>(e.g., `https://companyname.zendesk.com/agent/tickets/1` for `Ticket ID` `1`).
 - **Optional**: `Closing Comment` for resolution summary or thanks.
@@ -140,7 +140,7 @@ Now that everything has been configured accordingly, proceed to test the set-up.
 
 ### Get Ticket Conversation
 
-- **Use**: Fetch recent comments on a ticket.
+Fetches the conversation ID of the provided Ticket ID in Zendesk.
 - **Input**: 
   - `Ticket ID`: The ID of the ticket from the ticket URL. <br/>(e.g., `https://companyname.zendesk.com/agent/tickets/1` for `Ticket ID` `1`).
 - **Returns**: Latest updates or responses from support agents on the ticket.
@@ -156,7 +156,7 @@ Now that everything has been configured accordingly, proceed to test the set-up.
 
 ### Find Customer (WIP)
 
-- **Use**: Search for a customer in Zendesk.
+Finds a customer in Zendesk based on the provided search query.
 - **Input**: 
   - `Search Query`: You can search by name, email, or phone number of the customer.
 - **Returns**: A list of matching customers and their details.
@@ -180,7 +180,7 @@ Now that everything has been configured accordingly, proceed to test the set-up.
 
 ### List Agents (WIP)
 
-- **Use**: Provide a list of available support agents.
+Provides a list of available support agents in Zendesk. 
 - **Input**: 
   - `Is Online`: Select this option to filter the list of agents by online status.
 - **Returns**: List of agents, optionally filtered by online status.
@@ -204,7 +204,7 @@ Now that everything has been configured accordingly, proceed to test the set-up.
 
 ### Set Conversation Requester (WIP)
 
-- **Use**: Change the requester of a ticket.
+Changes the requester of a ticket conversation in Zendesk.
 - **Inputs**:
   - `Conversation ID`: Get this from the `Get Ticket Conversation` card.
   - `Requester ID`: Get this from the requester's profile URL in Zendesk (e.g., `https://companyname.zendesk.com/agent/users/1` for `Requester ID` `1`).
