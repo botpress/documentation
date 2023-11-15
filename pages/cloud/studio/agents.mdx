@@ -1,10 +1,53 @@
 import { Callout } from 'nextra/components'
 
-# Agents
+![agents](/docs/content/agents-banner.svg)
 
-![Studio Agents](/docs/content/agents.png)
 
-Botpress offers a variety of specialized Agents to enhance your chatbot's capabilities and adaptability. These Agents are designed to perform specific tasks, each contributing to the overall performance of your chatbot. Here, we introduce four of our agents: Summary, Personality, Knowledge, and Translator Agents.
+Botpress offers a variety of specialized Agents to enhance your chatbot's capabilities and adaptability. These Agents are designed to perform specific tasks, each contributing to the overall performance of your chatbot. Here, we introduce five of our agents: HITL, Summary, Personality, Knowledge, and Translator Agents.
+
+
+## HITL Agent
+
+The HITL Agent is a feature that allows human agents to take over the conversation from the chatbot. It's useful for instances when the bot cannot handle a user's request effectively, and a human touch is needed.
+
+### Configuration
+
+- **Enable Agent**: Turn this on to allow a human agent to participate in conversations. When it's on, the agent can handle messages that the bot can't.
+
+- **Escalation Integration**: This is where you choose the service that will notify your human agents when they need to take over. For example, [Zendesk](../agent-handoff/zendesk/) could be a service you use.
+
+- **Queue Timeout (in minutes)**: This is how long a user's message will wait for a human agent to respond before timing out. You can set this to any number of minutes, like 10.
+
+- **Intent to cancel HITL**: If the user wants to stop talking to a human and go back to the bot, this setting decides which command they should use, like **cancel**.
+
+- **Transcript Context**: This includes the conversation's transcript that will be sent to the human agent. It helps the agent understand what has been discussed so far.
+
+- **On Waiting for Agent**: Here you can add any special instructions or code that you want to execute while the user is waiting for a human agent to respond.
+
+- **On Agent Assigned**: Similar to the above, this is where you can add instructions or code for when a human agent is assigned to the conversation.
+
+- **On Agent Ended Interaction**: This is where you set up what happens after a human agent finishes their conversation with a user.
+
+- **On User Cancelled**: Here you specify the actions or code that will run if the user decides to cancel the interaction with the human agent.
+
+- **On Timed Out Waiting for Agent**: This is where you can define what should happen if no human agent responds within the set timeout period.
+
+### Exposed Variables
+
+These are like shortcuts to specific pieces of information that the HITL Agent can use or provide.
+
+- `{{conversation.HITLAgent.isHitl}}`: This tells you if a human agent is currently handling the conversation.
+
+- `{{conversation.HITLAgent.hitlSessionStatus}}`: This gives you the status of the human agent session, like whether it's active or has ended.
+
+- `{{conversation.HITLAgent.hitlContext}}`: This provides context about the HITL session, which can include the transcript and summary of the conversation so far.
+
+### Usage
+
+Once you've enabled the HITL Agent, you can use the exposed variables in any place where user code is permitted. This includes Hooks, workflow Executed Code cards, AI Task cards, and Transition cards.
+
+To start a human agent session, you can use the `Start HITL` card from the Toolbox. This will trigger the HITL Agent to start looking for a human agent to take over the conversation.
+
 
 ## Summary Agent
 
@@ -46,7 +89,6 @@ There are no known conflicts with the Summary Agent and other Botpress functiona
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   allowfullscreen
 ></iframe>
-![Languages](/docs/content/translator-agent.png)
 
 The Translator Agent allows your chatbot to interact with users in different languages, breaking language barriers and expanding the range of your bot's audience.
 
@@ -164,3 +206,4 @@ To enable Knowledge Bases on a node, click on the node in the workflow editor an
 - **turn.KnowledgeAgent.answer**: This variable represents the answer from the Knowledge Base. It is set to `null` if no answer is found.
 - **turn.KnowledgeAgent.responded**: This variable is set to `true` if the Knowledge Agent has answered the user's question **automatically**. It is set to `false` otherwise if manual answering is enabled.
 - **turn.KnowledgeAgent.citations**: This variable represents the citations from the Knowledge Base. It is set to `null` if no citations are found.
+
