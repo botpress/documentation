@@ -2,9 +2,7 @@ import { Callout } from 'nextra/components'
 
 ![agents](/docs/content/agents-banner.svg)
 
-
 Botpress offers a variety of specialized Agents to enhance your chatbot's capabilities and adaptability. These Agents are designed to perform specific tasks, each contributing to the overall performance of your chatbot. Here, we introduce five of our agents: HITL, Summary, Personality, Knowledge, and Translator Agents.
-
 
 ## HITL Agent
 
@@ -48,24 +46,25 @@ Once you've enabled the HITL Agent, you can use the exposed variables in any pla
 
 To start a human agent session, you can use the `Start HITL` card from the Toolbox. This will trigger the HITL Agent to start looking for a human agent to take over the conversation.
 
-
 ## Summary Agent
 
-The Summary Agent is designed to condense lengthy user responses or extensive text into a brief, digestible summary. This feature is crucial in ensuring that the main ideas are quickly understood, thus making interactions with your bot more efficient.
+The Summary Agent is designed to condense lengthy user responses or extensive text into a brief, digestible summary. This feature is crucial in ensuring that the main events of a conversation are quickly understood, thus making interactions with your bot more efficient. The agent also creates a transcript of the conversation going back a certain amount of turns.
 
-### Input Parameters
+### Settings
 
-- **Summary Max Tokens**: This defines the maximum length of the generated summary in tokens. A token can be a word or a punctuation mark. This parameter allows you to set a limit on how lengthy your summaries can be, ensuring they remain concise and manageable.
+- **Summary Max Tokens**: The maximum length of the generated summary in LLM tokens. A token can be a word or a punctuation mark. This parameter allows you to set a limit on how lengthy your summaries can be, ensuring they remain concise and manageable. Goes from 1 to 500. The default value is 100.
+- **Transcript Max Lines**: The maximum number of lines (conversation turns) in the transcript. This parameter allows you to set a limit on how lengthy your transcripts can be, ensuring they remain concise and manageable. Goes from 0 (to disable) to 100. The default value is 10.
 
-### Output Parameters
+### Exposed Variables
 
 - **conversation.SummaryAgent.summary**: This is the generated summary of the conversation thus far. It's important to note that this parameter is only available after each conversation turn.
+- **conversation.SummaryAgent.transcript**: This is the transcript of the conversation thus far. It's updated after each conversation turn.
 
 ### Usage
 
-Upon enabling the Summary Agent, the conversation summary becomes accessible through the `{{conversation.SummaryAgent.summary}}` variable. This variable can be incorporated in any place where user code is permitted. This includes Hooks, workflow Executed Code cards, AI Task cards, and Transition cards.
+Upon enabling the Summary Agent, its variables become accessible and they can be incorporated in any place where user code is permitted. This includes Hooks, workflow Executed Code cards, AI Task cards, and Transition cards. By default the [Knowledge Agent](#knowledge-agent) uses the summary and transcript variables to understand the context of the user's question, so make sure the Summary Agent is enabled if you want to use the Knowledge Agent contextual answering.
 
-For example, if you wish to include a conversation summary in a chatbot prompt, you could write:
+For example, if you wish send the conversation summary to the user, create a Text card and include the summary like this:
 
 ```js
 'Your conversation summary: {{conversation.SummaryAgent.summary}}'
@@ -129,7 +128,10 @@ You can do this in Execute Code card as well:
 </Callout>
 
 <Callout type="info">
-  You can alter the Translator Agent settings for a node, by clicking it, then "Translator Agent" and toggling the options. The toggle for "Detect Initial   User Language" allows you to delay the moment where the language is detected. The toggle for "Detect Language Change" allows you to disable the detection of a language change. This is useful if you are asking the user to provide information that may be of a different language.
+  You can alter the Translator Agent settings for a node, by clicking it, then "Translator Agent" and toggling the
+  options. The toggle for "Detect Initial User Language" allows you to delay the moment where the language is detected.
+  The toggle for "Detect Language Change" allows you to disable the detection of a language change. This is useful if
+  you are asking the user to provide information that may be of a different language.
 </Callout>
 
 ### Conflicts
@@ -206,4 +208,3 @@ To enable Knowledge Bases on a node, click on the node in the workflow editor an
 - **turn.KnowledgeAgent.answer**: This variable represents the answer from the Knowledge Base. It is set to `null` if no answer is found.
 - **turn.KnowledgeAgent.responded**: This variable is set to `true` if the Knowledge Agent has answered the user's question **automatically**. It is set to `false` otherwise if manual answering is enabled.
 - **turn.KnowledgeAgent.citations**: This variable represents the citations from the Knowledge Base. It is set to `null` if no citations are found.
-
