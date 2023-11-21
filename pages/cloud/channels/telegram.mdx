@@ -50,3 +50,14 @@ If your existing token is compromised or you lost it for some reason, use the `/
 Copy your Telegram bot token and paste it into the **Bot Token** channel configuration and click **Save**.
 
 That's it, you may now start chatting with your bot on Telegram!
+
+## Tips
+
+- To get the Telegram conversation ID, you can read the following variable:
+  `{{ event.tags.conversation["telegram:id"] }}`.
+
+- To get the Telegram user ID, you can read the following variable:
+  `{{ event.tags.user["telegram:id"] }}`.
+
+- To get the Telegram message ID, you can read the following variable:
+  `{{ event.tags.message["telegram:id"] }}`.
