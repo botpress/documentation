@@ -50,6 +50,9 @@ dependencies:
   unleash-proxy-client:
     specifier: ^2.4.2
     version: 2.5.0
+  yn:
+    specifier: ^3.1.1
+    version: 3.1.1
   zod:
     specifier: ^3.21.4
     version: 3.21.4
@@ -6961,6 +6964,11 @@ packages:
     dependencies:
       buffer-crc32: 0.2.13
       fd-slicer: 1.1.0
+    dev: false
+
+  /yn@3.1.1:
+    resolution: {integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==}
+    engines: {node: '>=6'}
     dev: false
 
   /yocto-queue@0.1.0:

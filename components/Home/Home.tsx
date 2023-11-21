@@ -1,10 +1,10 @@
 import { NavigationCardList } from '@components/NavigationCardList'
 import Link from 'next/link'
 import { API_DOCS_CARD, HERO_CARDS, OTHER_RESOURCES_CARDS } from './Home.constants'
-import { toggler, useFeature } from '@utils/FeatureToggle'
+import { useFeature } from '@utils/FeatureToggle'
 
 export function Home() {
-  const [isApiDocsEnabled] = useFeature('apiDocs', toggler)
+  const [isApiDocsEnabled] = useFeature('apiDocs')
 
   return (
     <div className="flex justify-center pb-20 pt-10 md:pb-8 md:pt-5">

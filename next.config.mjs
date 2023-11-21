@@ -15,7 +15,7 @@ export default withNextra({
   basePath: '/docs',
   swcMinify: true,
   compiler: {
-    removeConsole: true,
+    removeConsole: false,
   },
   images: {
     unoptimized: true,
