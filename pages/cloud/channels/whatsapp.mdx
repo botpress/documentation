@@ -203,6 +203,7 @@ If you need to access the ID of the conversation created in Botpress Cloud by th
 So for example, if you choose to store the output value of this action in a variable named `bpWhatsappAction`, you can use `{{ workflow.bpWhatsappAction.conversationId }}` in input fields of the Studio (where supported) to insert the conversation ID, or use `workflow.bpWhatsappAction.conversationId` to access it in code.
 
 #### Creating the conversation using the Botpress Client
+Note: This only works for bots created from code only.
 
 If you're building a bot as code (instead of using Botpress Studio), you can use the Botpress Client instance provided to your bot's handlers to call this action programmatically as shown in the following example:
 
