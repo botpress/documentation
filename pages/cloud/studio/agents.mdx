@@ -60,10 +60,11 @@ The Summary Agent is designed to condense lengthy user responses or extensive te
 ### Output Parameters
 
 - **conversation.SummaryAgent.summary**: This is the generated summary of the conversation thus far. It's important to note that this parameter is only available after each conversation turn.
+- **conversation.SummaryAgent.transcript**: This is the transcript of the conversation thus far. It's important to note that this parameter is only available after each conversation turn.
 
 ### Usage
 
-Upon enabling the Summary Agent, the conversation summary becomes accessible through the `{{conversation.SummaryAgent.summary}}` variable. This variable can be incorporated in any place where user code is permitted. This includes Hooks, workflow Executed Code cards, AI Task cards, and Transition cards.
+Upon enabling the Summary Agent, the conversation summary becomes accessible through the `{{conversation.SummaryAgent.summary}}` variable and the transcript through the `{{conversation.SummaryAgent.transcript}}` variable. These variables can be incorporated in any place where user code is permitted. This includes Hooks, workflow Executed Code cards, AI Task cards, and Transition cards.
 
 For example, if you wish to include a conversation summary in a chatbot prompt, you could write:
 
