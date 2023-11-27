@@ -52,8 +52,8 @@ The Summary Agent is designed to condense lengthy user responses or extensive te
 
 ### Settings
 
-- **Summary Max Tokens**: The maximum length of the generated summary in LLM tokens. A token can be a word or a punctuation mark. This parameter allows you to set a limit on how lengthy your summaries can be, ensuring they remain concise and manageable. Goes from 1 to 500. The default value is 100.
-- **Transcript Max Lines**: The maximum number of lines (conversation turns) in the transcript. This parameter allows you to set a limit on how lengthy your transcripts can be, ensuring they remain concise and manageable. Goes from 0 (to disable) to 100. The default value is 10.
+- **Summary Max Tokens**: The maximum length of the generated summary measured in LLM tokens. A token can consist of a few letters, an entire word, or a punctuation mark. This parameter allows you to set a limit on how lengthy your summaries can be, ensuring they remain concise and manageable. It can range from 1 to 500 tokens, and the default is 100.
+- **Transcript Max Lines**: The maximum number of lines (conversation turns) in the transcript. This parameter allows you to set a limit on how lengthy your transcripts can be, ensuring they remain concise and manageable. It can range from 0 (to disable) to 100 lines, and the default is 10.
 
 ### Exposed Variables
 
@@ -64,7 +64,7 @@ The Summary Agent is designed to condense lengthy user responses or extensive te
 
 Upon enabling the Summary Agent, its variables become accessible and they can be incorporated in any place where user code is permitted. This includes Hooks, workflow Executed Code cards, AI Task cards, and Transition cards. By default the [Knowledge Agent](#knowledge-agent) uses the summary and transcript variables to understand the context of the user's question, so make sure the Summary Agent is enabled if you want to use the Knowledge Agent contextual answering.
 
-For example, if you wish send the conversation summary to the user, create a Text card and include the summary like this:
+For example, if you wish to send the conversation summary to the user, create a Text card and include the summary like this:
 
 ```js
 'Your conversation summary: {{conversation.SummaryAgent.summary}}'
@@ -161,7 +161,7 @@ To activate the Personality Agent, you need to enable the **Personality Rewritin
 
 This is where you define the personality of your chatbot. You should describe how your chatbot is meant to behave and what it is meant to do. Including specific personality traits will influence the bot's responses. For example, if you describe the bot as a "funny cowboy that likes to add emojis to some of your messages and often refers to the user as 'my friend'", the bot will mimic this behavior in its responses.
 
-The Personality Agent, once enabled, will automatically rewrite all the messages sent by your bot to align with the described personality. For instance, if your bot is described as having a humorous and friendly personality, its responses may contain light-hearted quips or friendly salutations such as "Hello, my friend!"
+The Personality Agent, once enabled, will automatically rewrite all the messages sent by your bot to align with the described personality. For instance, a bot described as having a humorous and friendly personality might include light-hearted quips or friendly salutations like 'Hello, my friend!' in its responses.
 
 For example, if you want your bot to behave like a professional consultant, you might add this text or something similar to the Personality Description:
 
@@ -201,7 +201,7 @@ To enable Knowledge Bases on a node, click on the node in the workflow editor an
 
 - **Answer on Start Node**: When enabled, the chatbot will answer questions on the Start Node.
 - **Answer Manually**: Your chatbot will not answer automatically. When this option is enabled, you need to manually reply to the user with `{{turn.KnowledgeAgent.answer}}`. This can be done with a Say node, on a Capture Card or with a Hook (advanced).
-- **Context**: Providing context helps knowledge bases give better answers. We recommend including the transcript of the conversation and/or the summary of the conversation provided by the Summary Agent. You can also include any other information that you think might be relevant to the KB.
+- **Context**: Providing context enhances the ability of knowledge bases to deliver more accurate answers. We recommend including the transcript of the conversation and/or the summary of the conversation provided by the Summary Agent. You can also include any other information that you think might be relevant to the KB.
 
 ### Exposed Variables
 
