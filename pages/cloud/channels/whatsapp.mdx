@@ -113,10 +113,23 @@ This comes with a few restrictions and behaviors specific to WhatsApp:
 
 ### From WhatsApp to Botpress
 
-- Text is mapped to Text Object
-- Location is mapped to Location Object
-- Interactive feedback is mapped to Text Object.
-- Botpress does not currently process the rest of the types
+#### Text
+
+Text messages are directly mapped to Botpress text messages, and readable through `event.preview`.
+
+#### Location
+
+Use a “Wait for User Input” card on your bot, check that `event.type` equals `"location"`, and then read `event.payload` which will contain the following properties:
+
+- `latitude`
+- `longitude`
+- `address` (not always provided)
+- `title` (not always provided)
+
+### Other message types
+
+- Buttons and interactive replies from a list or button are mapped to a plain text response from the user, so you can use `event.preview` to get the value.
+- Botpress does not currently support other Whatsapp message types.
 
 ## Tips
 
