@@ -500,6 +500,33 @@ update as soon as possible.
 
 This will acknowledge the issue and provide the user with an estimated time frame for resolution.
 
+#### Answer from a Knowledge Base
+
+The Raw Input card can also be used to search for answers in a Knowledge Base (KB) and answer the user's question directly. You can have it search across all available KBs or limit the search to a specific KB.
+
+**Searching All Knowledge Bases**
+
+To enable the search across all available Knowledge Bases when the user asks a question:
+
+1. Create a new capture information card with the Type set to **Raw Input**.
+2. Make sure the "Search in all KBs" option is selected.
+3. In the **Prompt message** property, enter a message that encourages the user to input their question (e.g., “What would you like to know?”).
+4. Store the user's input in a variable by setting the **Variable name** property (e.g., `userQuery`) if you want to use it later.
+
+Once set up, the chatbot will automatically search all configured Knowledge Bases for the user's inputted question and display the answer, provided that the Knowledge Agent's manual answering feature is not enabled.
+
+**Searching a Particular Knowledge Base**
+
+For more targeted information retrieval, you may want to search within a specific KB:
+
+1. Create a new capture information card with the Type set to **Raw Input**.
+2. Deselect the "Search in all KBs" option.
+3. Provide the name of the KB you wish to search in the "KBs to search in" input field.
+4. In the **Prompt message** property, enter a prompt directing the user to ask their question.
+5. Set the **Variable name** property to save the user's query (e.g., `userQuerySpecific`) if you want to use it later.
+
+After the user submits their question, the chatbot will automatically conduct a search within the specified Knowledge Base and display the relevant answer. This happens seamlessly without the need for an action card to trigger the search, assuming that manual answering is turned off for the Knowledge Agent.
+
 ### Percentage
 
 The **Percentage** extracts the decimal representing the percentage the user is using from the user's input and saves it in a variable of type number. The extracted information can include values like 50%, 75%, or any other percentage.
