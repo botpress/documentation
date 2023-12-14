@@ -66,32 +66,34 @@ Botpress can interact with the version 15.0 or higher of the Instagram API. It i
 
 ### Verify Token
 
-The Verify Token is used by Facebook to verify that you are the real owner of the provided webhook.
+The Verify Token is used by Meta to verify that you are the real owner of the provided webhook.
 
 You can generate any random alphanumerical string for this configuration. Paste it in your **Verify Token** channel configuration.
 
 ### Save Configuration
 
-Channel configuration is completed, you can now click **Save**. It is important you save your configuration before configuring the webhook, otherwise Messenger will be unable to validate the webhook URL.
+Channel configuration is completed, you can now click **Save**. It is important to save your configuration in Botpress before updating the webhook in the Meta app settings, otherwise Meta will be unable to validate the webhook URL.
 
 ## Webhook Configuration
 
-To receive messages from Instagram in your Botpress bot, you will need to setup some webhook settings.
+To receive messages from Instagram in your Botpress bot, you will need to setup a webhook.
 
 1. Go to your Meta App.
-1. In the left sidebar, expand the Messenger menu and select Settings.
-1. In the Webhooks section, click Add Callback URL.
-1. Copy and paste the webhook URL provided in the channel configuration UI.
-1. Copy and paste the Verify Token you generated earlier.
+1. In the left sidebar, expand the **Messenger** menu and select **Instagram Settings**.
+1. In the **Webhooks** section, click **Add Callback URL**.
+1. Copy and paste the **Webhook URL** provided in the integration configuration page in Botpress.
+1. Copy and paste the **Verify Token** that you generated earlier in the integration configuration page in Botpress.
 1. Click on Verify and Save. Make sure your channel configuration was saved before doing this step, otherwise the webhook validation will fail.
-1. Click on Add Subscriptions and add messages, instagram_manage_messages and messaging_postbacks to your webhook.
+1. Now you will select subscriptions for your webhook. Click on **Add Subscriptions**, then select `instagram_manage_messages` (if app has been [reviewed by Meta](#submit-your-app-for-meta-review)), `messages` and `messaging_postbacks`. Then click **Save**.
 
-Note: If you can't find the above permissions, then you need to get your meta app reviewed first
-https://developers.facebook.com/docs/permissions/
+**Note**: If you can't find the `instagram_manage_messages` subscription in the list above, that's because your app has not been reviewed by Meta yet (see [this section](#submit-your-app-for-meta-review)). But don't worry, this is not mandatory to test your bot. You can still test it with the `messages` and `messaging_postbacks` subscriptions.
 
 That's it, you may now start chatting with your bot on Instagram!
 
-## Submit your App for Meta Approval
+## Submit your App for Meta Review
 
-When your app is in Development Mode, your bot will work for admins, developers, and testers of the app. After your app is approved and made public, it will work for the general public.
-https://developers.facebook.com/docs/app-review/support/rejection-guides/instagram/
+When your app is in Development Mode, your bot will work for admins, developers, and testers of the app only. After your app is approved and made public, it will work for the general public.
+
+Read more about the App Review process on [the official documentation](https://developers.facebook.com/docs/app-review/submission-guide/) and find some help if necessary [in this Github issue](https://github.com/microsoft/botframework-sdk/issues/1465).
+
+You can find some troubleshooting [in this documentation](https://developers.facebook.com/docs/app-review/support/rejection-guides/instagram/) in case you app get rejected.
