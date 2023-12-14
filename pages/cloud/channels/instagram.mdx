@@ -4,14 +4,14 @@
 
 ## Prerequisites
 
-- A [Meta developer app](https://developers.facebook.com/apps)
-- A [Facebook page](https://www.facebook.com/pages/create) in which you have the administrator or developer roles
-- An [Instagram Professional account](https://business.instagram.com/)
+- A [Meta developer app](https://developers.facebook.com/apps) that will serve as the primary platform for managing connection between Instagram and Botpress, including the configuration of webhooks and access tokens.
+- A [Facebook page](https://www.facebook.com/pages/create) in which you have the administrator or developer roles. Instagram accounts must be linked to a Facebook page to use the Facebook Graph API.
+- An [Instagram Professional account](https://business.instagram.com/), necessary to use features specific to Instagram professional accounts.
 
 ## Setting up the Instagram integration in Botpress
 
 1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
-2. Find and open the Instagram integration then click on the "Install to Bot" button, now go back to your bot settings.
+1. Find and open the Instagram integration then click on the "Install to Bot" button, now go back to your bot settings.
 
 The Instagram integration has the following settings:
 
@@ -29,15 +29,12 @@ The Instagram integration has the following settings:
 
 If you do not already have a Facebook page you will need to create one. You can find details on how to create a new Facebook page [here](https://www.facebook.com/pages/create/). To link your chatbot to a pre-existing page, you must have an administrator or developer role.
 
-1. Give a name to your Facebook Page.
-2. Pick a Category.
-
 ### Create a Meta App
 
 1. Log in to your Facebook account and go to the [Facebook for Developers website](https://developers.facebook.com/).
-2. Select **My Apps** from the top menu, and create a new app.
-3. Select **Business** as App Type.
-4. Give a name to your App.
+1. Select **My Apps** from the top menu, and create a new app.
+1. Select **Business** as App Type.
+1. Give a name to your App.
 
 ### Add Messenger to your Meta App
 
@@ -82,12 +79,12 @@ Channel configuration is completed, you can now click **Save**. It is important 
 To receive messages from Instagram in your Botpress bot, you will need to setup some webhook settings.
 
 1. Go to your Meta App.
-2. In the left sidebar, expand the Messenger menu and select Settings.
-3. In the Webhooks section, click Add Callback URL.
-4. Copy and paste the webhook URL provided in the channel configuration UI.
-5. Copy and paste the Verify Token you generated earlier.
-6. Click on Verify and Save. Make sure your channel configuration was saved before doing this step, otherwise the webhook validation will fail.
-7. Click on Add Subscriptions and add messages, instagram_manage_messages and messaging_postbacks to your webhook.
+1. In the left sidebar, expand the Messenger menu and select Settings.
+1. In the Webhooks section, click Add Callback URL.
+1. Copy and paste the webhook URL provided in the channel configuration UI.
+1. Copy and paste the Verify Token you generated earlier.
+1. Click on Verify and Save. Make sure your channel configuration was saved before doing this step, otherwise the webhook validation will fail.
+1. Click on Add Subscriptions and add messages, instagram_manage_messages and messaging_postbacks to your webhook.
 
 Note: If you can't find the above permissions, then you need to get your meta app reviewed first
 https://developers.facebook.com/docs/permissions/

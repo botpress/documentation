@@ -15,8 +15,8 @@
 
 ## Prerequisites
 
-- A [Meta developer app](https://developers.facebook.com/apps/create/)
-- A [Facebook page](https://www.facebook.com/pages/create/) that you own or has the developer role to connect your bot to messenger
+- A [Meta developer app](https://developers.facebook.com/apps/create/) that will serve as the primary platform for managing connection between Messenger and Botpress, including the configuration of webhooks and access tokens.
+- A [Facebook page](https://www.facebook.com/pages/create/) that you own or has the developer role, this is needed to use the Messenger API.
 - A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
 
 ## Setting up the Messenger integration in Botpress
@@ -35,6 +35,10 @@ The Messenger integration has the following settings:
 - **Access Token**: The access token used to send messages to the Messenger API
 
 ## Setting up Messenger
+
+### Create a Facebook Page
+
+If you do not already have a Facebook page you will need to create one. You can find details on how to create a new Facebook page [here](https://www.facebook.com/pages/create/). To link your chatbot to a pre-existing page, you must have an administrator or developer role.
 
 ### Messenger API version
 
