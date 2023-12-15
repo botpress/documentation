@@ -15,14 +15,14 @@
 
 ## Prerequisites
 
-- A [Meta developer app](https://developers.facebook.com/apps/create/)
-- A [Facebook page](https://www.facebook.com/pages/create/) that you own or has the developer role to connect your bot to messenger
+- A [Meta developer app](https://developers.facebook.com/apps/create/) that will serve as the primary platform for managing connection between Messenger and Botpress, including the configuration of webhooks and access tokens.
+- A [Facebook page](https://www.facebook.com/pages/create/) that you own or has the developer role, this is needed to use the Messenger API.
 - A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
 
 ## Setting up the Messenger integration in Botpress
 
 1. Go to the [Integration Hub](https://app.botpress.cloud/hub) in Botpress Cloud (if you don't have the integration installed yet).
-2. Find and open the Messenger integration then click on the "Install to Bot" button, now go back to your bot settings.
+1. Find and open the Messenger integration then click on the "Install to Bot" button, now go back to your bot settings.
 
 The Messenger integration has the following settings:
 
@@ -35,6 +35,10 @@ The Messenger integration has the following settings:
 - **Access Token**: The access token used to send messages to the Messenger API
 
 ## Setting up Messenger
+
+### Create a Facebook Page
+
+If you do not already have a Facebook page you will need to create one. You can find details on how to create a new Facebook page [here](https://www.facebook.com/pages/create/). To link your chatbot to a pre-existing page, you must have an administrator or developer role.
 
 ### Messenger API version
 
@@ -65,32 +69,38 @@ You can generate any random alphanumerical string for this configuration. Paste 
 
 ### Page Id and Access Token
 
-1. In the left sidebar, expand the **Messenger** menu and select **Settings**
-1. In the **Access Tokens** section, click **Add or remove Pages** and add your facebook page
+1. In the left sidebar, expand the **Messenger** menu and select **Messenger API Settings**
+1. In the **Access Tokens** section, click **Add or remove Pages** and add your Facebook page
 1. Copy the number under your page name and paste it in your **Page Id** channel configuration
 1. Click on **Generate token**. Copy this token and paste it in the **Access Token** channel configuration
 
 ### Save Configuration
 
-Channel configuration is complete, you can now click **Save**. It is important to save your configuration before configuring the webhook, otherwise Messenger will be unable to validate the Webhook URL.
+Channel configuration is completed, you can now click **Save**. It is important to save your configuration in Botpress before updating the webhook in the Meta app settings, otherwise Meta will be unable to validate the webhook URL.
 
 ## Webhook Configuration
 
-To receive messages from Messenger, you will need to setup a webhook
+To receive messages from Messenger in your Botpress bot, you will need to setup a webhook.
 
 1. Go to your Meta app.
-1. In the left sidebar, expand the **Messenger** menu and select **Settings**
+1. In the left sidebar, expand the **Messenger** menu and select **Messenger API Settings**
 1. In the **Webhooks** section, click **Add Callback URL**
-1. Copy paste the webhook url provided in the channel configuration UI
-1. Copy paste the verify token you generated earlier
+1. Copy paste the **Webhook URL** provided in the integration configuration page in Botpress.
+1. Copy and paste the **Verify Token** that you generated earlier in the integration configuration page in Botpress.
 1. Click on **Verify and save**. Make sure your channel configuration was saved before doing this step, otherwise the webhook validation will fail
-1. Click on **Add subscriptions** and add `messages` and `messaging_postbacks` to your webhook
+1. Click on **Add Subscriptions**, then select `messages` and `messaging_postbacks`. Then click **Save**.
 
-## Submit your App for Meta Approval
+You may now start chatting with your bot on Messenger! 
 
-When your app is in Development Mode, your bot will work for admins, developers, and testers of the app. After your app is approved and made public, it will work for the general public.
+**Note**: If the bot does not answer to some people, that's probably because your app has not been reviewed by Meta yet (see [this section](#submit-your-app-for-meta-review)). But don't worry, this is not mandatory to test your bot.
 
-Read more about the [App Approval process](https://github.com/microsoft/botframework-sdk/issues/1465)
+## Submit your App for Meta Review
+
+When your app is in Development Mode, your bot will work for admins, developers, and testers of the app only. After your app is approved and made public, it will work for the general public.
+
+Read more about the App Review process on [the official documentation](https://developers.facebook.com/docs/app-review/submission-guide) and find some help if necessary [in this Github issue](https://github.com/microsoft/botframework-sdk/issues/1465).
+
+You can find some troubleshooting [in this documentation](https://developers.facebook.com/docs/app-review/support/rejection-guides/messenger) in case you app get rejected.
 
 ## Send Greeting/Welcome Message
 
