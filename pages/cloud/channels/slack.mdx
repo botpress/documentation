@@ -4,8 +4,20 @@
 
 ## Prerequisites
 
-- A [Slack App](https://api.slack.com/apps) to connect your bot to Slack. Create one from scratch.
+- A [Slack App](https://api.slack.com/apps) to connect your bot to Slack.
 - A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
+
+## Create a Slack App
+
+If you don't have a Slack app already, follow the steps below to create one:
+
+1. Go to [this link](https://api.slack.com/apps?new_app=1).
+1. Select **from scratch**.
+1. Enter a name for your app.
+1. Select the workspace you want to connect your bot to.
+1. Click **Create App**.
+
+Et voilà! You have created a Slack app.
 
 ## Setting up the Slack integration in Botpress
 
@@ -18,6 +30,8 @@ The Slack integration has the following settings:
 - **Webhook URL**: The URL for receiving data in Botpress
 - **Bot Token**: The token used to authenticate requests made to Slack
 - **Signing Secret**: The secret used to verify the requests
+- **Bot Name**: The name of the bot that will be displayed in Slack
+- **Bot Avatar URL**: The URL to the bot's avatar that will be displayed in Slack
 
 ## Setting up Slack
 
@@ -69,7 +83,7 @@ Slack sends "interactive" events such as reactions to message to the interactivi
 
 ### Add App to Workspace
 
-Your Slack app needs to be added to your workspace to allow Slack users to communicate with it
+Your Slack app needs to be added to your workspace to allow Slack users to communicate with it:
 
 1. In the left sidebar, click on **Features** > **App Home**
 1. Scroll down and in the **Show Tabs > Messages Tab** section, tick **Allow users to send Slash commands and messages from the messages tab**
@@ -90,3 +104,40 @@ That's it, you may now start chatting with your bot on Slack!
 
 - To get the Slack message ID, you can read the following variable:
   `{{ event.tags.message["slack:id"] }}`.
+
+## Slack actions in Botpress Studio
+
+### Starting a Conversation Proactively
+
+To start a conversation with a user proactively, you need to know the user's Slack ID.
+
+1. In Studio, add the **Start DM Conversation** card to your flow.
+1. Pass the user's Slack ID in the `Slack User Id` input.
+1. You can store the result of the action in a variable.
+
+### Retrieve a Message
+
+To retrieve a message from Slack, you need to know the `timestamp` and the `channel` of the message.
+
+1. In Studio, add the **Retrieve Message** card to your flow.
+1. Pass the timestamp of the message in the `Timestamp` input.
+1. Pass the channel of the message in the `Channel` input.
+1. You can store the result of the action in a variable.
+
+### Add Reaction to message
+
+To add a reaction on a Slack message, you need to know the `message Id` and the `reaction name`.
+
+1. In Studio, add the **Add Reaction** card to your flow.
+1. Pass the message Id in the `Message Id` input.
+1. Pass the reaction name in the `Reaction Name` input. (see [Slack documentation](https://slack.com/help/articles/202931348-Use-emoji-and-reactions) for more informations on emojis/reactions)
+
+### Synchronize Members
+
+This action will synchronize the members of a Slack workspace with Botpress users.
+
+In Studio, add the **Sync Members** card to your flow.
+
+### Reaction Added trigger
+
+You can use the **Reaction Added** trigger to make actions when a reaction is added to a Slack message.
