@@ -17,15 +17,7 @@ import { getContext } from './openApiContext'
 const HiddenSections = ['file']
 const SectionsWithRequiredWorkspaceIdHeader = ['bot', 'integration', 'workspaceMember']
 const SectionsWithRequiredBotIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'action']
-const SectionsWithRequiredIntegrationIdHeader = [
-  'user',
-  'conversation',
-  'event',
-  'message',
-  'file',
-  'state',
-  'action',
-]
+const SectionsWithRequiredIntegrationIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'action']
 
 type Section = {
   name: string
@@ -144,6 +136,11 @@ function getJsonSchemaMarkDown(schema: JSONSchemaType): string {
 
   if (flattenedProperties) {
     return Object.entries(flattenedProperties).reduce((md, [name, property]) => {
+      if (property.deprecated) {
+        console.info(`Skipping deprecated property "${name}" of schema "${schema.title}"`)
+        return md
+      }
+
       const flattenedSubProperties = property.type === 'object' ? getNormalizedProperties(property) : false
 
       md += `<Collapsible className="mt-3" isCollapsible={${Boolean(
