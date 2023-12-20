@@ -3,20 +3,23 @@ type StringObject = {
   type: 'string'
   maxLength?: number
 }
-type PrimitiveObject = {
-  type: 'number' | 'null' | 'boolean'
+
+type CommonProps = {
   description?: string
+  deprecated?: boolean
 }
 
-type ArrayObject = {
+type PrimitiveObject = CommonProps & {
+  type: 'number' | 'null' | 'boolean'
+}
+
+type ArrayObject = CommonProps & {
   type: 'array'
-  description?: string
   items: PrimitiveObject | ArrayObject | ObjectObject | StringObject
 }
 
-type ObjectObject = {
+type ObjectObject = CommonProps & {
   type: 'object'
-  description?: string
   properties: Record<string, PrimitiveObject | ArrayObject | ObjectObject>
   additionalProperties?: AdditionalProperties
   required: string[]
@@ -41,7 +44,7 @@ export type JSONSchemaProps = JSX.IntrinsicElements['div'] & {
 }
 
 const httpMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'] as const
-type HttpMethod = typeof httpMethods[number]
+type HttpMethod = (typeof httpMethods)[number]
 
 export function isHttpMethod(value: any): value is HttpMethod {
   return httpMethods.includes(value)

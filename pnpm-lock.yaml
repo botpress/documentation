@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@botpress/api':
-    specifier: 0.14.2
-    version: 0.14.2(openapi-types@12.1.3)
+    specifier: 0.15.5
+    version: 0.15.5(openapi-types@12.1.3)
   '@heroicons/react':
     specifier: ^2.0.18
     version: 2.0.18(react@18.2.0)
@@ -1447,17 +1447,17 @@ packages:
       js-yaml: 4.1.0
     dev: false
 
-  /@botpress/api@0.14.2(openapi-types@12.1.3):
-    resolution: {integrity: sha512-u8sWpqjGOn+dk48FxZz/IQVFsLAcKwRkKUHmcMjmrEkUh3pPJSPqlS2MN0iuQmkPPdTF9bxZbzXFHpeR58Chjw==}
+  /@botpress/api@0.15.5(openapi-types@12.1.3):
+    resolution: {integrity: sha512-e/FlH+3Kso5UYNwOz2o89RJUttshmUDAWgmwg0v9Ft2wsPjswtFdV6Raf7Ursq/KPrEqxLICfKIGD8BGRUc1uQ==}
     dependencies:
-      '@bpinternal/opapi': 0.6.1(openapi-types@12.1.3)
+      '@bpinternal/opapi': 0.6.2(openapi-types@12.1.3)
     transitivePeerDependencies:
       - debug
       - openapi-types
     dev: false
 
-  /@bpinternal/opapi@0.6.1(openapi-types@12.1.3):
-    resolution: {integrity: sha512-Nksv6w5jEBIiUsrVLGbMgWb+8qxMlOQeCHasHF2+ZLoispRwQJsJzw63P3q1/p+gdDHfpKYywMSh24oUGJ1dPA==}
+  /@bpinternal/opapi@0.6.2(openapi-types@12.1.3):
+    resolution: {integrity: sha512-/JsMn5zGOFXA058MMfvoU7yem1NDLyNOJ/Z+OlWJakw2dvmP8Fcas3gBbUymeoWfM6zU7d9raBe0kc0vw2qqZw==}
     dependencies:
       '@anatine/zod-openapi': 1.14.2(openapi3-ts@2.0.2)(zod@3.21.4)
       '@readme/openapi-parser': 2.5.0(openapi-types@12.1.3)
