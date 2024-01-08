@@ -126,6 +126,41 @@ Use a “Wait for User Input” card on your bot, check that `event.type` equals
 - `address` (not always provided)
 - `title` (not always provided)
 
+#### Media (images, audio, documents)
+
+Use a “Wait for User Input” card on your bot, check that `event.type` equals `"image"`, `"audio"` or `"document"`, and then read `event.payload` which will have the following structure depending on the event type:
+
+- For an image: `{"imageUrl": "https://lookaside.fbsbx.com/...."}`
+- For audio: `{"audioUrl": "https://lookaside.fbsbx.com/...."}`
+- For a document: `{"documentUrl": "https://lookaside.fbsbx.com/....", "filename": "the-filename.pdf"}`
+
+Then, you can retrieve the raw file content from WhatsApp by making a `GET` HTTP request to the URL provided in the payload while passing your WhatsApp access token as a `Bearer` token in the `Authorization` HTTP header.
+
+For example:
+
+```js
+/* INSTRUCTIONS:
+1. Create a Configuration Variable named "WHATSAPP_ACCESS_TOKEN" in the Bot Settings section of Botpress Studio.
+2. Go to the "Configuration Variables" section of your bot in Botpress Cloud and set its value to your WhatsApp access token.
+*/
+const whatsappAccessToken = env.WHATSAPP_ACCESS_TOKEN
+
+const res = await axios.get(event.payload.imageUrl, {
+  headers: {
+    Authorization: `Bearer ${whatsappAccessToken}`,
+  },
+})
+
+// This will be a JavaScript Buffer (https://nodejs.org/api/buffer.html) containing the raw binary content of the media file.
+const rawFileContent = res.data
+
+// This will indicate the file type, see:
+// https://developers.facebook.com/docs/whatsapp/cloud-api/reference/media/#supported-media-types
+const mimeType = res.headers['content-type']
+```
+
+For further information, please check the [WhatsApp documentation](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/media/#download-media) on downloading media files and the [Botpress documentation](https://docs.botpress.cloud/docs/cloud/studio/variables/#configuration-variables) on using Configuration Variables.
+
 ### Other message types
 
 - Buttons and interactive replies from a list or button are mapped to a plain text response from the user, so you can use `event.preview` to get the value.
@@ -142,17 +177,6 @@ Use a “Wait for User Input” card on your bot, check that `event.type` equals
 - To get the Whatsapp Phone Number ID of your bot that the user is interacting with _(useful when pointing multiple Phone Number IDs to the same bot)_:
 
   `{{ event.tags.conversation['whatsapp:phoneNumberId'] }}`
-
-## Receiving a Location
-
-When WhatsApp shares a location it is mapped to the Botpress `location` object and the location information is found in the `event.payload` object. In the conversation, you can use a text message card asking the user to send their location using the built-in "Send Your Current Location" feature of Whatsapp followed by a "Wait for Message" card to await the user's response with their location.
-
-Once you get the response, you will be able to access the properties of the location using the variables below:
-
-- Location Title: `{{event.payload.title}}`
-- Location Address: `{{event.payload.address}}`
-- Location Longitude: `{{event.payload.longitude}}`
-- Location Latitude: `{{event.payload.latitude}}`
 
 #### Example:
 
@@ -216,6 +240,7 @@ If you need to access the ID of the conversation created in Botpress Cloud by th
 So for example, if you choose to store the output value of this action in a variable named `bpWhatsappAction`, you can use `{{ workflow.bpWhatsappAction.conversationId }}` in input fields of the Studio (where supported) to insert the conversation ID, or use `workflow.bpWhatsappAction.conversationId` to access it in code.
 
 #### Creating the conversation using the Botpress Client
+
 Note: This only works for bots created from code only.
 
 If you're building a bot as code (instead of using Botpress Studio), you can use the Botpress Client instance provided to your bot's handlers to call this action programmatically as shown in the following example:
