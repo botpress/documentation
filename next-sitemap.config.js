@@ -2,4 +2,5 @@
 module.exports = {
   siteUrl: process.env.SITE_URL || 'https://botpress.com/docs',
   generateRobotsTxt: true,
+  outDir: './out',
 }
