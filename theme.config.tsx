@@ -1,5 +1,6 @@
 import { Footer } from '@components/Footer'
-import { useConfig, type DocsThemeConfig } from 'nextra-theme-docs'
+import { useRouter } from 'next/router'
+import { type DocsThemeConfig } from 'nextra-theme-docs'
 import React from 'react'
 
 const logo = (
@@ -89,12 +90,14 @@ const config: DocsThemeConfig = {
   docsRepositoryBase,
   primaryHue: { dark: 217, light: 217 },
   head: function useHead() {
+    const { pathname } = useRouter()
     return (
       <>
         <meta name="theme-color" content="#fff" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="Content-Language" content="en" />
         <link rel="icon" href="/docs/favicon.svg" type="image/svg+xml" />
+        <link rel="canonical" href={`https://botpress.com/docs${pathname}`} />
         <link rel="icon" href="/docs/favicon.png" type="image/png" />
       </>
     )

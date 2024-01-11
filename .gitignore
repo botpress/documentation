@@ -8,3 +8,5 @@ dist
 .env.local
 out
 pages/api-documentation/index.mdx
+.vercel
+.env*.local
