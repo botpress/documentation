@@ -43,10 +43,10 @@ export function Footer() {
             [
               'Hub',
               [
-                ['https://botpress.com/hub', 'Channels'],
-                ['https://botpress.com/hub', 'Integrations'],
-                ['https://botpress.com/hub', 'Languages'],
-                ['https://botpress.com/hub', 'Templates'],
+                ['https://botpress.com/hub?type=Channel', 'Channels'],
+                ['https://botpress.com/hub?type=Knowledge+Connector', 'Knowledge Connector'],
+                ['https://botpress.com/hub?type=Automation', 'Automation'],
+                ['https://botpress.com/hub?type=Template', 'Templates'],
               ],
             ],
             [
@@ -57,7 +57,7 @@ export function Footer() {
                 ['https://discord.gg/botpress', 'Discord Community'],
                 ['https://botpress.com/find-a-partner', 'Find a Partner'],
                 ['https://botpress.com/experts', 'Become a Partner'],
-                ['https://botpress.com/docs/api/', 'API Reference'],
+                ['https://botpress.com/docs/api-documentation/', 'API Reference'],
                 ['https://www.youtube.com/botpress', 'Videos'],
                 ['https://status.botpress.com/', 'Status'],
                 ['https://v12.botpress.com/', 'v12 Resources'],
