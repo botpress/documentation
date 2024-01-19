@@ -57,7 +57,7 @@ export function Footer() {
                 ['https://discord.gg/botpress', 'Discord Community'],
                 ['https://botpress.com/find-a-partner', 'Find a Partner'],
                 ['https://botpress.com/experts', 'Become a Partner'],
-                ['https://botpress.com/docs/api/', 'API Reference'],
+                ['https://botpress.com/docs/api-documentation/', 'API Reference'],
                 ['https://www.youtube.com/botpress', 'Videos'],
                 ['https://status.botpress.com/', 'Status'],
                 ['https://v12.botpress.com/', 'v12 Resources'],
