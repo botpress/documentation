@@ -43,10 +43,10 @@ export function Footer() {
             [
               'Hub',
               [
-                ['https://botpress.com/hub', 'Channels'],
-                ['https://botpress.com/hub', 'Integrations'],
-                ['https://botpress.com/hub', 'Languages'],
-                ['https://botpress.com/hub', 'Templates'],
+                ['https://botpress.com/hub?type=Channel', 'Channels'],
+                ['https://botpress.com/hub?type=Knowledge+Connector', 'Knowledge Connector'],
+                ['https://botpress.com/hub?type=Automation', 'Automation'],
+                ['https://botpress.com/hub?type=Template', 'Templates'],
               ],
             ],
             [
