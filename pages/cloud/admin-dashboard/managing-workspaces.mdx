@@ -7,14 +7,25 @@ import {Callout} from 'nextra/components'
 A Workspace is a collaborative environment where users can create, manage, and deploy chatbots. It provides a centralized location for managing all aspects of a chatbot project.
 
 <Callout type="note">
-  **Free Self-Serve Plan** <br />
-  The number of workspaces is limited to 1, with a maximum of 5 bots per workspace.
-
-  **Paid Self-Serve Plan** <br />
-  The number of workspaces is unlimited, with a maximum of 10 bots per workspace.
-
-  **Enterprise Plan** <br />
-  Botpress also offers an enterprise plan if you require advanced security, support, or customization. [Get in touch](https://botpress.com/contact-us).
+  **Free Plan (Self-Serve)**
+  - Ideal for individuals exploring AI chatbot capabilities.
+  - Includes 5 bots, 2,000 messages per month, 3 collaborators, 5,000 table rows, 100MB vector DB storage, and $5 AI credit monthly.
+  - Community support is available, and no credit card is required to start.
+  <hr/>
+  **Pay-as-You-Go Plan (Self-Serve)**
+  - Perfect for bot-building enthusiasts and individual developers.
+  - Start with the Free Plan features and customize by adding bots, messages, collaborators, etc., at an additional cost.
+  - Charges are at cost for AI tokens used, with a $5 monthly AI credit provided.
+  <hr/>
+  **Team Plan**
+  - Suited for teams with mature chatbot projects aiming for savings on limit increases.
+  - Offers 20 bots, 250,000 messages per month, 5 collaborators, 1,000,000 table rows, and 2GB vector DB storage.
+  - Includes live-chat support and represents a `$1000` monthly value for $495 USD/month.
+  <hr/>
+  **Enterprise Plan**
+  - Tailored for businesses that require advanced features and enterprise security.
+  - Provides custom numbers of bots, messages, storage, table rows, and collaborators, along with volume discounts, custom payment terms, and dedicated support.
+  - To get this plan, direct contact with Botpress is necessary for a custom quote. [Get in touch](https://botpress.com/contact-us).
 </Callout>
 <br />
 
@@ -31,7 +42,55 @@ You can manage users in a workspace by accessing the Collaborators tab on the da
 
 The user who creates a workspace automatically becomes the owner of the workspace.
 
-## Billing in Botpress
+
+## Usage & Subscriptions
+
+### Workspace Limits
+
+The Workspace Limits section displays the limits for your workspace. These limits are based on the plan you are on. Collaborators, bots, rate limits, and always alive bots are the limits that you can see here.
+
+### Usage
+
+This section displays the usage of your workspace. You can see the number of messages sent, storage used, table rows created, vector DB storage used, and AI spends for the current month.
+
+#### Messages
+
+A message is an incoming action that triggers bot activation. For example, if a user sends a message to a bot, that message will be counted as a message. The number of messages sent is the number of messages that have been sent to your bot in the current month.
+
+#### Storage
+
+This is the storage for files that are not vectorized (e.g. images used in conversations). 
+
+#### Table Rows
+
+This is the number of rows in the tables of your bot.
+
+#### Vector DB Storage
+
+This is the storage for Knowledge Base documents. 100MB is about 28,500 vectors. This is the equivalent of 4K blog articles or 20K PDF pages.
+
+#### AI Spends
+
+Track your usage of third-party AI services here. Botpress integrates with OpenAI to process natural language for your chatbot, incurring a cost based on the amount of [Tokens](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) consumed. This meter helps you monitor your spend against your budget.
+
+### Subscribing to Team Plan
+
+1. If you are on the Free plan, you can upgrade to the Team plan by clicking on the **Manage Subscription** button in the Usage & Subscriptions section of Workspace Settings. 
+2. Select the Team plan and add features you want to include in your plan.
+3. With the Team Plan chosen, you can enhance your plan by adding extra features, if necessary. Available additions include:
+     - Bot: Add bots for **$1** each.
+     - Table Rows: Increase your table row limit by **100,000** for **$25**.
+     - Vector DB Storage: Add **1GB** of vector database storage for **$10**.
+     - Collaborators: Add seats for collaborators at **$25** each.
+   - Adjust the quantities of these features by using the **+** and **-** buttons, and the total cost will be updated accordingly.
+4. Proceed to the **Checkout** button to complete the process after reviewing your features and total cost.
+5. After completing the Checkout process, your plan will be activated, and you can utilize the features as per the limits of the Team Plan. 
+
+If your needs exceed the provided resources, you can always go back and add more features as previously described.
+Remember, any modifications to your plan, including added features, will be reflected in your monthly billing.
+
+
+## Billing
 
 Botpress offers both Community and Business plans, and you can view your billing details by accessing the billing section on the dashboard.
 
@@ -60,6 +119,10 @@ The monthly budget allows you to set a limit on your billing amount to ensure th
 Finally, you can view your past payments in the Invoice section of the billing page.
 
 In summary, the billing section of Botpress allows you to keep track of your current plan, current monthly bill, payment information, incoming messages, monthly budget, and past payments.
+
+
+
+
 
 ## Audits
 
