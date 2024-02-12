@@ -14,7 +14,7 @@ import {
 import { JSONSchemaProperty, JSONSchemaType } from './generateApiDocumentationPage.types'
 import { getContext } from './openApiContext'
 
-const HiddenSections = ['file', 'helper']
+const HiddenSections = ['file', 'helper', 'task']
 const SectionsWithRequiredWorkspaceIdHeader = ['bot', 'integration', 'workspaceMember']
 const SectionsWithRequiredBotIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'action']
 const SectionsWithRequiredIntegrationIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'action']
@@ -220,4 +220,4 @@ getApiDocumetationPageContent()
   .then((context) => {
     fs.writeFileSync('./pages/api-documentation/index.mdx', context)
   })
-  .catch(() => {})
+  .catch(() => { })
