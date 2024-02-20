@@ -101,11 +101,11 @@ This comes with a few restrictions and behaviors specific to WhatsApp:
 - Button labels are limited to 20 characters, and dropdown labels are limited to 24 characters.
   - Labels exceeding these limits are automatically truncated. For example, the label "This button label is very long" would become "This button label i…" on a button and "This button label is ve…" on a dropdown.
 
-##### Carousels and Cards
+##### Cards and Carousels
 
-- Each card in a carousel will be sent individually.
-- There is a limit of 3 action buttons on each card.
-- Whatsapp requires cards to only use "reply" buttons. If the card has a URL action or no action at all, it won't be able to be displayed and will be down-rendered using multiple text/image messages instead.
+- WhatsApp only supports one link (label and URL) on a card, so multiple links will be split into separate empty cards.
+- WhatsApp imposes a limit of 3 "reply" action buttons on a card, so if a card has more than these, the buttons will be split into multiple cards.
+- WhatsApp doesn't natively support carousels, so each card in a carousel will be sent individually.
 
 ##### Files
 
