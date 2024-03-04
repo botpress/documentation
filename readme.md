@@ -12,7 +12,14 @@ pnpm install
 pnpm generate
 ```
 
-3. Then run the development server:
+3. Create a file in the root directory called `.env.local`. Add this content to it and save:
+```
+NEXT_PUBLIC_UNLEASH_URL="https://unleash.botpress.dev/proxy"
+NEXT_PUBLIC_UNLEASH_CLIENT_KEY=cdm:development.23c5337748c2fa1433ab463704660120ff4b3430451b3274ab53a909
+NEXT_PUBLIC_UNLEASH_APP_NAME=cdm
+```
+
+4. Then run the development server:
 
 ```bash
 pnpm dev
