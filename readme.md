@@ -1,24 +1,17 @@
 ## Getting Started
 
-1. First, install the dependencies
+1. Install Tilt -> [instructions](https://docs.tilt.dev/install.html)
 
+2. Run this command to run your project: 
 ```bash
-pnpm install
+tilt up
 ```
 
-2. Run the API documentation generator script:
+A "Tilt started on https://localhost:XYZ/" message will appear in the terminal. You can open the link to see the status. 
 
-```bash
-pnpm generate
-```
+3. Wait for all resources to have loaded.
 
-3. Then run the development server:
-
-```bash
-pnpm dev
-```
-
-Open [http://localhost:3000/docs](http://localhost:3000/docs) with your browser and you should see the local instance of documentation running.
+4. Open [http://localhost:3000/docs](http://localhost:3000/docs) with your browser and you should see the local instance of documentation running.
 
 ## About Nextra and Next.js
 
