@@ -53,7 +53,7 @@ Before your change is reflected on the live documentation website, your PR has t
 
 1. Open [http://localhost:3000/docs](http://localhost:3000/docs) with your browser and you should see the local instance of documentation running.
 
-## About Nextra and Next.js
+### About Nextra and Next.js
 
 This projects is based on [Nextra](https://nextra.site/) which is built on top of [Next.js](https://nextjs.org/). Although knowledge of these is not a prerequisite for contributing, here are some links to quickly get you started on some concepts used in this project:
 
