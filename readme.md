@@ -6,7 +6,7 @@ This repository contains the source code for the Botpress documentation website.
 
 Issues are disabled in the repository.
 
-If you find any problems in the documentation, have any suggestions about the documentation, have any questions about Botpress Cloud or want to report a bug in Botpress Cloud, please reach ou to us on [our discord server](https://discord.gg/botpress).
+If you find any problems in the documentation, have any suggestions for the documentation or Botpress Cloud in general, or want to report a bug, please reach out to us on [our discord server](https://discord.gg/botpress).
 
 This is to ensure your issue is addressed as soon as possible and to keep all the information in one place.
 
