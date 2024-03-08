@@ -12,7 +12,7 @@ This is to ensure your issue is addressed as soon as possible and to keep all th
 
 ## Contributions
 
-If you feel like adressing a documentation issue yourself, you can contribute by raising a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) directly on this Github Repo.
+If you feel like addressing a documentation issue yourself, you can contribute by raising a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) directly on this Github Repo.
 
 There are two ways to contribute to the documentation:
 
