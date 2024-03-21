@@ -231,6 +231,16 @@ You can scope the Knowledge Base by folders to limit the search to specific fold
 
 Learn more about [Scoping the Knowledge Base with Folders](./studio/explorer/knowledge-base/)
 
+## Handle No Answer in KB
+
+If no answer is found in the KB, you want to add a default message to handle that case. You can add a transition/expression card and add the following:
+```javascript
+!event.state.agentVariables.KnowledgeAgent.turn.answer
+```
+This will make the bot check if there is a value in the "answer" field; if not, then this transition/expression card will be fired.
+Connect this card to a node with the message you want to show.
+
+
 ## Debugging
 
 If your bot is not returning the expected results you can try debugging it in a few different ways:
