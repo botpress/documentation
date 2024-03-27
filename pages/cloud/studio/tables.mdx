@@ -37,6 +37,53 @@ A Query Selector is the query you use to select or filter data from your table. 
 
 To add a Query Selector, click on the table in the explorer menu. You'll then see a list of all the records in the table. Click on the `Add Query Selector` button from the right panel to add a new query selector. You can then enter the query selector in the text field.
 
+
+
+## Filtering Records
+
+Table filters are a powerful feature that allows you to refine and display only the records that meet certain criteria. Filters can be based on specific conditions, such as date ranges, text matches, and numerical comparisons.
+
+### Logical Operators
+
+- **AND**: Use the AND operator when you want all conditions to be true for a record to be displayed. For example, filtering by `createdAt` AND `status` will only show records that match both conditions.
+
+- **OR**: Use the OR operator to display records that match any one of multiple conditions. For example, filtering by `createdAt` OR `updatedAt` will show records that match either one of the conditions.
+
+### Types of Rules
+
+Rules define the individual conditions applied to each column of data.
+
+- `is equal to`: Shows records where the field is equal to the specified value.
+- `is not equal to`: Shows records where the field is not equal to the specified value.
+- `less than`: Shows records where the field is less than the specified value.
+- `less than or equal to`: Shows records where the field is less than or equal to the specified value.
+- `greater than`: Shows records where the field is greater than the specified value.
+- `greater than or equal to`: Shows records where the field is greater than or equal to the specified value.
+- `in`: Shows records where the field matches any of the specified values.
+- `not in`: Shows records where the field does not match any of the specified values.
+- `is null`: Shows records where the field is empty.
+- `is not null`: Shows records where the field is not empty.
+
+
+### Rule Groups
+
+- **Group**: A group is a collection of rules combined by a logical operator (AND/OR). You can nest groups to create complex filters.
+
+### Creating a Filter
+
+1. Click on the `Filter` button to expand the filter menu.
+2. Select a logical operator (AND/OR) from the dropdown.
+3. Choose a field to filter by (e.g., `createdAt`).
+4. Select a rule (e.g., `is equal to`).
+5. Enter the required value or select from a calendar if it's a date field.
+6. To add another rule within the same logical condition, click the `+ Rule` button.
+7. To create a nested group of conditions, click the `+ Group` button.
+8. Apply the filter by clicking the `Apply filter` button.
+
+### Manually Editing Filters
+
+Click on **Edit Manually** to view and edit the filter in JSON format. You can then copy this JSON filter and use it in your table operations via code.
+
 ## Operations on Tables - via the Interface
 
 ### Add records to a table
