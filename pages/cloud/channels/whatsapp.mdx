@@ -64,6 +64,12 @@ The **Phone Number ID** and **Access Token** are used to send and receive messag
 7. Click `Generate New Token` and select `whatsapp_business_messaging` and `whatsapp_business_management` permission.
 8. Copy and save your token.
 
+<Callout type="info">
+  **Fix for Unexpected Messaging Behavior** <br />
+ Experiencing replies from the wrong numbers? **Disable** the advanced permission for `whatsapp_business_management`. This adjustment is crucial because advanced permissions can interfere with how messages are routed, leading to responses from multiple numbers instead of the intended one. 
+ <br/>Reverting to basic permission settings ensures messages are directed correctly, solving this issue.
+</Callout>
+
 ## Finalizing Channel Configuration
 
 The next step is to Enable the channel from the top of the screen and then copy the webhook URL from the button below the webhook URL.
