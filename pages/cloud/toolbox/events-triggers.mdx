@@ -9,6 +9,27 @@ Events and Triggers in Botpress allow you to interact with your bot based on dif
 
 Events represent interactions or changes of state within the chat platform. These might not directly involve a message exchange in a conversation, but they capture a variety of activities. For instance, it could be when a user opens the chat in WhatsApp, when a new issue is created in Linear, or a member joining a group in Telegram.
 
+
+## Fixed Schedule
+
+Fixed Schedule is a feature that allows you to schedule events to occur at specific times. This can be useful for sending reminders, notifications, or other time-sensitive messages to users. Here's how you can use the Fixed Schedule feature:
+
+### Cron Expression
+
+A cron expression is a string representing a schedule. It consists of five fields separated by spaces, each representing a different aspect of the schedule. The fields are as follows:
+
+1. Minute (0 - 59)
+2. Hour (0 - 23)
+3. Day of the month (1 - 31)
+4. Month (1 - 12)
+5. Day of the week (0 - 7)
+
+Here are some examples of cron expressions:
+
+- `0 0 12 * * ?` - This expression triggers an event every day at 12:00 PM.
+- `0 0 12 ? * MON-FRI` - This expression triggers an event every weekday at 12:00 PM.
+- `0 0 12 1/1 * ? *` - This expression triggers an event every minute.
+
 ## Webchat Triggers
 
 When you enable the webchat, you can access Webchat Triggers. These are specific types of events that you can use for your benefit. Here are the types of Webchat Triggers:
@@ -35,6 +56,10 @@ To use a trigger, add it to the studio editor. Here's what you need to remember 
   Please note: filters are evaluated from the first trigger card created to the last one created. Make sure your conditions are written in consequence.
 </Callout>
 <br />
+
+### Advanced Options - Conversation ID
+
+The conversation ID is a unique identifier for each conversation. It can be used to track the conversation history and context. You can use the conversation ID to send messages to a specific conversation or to store information about the conversation.
 
 ## Welcome Message
 
@@ -132,6 +157,3 @@ Here's an example:
 
 In this example, when the user clicks on the button, the bot opens up and then sends a payload to the bot. You can customize this code based on your needs to create interactive experiences for your users.
 
-## Conclusion
-
-Events and Triggers in Botpress are powerful tools that allow your bot to be more interactive and responsive to user actions. Understanding how to use these features will enable you to create a more engaging user experience.
