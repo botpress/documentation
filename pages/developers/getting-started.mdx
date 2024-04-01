@@ -171,17 +171,6 @@ In this case, we are parsing the incoming request from telegram and extracting t
 
 The channels object is used to implement the channels that the integration defined previously. In this case, we defined a channel named `group`, this will be used to send messages to a specific group channel in telegram. The `text` message type that we defined is implemented in the `messages` object. This function will be called every time the bot sends a `text` message to the `group` channel.
 
-## Run the integration in dev mode
-
-Run the integration in dev mode:
-
-```bash
-bp dev
-```
-
-This command will log an integration ID. Keep it, we'll need it later.
-
-Bravo! You've just created your first integration. Now that we have defined, implemented and started the integration, we should be able to send and receive `text` messages from a bot.
 
 ## Develop the Bot
 
@@ -236,19 +225,6 @@ bot.message('', async ({ message, client, ctx }) => {
 
 We have a parrot bot! Now, let's test it.
 
-### Run the bot in dev mode
-
-Run the bot in dev mode:
-
-```bash
-bp dev
-```
-
-## Iterate
-
-At this point in time, you should have 2 different terminals running: one for the integration and one for the bot.
-
-Both the integration and the bot are running locally within a process that watch source files for changes. This means that you can modify the integration and the bot and see the changes in real time.
 
 ## Deploy the Integration
 
