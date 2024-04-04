@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":rebaseStalePrs", ":disableDependencyDashboard"],
+  "enabledManagers": ["npm", "github-actions"],
+  "prHourlyLimit": 5,
+  "separateMajorMinor": false,
+  "timezone": "America/Toronto",
+  "schedule": ["before 3am every monday"],
+  "bumpVersion": "patch",
+  "packageRules": [
+    {
+      "matchPackageNames": ["@types/react", "react-dom", "react"],
+      "allowedVersions": "< 19.0.0"
+    },
+    {
+      "matchPackageNames": ["@types/node"],
+      "allowedVersions": "< 19.0.0"
+    },
+    {
+      "packagePatterns": ["*"],
+      "groupName": "dependencies"
+    },
+    {
+      "packagePatterns": ["@botpress/*", "@bpinternal/*"],
+      "groupName": "botpress-deps",
+      "enabled": true
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
+  ]
+}
