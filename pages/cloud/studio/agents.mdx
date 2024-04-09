@@ -4,6 +4,17 @@ import { Callout } from 'nextra/components'
 
 Botpress offers a variety of specialized Agents to enhance your chatbot's capabilities and adaptability. These Agents are designed to perform specific tasks, each contributing to the overall performance of your chatbot. Here, we introduce five of our agents: HITL, Summary, Personality, Knowledge, and Translator Agents.
 
+<iframe
+  data-youtube-iframe
+  width="720"
+  height="480"
+  src="https://www.youtube.com/embed/vVLDSxZouxc"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
 ## HITL Agent
 
 The HITL Agent is a feature that allows human agents to take over the conversation from the chatbot. It's useful for instances when the bot cannot handle a user's request effectively, and a human touch is needed.
@@ -199,9 +210,19 @@ To enable Knowledge Bases on a node, click on the node in the workflow editor an
 
 ### Configuration
 
-- **Answer on Start Node**: When enabled, the chatbot will answer questions on the Start Node.
-- **Answer Manually**: Your chatbot will not answer automatically. When this option is enabled, you need to manually reply to the user with `{{turn.KnowledgeAgent.answer}}`. This can be done with a Say node, on a Capture Card or with a Hook (advanced).
-- **Context**: Providing context enhances the ability of knowledge bases to deliver more accurate answers. We recommend including the transcript of the conversation and/or the summary of the conversation provided by the Summary Agent. You can also include any other information that you think might be relevant to the KB.
+- **Enable Agent**: Turn this on to allow the chatbot to answer questions from Knowledge Bases.
+- **Answer Manually(advanced)**: Your chatbot will not answer automatically. When this option is enabled, you need to manually reply to the user with `{{turn.KnowledgeAgent.answer}}`. This can be done with a Say node, on a Capture Card or with a Hook (advanced).
+- **Additional Context**: Providing context enhances the ability of knowledge bases to deliver more accurate answers. We recommend including the transcript of the conversation and/or the summary of the conversation provided by the Summary Agent. You can also include any other information that you think might be relevant to the KB.
+- **Model Strategy**: Determines which model will be used to answer the user's question. 
+  - **Fastest**: Will always use the fastest model to answer the user's question.(GPT 3.5-Turbo)
+  - **Hybrid**: Will try to answer using the fastest model and fallback to the best model if the fastest model doesn't have an answer.
+  - **Best**: Will always use slowest but most accurate model to answer the user's question.(GPT 4-Turbo)
+
+
+### Chunks Count
+
+This setting allows you to control the number of chunks that the agent will use to answer the user's question. The agent will split the user's question into chunks and try to find an answer for each chunk. The agent will then merge the answers to form the final answer. Increasing the number of chunks can improve the quality of the answer but can also increase the response time and will cost more AI tokens.
+
 
 ### Exposed Variables
 
