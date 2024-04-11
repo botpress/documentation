@@ -1,0 +1,45 @@
+import { Callout } from 'nextra/components'
+
+# Schemas
+![Studio Explorer](/docs/content/schemas.png)
+
+You can create custom object schemas (variable types) to validate the data you are working with. This is useful when you want to ensure that the data you are working with is in the correct format.
+
+![Studio Explorer](/docs/content/schemas-explanation-1.png)
+
+1. Create a schema for a user object with the following properties:
+```js
+zui.object({
+  name: zui.string(),
+  age: zui.number(),
+  email: zui.string().email(),
+  address: zui.object({
+    street: zui.string(),
+    city: zui.string(),
+    zip: zui.string().length(5)
+  })
+})
+```
+2. Create a Variable of the user schema type and name it `UserInformation`.
+
+![Studio Explorer](/docs/content/schemas-explanation-2.png)
+
+### Usage in AI Task
+
+- Task Instructions:
+
+```text
+Fetch name, age, email and address from the provided input
+```
+
+- AI Task Input:
+
+```HTML
+Rohan Kokkula, 26, at rohan@email.com, received a mysterious parcel at his doorstep: 
+42 Emerald Lane, Mystic Falls, 560078. 
+Inside, a map beckoned him to a hidden world beneath Mumbai's bustling streets, 
+where history and magic intertwined.
+```
+
+- Store result in variables: Select the Variable we created above. 
+
