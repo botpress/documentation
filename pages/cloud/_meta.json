@@ -8,5 +8,6 @@
   "channels": "Messaging Channels",
   "exporting-bot-data": "Exporting Bot Data",
   "issues": "Issues",
-  "agent-handoff": "Live Agent Handoff"
+  "agent-handoff": "Live Agent Handoff",
+  "user-profile": "User Profile"
 }
