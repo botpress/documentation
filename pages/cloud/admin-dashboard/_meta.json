@@ -1,10 +1,12 @@
 {
-  "details": "Chatbot Details",
+  "details": "Overview",
   "messaging-channels": "",
-  "logs": "Admin Logs",
-  "config-variables": "Configuration Variables",
-  "analytics": "Chatbot Analytics",
   "chat": "Chat with your Bot",
+  "logs": "Production Logs",
+  "conversations": "Conversations",
+  "analytics": "Analytics",
+  "events": "Events",
   "usage": "Resources Usage Metrics",
-  "managing-workspaces": ""
+  "managing-workspaces": "",
+  "config-variables": "Configuration Variables"
 }
