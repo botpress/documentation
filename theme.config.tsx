@@ -2,6 +2,7 @@ import { Footer } from '@components/Footer'
 import { useRouter } from 'next/router'
 import { type DocsThemeConfig } from 'nextra-theme-docs'
 import React from 'react'
+import { Feedback } from './components/Feedback'
 
 const logo = (
   <div className="logo-container">
@@ -82,7 +83,12 @@ const docsRepositoryBase = 'https://github.com/botpress/documentation/tree/maste
 const nonEditablePages = ['pages/api-documentation/index.mdx']
 
 const config: DocsThemeConfig = {
-  feedback: { content: 'Feedback →' },
+  toc: {
+    extraContent: <Feedback />
+  },
+  feedback: {
+    content: undefined
+  },
   project: {
     link: undefined,
   },
