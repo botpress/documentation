@@ -1,5 +1,6 @@
 import * as fs from 'fs'
 import { startCase } from 'lodash'
+import { state } from '@botpress/api'
 import {
   API_DOCS_AUTHENTICATION,
   API_DOCS_CLIENT,
@@ -14,7 +15,70 @@ import {
 import { JSONSchemaProperty, JSONSchemaType } from './generateApiDocumentationPage.types'
 import { getContext } from './openApiContext'
 
-const HiddenSections = ['file', 'helper', 'task']
+type Operation = keyof typeof state['operations']
+
+const VisibleOperations: Operation[] = [
+  // User
+  'createUser',
+  'getUser',
+  'listUsers',
+  'getOrCreateUser',
+  'updateUser',
+  'deleteUser',
+
+  // Conversation
+  'createConversation',
+  'getConversation',
+  'listConversations',
+  'getOrCreateConversation',
+  'updateConversation',
+  'deleteConversation',
+
+  // Participant
+  'listParticipants',
+  'addParticipant',
+  'getParticipant',
+  'removeParticipant',
+
+  // Event
+  'createEvent',
+  'getEvent',
+  'listEvents',
+
+  // Message
+  'createMessage',
+  'getOrCreateMessage',
+  'getMessage',
+  'updateMessage',
+  'listMessages',
+  'deleteMessage',
+
+  // State
+  'getState',
+  'setState',
+  'getOrSetState',
+  'patchState',
+
+  // Action
+  'callAction',
+
+  // Tables
+  'listTables',
+  'getTable',
+  'getOrCreateTable',
+  'createTable',
+  'duplicateTable',
+  'updateTable',
+  'renameTableColumn',
+  'deleteTable',
+  'getTableRow',
+  'findTableRows',
+  'createTableRows',
+  'deleteTableRows',
+  'updateTableRows',
+  'upsertTableRows',
+]
+
 const SectionsWithRequiredWorkspaceIdHeader = ['bot', 'integration', 'workspaceMember']
 const SectionsWithRequiredBotIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'action']
 const SectionsWithRequiredIntegrationIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'action']
@@ -46,12 +110,12 @@ async function getApiDocumetationPageContent(): Promise<string> {
   })
 
   context.metadata.sections.forEach((section: Section) => {
-    if (HiddenSections.includes(section.name)) {
+    if (section.operations.findIndex((operation) => VisibleOperations.includes(operation as Operation)) === -1) {
       console.info(`Skipping section "${section.name}" of API documentation because it's marked as hidden`)
       return
     }
 
-    const endpointRoutes = section.operations.map((operationId: string) => {
+    const endpointRoutes = section.operations.filter((operationId) => VisibleOperations.includes(operationId as Operation)).map((operationId: string) => {
       const { method, path } = context.operations[operationId]
       return { method, path }
     })
@@ -93,7 +157,7 @@ async function getApiDocumetationPageContent(): Promise<string> {
       md += getJsonSchemaMarkDown(context.schemas[section.schema])
     }
 
-    section.operations.forEach((operationId: string) => {
+    section.operations.filter((operationId) => VisibleOperations.includes(operationId as Operation)).forEach((operationId: string) => {
       const operation = context.operations[operationId]
       md += `### ${startCase(operationId)}\n\n`
       const { method, path } = context.operations[operationId]
