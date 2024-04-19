@@ -141,3 +141,37 @@ In Studio, add the **Sync Members** card to your flow.
 ### Reaction Added trigger
 
 You can use the **Reaction Added** trigger to make actions when a reaction is added to a Slack message.
+
+### Get Slack Profile
+You can add the below code in an Execute Code card to allow the bot to retrieve the sender's Display Name or E-mail. You can add other properties as per your needs, all you need is to pass your bot's token in the first line. This can add more personalization and customization to your bot.
+
+```javascript
+const botToken = ''
+
+const userInfoUrl = 'https://slack.com/api/users.profile.get?user=' + event.tags.user['slack:id']
+// Query Slack API
+await axios({ method: 'get', url: userInfoUrl, headers: { Authorization: 'Bearer ' + botToken } })
+  .then((response) => {
+    console.log(response.data)
+    user.userFullName = response.data.profile.display_name
+    user.email = response.data.profile.email
+  })
+  .catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log(error.response.data)
+      console.log(error.response.status)
+      console.log(error.response.headers)
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request)
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message)
+    }
+    console.log(error.config)
+  })
+```
