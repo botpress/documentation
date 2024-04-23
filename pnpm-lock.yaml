@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@botpress/api':
-    specifier: 0.26.3
-    version: 0.26.3(openapi-types@12.1.3)
+    specifier: 0.26.4
+    version: 0.26.4(openapi-types@12.1.3)
   '@heroicons/react':
     specifier: ^2.0.18
     version: 2.0.18(react@18.2.0)
@@ -1450,8 +1450,8 @@ packages:
       js-yaml: 4.1.0
     dev: false
 
-  /@botpress/api@0.26.3(openapi-types@12.1.3):
-    resolution: {integrity: sha512-032/T1tloXE2XpKGsZdk7lekUzWtX+n7UMUQwq3UEWxlJobYfa2ztgv7Wwq5ypjXNvGPclJOV3+DBvwn1t59UA==}
+  /@botpress/api@0.26.4(openapi-types@12.1.3):
+    resolution: {integrity: sha512-+CCtbLkPxqYfYfEJ+lxlgAHZaE7pK61tChrlTbPcZEakkbMjot5HVQXz58u3K6cPbvDOoL2BUtV561DAbE5vfA==}
     dependencies:
       '@bpinternal/opapi': 0.10.12(openapi-types@12.1.3)
     transitivePeerDependencies:
