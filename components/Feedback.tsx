@@ -1,23 +1,44 @@
-import { WebchatProvider, useClient } from '@botpress/webchat'
 import { HandThumbDownIcon, HandThumbUpIcon } from '@heroicons/react/24/outline'
-
+import { getUserData } from '@utils/userData'
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-use';
 
 export const Feedback = () => {
-  const client = useClient({
-    clientId: 'bf6e2073-8c26-4bb8-88fb-bf9c48ee5b76',
-    apiUrl: 'https://webchat.botpress.cloud',
-    mode: 'pushpin'
-  })
+  const [feedbackGiven, setFeedbackGiven] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setFeedbackGiven(false)
+  }, [location])
+
+  const sendFeedback = async ({ feedback }: { feedback: 'positive' | 'negative' }) => {
+    await fetch('https://webhook.botpress.cloud/141bd36a-fbe7-4926-849c-1a793121196c', {
+      method: 'POST',
+      body: JSON.stringify({
+        feedback,
+        userData: getUserData()
+      }),
+    }).catch(err => {
+      console.error(err)
+    })
+
+    setFeedbackGiven(true)
+  }
 
   return (
-    <WebchatProvider client={client}>
       <div className='flex flex-col items-start'>
-        <div className='text-gray-500 text-xs mb-2'>Give us feedback!</div>
-        <div className="flex justify-center space-x-3">
-          <HandThumbUpIcon className="w-6 h-6 text-gray-500 hover:text-gray-800 cursor-pointer" />
-          <HandThumbDownIcon className="w-6 h-6 text-gray-500 hover:text-gray-800 cursor-pointer" />
-        </div>
+        {
+          feedbackGiven ? (
+            <div className='text-gray-500 text-xs mb-2 animate-[fadein_500ms_ease-in-out]'>Thank you for your feedback!</div>) : (
+            <>
+              <div className='text-gray-500 text-xs mb-2'>Was this helpful!</div>
+              <div className="flex justify-center space-x-3">
+                <HandThumbUpIcon className="w-6 h-6 text-gray-500 hover:text-gray-800 cursor-pointer" onClick={() => sendFeedback({ feedback: 'positive' })} />
+                <HandThumbDownIcon className="w-6 h-6 text-gray-500 hover:text-gray-800 cursor-pointer" onClick={() => sendFeedback({ feedback: 'negative' })} />
+              </div>
+            </>
+          )
+        }
       </div>
-    </WebchatProvider>
   )
 }
