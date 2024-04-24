@@ -12,7 +12,7 @@ export const Feedback = () => {
   }, [location])
 
   const sendFeedback = async ({ feedback }: { feedback: 'positive' | 'negative' }) => {
-    await fetch('https://webhook.botpress.cloud/141bd36a-fbe7-4926-849c-1a793121196c', {
+    await fetch(process.env.NEXT_PUBLIC_BOT_URL ?? '', {
       method: 'POST',
       body: JSON.stringify({
         feedback,
