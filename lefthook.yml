@@ -1,4 +1,0 @@
-pre-push:
-  commands:
-    todo:
-      run: deno run --allow-run=rg,git,jq jsr:@michaelmass/stodo/cli search --format pretty -e --jq "[.[] | select(.priority.value > 5)]"
