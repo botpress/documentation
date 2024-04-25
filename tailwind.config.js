@@ -13,6 +13,12 @@ module.exports = {
       heading: ['Lexend', 'sans-serif'],
     },
     extend: {
+      keyframes: {
+        fadein: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        }
+      },
       colors: {
         bpBlue: '#3276ea',
         bpBlueDark: '#134fb7',

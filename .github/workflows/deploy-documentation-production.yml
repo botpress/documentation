@@ -17,6 +17,7 @@ jobs:
           unleash-url: ${{ vars.UNLEASH_URL }}
           unleash-app-name: ${{ vars.UNLEASH_APP_NAME }}
           unleash-client-key: ${{ vars.UNLEASH_CLIENT_KEY }}
+          bot-url: ${{ vars.BOT_URL }}
 
       - uses: botpress/gh-actions/deploy/s3@v2
         if: github.ref == 'refs/heads/master'
