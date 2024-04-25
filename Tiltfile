@@ -17,6 +17,7 @@ documentation_env = {
   'NEXT_PUBLIC_UNLEASH_APP_NAME': 'cdm',
   'NEXT_PUBLIC_UNLEASH_CLIENT_KEY': 'cdm:development.23c5337748c2fa1433ab463704660120ff4b3430451b3274ab53a909',
   'NEXT_PUBLIC_UNLEASH_URL': 'https://unleash.botpress.dev/proxy',
+  'NEXT_PUBLIC_BOT_URL': 'https://webhook.botpress.cloud/141bd36a-fbe7-4926-849c-1a793121196c',
 }
 
 local_resource(
