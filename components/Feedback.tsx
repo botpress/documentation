@@ -31,7 +31,7 @@ export const Feedback = () => {
           feedbackGiven ? (
             <div className='text-gray-500 text-xs mb-2 animate-[fadein_500ms_ease-in-out]'>Thank you for your feedback!</div>) : (
             <>
-              <div className='text-gray-500 text-xs mb-2'>Was this helpful!</div>
+              <div className='text-gray-500 text-xs mb-2'>Was this helpful?</div>
               <div className="flex justify-center space-x-3">
                 <HandThumbUpIcon className="w-6 h-6 text-gray-500 hover:text-gray-800 cursor-pointer" onClick={() => sendFeedback({ feedback: 'positive' })} />
                 <HandThumbDownIcon className="w-6 h-6 text-gray-500 hover:text-gray-800 cursor-pointer" onClick={() => sendFeedback({ feedback: 'negative' })} />
