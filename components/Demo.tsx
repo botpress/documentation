@@ -26,11 +26,11 @@ export const Demo = ({ src, message, title, preload = true }: Props) => {
                 <CloseDown className='h-6 w-10' />
               </button>
             </div>
-            {preload && <iframe src={src} className='w-full h-full' />}
+            {(preload || showDemo) && <iframe src={src} className='w-full h-full' />}
           </div>
         </div>
 
-      <div className='h-20 transition-all cursor-pointer mt-8 hover:shadow-sm hover:scale-105 p-2 border rounded border-blue-100 bg-white hover:border-blue-400 group' onClick={() => setShowDemo(true)}>
+      <div className='h-20 transition-all cursor-pointer m-4 mt-8 mb-0 hover:shadow-sm hover:scale-105 p-2 border rounded border-blue-100 bg-white hover:border-blue-400 group' onClick={() => setShowDemo(true)}>
         <div className='flex justify-center items-center relative'>
           <>
             <Execution className='h-14 w-14 mr-4' />
