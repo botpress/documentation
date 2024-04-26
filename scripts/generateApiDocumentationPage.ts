@@ -15,7 +15,7 @@ import {
 import { JSONSchemaProperty, JSONSchemaType } from './generateApiDocumentationPage.types'
 import { getContext } from './openApiContext'
 
-type Operation = keyof typeof state['operations']
+type Operation = keyof (typeof state)['operations']
 
 const VisibleOperations: Operation[] = [
   // User
@@ -77,6 +77,18 @@ const VisibleOperations: Operation[] = [
   'deleteTableRows',
   'updateTableRows',
   'upsertTableRows',
+
+  // Bots
+  'createBot',
+  'getBot',
+  'updateBot',
+  'deleteBot',
+  'listBots',
+  'listBotIssues',
+  'listBotIssueEvents',
+  'deleteBotIssue',
+  'getBotLogs',
+  'getBotAnalytics',
 ]
 
 const SectionsWithRequiredWorkspaceIdHeader = ['bot', 'integration', 'workspaceMember']
@@ -115,10 +127,12 @@ async function getApiDocumetationPageContent(): Promise<string> {
       return
     }
 
-    const endpointRoutes = section.operations.filter((operationId) => VisibleOperations.includes(operationId as Operation)).map((operationId: string) => {
-      const { method, path } = context.operations[operationId]
-      return { method, path }
-    })
+    const endpointRoutes = section.operations
+      .filter((operationId) => VisibleOperations.includes(operationId as Operation))
+      .map((operationId: string) => {
+        const { method, path } = context.operations[operationId]
+        return { method, path }
+      })
 
     const routesVariableName = `routes_${section.name}`
 
@@ -157,33 +171,35 @@ async function getApiDocumetationPageContent(): Promise<string> {
       md += getJsonSchemaMarkDown(context.schemas[section.schema])
     }
 
-    section.operations.filter((operationId) => VisibleOperations.includes(operationId as Operation)).forEach((operationId: string) => {
-      const operation = context.operations[operationId]
-      md += `### ${startCase(operationId)}\n\n`
-      const { method, path } = context.operations[operationId]
-      md += `<EndpointBlock className="mt-2" endpoints={[${JSON.stringify({ method, path })}]} />\n\n`
-      md += `${operation.description} \n\n`
-      Object.entries(operation.parameters).forEach(([location, parameters]: [string, any]) => {
-        md += `<H4> ${startCase(location)} </H4> \n\n`
-        if (Array.isArray(parameters)) {
-          parameters.forEach((parameter) => {
-            md += `<Collapsible className="mt-3" collapsible={false} defaultCollapsed={${!Boolean(
-              parameter.schema?.description
-            )}}>\n\n`
-            md += getPropertyMdWithDescription(parameter.name, parameter.schema)
-            md += '</Collapsible>\n\n'
-          })
+    section.operations
+      .filter((operationId) => VisibleOperations.includes(operationId as Operation))
+      .forEach((operationId: string) => {
+        const operation = context.operations[operationId]
+        md += `### ${startCase(operationId)}\n\n`
+        const { method, path } = context.operations[operationId]
+        md += `<EndpointBlock className="mt-2" endpoints={[${JSON.stringify({ method, path })}]} />\n\n`
+        md += `${operation.description} \n\n`
+        Object.entries(operation.parameters).forEach(([location, parameters]: [string, any]) => {
+          md += `<H4> ${startCase(location)} </H4> \n\n`
+          if (Array.isArray(parameters)) {
+            parameters.forEach((parameter) => {
+              md += `<Collapsible className="mt-3" collapsible={false} defaultCollapsed={${!Boolean(
+                parameter.schema?.description
+              )}}>\n\n`
+              md += getPropertyMdWithDescription(parameter.name, parameter.schema)
+              md += '</Collapsible>\n\n'
+            })
+          }
+        })
+        if (operation.requestBody) {
+          md += '<H4> Body </H4>\n\n'
+          md += getJsonSchemaMarkDown(operation.requestBody.schema) + '\n\n'
         }
-      })
-      if (operation.requestBody) {
-        md += '<H4> Body </H4>\n\n'
-        md += getJsonSchemaMarkDown(operation.requestBody.schema) + '\n\n'
-      }
 
-      md += '<H4> Response </H4> \n\n'
-      md += `${operation.response?.description || ''} \n\n`
-      md += getJsonSchemaMarkDown(operation.response.schema) + '\n\n'
-    })
+        md += '<H4> Response </H4> \n\n'
+        md += `${operation.response?.description || ''} \n\n`
+        md += getJsonSchemaMarkDown(operation.response.schema) + '\n\n'
+      })
   })
 
   return md
@@ -284,4 +300,4 @@ getApiDocumetationPageContent()
   .then((context) => {
     fs.writeFileSync('./pages/api-documentation/index.mdx', context)
   })
-  .catch(() => { })
+  .catch(() => {})
