@@ -17,7 +17,11 @@ module.exports = {
         fadein: {
           '0%': { opacity: 0 },
           '100%': { opacity: 1 },
-        }
+        },
+        scaleout: {
+          '0%': { transform: 'scale(0.2)' },
+          '100%': { transform: 'scale(1)' },
+        },
       },
       colors: {
         bpBlue: '#3276ea',

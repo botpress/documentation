@@ -1,4 +1,11 @@
+import { Callout } from 'nextra/components'
+import { Demo } from '@components/Demo'
+
 # Webchat React Library
+
+<Callout type="warning">
+  When using the react library, the configuration in the dashboard will not be used. You will need to configure the webchat using the React components.
+</Callout>
 
 The Webchat React library is a set of React components that makes it easy to embed a webchat in any application or build a more advance version of the actual webchat. It is the building block for the Webchat UI.
 
@@ -16,10 +23,9 @@ The `useClient` hook is a custom hook that will create an instance of the `Webch
 
 The `WebchatProvider` component is a context provider that will provide the webchat with the necessary configuration. It requires a `client` prop that is an instance of the `WebchatClient`. The `WebchatProvider` must be provided for any Webchat component to work.
 
-### Theme
+### Theme & Styles
 
-{/* TODO! finish this section */}
-The `WebchatProvider` component also accepts a `theme` prop that is an object that will style the webchat .
+The `WebchatProvider` component also accepts a `theme` prop that is an object that will style the webchat. Read the [extending Botpress themes](theming/extending-botpress-themes) to generate the `theme object` and `stylesheet`.
 
 ### What it looks like
 
@@ -40,8 +46,7 @@ const App = () => {
 }
 ```
 
-### Header
-### MessageList
-### Composer
+<Demo src="https://stackblitz.com/edit/bp-webchat-template-c51e4w?embed=1&file=src%2FApp.tsx&hideNavigation=1" title="React Library Demo" />
 
-### Custom Message Components
+This is the simplest way to get started with the Webchat React library. After this, we'll get into more advanced topics like advance components, custom messages components, and more.
+
