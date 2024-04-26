@@ -6,12 +6,14 @@ import { useState } from 'react';
 type Props = {
   title?: string;
   message?: string;
-  src: string;
+  example: string;
   preload?: boolean;
 }
 
-export const Demo = ({ src, message, title, preload = true }: Props) => {
+export const Demo = ({ example, message, title, preload = true }: Props) => {
   const [showDemo, setShowDemo] = useState(false);
+
+  const src = `https://stackblitz.com/github/botpress/documentation-examples/tree/master/examples/${example}?embed=1&hideNavigation=1&view=both`
 
   return (
     <>
