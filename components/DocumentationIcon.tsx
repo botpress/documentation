@@ -10,6 +10,13 @@ import Rocket from '@assets/learning_center.inline.svg'
 import Lightning from '@assets/lightning.inline.svg'
 import Prompt from '@assets/prompt.inline.svg'
 import StudioLayout from '@assets/studio-layout.inline.svg'
+import Desktop from '@assets/desktop.icon.svg'
+import ReactIcon from '@assets/react.svg'
+import Javascript from '@assets/javascript.svg'
+import Code from '@assets/code.icon.svg'
+import Community from '@assets/community.icon.svg'
+import Dashboard from '@assets/dashboard.icon.svg'
+
 export type DocumentationIcons =
   | 'book'
   | 'chip'
@@ -22,6 +29,12 @@ export type DocumentationIcons =
   | 'grid'
   | 'lightning'
   | 'rocket'
+  | 'desktop'
+  | 'react'
+  | 'code'
+  | 'javascript'
+  | 'community'
+  | 'dashboard'
 
 export function DocumentationIcon(props: { name: DocumentationIcons; className: string }) {
   const IconElement = (() => {
@@ -48,6 +61,18 @@ export function DocumentationIcon(props: { name: DocumentationIcons; className: 
         return Lightning
       case 'rocket':
         return Rocket
+      case 'desktop':
+        return Desktop
+      case 'react':
+        return ReactIcon
+      case 'code':
+        return Code
+      case 'javascript':
+        return Javascript
+      case 'community':
+        return Community
+      case 'dashboard':
+        return Dashboard
 
       default:
         return <svg />

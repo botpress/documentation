@@ -12,6 +12,7 @@ export const Feedback = () => {
   }, [location])
 
   const sendFeedback = async ({ feedback }: { feedback: 'positive' | 'negative' }) => {
+    setFeedbackGiven(true)
     await fetch(process.env.NEXT_PUBLIC_BOT_URL ?? '', {
       method: 'POST',
       body: JSON.stringify({
@@ -21,8 +22,6 @@ export const Feedback = () => {
     }).catch(err => {
       console.error(err)
     })
-
-    setFeedbackGiven(true)
   }
 
   return (

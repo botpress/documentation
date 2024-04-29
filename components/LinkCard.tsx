@@ -22,7 +22,9 @@ export function LinkCard({ title, className, href, icon, children }: LinkCardPro
       )}
     >
       <Card className="h-full p-4">
-        {icon && <DocumentationIcon name={icon} className="h-12 w-12 text-bpBlue" />}
+        <div className='p-4 bg-blue-50 rounded flex justify-center items-center'>
+          {icon && <DocumentationIcon name={icon} className="max-h-14 max-w-18 text-bpBlue" />}
+        </div>
         <div className="pt-3 text-xl font-bold">{title}</div>
         <div className="pt-2.5 text-base"> {children}</div>
       </Card>
