@@ -8,12 +8,13 @@ type Props = {
 	message?: string;
 	example: string;
 	preload?: boolean;
+	file?: string
 };
 
-export const Demo = ({ example, message, title, preload = true }: Props) => {
+export const Demo = ({ example, message, title, file = 'src/App.tsx', preload = true }: Props) => {
 	const [showDemo, setShowDemo] = useState(false);
 
-	const src = `https://stackblitz.com/github/botpress/documentation-examples/tree/master/examples/${example}?embed=1&hideNavigation=1&view=both`;
+	const src = `https://stackblitz.com/github/botpress/documentation-examples/tree/master/examples/${example}?embed=1&hideNavigation=1&view=both&file=${encodeURIComponent(file)}`;
 
 	return (
 		<>
