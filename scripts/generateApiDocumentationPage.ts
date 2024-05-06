@@ -89,6 +89,14 @@ const VisibleOperations: Operation[] = [
   'deleteBotIssue',
   'getBotLogs',
   'getBotAnalytics',
+
+  // Files
+  'createFile',
+  'getFile',
+  'updateFile',
+  'deleteFile',
+  'listFiles',
+  'searchFiles',
 ]
 
 const SectionsWithRequiredWorkspaceIdHeader = ['bot', 'integration', 'workspaceMember']
