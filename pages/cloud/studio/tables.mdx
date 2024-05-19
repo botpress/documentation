@@ -444,13 +444,13 @@ const limit = 10
 const startRow = 0
 
 workflow.records = await DataTable1.findRecords({
-  limit,
+  limit: limit,
   offset: startRow,
 })
 
 // Checking the second page
 const secondPage = await Data1Table.findRecords({
-  limit,
+  limit: limit,
   filter: AI`everything`,
   offset: startRow + limit,
 })
