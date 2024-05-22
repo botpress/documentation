@@ -274,7 +274,6 @@ function getPropertyMdWithDescription(
   let md = ''
   md += `\`\`\`${name}\`\`\` : ${getPropertyType(property)} ${supplementaryHeadingMarkdown} \n\n`
   md += `${property?.description || ''}\n\n`
-  console.log(md)
   return md
 }
 
