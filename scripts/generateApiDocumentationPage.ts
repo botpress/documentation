@@ -12,7 +12,7 @@ import {
   API_REQUIRED_WORKSPACE_ID_HEADER,
   DONT_EDIT_WARNING,
 } from './generateApiDocumentationPage.constants'
-import { JSONSchemaProperty, JSONSchemaType, Parameter } from './generateApiDocumentationPage.types'
+import { JSONSchemaProperty, JSONSchemaType, Parameter, ParameterSchema } from './generateApiDocumentationPage.types'
 import { getContext } from './openApiContext'
 
 type Operation = keyof (typeof state)['operations']
@@ -190,7 +190,8 @@ async function getApiDocumetationPageContent(): Promise<string> {
         Object.entries(operation.parameters).forEach(([location, parameters]: [string, any]) => {
           md += `<H4> ${startCase(location)} </H4> \n\n`
           if (Array.isArray(parameters)) {
-            parameters.forEach((parameter) => {
+            parameters.forEach((p) => {
+              const parameter = ParameterSchema.parse(p)
               md += `<Collapsible className="mt-3" collapsible={false} defaultCollapsed={${!Boolean(
                 parameter.description
               )}}>\n\n`
@@ -274,18 +275,21 @@ function getPropertyMdWithDescription(
   let md = ''
   md += `\`\`\`${name}\`\`\` : ${getPropertyType(property)} ${supplementaryHeadingMarkdown} \n\n`
   md += `${property?.description || ''}\n\n`
+  if (property.type === 'string' && property.enum) {
+    md += `Possible values: ${property.enum.map((v) => `\`${v}\``).join(', ')}\n`
+  }
+  md += '\n'
   return md
 }
 
-function getParameterMd({name, schema, description}: Parameter
-) {
+function getParameterMd({ name, schema, description }: Parameter) {
   let md = ''
   md += `\`\`\`${name}\`\`\` : ${getPropertyType(schema)} \n\n`
-  md += `${description || ''}\n\n`
+  md += `${description || ''}\n`
   return md
 }
 
-export function getPropertyType(property: JSONSchemaProperty): string {
+export function getPropertyType(property: JSONSchemaProperty | Parameter['schema']): string {
   if (!property?.type) {
     return ''
   }
@@ -312,8 +316,6 @@ export function getNormalizedProperties(jsonSchema: JSONSchemaType): Record<stri
   return jsonSchema.properties
 }
 
-getApiDocumetationPageContent()
-  .then((context) => {
-    fs.writeFileSync('./pages/api-documentation/index.mdx', context)
-  })
-  .catch(() => {})
+getApiDocumetationPageContent().then((context) => {
+  fs.writeFileSync('./pages/api-documentation/index.mdx', context)
+})
