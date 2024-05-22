@@ -6,5 +6,6 @@
   "sdk": "SDK",
   "howTo":"How To",
   "concepts": "Key Concepts",
-  "webchat": "Web Chat"
+  "webchat": "Web Chat old",
+  "webchat-v2": "Web Chat v2"
 }

@@ -1,0 +1,29 @@
+import { Demo } from '@components/Demo'
+import { ComingSoon } from '@components/ComingSoon'
+
+## Message List Component
+
+The `MessageList` component is a component that will render the list of messages in the webchat. This component can be used to add custom messages to the webchat.
+
+![webchat-embed-config](/docs/content/webchat/component-message-list.png)
+
+```jsx /MessageList/
+import "./style.css"
+import theme from "./theme.json"
+
+import { MessageList, Container, WebchatProvider, useClient } from '@botpress/webchat'
+
+const App = () => {
+  const client = useClient({ clientId: '453254325-54325-435-345-345534253' })
+
+  return (
+    <WebchatProvider client={client} theme={theme}>
+      <Container>
+        <MessageList />
+      </Container>
+    </WebchatProvider>
+  )
+}
+```
+
+<Demo example="webchat-react-message-list" title="Message List Demo" />

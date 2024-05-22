@@ -1,12 +1,16 @@
+import { z } from 'zod'
+
 type AdditionalProperties = JSONSchemaProperty | boolean
-type StringObject = {
-  type: 'string'
-  maxLength?: number
-}
 
 type CommonProps = {
   description?: string
   deprecated?: boolean
+}
+
+type StringObject = CommonProps & {
+  type: 'string'
+  maxLength?: number
+  enum?: string[]
 }
 
 type PrimitiveObject = CommonProps & {
@@ -20,11 +24,11 @@ type ArrayObject = CommonProps & {
 
 type ObjectObject = CommonProps & {
   type: 'object'
-  properties: Record<string, PrimitiveObject | ArrayObject | ObjectObject>
+  properties: Record<string, PrimitiveObject | StringObject | ArrayObject | ObjectObject>
   additionalProperties?: AdditionalProperties
   required: string[]
 }
-export type JSONSchemaProperty = PrimitiveObject | ArrayObject | ObjectObject
+export type JSONSchemaProperty = PrimitiveObject | StringObject | ArrayObject | ObjectObject
 
 export type JSONSchemaType = {
   $schema?: string
@@ -42,6 +46,27 @@ export type JSONSchemaProps = JSX.IntrinsicElements['div'] & {
   collapsable?: boolean
   parent?: string
 }
+
+export const ParameterSchema = z
+  .object({
+    name: z.string(),
+    in: z.enum(['path', 'query']),
+    description: z.string(),
+    required: z.boolean().optional(),
+    schema: z.discriminatedUnion('type', [
+      z.object({ type: z.literal('string') }),
+      z.object({ type: z.literal('boolean') }),
+      z.object({ type: z.literal('integer') }),
+      z.object({ type: z.literal('object'), additionalProperties: z.object({ type: z.literal('string') }).optional() }),
+      z.object({
+        type: z.literal('array'),
+        items: z.object({ type: z.literal('string') }).optional(),
+      }),
+    ]),
+  })
+  .strict()
+
+export type Parameter = z.infer<typeof ParameterSchema>
 
 const httpMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'] as const
 type HttpMethod = (typeof httpMethods)[number]

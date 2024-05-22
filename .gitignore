@@ -10,3 +10,5 @@ out
 pages/api-documentation/index.mdx
 .vercel
 .env*.local
+.ignore.me.*
+lefthook.yml

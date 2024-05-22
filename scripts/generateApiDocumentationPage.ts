@@ -1,5 +1,6 @@
 import * as fs from 'fs'
 import { startCase } from 'lodash'
+import { state } from '@botpress/api'
 import {
   API_DOCS_AUTHENTICATION,
   API_DOCS_CLIENT,
@@ -11,10 +12,93 @@ import {
   API_REQUIRED_WORKSPACE_ID_HEADER,
   DONT_EDIT_WARNING,
 } from './generateApiDocumentationPage.constants'
-import { JSONSchemaProperty, JSONSchemaType } from './generateApiDocumentationPage.types'
+import { JSONSchemaProperty, JSONSchemaType, Parameter, ParameterSchema } from './generateApiDocumentationPage.types'
 import { getContext } from './openApiContext'
 
-const HiddenSections = ['file', 'helper', 'task']
+type Operation = keyof (typeof state)['operations']
+
+const VisibleOperations: Operation[] = [
+  // User
+  'createUser',
+  'getUser',
+  'listUsers',
+  'getOrCreateUser',
+  'updateUser',
+  'deleteUser',
+
+  // Conversation
+  'createConversation',
+  'getConversation',
+  'listConversations',
+  'getOrCreateConversation',
+  'updateConversation',
+  'deleteConversation',
+
+  // Participant
+  'listParticipants',
+  'addParticipant',
+  'getParticipant',
+  'removeParticipant',
+
+  // Event
+  'createEvent',
+  'getEvent',
+  'listEvents',
+
+  // Message
+  'createMessage',
+  'getOrCreateMessage',
+  'getMessage',
+  'updateMessage',
+  'listMessages',
+  'deleteMessage',
+
+  // State
+  'getState',
+  'setState',
+  'getOrSetState',
+  'patchState',
+
+  // Action
+  'callAction',
+
+  // Tables
+  'listTables',
+  'getTable',
+  'getOrCreateTable',
+  'createTable',
+  'duplicateTable',
+  'updateTable',
+  'renameTableColumn',
+  'deleteTable',
+  'getTableRow',
+  'findTableRows',
+  'createTableRows',
+  'deleteTableRows',
+  'updateTableRows',
+  'upsertTableRows',
+
+  // Bots
+  'createBot',
+  'getBot',
+  'updateBot',
+  'deleteBot',
+  'listBots',
+  'listBotIssues',
+  'listBotIssueEvents',
+  'deleteBotIssue',
+  'getBotLogs',
+  'getBotAnalytics',
+
+  // Files
+  'createFile',
+  'getFile',
+  'updateFile',
+  'deleteFile',
+  'listFiles',
+  'searchFiles',
+]
+
 const SectionsWithRequiredWorkspaceIdHeader = ['bot', 'integration', 'workspaceMember']
 const SectionsWithRequiredBotIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'action']
 const SectionsWithRequiredIntegrationIdHeader = ['user', 'conversation', 'event', 'message', 'file', 'state', 'action']
@@ -46,15 +130,17 @@ async function getApiDocumetationPageContent(): Promise<string> {
   })
 
   context.metadata.sections.forEach((section: Section) => {
-    if (HiddenSections.includes(section.name)) {
+    if (section.operations.findIndex((operation) => VisibleOperations.includes(operation as Operation)) === -1) {
       console.info(`Skipping section "${section.name}" of API documentation because it's marked as hidden`)
       return
     }
 
-    const endpointRoutes = section.operations.map((operationId: string) => {
-      const { method, path } = context.operations[operationId]
-      return { method, path }
-    })
+    const endpointRoutes = section.operations
+      .filter((operationId) => VisibleOperations.includes(operationId as Operation))
+      .map((operationId: string) => {
+        const { method, path } = context.operations[operationId]
+        return { method, path }
+      })
 
     const routesVariableName = `routes_${section.name}`
 
@@ -93,33 +179,36 @@ async function getApiDocumetationPageContent(): Promise<string> {
       md += getJsonSchemaMarkDown(context.schemas[section.schema])
     }
 
-    section.operations.forEach((operationId: string) => {
-      const operation = context.operations[operationId]
-      md += `### ${startCase(operationId)}\n\n`
-      const { method, path } = context.operations[operationId]
-      md += `<EndpointBlock className="mt-2" endpoints={[${JSON.stringify({ method, path })}]} />\n\n`
-      md += `${operation.description} \n\n`
-      Object.entries(operation.parameters).forEach(([location, parameters]: [string, any]) => {
-        md += `<H4> ${startCase(location)} </H4> \n\n`
-        if (Array.isArray(parameters)) {
-          parameters.forEach((parameter) => {
-            md += `<Collapsible className="mt-3" collapsible={false} defaultCollapsed={${!Boolean(
-              parameter.schema?.description
-            )}}>\n\n`
-            md += getPropertyMdWithDescription(parameter.name, parameter.schema)
-            md += '</Collapsible>\n\n'
-          })
+    section.operations
+      .filter((operationId) => VisibleOperations.includes(operationId as Operation))
+      .forEach((operationId: string) => {
+        const operation = context.operations[operationId]
+        md += `### ${startCase(operationId)}\n\n`
+        const { method, path } = context.operations[operationId]
+        md += `<EndpointBlock className="mt-2" endpoints={[${JSON.stringify({ method, path })}]} />\n\n`
+        md += `${operation.description} \n\n`
+        Object.entries(operation.parameters).forEach(([location, parameters]: [string, any]) => {
+          md += `<H4> ${startCase(location)} </H4> \n\n`
+          if (Array.isArray(parameters)) {
+            parameters.forEach((p) => {
+              const parameter = ParameterSchema.parse(p)
+              md += `<Collapsible className="mt-3" collapsible={false} defaultCollapsed={${!Boolean(
+                parameter.description
+              )}}>\n\n`
+              md += getParameterMd(parameter)
+              md += '</Collapsible>\n\n'
+            })
+          }
+        })
+        if (operation.requestBody) {
+          md += '<H4> Body </H4>\n\n'
+          md += getJsonSchemaMarkDown(operation.requestBody.schema) + '\n\n'
         }
-      })
-      if (operation.requestBody) {
-        md += '<H4> Body </H4>\n\n'
-        md += getJsonSchemaMarkDown(operation.requestBody.schema) + '\n\n'
-      }
 
-      md += '<H4> Response </H4> \n\n'
-      md += `${operation.response?.description || ''} \n\n`
-      md += getJsonSchemaMarkDown(operation.response.schema) + '\n\n'
-    })
+        md += '<H4> Response </H4> \n\n'
+        md += `${operation.response?.description || ''} \n\n`
+        md += getJsonSchemaMarkDown(operation.response.schema) + '\n\n'
+      })
   })
 
   return md
@@ -186,10 +275,21 @@ function getPropertyMdWithDescription(
   let md = ''
   md += `\`\`\`${name}\`\`\` : ${getPropertyType(property)} ${supplementaryHeadingMarkdown} \n\n`
   md += `${property?.description || ''}\n\n`
+  if (property.type === 'string' && property.enum) {
+    md += `Possible values: ${property.enum.map((v) => `\`${v}\``).join(', ')}\n`
+  }
+  md += '\n'
   return md
 }
 
-export function getPropertyType(property: JSONSchemaProperty): string {
+function getParameterMd({ name, schema, description }: Parameter) {
+  let md = ''
+  md += `\`\`\`${name}\`\`\` : ${getPropertyType(schema)} \n\n`
+  md += `${description || ''}\n`
+  return md
+}
+
+export function getPropertyType(property: JSONSchemaProperty | Parameter['schema']): string {
   if (!property?.type) {
     return ''
   }
@@ -216,8 +316,6 @@ export function getNormalizedProperties(jsonSchema: JSONSchemaType): Record<stri
   return jsonSchema.properties
 }
 
-getApiDocumetationPageContent()
-  .then((context) => {
-    fs.writeFileSync('./pages/api-documentation/index.mdx', context)
-  })
-  .catch(() => { })
+getApiDocumetationPageContent().then((context) => {
+  fs.writeFileSync('./pages/api-documentation/index.mdx', context)
+})

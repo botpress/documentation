@@ -62,7 +62,7 @@ For instance, if a user searches for **"How to calibrate the XYZ device,"** Botp
   designed for optimal utilization.
 </Callout>
 
-## 2. Web Pages
+## 2. Website
 
 The **Web Pages** KB Source allows users to upload website s to their Knowledge Base. This feature enables users to create a comprehensive Knowledge Base by incorporating different types of web content, such as articles, blog posts, and online forums.
 
@@ -74,7 +74,7 @@ To add a web page to your Knowledge Base, you can simply enter the URLs (one URL
 
 You can also add multiple web pages to your Knowledge Base by entering the **Site Map URL**. This file contains a list of URLs that you want to add to your Knowledge Base. Botpress will automatically retrieve the content from these web pages and add them to your Knowledge Base.
 
-## 3. Web Search
+## 3. Search The Web
 
 When using the Web Search Knowledge Base Source, you have the ability to specify the websites to include or exclude from your search. This allows you to customize the search to meet your specific requirements. Here are three options you can consider:
 
@@ -163,25 +163,26 @@ The storage quota is the maximum amount of data that can be stored in the Knowle
   pages.
 </Callout>
 
-## Enabling/Disabling KB on Nodes
+## Enabling/Disabling KB on Capture Information cards
 
-In Botpress, you have the ability to enable or disable the Knowledge Base feature for specific nodes that utilize the Capture Info action.
+In Botpress, you have the ability to enable or disable the Knowledge Base feature for specific Capture Information cards - it is enabled by default.
 
-To enable the Knowledge Base on nodes with a Capture Information Card:
+To enable the Knowledge Base on a Capture Information Card:
 
-1.  Locate the nodes that include a Capture Information Card.
-2.  In the Inspector panel, look for the option called **Enable Knowledge Answering** and select it.
+1.  Locate the Capture Information Card.
+2.  In the Inspector panel, look for the option called **Knowledge Base**.
+3.  In the "Search all KBs" field, you can choose either specific KBs to search in, or you can choose "Disable Search"
 
 By enabling this option, you allow the Knowledge Base to provide answers during the interaction when the user is asked for a response. If the user's input is relevant to the information stored in the Knowledge Base, Botpress's Natural Language Understanding (NLU) will retrieve the corresponding answer from the Knowledge Base and display it to the user. The conversation then proceeds to the next step of capturing information.
 This feature helps to enhance the user experience by providing quick and accurate answers sourced from the Knowledge Base when appropriate.
 
-If you disable the Knowledge Base feature on nodes that use the Capture Info action in Botpress, the system **will not** utilize the Knowledge Base to provide answers during the interaction.
+If you disable the Knowledge Base feature on the Capture Info action in Botpress, the system **will not** utilize the Knowledge Base to provide answers during the interaction.
 
 Disabling the Knowledge Base means that when users are prompted for a response and their input matches a query that could be answered using the Knowledge Base, Botpress's NLU will not retrieve answers from the Knowledge Base. Instead, the conversation will continue without incorporating information from the Knowledge Base.
 
-By disabling the Knowledge Base, you essentially exclude it as a potential source of information for those specific nodes. This may be useful if you want to handle user responses differently or if you prefer to rely on other mechanisms to provide answers or capture information in those particular nodes.
+By disabling the Knowledge Base, you essentially exclude it as a potential source of information for those specific cards. This may be useful if you want to handle user responses differently or if you prefer to rely on other mechanisms to provide answers or capture information in those particular cards.
 
-Let's consider an example of a chatbot for a travel agency. The bot is designed to capture information from users regarding their travel preferences and provide relevant recommendations. The bot uses the Capture Info action in certain nodes to gather specific details from users.
+Let's consider an example of a chatbot for a travel agency. The bot is designed to capture information from users regarding their travel preferences and provide relevant recommendations. The bot uses the Capture Info action in certain cards to gather specific details from users.
 
 #### Example 1: Enabling the Knowledge Base
 
@@ -189,7 +190,7 @@ Let's consider an example of a chatbot for a travel agency. The bot is designed 
 Node: Capture Destination
 Action: Capture Info
 Scenario: The user is asked to provide their desired travel destination.
-Enable Knowledge Answering: Enabled
+Included Knowledge Bases: Search all KBs
 
 User Input: "I want to go to Paris."
 
@@ -204,16 +205,16 @@ The conversation then proceeds to the next step of capturing additional informat
 Node: Capture Transportation
 Action: Capture Info
 Scenario: The user is asked to specify their preferred mode of transportation for travel.
-Enable Knowledge Answering: Disabled
+Included Knowledge Bases: Disable Search
 
 User Input: "I prefer to travel by train."
 
-Response: Since the Knowledge Base feature is disabled for this node, the bot's NLU does not consult the Knowledge Base. It simply captures the user's response without incorporating any information from the Knowledge Base.
+Response: Since the Knowledge Base feature is disabled for this card, the bot's NLU does not consult the Knowledge Base. It simply captures the user's response without incorporating any information from the Knowledge Base.
 ```
 
-The conversation continues to the next step based on the specific logic or action defined for that node, without utilizing the Knowledge Base to provide answers or additional information.
+The conversation continues to the next step based on the specific logic or action defined for that card, without utilizing the Knowledge Base to provide answers or additional information.
 
-In both examples, enabling or disabling the Knowledge Base on nodes using the Capture Info action determines whether the bot incorporates Knowledge Base information into the conversation flow or relies solely on other mechanisms to handle user responses.
+In both examples, enabling or disabling the Knowledge Base on the Capture Info action determines whether the bot incorporates Knowledge Base information into the conversation flow or relies solely on other mechanisms to handle user responses.
 
 ## Removing the references
 
@@ -230,6 +231,16 @@ Then, input `@kbAnswerWithoutRef` into your text or capture card. Make sure to c
 You can scope the Knowledge Base by folders to limit the search to specific folders. This allows you to focus on a particular area of interest and retrieve relevant information from the Knowledge Base.
 
 Learn more about [Scoping the Knowledge Base with Folders](./studio/explorer/knowledge-base/)
+
+## Handle No Answer in KB
+
+If no answer is found in the KB, you want to add a default message to handle that case. You can add a transition/expression card and add the following:
+```javascript
+!event.state.agentVariables.KnowledgeAgent.turn.answer
+```
+This will make the bot check if there is a value in the "answer" field; if not, then this transition/expression card will be fired.
+Connect this card to a node with the message you want to show.
+
 
 ## Debugging
 

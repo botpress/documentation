@@ -19,8 +19,13 @@ import { Image } from '@components/Image'
 ## Prerequisites
 
 - A [Meta developer app](https://developers.facebook.com/apps/create/). Check out [this article](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started#set-up-developer-assets) to learn more about the setup.
-- A WhatsApp Business Account to be your bot's interface on WhatsApp
+- A [WhatsApp Business Platform Account](https://business.whatsapp.com/products/business-platform) to be your bot's interface on WhatsApp
 - A [Botpress Cloud account](https://sso.botpress.cloud) and a [Botpress Bot](https://botpress.com/docs/cloud/getting-started/create-and-publish-your-chatbot/)
+
+<Callout type="error">
+  **Business Verification** <br/>
+  To deploy a chatbot on your WhatsApp channel, your business must first undergo a verification process by Meta, the parent company of WhatsApp. This verification, typically conducted through the Facebook Business Manager, confirms the identity and eligibility of your business to use Meta's platforms. Checking the official Meta for Developers website or WhatsApp Business API documentation is advisable for up-to-date information on the verification process and API access.
+</Callout>
 
 ## Setting up the WhatsApp integration in Botpress
 
@@ -58,6 +63,12 @@ The **Phone Number ID** and **Access Token** are used to send and receive messag
 6. Select your app and toggle `Manage App (full control)`.
 7. Click `Generate New Token` and select `whatsapp_business_messaging` and `whatsapp_business_management` permission.
 8. Copy and save your token.
+
+<Callout type="info">
+  **Fix for Unexpected Messaging Behavior** <br />
+ Experiencing replies from the wrong numbers? **Disable** the advanced permission for `whatsapp_business_management`. This adjustment is crucial because advanced permissions can interfere with how messages are routed, leading to responses from multiple numbers instead of the intended one. 
+ <br/>Reverting to basic permission settings ensures messages are directed correctly, solving this issue.
+</Callout>
 
 ## Finalizing Channel Configuration
 

@@ -1,3 +1,6 @@
+import { Callout } from 'nextra/components'
+
+
 ### Controlling the Webchat Widget
 
 This library is a toolkit that provides various tools (or functions) to interact with the Botpress Webchat.
@@ -55,6 +58,10 @@ window.botpressWebChat.init({
   },
 })
 ```
+
+<Callout type="warning">
+  All the parameters sent to the userData object should be string typed.
+</Callout>
 
 You can receive data from the webchat in Botpress by using `Get User Data` Card in the flow. In the User ID field, add `{{event.userId}}`.
 

@@ -37,6 +37,53 @@ A Query Selector is the query you use to select or filter data from your table. 
 
 To add a Query Selector, click on the table in the explorer menu. You'll then see a list of all the records in the table. Click on the `Add Query Selector` button from the right panel to add a new query selector. You can then enter the query selector in the text field.
 
+
+
+## Filtering Records
+
+Table filters are a powerful feature that allows you to refine and display only the records that meet certain criteria. Filters can be based on specific conditions, such as date ranges, text matches, and numerical comparisons.
+
+### Logical Operators
+
+- **AND**: Use the AND operator when you want all conditions to be true for a record to be displayed. For example, filtering by `createdAt` AND `status` will only show records that match both conditions.
+
+- **OR**: Use the OR operator to display records that match any one of multiple conditions. For example, filtering by `createdAt` OR `updatedAt` will show records that match either one of the conditions.
+
+### Types of Rules
+
+Rules define the individual conditions applied to each column of data.
+
+- `is equal to`: Shows records where the field is equal to the specified value.
+- `is not equal to`: Shows records where the field is not equal to the specified value.
+- `less than`: Shows records where the field is less than the specified value.
+- `less than or equal to`: Shows records where the field is less than or equal to the specified value.
+- `greater than`: Shows records where the field is greater than the specified value.
+- `greater than or equal to`: Shows records where the field is greater than or equal to the specified value.
+- `in`: Shows records where the field matches any of the specified values.
+- `not in`: Shows records where the field does not match any of the specified values.
+- `is null`: Shows records where the field is empty.
+- `is not null`: Shows records where the field is not empty.
+
+
+### Rule Groups
+
+- **Group**: A group is a collection of rules combined by a logical operator (AND/OR). You can nest groups to create complex filters.
+
+### Creating a Filter
+
+1. Click on the `Filter` button to expand the filter menu.
+2. Select a logical operator (AND/OR) from the dropdown.
+3. Choose a field to filter by (e.g., `createdAt`).
+4. Select a rule (e.g., `is equal to`).
+5. Enter the required value or select from a calendar if it's a date field.
+6. To add another rule within the same logical condition, click the `+ Rule` button.
+7. To create a nested group of conditions, click the `+ Group` button.
+8. Apply the filter by clicking the `Apply filter` button.
+
+### Manually Editing Filters
+
+Click on **Edit Manually** to view and edit the filter in JSON format. You can then copy this JSON filter and use it in your table operations via code.
+
 ## Operations on Tables - via the Interface
 
 ### Add records to a table
@@ -54,6 +101,271 @@ Double click on a a table cell or press click it and press `Enter` to see an inp
 ## Operations on Tables - via Cards
 
 Check out the [Table Cards documentation](../toolbox/table-cards) to learn more about operations with cards.
+
+## Operations on Tables - via Botpress Client
+
+You can also interact with tables using the Botpress Client. Here are some of the functions you can use to interact with tables:
+
+### listTables
+
+To list all the tables in the bot, use the `listTables` function. This function will return an array of all the tables in the bot.
+
+```javascript
+try {
+  const tables = await client.listTables({})
+  console.log('Tables:', tables)
+} catch (err) {
+  console.error('Error fetching tables', err)
+}
+```
+
+### Create Table Rows
+
+Execute the following query to create one or multiple rows. The response will include the inserted rows, along with any encountered errors or warnings during the operation (e.g., unrecognized fields)
+```javascript
+const { rows, errors, warnings } = await client.createTableRows({
+  table: 'Data1Table',
+  rows: [
+    {
+      name: 'test'
+    }
+  ]
+})
+```
+
+### Find & Filter Table Rows
+
+To find and filter rows in a table, use the `findTableRows` function. You can specify the limit (number of records to return) and the offset (number of rows to start from).
+
+```javascript
+const { rows, limit, offset, count } = await client.findTableRows({
+  table: 'Data1Table',
+  limit: 50,
+  offset: 0,
+  filter: {},
+  orderBy: 'row_id',
+  orderDirection: 'asc'
+})
+```
+
+Utilize filters to conduct more refined queries for specific rows, employing a MongoDB-like syntax. The query builder aids in understanding available operations and constructing the filter.
+  
+  ```javascript
+  const { rows, limit, offset, count } = await client.findTableRows({
+  table: 'Data1Table',
+  filter: {
+    // Retrieve rows where date is greater than a specific date
+    updatedAt: { gte: '2024-01-01' },
+    // Or more complex conditions, such as name starting with 'a' or 'b', or 'isActive' being true
+    $or: [{ name: { $regex: '^a' } }, { name: { $regex: '^b' } }, { isActive: true }]
+  }
+})
+```
+
+The "search" property allows for a partial text search across the table. The query returns multiple results, each accompanied by a similarity score to indicate relevance.
+
+```javascript
+const { rows, limit, offset, count } = await client.findTableRows({
+  table: 'Data1Table',
+  search: 'John Doe'
+})
+```
+
+### Projection & Aggregation
+
+Employ the group property for projections and aggregations. The following example demonstrates returning a single row with requested data.
+
+```javascript
+const { rows } = await client.findTableRows({
+  table: 'Data1Table',
+  group: {
+    id: 'count',
+    name: ['unique', 'count'], // will return a list of unique values & the total count
+    updatedAt: ['min', 'max'] // Retrieves the earliest and latest date
+  }
+})
+
+// Output variables are named after the field, suffixed with the operation
+const oldestChange = rows[0].updatedAtMin
+const mostRecentChange = rows[0].updatedAtMax
+const count = rows[0]['nameCount']
+const uniqueValues = rows[0]['nameUnique']
+```
+
+| Column    | Type   | Key  | Count | Sum | Avg | Max | Min | Unique |
+|:--------- |:------ |:----:|:-----:|:---:|:---:|:---:|:---:|:------:|
+| id        | number | ✔️    | ✔️     | ✔️  | ✔️  | ✔️  | ✔️  | ✔️      |
+| createdAt | date   | ✔️    |       |     |     | ✔️  | ✔️  | ✔️      |
+| updatedAt | date   | ✔️    |       |     |     | ✔️  | ✔️  | ✔️      |
+| name      | string | ✔️    |       |     |     | ✔️  | ✔️  | ✔️      |
+
+<ul><li>**Key**: Projections are grouped by keys (ex: date)</li><li>**Count**: Returns the total number of non-null values</li><li>**sum**: Returns the sum of all values</li><li>**Avg**: Returns the average of all values</li><li>**Max**: Returns the maximum value</li><li>**Min**: Returns the minimum value</li><li>**Unique**: Returns a list of unique values</li></ul>
+
+Providing one or multiple keys yields more specific results.
+
+```javascript
+const { rows } = await client.findTableRows({
+  table: 'Data1Table',
+  group: {
+    someField: 'key', // Either provide a single operation
+    someNumber: ['avg', 'sum'] // Or multiple operations
+  }
+})
+
+// Returns multiple rows for each unique combination of keys
+const result = rows.map((row) => {
+  const { someFieldKey, someNumberAvg, someNumberSum } = row
+})
+```
+
+### Update Table Rows
+
+This operation updates rows based solely on their numeric IDs.
+
+```javascript
+const { rows, errors, warnings } = await client.updateTableRows({
+  table: 'Data1Table',
+  rows: [
+    {
+      id: 1,
+      name: 'test'
+    }
+  ]
+})
+```
+
+### Delete Table Rows
+
+Rows can be deleted from a table in three distinct manners, each mutually exclusive.
+
+<ul><li>By specifying row IDs</li><li>By applying a filter</li><li>By removing all rows</li></ul>
+
+```javascript
+const { deletedRows } = await client.deleteTableRows({
+  table: 'Data1Table',
+  // Specify a list of IDs
+  ids: [1, 2, 3],
+  // Or use a filter (caution: all rows matching the filter will be deleted. It's advisable to first test with the findTableRows query)
+  filter: { name: 'John Doe' },
+  // Deletes every row within this table, irreversible action
+  deleteAllRows: true
+})
+```
+
+### Upsert Table Rows
+
+The upsert operation is a combination of insert and update, allowing you to insert new rows or update existing ones. The operation is based on the row's ID.
+
+**keyColumn**: The column used to identify the row. This column must be unique. Failure occurs if more than one row is found for the same key.
+
+```javascript
+const { rows, inserted, updated, errors, warnings } = await client.upsertTableRows({
+  table: 'Data1Table',
+  keyColumn: 'id',
+  rows: [
+    {
+      name: 'test'
+    }
+  ]
+})
+```
+
+### Create Table
+
+To create a table, simply provide a name and a schema. The naming convention follows the same rules as those applied within the studio. Initially, the schema can be empty and populated or modified later. The schema accepts either an example object, from which it will infer the structure, or a directly provided JSON schema.
+
+```javascript
+const { table } = await client.createTable({
+  name: 'Data1Table',
+  schema: {
+    name: 'test'
+  }
+})
+```
+
+Example using a JSON schema. A field marked as 'searchable' will be indexed, enhancing its availability for search queries. Note, 'index' is a system-managed, read-only attribute.
+
+```javascript
+const { table } = await client.createTable({
+  name: 'Data1Table',
+  schema: {
+    type: 'object',
+    'x-zui': {},
+    properties: {
+      name: {
+        type: 'string',
+        'x-zui': {
+          index: 0,
+          searchable: true
+        },
+        nullable: true
+      }
+    },
+    additionalProperties: true
+  }
+})
+```
+
+### Update Table
+
+You can update a table's name, schema, or both. Providing only one of these attributes is also permissible. Should you alter the type of an existing column, be advised that all its entries will default to NULL.
+
+#### Adding a new field 
+```javascript
+const { table } = await client.updateTable({
+  table: 'Data1Table',
+  schema: {
+    myNewField: 'abc', // Direct value assignment
+    // Or specify with a JSON schema
+    myNewField: { type: 'string' }
+  }
+})
+```
+
+#### Removing an existing field:
+
+```javascript
+const { table } = await client.updateTable({
+  table: 'Data1Table',
+  schema: {
+    myOldField: null // Field removal
+  }
+})
+```
+#### Renaming the table:
+
+```javascript
+await client.updateTable({ table: 'Data1Table', name: 'myNewTable' })
+```
+
+#### Rename Table Column: 
+
+To rename a table column, specify both the current and new names. The column's data type and attributes will remain unchanged.
+
+```javascript
+const { table } = await client.renameTableColumn({
+  table: 'Data1Table',
+  name: 'My Old Column Name',
+  newName: 'New Column Name'
+})
+```
+
+### Get Table
+
+To retrieve a table's schema, use the `getTable` function. This will return the table's name and schema.
+
+```javascript
+const { table } = await client.getTable({ table: 'Data1Table' })
+```
+
+### Delete Table
+
+To delete a table, use the `deleteTable` function. This will permanently remove the table and all its records.
+
+```javascript
+const { table } = await client.deleteTable({ table: 'Data1Table' })
+```
+
 
 ## Operations on Tables - via Code
 

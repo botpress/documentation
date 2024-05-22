@@ -29,14 +29,14 @@ Here's the list of all the Prompt Fields available in Capture Information Card.
     <Td>[SingleChoice](#single-choice)</Td>
     <Td>
       Extracts a Single Choice from a finite list of possible Values
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: String
     </Td>
   </Tr>
   <Tr>
     <Td>[MultipleChoice](#multi-choice)</Td>
     <Td>
       Extracts one or multiple choices from a finite list of possible Values
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: String
     </Td>
   </Tr>
   <Tr>
@@ -57,98 +57,98 @@ Here's the list of all the Prompt Fields available in Capture Information Card.
     <Td>[Number](#number)</Td>
     <Td>
       Extracts a Number from the Query
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: Number
     </Td>
   </Tr>
   <Tr>
     <Td>[EmailAddress](#email-address)</Td>
     <Td>
       Extracts a full Email Address from the Query
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: String
     </Td>
   </Tr>
   <Tr>
     <Td>[PhoneNumber](#phone-number)</Td>
     <Td>
       Extracts a Telephone Number and optionally the Country Code from the Query
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: String
     </Td>
   </Tr>
   <Tr>
     <Td>[FullAddress](#full-address)</Td>
     <Td>
       Extract the Full Address from the Query
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: Object
     </Td>
   </Tr>
   <Tr>
     <Td>[Price](#price)</Td>
     <Td>
       Extracts a Price from the Query
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: Number
     </Td>
   </Tr>
   <Tr>
     <Td>[RawInput](#raw-input)</Td>
     <Td>
       Extract the Input provided by the User, without any processing
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: String
     </Td>
   </Tr>
   <Tr>
     <Td>[Percentage](#percentage)</Td>
     <Td>
       Extracts a Percentage from the Query
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: Number
     </Td>
   </Tr>
   <Tr>
     <Td>[Quantity](#quantity)</Td>
     <Td>
       Extract a Quantity from a Query
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: Number
     </Td>
   </Tr>
   <Tr>
     <Td>[Color](#color)</Td>
     <Td>
       Extracts a Color as both HEX and RGB codes from the Query
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: Object
     </Td>
   </Tr>
   <Tr>
     <Td>[TimeMeasurement](#time-measurement)</Td>
     <Td>
       Extracts a time measurement as (ns, mu, ms, s, min, h, d, week, month, year) Units
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: Number
     </Td>
   </Tr>
   <Tr>
     <Td>[WeightMeasurement](#weight-measurement)</Td>
     <Td>
       Extracts a Weight Measurement as (mcg, mg, g, kg, oz, lb, mt, t) Units
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: Number
     </Td>
   </Tr>
   <Tr>
     <Td>[CronSchedule](#cron-schedule)</Td>
     <Td>
       Extracts a one-time or recurring schedule as a CRON Expression from the Query
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: Object
     </Td>
   </Tr>
   <Tr>
     <Td>[OperatingSystem](#operating-system)</Td>
     <Td>
       Extracts the name of an Operating System (Windows, OSX, IOS, Android, Linux)
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: Object
     </Td>
   </Tr>
   <Tr>
     <Td>[QuantityofPeople](#quantity-of-people)</Td>
     <Td>
       Extracts the Number of People in a Query
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: Number
     </Td>
   </Tr>
   <Tr>
@@ -156,14 +156,14 @@ Here's the list of all the Prompt Fields available in Capture Information Card.
     <Td>
       Extracts a volume measurement as (mm3, cm3, ml, l, kl, m3, km3, tsp, Tbs, in3, fl-oz, cup, pnt, qt, gal, ft3, yd3)
       Units
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: Number
     </Td>
   </Tr>
   <Tr>
     <Td>[TemperatureMeasurement](#temperature-measurement)</Td>
     <Td>
       Extracts a Temperature Measurement as (C, K, F) Units
-      <br /> Variable Type: Boolean
+      <br /> Variable Type: Number
     </Td>
   </Tr>
   <Tr>
@@ -177,7 +177,7 @@ Here's the list of all the Prompt Fields available in Capture Information Card.
     <Td>[DateTime](#datetime)</Td>
     <Td>
       Extracts date and time relative to the current date
-      <br /> Variable Type: Object
+      <br /> Variable Type: Date
     </Td>
   </Tr>
 </Table>
