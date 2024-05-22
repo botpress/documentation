@@ -43,6 +43,13 @@ export type JSONSchemaProps = JSX.IntrinsicElements['div'] & {
   parent?: string
 }
 
+export type Parameter = {
+  name:string
+  in: 'path' | 'query',
+  description: string
+  schema: JSONSchemaProperty
+}
+
 const httpMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'] as const
 type HttpMethod = (typeof httpMethods)[number]
 

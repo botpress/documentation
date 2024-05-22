@@ -12,7 +12,7 @@ import {
   API_REQUIRED_WORKSPACE_ID_HEADER,
   DONT_EDIT_WARNING,
 } from './generateApiDocumentationPage.constants'
-import { JSONSchemaProperty, JSONSchemaType } from './generateApiDocumentationPage.types'
+import { JSONSchemaProperty, JSONSchemaType, Parameter } from './generateApiDocumentationPage.types'
 import { getContext } from './openApiContext'
 
 type Operation = keyof (typeof state)['operations']
@@ -192,9 +192,9 @@ async function getApiDocumetationPageContent(): Promise<string> {
           if (Array.isArray(parameters)) {
             parameters.forEach((parameter) => {
               md += `<Collapsible className="mt-3" collapsible={false} defaultCollapsed={${!Boolean(
-                parameter.schema?.description
+                parameter.description
               )}}>\n\n`
-              md += getPropertyMdWithDescription(parameter.name, parameter.schema)
+              md += getParameterMd(parameter)
               md += '</Collapsible>\n\n'
             })
           }
@@ -274,6 +274,15 @@ function getPropertyMdWithDescription(
   let md = ''
   md += `\`\`\`${name}\`\`\` : ${getPropertyType(property)} ${supplementaryHeadingMarkdown} \n\n`
   md += `${property?.description || ''}\n\n`
+  console.log(md)
+  return md
+}
+
+function getParameterMd({name, schema, description}: Parameter
+) {
+  let md = ''
+  md += `\`\`\`${name}\`\`\` : ${getPropertyType(schema)} \n\n`
+  md += `${description || ''}\n\n`
   return md
 }
 
