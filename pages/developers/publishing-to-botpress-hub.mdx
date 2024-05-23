@@ -1,0 +1,46 @@
+# Publish your integration on Botpress Hub
+
+We're thrilled you want to publish your integration on the Botpress Hub! To ensure the quality of contributions on the Botpress Hub, we've come up with the following application process.
+
+## Your profile on Botpress Hub 
+We suggest you create a Workspace specifically for publishing integrations, as this will make it easier to add collaborators to your workspace, and keep your production and dev environments separate.
+
+In your Botpress Workspace's configuration:
+
+- [ ]  Make sure your Workspace has a url handle that represents you. 
+- [ ]  Add a way for integration users to contact you, like an email or a website
+- [ ]  Introduce yourself in the Workspace snippet
+- [ ]  Add an icon to your Workspace that represents you
+
+When a user installs the app, these may be shown to the user.
+
+
+## Your integration's display information
+
+Your integration's integration.definition.ts file should contain:
+
+- [ ]  **title**: the display title of your integration for the hub. Do not include “Botpress”.
+- [ ]  **name**: your_workspace_handle/integration_handle
+- [ ]  **description**: a succinct description of what your integration does.
+- [ ]  **icon**: the icon of the service you are connecting to, or the problem you are solving. Do not use the Botpress Icon.
+- [ ]  **readme**: the name of the markdown file in the folder that contains the integration code. It should contain an explanation of what the integration is, and how to use it. Self-promotion is not allowed here.
+
+## Your integration's logic
+
+- [ ]  If your integration requires parameters to be configured: it should validate the parameters in the register method, and throw a RuntimeError if there is an issue.
+
+```
+import * as bpclient from "@botpress/client";
+
+...
+
+throw new bpclient.RuntimeError(
+	"Configuration Error! The Mixpanel token is not set. Please set it in your bot integration configuration."
+);
+```
+
+## Submitting your integration to our team for approval
+- [ ]  In your workspace, add a bot and configure your integration for it, with some example flows that demonstrate the integration's capabilities. If any external test account is used, please provide credentials.
+- [ ]  When you're done with these steps, add `hub-applications@botpress.com` to your workspace with Admin privileges and send an email to it linking to the integration you'd like to publish as well as a .bpz export of the bot that has your integration configured.
+
+You can also send an email to [hub-applications@botpress.com](mailto:hub-applications@botpress.com) if you have any questions!
