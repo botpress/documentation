@@ -275,7 +275,9 @@ function getPropertyMdWithDescription(
   let md = ''
   md += `\`\`\`${name}\`\`\` : ${getPropertyType(property)} ${supplementaryHeadingMarkdown} \n\n`
   md += `${property?.description || ''}\n\n`
-  if (property.type === 'string' && property.enum) {
+  if (property.type === 'array' && property.items.type === 'string' && property.items.enum) {
+    md += `Possible values for array items: ${property.items.enum.map((v) => `\`${v}\``).join(', ')}\n`
+  } else if (property.type === 'string' && property.enum) {
     md += `Possible values: ${property.enum.map((v) => `\`${v}\``).join(', ')}\n`
   }
   md += '\n'
@@ -294,7 +296,7 @@ export function getPropertyType(property: JSONSchemaProperty | Parameter['schema
     return ''
   }
   if (property.type === 'object' && property.additionalProperties) {
-    return 'map of objects'
+    return 'object of key-value pairs'
   }
   if (property.type === 'array') {
     return `${property.type} of ${property.items?.type || 'string'}`
