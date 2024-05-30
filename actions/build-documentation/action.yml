@@ -30,7 +30,7 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      run: pnpm i
+      run: pnpm install --frozen-lockfile
 
     - name: Generate "API Documentation" page
       shell: bash
