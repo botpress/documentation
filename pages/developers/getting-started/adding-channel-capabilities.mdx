@@ -83,8 +83,7 @@ Update your `src/index.ts` to manage the lifecycle of the integration:
 
 ```ts
 import { Telegraf } from 'telegraf'
-import { Integration } from '@botpress/sdk'
-import * as bpclient from '@botpress/client'
+import { Integration, RuntimeError } from '@botpress/sdk'
 
 // Your existing integration logic...
 
@@ -94,7 +93,7 @@ export default new Integration({
     try {
       await telegraf.telegram.setWebhook(webhookUrl)
     } catch (error) {
-      throw new bpclient.RuntimeError(
+      throw new RuntimeError(
         "Configuration Error! The Telegram bot token is not set. Please set it in your bot integration configuration."
       );
     }
@@ -111,7 +110,7 @@ export default new Integration({
 
 The `register` function sets up the webhook for Telegram when the integration is added to a bot. The `unregister` function removes the webhook when the integration is removed from a bot. These functions also validate the configuration.
 
-If the configuration is invalid, a `bpclient.RuntimeError` is thrown, which will be displayed to the user in the Botpress Studio interface.
+If the configuration is invalid, a `RuntimeError` is thrown, which will be displayed to the user in the Botpress Studio interface.
 
 ### Step 4: Handle Incoming Messages
 
