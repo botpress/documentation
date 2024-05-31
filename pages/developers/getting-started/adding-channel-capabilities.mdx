@@ -42,8 +42,9 @@ export default new IntegrationDefinition({
   // ...existing properties
   channels: {
     group: {
+      // messages: messages.defaults,  // use this to support all message types supported in Botpress Studio
       messages: {
-        text: messages.defaults.text, // Add this line to support text messages
+        text: messages.defaults.text, // For our example, we'll specify text messages only
       },
       message: {
         tags: {
@@ -66,7 +67,7 @@ export default new IntegrationDefinition({
 })
 ```
 
-The `channels` property defines the communication channels your integration supports. Here, we define a `group` channel to send messages to a specific group in Telegram. The `messages` property specifies that we support `text` messages. Tags are used to identify users, conversations, and messages within the Telegram system.
+The `channels` property defines the communication channels your integration supports. Here, we define a `group` channel to send messages to a specific group in Telegram. The `messages` property, on the other hand, defines the message types that this channel support. We set it to `messages.defaults.text`, for it to support `text` messages in the Botpress Studio. Tags are used to identify users, conversations, and messages within the Telegram system.
 
 ## Add the Integration Logic
 
