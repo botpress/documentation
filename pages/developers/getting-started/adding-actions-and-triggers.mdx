@@ -74,10 +74,10 @@ Update your `src/index.ts` to handle the creation of trackable links:
 
 ```ts
 // src/index.ts
-import { Integration } from '@botpress/sdk';
-import { z } from 'zod';
+import { Integration, z } from '@botpress/sdk'; // import the z import
 
 export default new Integration({
+    // ...existing properties
   actions: {
     createTrackableLink: async ({ input, ctx }) => {
       const { conversationId, originalLink } = input;
@@ -104,6 +104,7 @@ Next, add the handler code to your `src/index.ts` to handle the redirect:
 import { Integration } from '@botpress/sdk';
 
 export default new Integration({
+  // ...existing properties
   handler: async ({ req, client }) => {
     // add this code to the handler function
     if (req.path === "" && req.method === "GET" && req.query.startsWith("rd=")) {

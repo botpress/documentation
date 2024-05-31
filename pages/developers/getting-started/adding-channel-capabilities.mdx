@@ -62,6 +62,7 @@ export default new IntegrationDefinition({
       id: {}, // Add this line to tag users
     },
   },
+  // ...existing properties
 })
 ```
 
@@ -85,11 +86,10 @@ Update your `src/index.ts` to manage the lifecycle of the integration:
 ```ts
 // src/index.ts
 import { Telegraf } from 'telegraf'
-import { Integration, RuntimeError } from '@botpress/sdk'
-
-// Your existing integration logic...
+import { Integration, RuntimeError } from '@botpress/sdk' // import the RuntimeError class
 
 export default new Integration({
+  // ...existing properties
   register: async ({ webhookUrl, ctx }) => {
     const telegraf = new Telegraf(ctx.configuration.botToken)
     try {
