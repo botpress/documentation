@@ -15,7 +15,8 @@ First, let's add the necessary configuration to your existing your integration d
 Add the following configuration schema to you `integration.definition.ts`:
 
 ```ts
-// Your existing integration definition code...
+// integration.definition.ts
+import { IntegrationDefinition, z } from '@botpress/sdk' // import the zod library like this
 
 export default new IntegrationDefinition({
   // ...existing properties
@@ -32,9 +33,11 @@ The configuration schema is used to validate the integration's configuration and
 
 ### Step 2: Define Telegram Channels and Tags
 
-Next, update the `channels` and `user` properties to support Telegram-specific functionality:
+Next update the `channels` and `user` properties to support Telegram-specific functionality:
+
 
 ```ts
+// integration.definition.ts
 export default new IntegrationDefinition({
   // ...existing properties
   channels: {
@@ -80,6 +83,7 @@ npm i telegraf
 Update your `src/index.ts` to manage the lifecycle of the integration:
 
 ```ts
+// src/index.ts
 import { Telegraf } from 'telegraf'
 import { Integration, RuntimeError } from '@botpress/sdk'
 
@@ -106,13 +110,14 @@ export default new Integration({
 
 The `register` function sets up the webhook for Telegram when the integration is added to a bot. The `unregister` function removes the webhook when the integration is removed from a bot. These functions also validate the configuration.
 
-If the configuration is invalid, a `RuntimeError` is thrown, which will be displayed to the user in the Botpress Studio interface.
+If the configuration is invalid, a `RuntimeError` is thrown, which will be displayed to the user in the Bot's Integration configuration page.
 
 ### Step 4: Handle Incoming Messages
 
 Add the handler function to process incoming messages from Telegram:
 
 ```ts
+// src/index.ts
 export default new Integration({
   // ...existing properties
   handler: async ({ req, client }) => {
@@ -150,13 +155,14 @@ export default new Integration({
 })
 ```
 
-The `handler` function processes incoming requests from Telegram. It extracts the conversation ID, user ID, and message ID, then creates or retrieves the conversation, user, and message from the Botpress client. Finally, it creates a message in the conversation, which will be sent to the bot as an incoming message from Telegram.
+The `handler` function processes incoming requests from Telegram. It extracts the conversation ID, user ID, and message ID, then creates or retrieves the conversation, user, and message using the client parameter. Finally, it creates a message in the conversation, which will be sent to the bot as an incoming message from Telegram.
 
 ### Step 5: Send Messages to Telegram
 
 Implement the `text` message type in the `group` channel:
 
 ```ts
+// src/index.ts
 export default new Integration({
   // ...existing properties
   channels: {
@@ -182,10 +188,10 @@ Before trying it out, make sure you either run `npm run deploy` or `npm run star
 
 1. Send a message to [the BotFather](https://telegram.me/BotFather) on Telegram and create a new bot. It will provide you with a token.
 2. Go to [your Botpress Cloud workspace](https://app.botpress.cloud/workspaces/).
-3. Go to your bot.
+3. Click your bot's name.
 4. Click on "Integrations" in the sidebar.
-5. Find your integration.
-6. Add your Telegram Bot API token in the configuration.
+5. Click your integration name.
+6. Add your Telegram Bot API token in the configuration in the input.
 7. Make sure the integration is enabled.
 8. Hit "Save".
 9. Open your bot in Telegram and chat with it!

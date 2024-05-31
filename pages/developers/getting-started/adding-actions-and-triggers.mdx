@@ -1,6 +1,6 @@
 # Adding Actions & Triggers to Botpress Studio
 
-When you install an integration in your bot in Botpress Studio, you can add custom cards that run any NodeJS code and triggers that listen for external events.
+When you install an integration in your bot in Botpress Studio, you can add custom cards that run advanced JavaScript programs and triggers that listen for external events.
 
 For this tutorial, we will add the capability for a bot to create a trackable URL that notifies the creator when it is used.
 
@@ -12,7 +12,8 @@ First, let's add the necessary configuration to your integration definition to e
 
 Add the following configuration schema to the `actions` property in your `integration.definition.ts`:
 
-```typescript
+```ts
+// integration.definition.ts
 import { IntegrationDefinition, z } from '@botpress/sdk'; // make sure to add the z import
 
 export default new IntegrationDefinition({
@@ -44,7 +45,8 @@ The `actions` property defines the custom action `createTrackableLink` which tak
 
 Next, add the following configuration schema to the `events` property in your `integration.definition.ts`:
 
-```typescript
+```ts
+// integration.definition.ts
 import { IntegrationDefinition, z } from '@botpress/sdk'; // make sure to add the z import
 
 export default new IntegrationDefinition({
@@ -70,7 +72,8 @@ Now that we've defined the actions and triggers, let's implement the logic that 
 
 Update your `src/index.ts` to handle the creation of trackable links:
 
-```typescript
+```ts
+// src/index.ts
 import { Integration } from '@botpress/sdk';
 import { z } from 'zod';
 
@@ -96,7 +99,8 @@ We are using the btoa function to obfuscate the conversation ID and original lin
 
 Next, add the handler code to your `src/index.ts` to handle the redirect:
 
-```typescript
+```ts
+// src/index.ts
 import { Integration } from '@botpress/sdk';
 
 export default new Integration({
