@@ -425,6 +425,43 @@ To run a semantic search on your bot's files you can use the [Search Files](/api
 
 You can check the [API reference](/api-documentation/#search-files) for more details on the properties available for each passage object returned in the response.
 
+#### Using the search results for RAG
+
+You can use the search results to provide relevant information to a chatbot for generating a response to a user's question.
+
+Here's an example of a simple RAG (Retrieval Augmented Generation) implementation that shows how you can use the ChatGPT large language model (through the OpenAI API) and the search results provided by our API to answer a user's question:
+
+```javascript
+import OpenAI from 'openai' // You'll need to install this package first using your favorite package manager
+
+const openai = new OpenAI({ apiKey: 'YOUR_OPENAI_API_KEY' })) // Change this for your own OpenAI API key
+
+const userQuestion = 'Which are the most popular products of your company?' // This will come from the user's input
+
+const res = await client.searchFiles({
+  query: userQuestion,
+  contextDepth: 1, // you can increase this number to pass more context to the model for each matching passage
+})
+
+const relevantInformation = res.data.passages.map(passage => passage.content).join("\n\n----------\n\n")
+
+const answer = await openai.chat.completions.create({
+    model: 'gpt-3.5-turbo', // you can change this for any other OpenAI model available here: https://platform.openai.com/docs/models
+    messages: [
+        {
+            role: 'system',
+            // You can change the text below to include any additional instructions to the model
+            content: "You are a helpful assistant that answers the user's question based only on the relevant information you are provided along with the question.",
+        },
+        {
+            role: 'user',
+            content: `## RELEVANT INFORMATION: \n\n ${relevantInformation}\n\n` +
+                     `## ANSWER THE FOLLOWING USER'S QUESTION: \n\n ${userQuestion}`,
+        },
+    ],
+})
+```
+
 ## Security
 
 ### Access Policies
