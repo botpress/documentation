@@ -1,3 +1,6 @@
+import { Tabs } from 'nextra/components'
+import { Callout } from 'nextra/components'
+
 # Files API
 
 The Files API allows you to upload, download, and manage files and searchable documents for your bots and integrations in Botpress Cloud.
@@ -24,13 +27,6 @@ The following code snippet can be put in an Execute Card in your bot to create a
 const file = await client.createAndUploadFile({
   name: 'test.txt',
   content: 'This is a test file',
-  accessPolicies: ['public_content'], // Remove this line if you want the file to be private
-  index: true, // Remove this line if you don't want the file to be indexed
-  tags: {
-    // Tags are optional but are useful for filtering files by a custom criteria you choose when using the "List Files" or "Search Files" API endpoints
-    myTag1: 'value_1',
-    myTag2: 'value_2',
-  },
 })
 ```
 
@@ -66,7 +62,13 @@ const file = await client.createAndUploadFile({
 
 #### In a custom script using the Botpress Client
 
-If you're using Javascript or TypeScript the easiest way to interact with the API is using the [Botpress Client](https://www.npmjs.com/package/@botpress/client). You can install the client package by running the `npm install @botpress/client` command in your project.
+If you're using Javascript or TypeScript the easiest way to interact with the API is using the [Botpress Client](https://www.npmjs.com/package/@botpress/client). You can install the client package by using your favorite package manager:
+
+<Tabs items={['npm', 'pnpm', 'yarn']}>
+  <Tabs.Tab>`npm install @botpress/client`</Tabs.Tab>
+  <Tabs.Tab>`pnpm install @botpress/client`</Tabs.Tab>
+  <Tabs.Tab>`yarn add @botpress/client`</Tabs.Tab>
+</Tabs>
 
 The Botpress Client will handle the authentication and other details for you, you just need to provide your Botpress PAT (Personal Access Token) to the client and the ID of the bot that the client will access. If your use-case requires accessing multiple bots, you can define as many client instances as needed (one for each bot).
 
@@ -127,6 +129,64 @@ const fileUrl = getFileResponse.file.url // Will contain the public URL of the f
 const fileStatus = getFileResponse.file.status // Should be 'indexing_pending' if the file was requested to be indexed, or 'upload_completed' otherwise.
 ```
 
+#### Adding tags to a file
+
+You can add custom tags to a file by passing the `tags` parameter when it's created. Tags allow you to organize and classify files in any way you see fit, and can be specified as a filter when listing or searching files.
+
+```javascript
+const file = await client.createAndUploadFile({
+  name: 'test.txt',
+  content: 'This is a test file',
+  tags: {
+    // Tags are optional but are useful for filtering files by a custom criteria you choose when using the "List Files" or "Search Files" API endpoints. You can change or remove the tags below based on your needs.
+    category: 'Sales',
+    knowledgeBaseName: 'Client Questions',
+  },
+})
+```
+
+### Creating a public file
+
+By default all files are private and can only be accessed by the bot that created them. If you need to make a file publicly accessible you can use the `public_content` access policy:
+
+```javascript
+const file = await client.createAndUploadFile({
+  name: 'test.txt',
+  content: 'This is a public file',
+  accessPolicies: ['public_content'],
+})
+```
+
+You can also specify a special access policy to allow all the integrations installed in the bot to access the file:
+
+```javascript
+const file = await client.createAndUploadFile({
+  name: 'test.txt',
+  content: 'This is a file that can be accessed by all integrations in a bot',
+  accessPolicies: ['integrations'],
+})
+```
+
+### Creating an indexed file
+
+If you need to index a file for semantic search you can use the `index` parameter when creating the file.
+
+```javascript
+const file = await client.createAndUploadFile({
+  name: 'test.txt',
+  content: 'This is a test file',
+  index: true,
+})
+```
+
+#### Notes on indexing:
+
+- The following file formats are supported for indexing:
+  .pdf, .docx, .doc, .pptx, .ppt, .xlsx, .xls, .odt, .txt, .rtf, .csv, .html, .md, .epub, .eml, .msg
+- The file it will initially have a status of "indexing_pending" and will be indexed asynchronously. The time it takes to index the file will depend on the file size and the current load on the system.
+- You can check the status of the file by calling the [Get File](/api-documentation/#get-file) endpoint and checking that the `file.status` property has changed to "indexing_completed".
+- If the indexing failed the status will be set to "indexing_failed" and the reason of the failure will be available in the `failedStatusReason` property of the file.
+
 ### Getting the file's metadata
 
 To get the details of a file you can use the "Get File" API endpoint. You can do this using the Botpress Client (replace `YOUR_FILE_ID` for the actual ID of your file):
@@ -151,7 +211,7 @@ const file = res.data.file
 
 ### Listing existing files of a bot
 
-To list all the files of a bot you can use the "List Files" API endpoint. Here's an example using the Botpress Client:
+To list all the files of a bot you can use the [List Files](/api-documentation/#list-files) API endpoint. Here's an example using the Botpress Client:
 
 ```javascript
 const res = await client.listFiles()
@@ -172,12 +232,14 @@ const files = res.data.files
 
 #### Filtering by tags
 
-If you need to filter files by tags, you can just pass the `tags` parameter which should be an object with key-value pairs of tags a file must have in order to be returned. For example:
+If you need to filter files by tags, you can just pass the `tags` parameter which should be an object with key-value pairs of tags a file must have in order to be returned. Tag filtering works in an "AND" fashion, so only the files that have all the specified tags will be returned.
+
+For example:
 
 ```javascript
 const res = await client.listFiles({
   tags: {
-    myTag1: 'value_1',
+    category: 'Sales',
   },
 })
 ```
@@ -186,7 +248,7 @@ If you're making the HTTP request directly to the API please note that you'll ne
 
 ```javascript
 const tags = {
-  myTag1: 'value_1',
+  category: 'Sales',
 }
 
 const res = await axios.get('https://api.botpress.cloud/v1/files?tags=' + encodeURIComponent(JSON.stringify(tags)), {
@@ -198,7 +260,9 @@ const res = await axios.get('https://api.botpress.cloud/v1/files?tags=' + encode
 
 #### Pagination
 
-The "List Files" API endpoint will only return the 20 most recent files your bot has. If you need to get more files you can use the `nextToken` property returned in the API response to get the next page (if any) of results. For example:
+The [List Files](/api-documentation/#list-files) API endpoint will return by default the 20 most recent files your bot has. If you need to list older files you can use the `nextToken` property returned in the API response to retrieve the next page (if any) of files. The `nextToken` will be included for each page if there are files remaining to be listed.
+
+For example:
 
 ```javascript
 let res = await client.listFiles()
@@ -214,7 +278,7 @@ if (res.data.nextToken) {
 
 ### Updating the file metadata
 
-Currently, only the access policies or tags of a file can be updated. The file content itself cannot be updated, but if you need to change the file content you can create a new file with the updated content and delete the old file.
+Only the tags and access policies of a file can be updated.
 
 Here's an example of how to update the access policies and tags of a file using the Botpress Client:
 
@@ -224,9 +288,9 @@ await client.updateFile({
   accessPolicies: ['integrations'], // This value will replace the existing access policies of the file.
   tags: {
     // This acts as a "patch" or partial update, so only the tags specified here will be updated, the rest will remain unchanged. If you need to delete an existing tag, you can set it to a `null` value.
-    myTag1: 'new_value_2', // This tag will be updated.
-    myTag2: null, // This tag will be deleted.
-    myNewTag: 'value_3', // This tag will be added.
+    category: 'Support', // This tag will be updated.
+    knowledgeBaseName: null, // This tag will be deleted.
+    subcategory: 'Technical', // This tag will be added.
     // Any other tags not specified here will remain unchanged.
   },
 })
@@ -240,9 +304,9 @@ await axios.put(
   {
     accessPolicies: ['integrations'],
     tags: {
-      myTag1: 'new_value_2',
-      myTag2: null,
-      myNewTag: 'value_3',
+      category: 'Support',
+      knowledgeBaseName: null,
+      subcategory: 'Technical',
     },
   },
   {
@@ -252,6 +316,10 @@ await axios.put(
   }
 )
 ```
+
+#### Updating file content
+
+If you need to update the content of a file, you can create a new one with the updated content and then delete the old file. The file ID will change in this case.
 
 ### Deleting a file
 
@@ -273,7 +341,7 @@ await axios.delete('https://api.botpress.cloud/v1/files/YOUR_FILE_ID', {
 
 ### Searching files
 
-To run a semantic search on your bot's files you can use the "Search Files" API endpoint. This is particularly useful for RAG (Retrieval Augmented Generation) implementations.
+To run a semantic search on your bot's files you can use the [Search Files](/api-documentation/#search-files) API endpoint. This is particularly useful for RAG (Retrieval Augmented Generation) implementations.
 
 Here's an example using the Botpress Client:
 
@@ -283,7 +351,8 @@ const res = await client.searchFiles({
   contextDepth: 1, // Optional (default: 0), allows you prepend and append the surrounding context to each matching passage in the search results
   tags: {
     // Optional, allows you to only search files that match the specified tags. Useful if you only want to search a subset of the bot's files.
-    myTag1: 'value_1',
+    category: 'Support',
+    subcategory: 'Technical',
   },
   limit: 30, // Default is 20, maximum is 50 results
 })
@@ -295,26 +364,9 @@ for (const passage of passages) {
 }
 ```
 
-You can check the [API reference](/api-documentation/#search-files) for the "Search Files" endpoint for more details on the properties available for each passage object returned in the response.
-
-## Indexing
-
-- You can set the `index` parameter to `true` when creating a file so that the file is indexed for semantic search.
-- The file it will initially have a status of "indexing_pending" and will be indexed asynchronously. The time it takes to index the file will depend on the file size and the current load on the system.
-- You can check the status of the file by calling the ["Get File"](/api-documentation/#get-file) endpoint and checking that the `file.status` property has changed to "indexing_completed".
-- If the indexing failed the status will be set to "indexing_failed" and the reason of the failure will be available in the `failedStatusReason` property of the file.
-- The following file formats are supported for indexing: .pdf, .docx, .doc, .pptx, .ppt, .xlsx, .xls, .odt, .txt, .rtf, .csv, .html, .md, .epub, .eml, .msg
+You can check the [API reference](/api-documentation/#search-files) for the [Search Files](/api-documentation/#search-files) endpoint for more details on the properties available for each passage object returned in the response.
 
 ## Security
-
-- Files are scoped to a specific bot, which means that their ownership cannot be shared between bots. However, the file can be configured with a `public_content` access policy so it can be downloaded from anywhere.
-- A bot has full permissions to access and manage all of its files, regardless of the user that created the file.
-- An integration has all permissions on the files that have been created by that integration for the bot they were running on.
-- Workspace Members:
-  - Viewer: can read, search, and list all files for the bot, regardless of creator, but cannot create or delete files.
-  - Developer, Manager, and Administrator: have all permissions on the bot's files, regardless of creator.
-  - Billing manager: no permissions on files.
-- The "List Files" API endpoint will filter out files that are not accessible to the user calling that API endpoint.
 
 ### Access Policies
 
@@ -323,25 +375,35 @@ A file can have a list of special access policies:
 - `public_content`: Unauthenticated users can read contents (but not metadata) of the file through a unique permanent URL provided by the API for each file. Without this policy the file URL returned by the API will be temporary and will expire after a short period of time.
 - `integrations`: Grants read, search, list access to all integrations of the bot that owns the file.
 
+### Permissions
+
+| Principal                                            | Permissions                                                                                                               |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Public (unauthenticated users)                       | Can only download files that have the `public_content` access policy.                                                     |
+| Bot                                                  | Owns and manages its files with full permissions to access and manage them, regardless of the user that created the file. |
+| Integration                                          | Has all permissions on the files that were created by that integration for the bot they are installed on.                 |
+| Viewer workspace member                              | Can read, search, and list all files for the bot, regardless of creator, but cannot create or delete files.               |
+| Developer, Manager or Administrator workspace member | Has all permissions on the bot's files, regardless of creator.                                                            |
+| Billing Manager workspace member                     | No permissions on files.                                                                                                  |
+
+<Callout type="info">
+  **Note:** <br />
+  The [List Files](/api-documentation/#list-files) API endpoint will filter out files that are not accessible to the user
+  calling that API endpoint.
+</Callout>
+
 ## Pricing
 
-- There are 2 types of storage: File Storage and Vector DB Storage.
-- All files count toward your workspace's File Storage usage. Indexed files also count toward your workspace's Vector DB Storage usage.
-- 500 MB of file storage and 100 MB of vector storage are included for free in all accounts.
-- Additional vector storage can be purchased at $10/month for 10 GB of additional file storage.
-- For additional file storage, the account can be upgraded to the [Team plan](https://botpress.com/pricing) which includes 10 GB of file storage.
+There are 2 types of storage: File Storage and Vector DB Storage. All files count toward your workspace's File Storage usage. Indexed files also count toward your workspace's Vector DB Storage usage.
 
-For more details on pricing please check our [Pricing page](https://botpress.com/pricing).
+For full details on pricing please check our [Pricing page](https://botpress.com/pricing).
 
 ## Quotas/Limits
 
 - Maximum file size: 100 MB
 - Rate limits: [same as all other endpoints](/cloud/getting-started/preventing-abuse/#rate-limits) of our public API
 - Tags
-  - Maximum number of tags per file: 50
-  - Minimum length of a tag name (key): 2 characters
-  - Maximum length of a tag name (key): 100 characters
-  - Maximum length of a tag value: 1000 characters
+  - As defined in the [Limits and Quotas of Botpress Cloud](/cloud/getting-started/platform-limits/)
 - Search
   - Query: 1 KB maximum
   - Maximum number of results: 50
