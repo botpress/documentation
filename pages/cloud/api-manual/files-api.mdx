@@ -96,34 +96,44 @@ Please note that when calling the API directly, an HTTP request to the Botpress 
 
 Additionally, if you need to access the file URL right away a third request to the "Get File" API endpoint will be needed to get the URL of the file after it has been uploaded.
 
-Here's an example on how to do this using the [`axios` package](https://www.npmjs.com/package/axios) in Javascript/TypeScript, note that your Botpress PAT will need to be defined in the environment variable `BOTPRESS_PAT`:
+Here's an example on how to do this using the native `fetch()` function in Javascript/TypeScript, note that your Botpress PAT will need to be defined in the environment variable `BOTPRESS_PAT`:
 
 ```javascript
-import axios from 'axios'
-
 const fileContent = 'Here goes the content of your file'
 
 const buffer = Buffer.from(fileContent)
 
 // Step 1: Create the file in Botpress Cloud.
 // Please note that specifying the file size (in raw bytes, not characters) is required when calling this endpoint.
-const res = await axios.post('https://api.botpress.cloud/v1/files', {
-  name: 'test.txt',
-  size: buffer.byteLength,
+const result = await fetch('https://api.botpress.cloud/v1/files', {
+  method: 'POST',
   headers: {
+    'Content-Type': 'application/json',
     Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
   },
+  body: JSON.stringify({
+    name: 'test.txt',
+    size: buffer.byteLength,
+  }),
 })
+
+const response = await result.json()
 
 // Step 2: Upload the file content to the unique upload URL provided for the created file.
-await axios.put(res.data.file.uploadUrl, buffer, { maxBodyLength: Infinity })
+await fetch(response.file.uploadUrl, {
+  method: 'PUT',
+  body: buffer,
+})
 
 // Optional - Step 3: You can call the "Get File" API endpoint to access the file details right away.
-const { data: getFileResponse } = await axios.get(`https://api.botpress.cloud/v1/files/${res.data.file.id}`, {
+const getFileResult = await fetch(`https://api.botpress.cloud/v1/files/${response.file.id}`, {
+  method: 'GET',
   headers: {
     Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
   },
 })
+
+const getFileResponse = await getFileResult.json()
 
 const fileUrl = getFileResponse.file.url // Will contain the public URL of the file if it was created with the 'public_content' access policy, otherwise it will contain a temporary pre-signed URL.
 const fileStatus = getFileResponse.file.status // Should be 'indexing_pending' if the file was requested to be indexed, or 'upload_completed' otherwise.
@@ -147,7 +157,7 @@ const file = await client.createAndUploadFile({
 
 ### Creating a public file
 
-By default all files are private and can only be accessed by the bot that created them. If you need to make a file publicly accessible you can use the `public_content` access policy:
+By default all files are private and can only be accessed by the bot that created them. If you need to make a file publicly accessible by anyone you can assign the `public_content` access policy to the file:
 
 ```javascript
 const file = await client.createAndUploadFile({
@@ -157,7 +167,7 @@ const file = await client.createAndUploadFile({
 })
 ```
 
-You can also specify a special access policy to allow all the integrations installed in the bot to access the file:
+If you only want to allow all the integrations installed in the bot to access the file rather than making it fully public, you can just assign the `integrations` access policy instead:
 
 ```javascript
 const file = await client.createAndUploadFile({
@@ -189,74 +199,89 @@ const file = await client.createAndUploadFile({
 
 ### Getting the file's metadata
 
-To get the details of a file you can use the "Get File" API endpoint. You can do this using the Botpress Client (replace `YOUR_FILE_ID` for the actual ID of your file):
+To get the details of a file you can use the [Get File](/api-documentation/#get-file) API endpoint.
 
-```javascript
-const file = await client.getFile('YOUR_FILE_ID')
-```
+<Tabs items={['Using the Botpress Client', 'Calling the API directly']}>
+  <Tabs.Tab>
+    ```javascript
+    const file = await client.getFile('YOUR_FILE_ID')
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```javascript
+    const result = await fetch('https://api.botpress.cloud/v1/files/YOUR_FILE_ID', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
+      },
+    })
 
-> The above example is for an Execute Code card in your bot. If you're using the Botpress Client in a custom script be sure to install and import the client NPM package first and then instantiate the client with your Botpress PAT and bot ID.
+    const response = await result.json()
+    const file = response.file
+    ```
 
-Or by calling the API directly (using the Axios library in the example below):
-
-```javascript
-const res = await axios.get('https://api.botpress.cloud/v1/files/YOUR_FILE_ID', {
-  headers: {
-    Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
-  },
-})
-
-const file = res.data.file
-```
+  </Tabs.Tab>
+</Tabs>
 
 ### Listing existing files of a bot
 
-To list all the files of a bot you can use the [List Files](/api-documentation/#list-files) API endpoint. Here's an example using the Botpress Client:
+To list all the files of a bot you can use the [List Files](/api-documentation/#list-files) API endpoint.
 
-```javascript
-const res = await client.listFiles()
-const files = res.data.files
-```
+<Tabs items={['Using the Botpress Client', 'Calling the API directly']}>
+  <Tabs.Tab>
+    ```javascript
+    const res = await client.listFiles()
+    const files = res.data.files
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```javascript
+    const result = await fetch('https://api.botpress.cloud/v1/files', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
+      },
+    })
 
-And here's an example calling the API directly using Axios:
+    const response = await result.json()
+    const files = response.files
+    ```
 
-```javascript
-const res = await axios.get('https://api.botpress.cloud/v1/files', {
-  headers: {
-    Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
-  },
-})
-
-const files = res.data.files
-```
+  </Tabs.Tab>
+</Tabs>
 
 #### Filtering by tags
 
 If you need to filter files by tags, you can just pass the `tags` parameter which should be an object with key-value pairs of tags a file must have in order to be returned. Tag filtering works in an "AND" fashion, so only the files that have all the specified tags will be returned.
 
-For example:
+<Tabs items={['Using the Botpress Client', 'Calling the API directly']}>
+  <Tabs.Tab>
+    ```javascript
+    const res = await client.listFiles({
+      tags: {
+        category: 'Sales',
+      },
+    })
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    If you're making the HTTP request directly to the API please note that you'll need to pass the `tags` parameter as a JSON-serialized, URL-encoded string (the Botpress Client handles this automatically for you).
 
-```javascript
-const res = await client.listFiles({
-  tags: {
-    category: 'Sales',
-  },
-})
-```
+    ```javascript
+    const tags = {
+      category: 'Sales',
+    }
 
-If you're making the HTTP request directly to the API please note that you'll need to pass the `tags` parameter as a JSON-serialized, URL-encoded string (the Botpress Client handles this automatically for you). Here's an example:
+    const result = await fetch('https://api.botpress.cloud/v1/files?tags=' + encodeURIComponent(JSON.stringify(tags)), {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
+      },
+    })
+    ```
 
-```javascript
-const tags = {
-  category: 'Sales',
-}
-
-const res = await axios.get('https://api.botpress.cloud/v1/files?tags=' + encodeURIComponent(JSON.stringify(tags)), {
-  headers: {
-    Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
-  },
-})
-```
+  </Tabs.Tab>
+</Tabs>
 
 #### Pagination
 
@@ -268,12 +293,11 @@ For example:
 let res = await client.listFiles()
 const files = res.data.files
 
+// You can put this in a loop to retrieve all the files if needed.
 if (res.data.nextToken) {
   res = await client.listFiles({ nextToken: res.data.nextToken })
   files.push(...res.data.files)
 }
-
-// You can put this in a loop to get all the files if needed.
 ```
 
 ### Updating the file metadata
@@ -282,89 +306,124 @@ Only the tags and access policies of a file can be updated.
 
 Here's an example of how to update the access policies and tags of a file using the Botpress Client:
 
-```javascript
-await client.updateFile({
-  id: 'YOUR_FILE_ID',
-  accessPolicies: ['integrations'], // This value will replace the existing access policies of the file.
-  tags: {
-    // This acts as a "patch" or partial update, so only the tags specified here will be updated, the rest will remain unchanged. If you need to delete an existing tag, you can set it to a `null` value.
-    category: 'Support', // This tag will be updated.
-    knowledgeBaseName: null, // This tag will be deleted.
-    subcategory: 'Technical', // This tag will be added.
-    // Any other tags not specified here will remain unchanged.
-  },
-})
-```
-
-And here's an example calling the API directly using Axios:
-
-```javascript
-await axios.put(
-  'https://api.botpress.cloud/v1/files/YOUR_FILE_ID',
-  {
-    accessPolicies: ['integrations'],
-    tags: {
-      category: 'Support',
-      knowledgeBaseName: null,
-      subcategory: 'Technical',
-    },
-  },
-  {
-    headers: {
-      Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
-    },
-  }
-)
-```
+<Tabs items={['Using the Botpress Client', 'Calling the API directly']}>
+  <Tabs.Tab>
+    ```javascript
+    await client.updateFile({
+      id: 'YOUR_FILE_ID',
+      accessPolicies: ['integrations'], // This value will replace the existing access policies of the file.
+      tags: {
+        // This acts as a "patch" or partial update, so only the tags specified here will be updated, the rest will remain unchanged. If you need to delete an existing tag, you can set it to a `null` value.
+        category: 'Support', // This tag will be updated.
+        knowledgeBaseName: null, // This tag will be deleted.
+        subcategory: 'Technical', // This tag will be added.
+        // Any other tags not specified here will remain unchanged.
+      },
+    })
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```javascript
+    await fetch(
+      'https://api.botpress.cloud/v1/files/YOUR_FILE_ID',
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
+        },
+        body: {
+          accessPolicies: ['integrations'], // This value will replace the existing access policies of the file.
+          tags: {
+            // This acts as a "patch" or partial update, so only the tags specified here will be updated, the rest will remain unchanged. If you need to delete an existing tag, you can set it to a `null` value.
+            category: 'Support', // This tag will be updated.
+            knowledgeBaseName: null, // This tag will be deleted.
+            subcategory: 'Technical', // This tag will be added.
+            // Any other tags not specified here will remain unchanged.
+          },
+        },
+      }
+    )
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 #### Updating file content
 
-If you need to update the content of a file, you can create a new one with the updated content and then delete the old file. The file ID will change in this case.
+If you need to update the content of a file, you can create a new file with the updated content and then delete the old file. The file ID will change in this case.
 
 ### Deleting a file
 
-To delete a file you can use the "Delete File" API endpoint. Here's an example using the Botpress Client:
+To delete a file you can use the "Delete File" API endpoint.
 
-```javascript
-await client.deleteFile('YOUR_FILE_ID')
-```
-
-And here's an example calling the API directly using Axios:
-
-```javascript
-await axios.delete('https://api.botpress.cloud/v1/files/YOUR_FILE_ID', {
-  headers: {
-    Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
-  },
-})
-```
+<Tabs items={['Using the Botpress Client', 'Calling the API directly']}>
+  <Tabs.Tab>
+    ```javascript
+    await client.deleteFile('YOUR_FILE_ID')
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```javascript
+    await fetch('https://api.botpress.cloud/v1/files/YOUR_FILE_ID', {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
+      },
+    })
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 ### Searching files
 
 To run a semantic search on your bot's files you can use the [Search Files](/api-documentation/#search-files) API endpoint. This is particularly useful for RAG (Retrieval Augmented Generation) implementations.
 
-Here's an example using the Botpress Client:
+<Tabs items={['Using the Botpress Client', 'Calling the API directly']}>
+  <Tabs.Tab>
+    ```javascript
+    const res = await client.searchFiles({
+      query: 'what are the most popular products of your company?', // This is the natural language query (e.g. a user's question) to be used for running a semantic search on the files of the bot.
+      contextDepth: 1, // Optional (default: 0), allows you prepend and append the surrounding context to each matching passage in the search results
+      tags: {
+        // Optional, allows you to only search files that match the specified tags. Useful if you only want to search a subset of the bot's files.
+        category: 'Support',
+        subcategory: 'Technical',
+      },
+      limit: 30, // Default is 20, maximum is 50 results
+    })
 
-```javascript
-const res = await client.searchFiles({
-  query: 'what are the most popular products of your company?', // This is the natural language query (e.g. a user's question) to be used for running a semantic search on the files of the bot.
-  contextDepth: 1, // Optional (default: 0), allows you prepend and append the surrounding context to each matching passage in the search results
-  tags: {
-    // Optional, allows you to only search files that match the specified tags. Useful if you only want to search a subset of the bot's files.
-    category: 'Support',
-    subcategory: 'Technical',
-  },
-  limit: 30, // Default is 20, maximum is 50 results
-})
+    const passages = res.data.passages
 
-const passages = res.data.passages
+    for (const passage of passages) {
+      // You can use passage.content here to retrieve the content (including surrounding context, if any) of each matching passage
+    }
+    ```
 
-for (const passage of passages) {
-  // You can use passage.content here to retrieve the content (including surrounding context, if any) of each matching passage
-}
-```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```javascript
+    const params = new URLSearchParams({
+      query: 'what are the most popular products of your company?',
+      tags: JSON.stringify({
+        category: 'Support',
+        subcategory: 'Technical',
+      }),
+    })
 
-You can check the [API reference](/api-documentation/#search-files) for the [Search Files](/api-documentation/#search-files) endpoint for more details on the properties available for each passage object returned in the response.
+    const result = await fetch('https://api.botpress.cloud/v1/files/search?' + params.toString(), {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
+      },
+    })
+
+    const response = await result.json()
+    const passages = response.passages
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+You can check the [API reference](/api-documentation/#search-files) for more details on the properties available for each passage object returned in the response.
 
 ## Security
 
@@ -394,7 +453,7 @@ A file can have a list of special access policies:
 
 ## Pricing
 
-There are 2 types of storage: File Storage and Vector DB Storage. All files count toward your workspace's File Storage usage. Indexed files also count toward your workspace's Vector DB Storage usage.
+There are two types of storage: File Storage and Vector DB Storage. All files count toward your workspace's File Storage usage. Indexed files also count toward your workspace's Vector DB Storage usage.
 
 For full details on pricing please check our [Pricing page](https://botpress.com/pricing).
 
