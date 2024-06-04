@@ -42,7 +42,6 @@ Or if the file is already available in a URL and you want to download and then u
 const file = await client.createAndUploadFile({
   name: 'test.pdf',
   url: 'https://example.com/test.pdf',
-  index: true,
 })
 ```
 
@@ -56,7 +55,6 @@ const buffer = // This must be a Buffer object containing the binary content of 
 const file = await client.createAndUploadFile({
   name: 'test.pdf',
   content: buffer,
-  index: true,
 })
 ```
 
