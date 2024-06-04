@@ -438,13 +438,13 @@ const userQuestion = 'Which are the most popular products of your company?' // T
 
 const res = await client.searchFiles({
   query: userQuestion,
-  contextDepth: 1, // you can increase this number to pass more context to the model for each matching passage
+  contextDepth: 1, // This number can be increased to pass more context to the model for each matching passage
 })
 
 const relevantInformation = res.data.passages.map(passage => passage.content).join("\n\n----------\n\n")
 
 const answer = await openai.chat.completions.create({
-    model: 'gpt-3.5-turbo', // you can change this for any other OpenAI model available here: https://platform.openai.com/docs/models
+    model: 'gpt-3.5-turbo', //  This can be changed for any other OpenAI model available here: https://platform.openai.com/docs/models
     messages: [
         {
             role: 'system',
@@ -473,7 +473,7 @@ A file can have a list of special access policies:
 
 | Principal                                            | Permissions                                                                                                               |
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Public (unauthenticated users)                       | Can only download files that have the `public_content` access policy.                                                     |
+| Public (unauthenticated/unauthorized users)          | Can only download files that have the `public_content` access policy.                                                     |
 | Bot                                                  | Owns and manages its files with full permissions to access and manage them, regardless of the user that created the file. |
 | Integration                                          | Has all permissions on the files that were created by that integration for the bot they are installed on.                 |
 | Viewer workspace member                              | Can read, search, and list all files for the bot, regardless of creator, but cannot create or delete files.               |
