@@ -2,6 +2,7 @@
   "index": "Home",
   "getting-started": "Getting Started",
   "admin-dashboard": "Admin Dashboard",
+  "api-handbook": "API Handbook",
   "generative-ai": "Generative AI",
   "studio": "Studio Interface",
   "toolbox": "Toolbox",
@@ -9,6 +10,5 @@
   "exporting-bot-data": "Exporting Bot Data",
   "issues": "Issues",
   "agent-handoff": "Live Agent Handoff",
-  "user-profile": "User Profile",
-  "api-handbook": "API Handbook"
+  "user-profile": "User Profile"
 }
