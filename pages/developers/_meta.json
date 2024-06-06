@@ -4,10 +4,10 @@
   "moving-parts": "Moving Parts",
   "cli": "CLI",
   "sdk": "SDK",
-  "howTo":"How To",
+  "howTo": "How To",
   "concepts": "Key Concepts",
-  "webchat": "Web Chat old",
+  "webchat": "Web Chat v1 (old)",
   "webchat-v2": "Web Chat v2",
-  "chat": "Chat API",
+  "api-handbook": "API Handbook",
   "publishing-to-botpress-hub": "Publishing to Botpress Hub"
 }
