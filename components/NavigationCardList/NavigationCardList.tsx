@@ -25,8 +25,8 @@ export function NavigationCardList(props: NavigationCardListProps) {
               </div>
             </div>
             <div className="flex flex-col p-6  dark:border-t dark:border-slate-700 ">
-              <div className="text-md pb-1 font-bold text-slate-900 dark:text-slate-100">{card.heading}</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">{card.subHeading}</div>
+              <div className="text-md pb-1 font-bold text-slate-900 dark:text-slate-900">{card.heading}</div>
+              <div className="text-sm text-slate-600 dark:text-slate-600">{card.subHeading}</div>
             </div>
           </div>
         </Link>
