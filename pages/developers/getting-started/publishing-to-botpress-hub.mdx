@@ -15,30 +15,42 @@ We're thrilled you want to publish your integration on the Botpress Hub! To ensu
   allowfullscreen
 ></iframe>
 
+There are essentially four things to do : 
+1. Update your profile on Botpress Cloud.
+2. Update your integration's display information.
+3. Ensure your integration checks the configuration parameters if any.
+4. Prepare an example bot with your integration configured and send it to us for approval.
+
 ## Your profile on Botpress Hub 
+
+When a user installs your app, your workspace information will be viewable by the user. Please ensure:
+
+- [ ]  Your Workspace has a url handle that represents you.
+- [ ]  You have a way for users to contact you, like an email or a website.
+- [ ]  Introduce yourself in the Workspace description (optional). This is the place for self-promotion.
+- [ ]  Add an icon to your Workspace that represents you (optional). 
+
 We suggest you create a Workspace specifically for publishing integrations, as this will make it easier to add collaborators to your workspace, and keep your production and dev environments separate.
 
-In your Botpress Workspace's configuration:
-
-- [ ]  Make sure your Workspace has a url handle that represents you. 
-- [ ]  Add a way for integration users to contact you, like an email or a website
-- [ ]  Introduce yourself in the Workspace snippet
-- [ ]  Add an icon to your Workspace that represents you
-
-When a user installs the app, these may be shown to the user.
-
-
 ## Your integration's display information
+
+Now we need to ensure the integration has all the assets and information it needs to be displayed on the Hub. 
 
 Your integration's integration.definition.ts file should contain:
 
 - [ ]  **title**: the display title of your integration for the hub. Do not include “Botpress”.
 - [ ]  **name**: your_workspace_handle/integration_handle
 - [ ]  **description**: a succinct description of what your integration does.
-- [ ]  **icon**: the icon of the service you are connecting to, or the problem you are solving. Do not use the Botpress Icon.
-- [ ]  **readme**: the name of the markdown file in the folder that contains the integration code. It should contain an explanation of what the integration is, and how to use it. Self-promotion is not allowed here.
+- [ ]  **icon**: set this to 'icon.svg'.
+- [ ]  **readme**: set this to 'hub.md'.
+
+Make sure to have these two files in the root of your integration folder:
+- [ ] icon.svg :  Use a pertinent icon related to the problem you are solving. Do not use the Botpress Icon.
+- [ ] hub.md :  It should contain an explanation of what the integration is, and how to use it. Self-promotion is not allowed here.
 
 ## Your integration's logic
+
+Finally, we need to ensure your integration is robust and user-friendly.
 
 - [ ]  If your integration requires parameters to be configured: it should validate the parameters in the register method, and throw a RuntimeError if there is an issue.
 
@@ -52,8 +64,14 @@ throw new RuntimeError(
 );
 ```
 
-## Submitting your integration to our team for approval
-- [ ]  In your workspace, add a bot and configure your integration for it, with some example flows that demonstrate the integration's capabilities. If any external test account is used, please provide credentials.
-- [ ]  When you're done with these steps, add `hub-applications@botpress.com` to your workspace with Admin privileges and send an email to it linking to the integration you'd like to publish as well as a .bpz export of the bot that has your integration configured.
+This RuntimeError will be shown to the user in the Botpress Studio when they try to add your integration to their bot and there is an issue.
 
-You can also send an email to [hub-applications@botpress.com](mailto:hub-applications@botpress.com) if you have any questions!
+## Submitting your integration to our team for approval
+
+When you're done with above, we'd like to test your integration to ensure it works as expected, and that everything is in order.
+
+- [ ]  In your workspace, create a demonstration bot and configure your integration for it. We'll use this to try out the integration.
+- [ ]  Add `hub-applications@botpress.com` to your workspace with Admin privileges.
+- [ ]  Send an email to us indicating which bot & integration we can use to test. Please also send the git repo if open source. 
+
+If you have any questions whatsoever, please don't hesitate to reach out to us at [hub-applications@botpress.com](mailto:hub-applications@botpress.com)!
