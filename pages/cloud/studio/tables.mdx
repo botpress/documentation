@@ -455,13 +455,13 @@ const limit = 10
 const startRow = 0
 
 workflow.records = await DataTable1.findRecords({
-  limit,
+  limit: limit,
   offset: startRow,
 })
 
 // Checking the second page
 const secondPage = await Data1Table.findRecords({
-  limit,
+  limit: limit,
   filter: AI`everything`,
   offset: startRow + limit,
 })
@@ -651,7 +651,7 @@ You can use the `getRecord` function to retrieve a specific record from a table 
 ```javascript // Get a record from the table and store it in a variable const data = await Data1Table.getRecord(1)
 
 // 1 is the record ID and User is the variable name
-workflow.User = data
+workflow.User = await.Data1Table.getRecord(1)
 
 ````
 
