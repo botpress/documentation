@@ -31,6 +31,24 @@ There are several types of fields you can add to a table. Each field type has a 
   The number of columns has a hard limit of **20 columns** per table.
 </Callout>
 
+### Computed Columns
+
+When creating a new column, you can use the toggle to designate it a 'computed' column. Computed table columns allow you to perform AI-powered operations on all of the associated cells in a given record.
+
+#### Using Computed Columns
+
+Follow these steps to use computed columns:
+
+1. During column creation, designate the column as computed by switching the toggle on
+2. Identify any depencies. These are the associated records that must have a value before the operation can begin.
+3. Select the model you'd like to use for this operation.
+4. Insert a prompt. This is where you'll identify what action you'd like to perform on the associated depencies.
+
+Enabling the 'Auto-compute' function allows your bot to automatically perform operations on a given record as soon as all of the associated dependencies are met.
+
+<Callout>
+  Make sure to <b>publish your bot</b> after creating any computed columns to ensure that the operations are performed correctly. You may not see values in a computed column until you publish the latest version of your bot.
+</Callout>
 
 ## Filtering Records
 
