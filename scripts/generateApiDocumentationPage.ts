@@ -91,9 +91,8 @@ const VisibleOperations: Operation[] = [
   'getBotAnalytics',
 
   // Files
-  'createFile',
+  'upsertFile',
   'getFile',
-  'updateFile',
   'deleteFile',
   'listFiles',
   'searchFiles',
