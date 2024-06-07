@@ -1,0 +1,46 @@
+---
+title: "Chat API"
+---
+
+import { Tabs } from 'nextra/components'
+import { Demo } from '@components/Demo'
+
+# Chat API
+
+## Introduction
+
+The Chat API is an HTTP-based API that allows you to interact with a Botpress bot through a backend. It is similar to the Webchat API, but it is designed to be used by backend services.
+
+## Setup and Configuration
+
+To use the Chat API, you must install the `@botpress/chat` package. You can do this by running the following command:
+
+<Tabs items={['npm', 'yarn', 'pnpm']}>
+  <Tabs.Tab>
+  ```
+  npm install @botpress/chat
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```
+  yarn add @botpress/chat
+  ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  ```
+  pnpm install @botpress/chat
+  ```
+  </Tabs.Tab>
+</Tabs>
+
+You'll need to provide the `Webhook URL` in the integration configuration where the Chat API will send the messages and events. This URL must be a public URL accessible from the internet.
+
+You can also configure the `Webhook Secret` to secure the communication between your backend and the Chat API. This secret will be used to make API requests to the Chat API.
+
+## Demo
+
+You can take a look at the following demo to see how the Chat API works:
+
+<Demo example="chat-client" title="Chat API" file="src/main.ts" />
+
+Also, the [NPM Package](https://www.npmjs.com/package/@botpress/chat) has a few examples on how to use the Chat API.

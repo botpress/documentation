@@ -1,0 +1,115 @@
+# Getting Started
+
+## What are Botpress Integrations?
+<iframe
+  data-youtube-iframe
+  width="720"
+  height="420"
+  src="https://www.youtube.com/embed/67Bzbqh4B0w"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+Integrations in Botpress are an easy and powerful way to extend Botpress channels, or improve the bot building experience. 
+
+Integrations have three main capabilities:
+1. Connecting bots with messaging channels (e.g. Telegram, Facebook Messenger)
+2. Extending Botpress Studio to add action cards that run any NodeJS code. (e.g. send an email, create a Jira ticket)
+3. Extending Botpress Studio by adding event listeners, invokable by adding triggers. (e.g. get notified when a purchase is made)
+
+They can be shared privately, or published to the Botpress Hub, where they can be discovered and installed by every Botpress user. They also run free of charge on Botpress Infrastructure, so you don't have to worry about hosting, scaling or even cost issues!
+
+## Setting up your first integration
+
+You can follow along the video, or simply follow the instructions below.
+<br/>
+<iframe
+  data-youtube-iframe
+  width="720"
+  height="420"
+  src="https://www.youtube.com/embed/FGyUd1qiVmw"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
+
+### Prerequisites
+- a workspace with a bot in Botpress Cloud
+- your workspace handle must be set. You can do so by going to your [your workspace](https://app.botpress.cloud/workspaces/), clicking "Settings", and setting your workspace handle.
+
+
+### Installing the integration to your workspace
+
+Create a new integration project using the init command. This will create a new folder with the name you specified and generate a basic project structure.
+
+```bash
+npx @botpress/cli init --name my-integration --type integration
+cd my-integration
+npm i --save-dev @botpress/cli nodemon
+npm i
+```
+
+now add these scripts to your package.json file:
+
+```json
+{
+  ...,
+  "integrationName": "my-workspace/my-integration",
+  "scripts": {
+    "login": "bp login",
+    "start": "nodemon --watch \"./*\" --ext \"ts\" --exec \"bp deploy -y\"",
+    "deploy": "bp deploy"
+  },
+  ...
+}
+```
+
+Make sure to replace `my-workspace/my-integration` with your public workspace handle and integration name.
+
+We're now done with setup. We suggest you commit your repo at this point. 
+
+Create a .gitignore file in the root folder with the following content:
+
+```bash
+.botpress
+node_modules/
+```
+
+Now you can start developing your integration. You can run the following commands to start developing your integration:
+
+```bash
+npm run login 
+npm run start
+```
+
+During the `npm run login` step, you will be asked to enter your Botpress Cloud Personal Access Token. You can create an access token by visiting your [Botpress Cloud Profile Page](https://app.botpress.cloud/profile/settings) and clicking "Generate new token".
+It will also ask you to select a workspace to deploy the integration to.
+
+The start command will deploy the integration to your workspace, once, and after every change in your files. Alternatively you can run `npm run deploy` to deploy the integration once.
+
+### Adding the integration to your bot
+
+1. After which, open [your workspace](https://app.botpress.cloud/workspaces/) and click "Your Integrations". 
+2. Find your integration and click "Install". Select the bot from your list of bots. 
+3. Once the integration is installed "Configure Integration"
+4. Click the "Enable integration" toggle on the top right, then hit "Save" to enable the integration.
+
+In the bot's integration page, you will be able to add configuration variables at a later point.
+
+## Seeing your integration logs
+
+To see the logs of your integration, 
+
+1. Open [your workspace](https://app.botpress.cloud/workspaces/) and click "Your Integrations".
+2. Find your integration and click "Logs" to see the logs of your integration.
+
+## Adding Capabilities
+
+Now that you have your integration running and installed on your bot, you can start adding capabilities to it.
+- [Adding Messaging Channel Capabilities](/developers/getting-started/adding-channel-capabilities)
+- [Adding Action Cards and External Triggers](/developers/getting-started/adding-actions-and-triggers)
+
+

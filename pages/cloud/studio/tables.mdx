@@ -31,13 +31,24 @@ There are several types of fields you can add to a table. Each field type has a 
   The number of columns has a hard limit of **20 columns** per table.
 </Callout>
 
-## Query Selector
+### Computed Columns
 
-A Query Selector is the query you use to select or filter data from your table. For instance, you may need to find a specific record based on certain criteria like a user's ID or a transaction number. The Query Selector allows you to articulate these conditions in plain English, making it both intuitive and powerful. An example of a query could be "Find all records where 'user_id' equals '123'".
+When creating a new column, you can use the toggle to designate it a 'computed' column. Computed table columns allow you to perform AI-powered operations on all of the associated cells in a given record.
 
-To add a Query Selector, click on the table in the explorer menu. You'll then see a list of all the records in the table. Click on the `Add Query Selector` button from the right panel to add a new query selector. You can then enter the query selector in the text field.
+#### Using Computed Columns
 
+Follow these steps to use computed columns:
 
+1. During column creation, designate the column as computed by switching the toggle on
+2. Identify any depencies. These are the associated records that must have a value before the operation can begin.
+3. Select the model you'd like to use for this operation.
+4. Insert a prompt. This is where you'll identify what action you'd like to perform on the associated depencies.
+
+Enabling the 'Auto-compute' function allows your bot to automatically perform operations on a given record as soon as all of the associated dependencies are met.
+
+<Callout>
+  Make sure to <b>publish your bot</b> after creating any computed columns to ensure that the operations are performed correctly. You may not see values in a computed column until you publish the latest version of your bot.
+</Callout>
 
 ## Filtering Records
 

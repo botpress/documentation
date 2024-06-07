@@ -1,11 +1,9 @@
 {
-  "index": "Overview",
   "getting-started": "Getting Started",
   "moving-parts": "Moving Parts",
   "cli": "CLI",
   "sdk": "SDK",
-  "howTo":"How To",
   "concepts": "Key Concepts",
-  "webchat": "Web Chat old",
+  "webchat": "Web Chat v1",
   "webchat-v2": "Web Chat v2"
 }
