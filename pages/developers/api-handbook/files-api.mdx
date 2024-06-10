@@ -24,8 +24,8 @@ The following code snippet can be put in an Execute Card in your bot to create a
 > Note: Make sure you have enabled the "Use the Botpress Client" setting in your bot's settings in Botpress Studio in order to have access to the `client` global variable, otherwise it will not be accessible and you'll get an error.
 
 ```javascript
-const file = await client.createAndUploadFile({
-  name: 'test.txt',
+const file = await client.uploadFile({
+  key: 'optional_prefix/unique_file_name.txt', // Each file needs a unique key under your bot
   content: 'This is a test file',
 })
 ```
@@ -34,13 +34,24 @@ Once the code above runs, the URL to download the file will be available in the 
 
 By default the file URL returned will be temporary and change on each request to this endpoint, and will expire after a short period of time and thus should not be stored long-term, but if the file was created with a 'public_content' access policy then this URL will be permanent and can be stored long-term.
 
+<Callout type="info">
+  The file `key` is required and must be unique for each file under your bot, but the key can be any value you need, like
+  a file path, a URL, a unique identifier, etc. However, if you want to make the file publicly accessible you should include
+  a file extension at the end of the key (e.g. `.txt`, `.pdf`, `.docx`, etc.) or set the `contentType` parameter to the MIME
+  type of the file when creating it so that users can easily open the file using the default application for that file format
+  in their device.
+
+> Note: If the file is being created by an integration, the key will be scoped to that integration so the key only needs to be unique for that integration under the specific bot it's installed on.
+
+</Callout>
+
 ##### Uploading from an existing URL
 
 Or if the file is already available in a URL and you want to download and then upload it to Botpress Cloud you can pass it in the `url` parameter instead of using the `content` parameter:
 
 ```javascript
-const file = await client.createAndUploadFile({
-  name: 'test.pdf',
+const file = await client.uploadFile({
+  key: 'unique_file_name.pdf', // Each file needs a unique key under your bot
   url: 'https://example.com/test.pdf',
 })
 ```
@@ -52,8 +63,8 @@ If you are dealing with a binary file such as a PDF or Microsoft Office document
 ```javascript
 const buffer = // This must be a Buffer object containing the binary content of the file
 
-const file = await client.createAndUploadFile({
-  name: 'test.pdf',
+const file = await client.uploadFile({
+  key: 'unique_file_name.pdf', // Each file needs a unique key under your bot
   content: buffer,
 })
 ```
@@ -80,8 +91,8 @@ const client = new Client({
   botId: process.env.BOTPRESS_BOT_ID,
 })
 
-const file = await client.createAndUploadFile({
-  name: 'test.txt',
+const file = await client.uploadFile({
+  key: 'optional_prefix/unique_file_name.txt',
   content: 'This is a test file',
 })
 ```
@@ -104,13 +115,13 @@ const buffer = Buffer.from(fileContent)
 // Step 1: Create the file in Botpress Cloud.
 // Please note that specifying the file size (in raw bytes, not characters) is required when calling this endpoint.
 const result = await fetch('https://api.botpress.cloud/v1/files', {
-  method: 'POST',
+  method: 'PUT',
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
   },
   body: JSON.stringify({
-    name: 'test.txt',
+    key: 'unique_file_name.txt',
     size: buffer.byteLength,
   }),
 })
@@ -142,8 +153,8 @@ const fileStatus = getFileResponse.file.status // Should be 'indexing_pending' i
 You can add custom tags to a file by passing the `tags` parameter when it's created. Tags allow you to organize and classify files in any way you see fit, and can be specified as a filter when listing or searching files.
 
 ```javascript
-const file = await client.createAndUploadFile({
-  name: 'test.txt',
+const file = await client.uploadFile({
+  key: 'test.txt',
   content: 'This is a test file',
   tags: {
     // Tags are optional but are useful for filtering files by a custom criteria you choose when using the "List Files" or "Search Files" API endpoints. You can change or remove the tags below based on your needs.
@@ -158,8 +169,8 @@ const file = await client.createAndUploadFile({
 By default all files are private and can only be accessed by the bot that created them. If you need to make a file publicly accessible by anyone you can assign the `public_content` access policy to the file:
 
 ```javascript
-const file = await client.createAndUploadFile({
-  name: 'test.txt',
+const file = await client.uploadFile({
+  key: 'test.txt',
   content: 'This is a public file',
   accessPolicies: ['public_content'],
 })
@@ -168,8 +179,8 @@ const file = await client.createAndUploadFile({
 If you only want to allow all the integrations installed in the bot to access the file rather than making it fully public, you can just assign the `integrations` access policy instead:
 
 ```javascript
-const file = await client.createAndUploadFile({
-  name: 'test.txt',
+const file = await client.uploadFile({
+  key: 'test.txt',
   content: 'This is a file that can be accessed by all integrations in a bot',
   accessPolicies: ['integrations'],
 })
@@ -180,8 +191,8 @@ const file = await client.createAndUploadFile({
 If you need to index a file for semantic search you can use the `index` parameter when creating the file.
 
 ```javascript
-const file = await client.createAndUploadFile({
-  name: 'test.txt',
+const file = await client.uploadFile({
+  key: 'test.txt',
   content: 'This is a test file',
   index: true,
 })
@@ -191,6 +202,7 @@ const file = await client.createAndUploadFile({
 
 - The following file formats are supported for indexing:
   .pdf, .docx, .doc, .pptx, .ppt, .xlsx, .xls, .odt, .txt, .rtf, .csv, .html, .md, .epub, .eml, .msg
+- Either the file key must contain a supported file extension at the end or the `contentType` parameter must be set to the MIME type of the file in order for the file to be indexed.
 - The file it will initially have a status of "indexing_pending" and will be indexed asynchronously. The time it takes to index the file will depend on the file size and the current load on the system.
 - You can check the status of the file by calling the [Get File](/api-documentation/#get-file) endpoint and checking that the `file.status` property has changed to "indexing_completed".
 - If the indexing failed the status will be set to "indexing_failed" and the reason of the failure will be available in the `failedStatusReason` property of the file.
@@ -298,16 +310,57 @@ if (res.data.nextToken) {
 }
 ```
 
-### Updating the file metadata
+### Updating the file content
 
-Only the tags and access policies of a file can be updated.
-
-Here's an example of how to update the access policies and tags of a file using the Botpress Client:
+If you need to update the content of a file, you can simply do the same as if you were creating the file for the first time, just make sure you're using the same `key` as the existing file you want to update. This will overwrite the existing content of the file with the new content you provide.
 
 <Tabs items={['Using the Botpress Client', 'Calling the API directly']}>
   <Tabs.Tab>
     ```javascript
-    await client.updateFile({
+    // Important: When this is started the original file content will be erased so if the upload fails you may need to add error handling code to retry the upload.
+    const file = await client.uploadFile({
+      key: 'existing_file_key.txt',
+      content: 'This is the new content of the file',
+    })
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```javascript
+    const buffer = Buffer.from('This is the new content of the file')
+
+    // Important: after this request finishes the original file content will be erased and the new content has to be uploaded to the new upload URL provided in the response (see below).
+    const result = await fetch('https://api.botpress.cloud/v1/files', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.BOTPRESS_PAT}`,
+      },
+      body: JSON.stringify({
+        key: 'existing_file_key.txt',
+        size: buffer.byteLength,
+      }),
+    })
+
+    const response = await result.json()
+
+    // If the upload fails you may need to add error handling code to retry the upload, otherwise the file content will remain empty.
+    await fetch(response.file.uploadUrl, {
+      method: 'PUT',
+      body: buffer,
+    })
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Updating the file metadata
+
+If you only need to update the metadata of the file (tags and access policies) you can use the dedicated [Update File Metadata](/api-documentation/#update-file-metadata) endpoint.
+
+<Tabs items={['Using the Botpress Client', 'Calling the API directly']}>
+  <Tabs.Tab>
+    ```javascript
+    await client.updateFileMetadata({
       id: 'YOUR_FILE_ID',
       accessPolicies: ['integrations'], // This value will replace the existing access policies of the file.
       tags: {
@@ -344,10 +397,6 @@ Here's an example of how to update the access policies and tags of a file using 
     ```
   </Tabs.Tab>
 </Tabs>
-
-#### Updating file content
-
-If you need to update the content of a file, you can create a new file with the updated content and then delete the old file. The file ID will change in this case.
 
 ### Deleting a file
 
@@ -468,6 +517,10 @@ A file can have a list of special access policies:
 
 - `public_content`: Unauthenticated users can read contents (but not metadata) of the file through a unique permanent URL provided by the API for each file. Without this policy the file URL returned by the API will be temporary and will expire after a short period of time.
 - `integrations`: Grants read, search, list access to all integrations of the bot that owns the file.
+
+### Special Considerations
+
+- Only the principal (i.e. the user) that created the file can update or delete the file after it has been created.
 
 ### Permissions
 

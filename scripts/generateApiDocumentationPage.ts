@@ -92,6 +92,7 @@ const VisibleOperations: Operation[] = [
 
   // Files
   'upsertFile',
+  'updateFileMetadata',
   'getFile',
   'deleteFile',
   'listFiles',
