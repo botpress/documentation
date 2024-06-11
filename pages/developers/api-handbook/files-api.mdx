@@ -21,7 +21,10 @@ Files can be in any text or binary format, and documents (such as PDF, Microsoft
 
 The following code snippet can be put in an Execute Card in your bot to create and upload a file that can be accessed by anyone with the file URL and that will be indexed for semantic search:
 
-> Note: Make sure you have enabled the "Use the Botpress Client" setting in your bot's settings in Botpress Studio in order to have access to the `client` global variable, otherwise it will not be accessible and you'll get an error.
+<Callout type="info">
+  Make sure you have enabled the **"Use the Botpress Client"** setting in your bot's settings in Botpress Studio in
+  order to have access to the `client` global variable, otherwise it will not be accessible and you'll get an error.
+</Callout>
 
 ```javascript
 const file = await client.uploadFile({
@@ -32,27 +35,24 @@ const file = await client.uploadFile({
 
 Once the code above runs, the URL to download the file will be available in the `file.url` property.
 
-By default the file URL returned will be temporary and change on each request to this endpoint, and will expire after a short period of time and thus should not be stored long-term, but if the file was created with a 'public_content' access policy then this URL will be permanent and can be stored long-term.
+> By default the file URL returned will be temporary and change on each request to this endpoint, and will expire after a short period of time and thus should not be stored long-term, but if the file is created with a 'public_content' access policy (explained later in this page) then this URL will be permanent and can be stored long-term.
 
-<Callout type="info">
-  The file `key` is required and must be unique for each file under your bot, but the key can be any value you need, like
-  a file path, a URL, a unique identifier, etc. However, if you want to make the file publicly accessible you should include
-  a file extension at the end of the key (e.g. `.txt`, `.pdf`, `.docx`, etc.) or set the `contentType` parameter to the MIME
-  type of the file when creating it so that users can easily open the file using the default application for that file format
-  in their device.
+Note that the file `key` is required and must be unique for each file under your bot, but the key can be any value you need, like
+a file path, a URL, a unique identifier, etc. However, if you want to make the file publicly accessible you should include
+a file extension at the end of the key (e.g. `.txt`, `.pdf`, `.docx`, etc.) or set the `contentType` parameter to the MIME
+type of the file when creating it so that users can easily open the file using the default application for that file format
+in their device.
 
 > Note: If the file is being created by an integration, the key will be scoped to that integration so the key only needs to be unique for that integration under the specific bot it's installed on.
 
-</Callout>
-
 ##### Uploading from an existing URL
 
-Or if the file is already available in a URL and you want to download and then upload it to Botpress Cloud you can pass it in the `url` parameter instead of using the `content` parameter:
+If the file is already available in a URL and you want to upload it to Botpress Cloud you can simply pass the `url` parameter (instead of using the `content` parameter) and this will take care of downloading and uploading the file for you:
 
 ```javascript
 const file = await client.uploadFile({
   key: 'unique_file_name.pdf', // Each file needs a unique key under your bot
-  url: 'https://example.com/test.pdf',
+  url: 'https://example.com/test.pdf', // This is the external URL where the file is currently located
 })
 ```
 
@@ -79,7 +79,7 @@ If you're using Javascript or TypeScript the easiest way to interact with the AP
   <Tabs.Tab>`yarn add @botpress/client`</Tabs.Tab>
 </Tabs>
 
-The Botpress Client will handle the authentication and other details for you, you just need to provide your Botpress PAT (Personal Access Token) to the client and the ID of the bot that the client will access. If your use-case requires accessing multiple bots, you can define as many client instances as needed (one for each bot).
+The Botpress Client will handle the authentication and other technical aspects for you, you only need to provide your Botpress PAT (Personal Access Token) and the ID of the bot that the client will access. If your use-case requires accessing multiple bots, you can define as many client instances as needed (one for each bot).
 
 You can use the following code snippet to create and upload a file in a custom script using the Botpress Client. Note that in the example below your Botpress PAT (Personal Access Token) and bot ID must be defined in the environment variables `BOTPRESS_PAT` and `BOTPRESS_BOT_ID` respectively.
 
@@ -148,7 +148,7 @@ const fileUrl = getFileResponse.file.url // Will contain the public URL of the f
 const fileStatus = getFileResponse.file.status // Should be 'indexing_pending' if the file was requested to be indexed, or 'upload_completed' otherwise.
 ```
 
-#### Adding tags to a file
+### Adding tags to a file
 
 You can add custom tags to a file by passing the `tags` parameter when it's created. Tags allow you to organize and classify files in any way you see fit, and can be specified as a filter when listing or searching files.
 
@@ -317,10 +317,12 @@ If you need to update the content of a file, you can simply do the same as if yo
 <Tabs items={['Using the Botpress Client', 'Calling the API directly']}>
   <Tabs.Tab>
     ```javascript
-    // Important: When this is started the original file content will be erased so if the upload fails you may need to add error handling code to retry the upload.
+    // Important: When this is started the original file content will be erased so if the upload fails you
+    // may need to add error handling code to retry the upload, otherwise the file will remain empty.
     const file = await client.uploadFile({
       key: 'existing_file_key.txt',
       content: 'This is the new content of the file',
+      // you can also overwrite the file metadata here, like tags or access policies
     })
     ```
   </Tabs.Tab>
@@ -338,6 +340,7 @@ If you need to update the content of a file, you can simply do the same as if yo
       body: JSON.stringify({
         key: 'existing_file_key.txt',
         size: buffer.byteLength,
+        // you can also overwrite the file metadata here, like tags or access policies
       }),
     })
 
@@ -355,7 +358,7 @@ If you need to update the content of a file, you can simply do the same as if yo
 
 ### Updating the file metadata
 
-If you only need to update the metadata of the file (tags and access policies) you can use the dedicated [Update File Metadata](/api-documentation/#update-file-metadata) endpoint.
+If you only need to update the metadata of the file (tags and access policies) and not the file content, you can use the dedicated [Update File Metadata](/api-documentation/#update-file-metadata) endpoint.
 
 <Tabs items={['Using the Botpress Client', 'Calling the API directly']}>
   <Tabs.Tab>
