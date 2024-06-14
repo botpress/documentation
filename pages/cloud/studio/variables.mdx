@@ -111,31 +111,6 @@ Bot variables are not encrypted or stored securely. Do not save secrets like API
 
 Bot variables can be used in text and other cards just like user variables - with either `@bot.variablename` or `{{bot.variablename}}`.
 
-## Session Variables
-
-Session variables are available in all flows, but only for one conversation. These variables are great for data used throughout a conversation, such as:
-
-1. Collecting items in a virtual shopping cart for the user to order
-2. Saving raw data from an API call for further processing
-3. Storing chat history for that conversation
-4. Saving an order number or policy number
-
-### Creating a Session Variable
-
-Session variables can only be created inside of an **Execute Code** card.
-
-To create one, simply write: `event.state.session.variablename = "Hello World"` or for short `session.variablename = "Hello World"`
-
-To use a Session Variable in a text or other card, enclose it in double curly brackets like `{{event.state.session.variablename}}` or for short `{{session.variablename}}`
-
-## Configuration Variables
-
-Configuration variables are a special kind of secure bot Variable. They can also be managed from the Cloud Dashboard without opening the bot. Configuration variables can store secrets like:
-
-- API Tokens
-- Private IP Addresses
-- Database usernames and passwords
-
 ### Creating a Configuration Variable (or Environment Variable)
 
 1. Click the Botpress icon in the upper-left corner and select **Chatbot Settings**
