@@ -134,7 +134,11 @@ await fetch(response.file.uploadUrl, {
   body: buffer,
 })
 
-const fileUrl = response.file.url // Will contain the public URL of the file if it was created with the 'public_content' access policy, otherwise it will contain a temporary pre-signed URL.
+// The variable below will contain the URL to download the file content uploaded above. If the file was
+// created with the 'public_content' access policy it will be a permanent URL that you can store long-term,
+// otherwise it will contain a temporary pre-signed URL that expires after a short period of time.
+// If you need to get a new URL, you can always use the `getFile` API endpoint.
+const downloadUrl = response.file.url
 ```
 
 ### Adding tags to a file
@@ -187,13 +191,19 @@ const file = await client.uploadFile({
 })
 ```
 
-#### Notes on indexing:
+#### Supported file formats
 
-- The following file formats are supported for indexing:
-  - .pdf
-  - .html
-  - .txt (Text files)
-  - .md (Markdown)
+The following file formats are supported for indexing:
+
+| Format   | File Extension | MIME Type       |
+| -------- | -------------- | --------------- |
+| PDF      | .pdf           | application/pdf |
+| HTML     | .html          | text/html       |
+| Text     | .txt           | text/plain      |
+| Markdown | .md            | text/markdown   |
+
+#### Notes on indexing
+
 - Either the file key must contain a supported file extension at the end or the `contentType` parameter must be set to the correct MIME type of the file format in order for the file to be indexed.
 - The file it will initially have a status of "indexing_pending" and will be indexed asynchronously. The time it takes to index the file will depend on the file size and the current load on the system.
 - You can check the status of the file by calling the [Get File](/api-documentation/#get-file) endpoint and checking that the `file.status` property has changed to "indexing_completed".
@@ -202,6 +212,8 @@ const file = await client.uploadFile({
 ### Getting the file's metadata
 
 To get the details of a file you can use the [Get File](/api-documentation/#get-file) API endpoint.
+
+You can also use this endpoint to retrieve a new temporary pre-signed URL to download a file if the previous pre-signed URL has already expired.
 
 <Tabs items={['Using the Botpress Client', 'Calling the API directly']}>
   <Tabs.Tab>
