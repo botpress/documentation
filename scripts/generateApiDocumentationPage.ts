@@ -78,6 +78,19 @@ const VisibleOperations: Operation[] = [
   'updateTableRows',
   'upsertTableRows',
 
+  // Integrations
+  'createIntegration',
+  'getIntegration',
+  'getIntegrationByName',
+  'updateIntegration',
+  'deleteIntegration',
+  'listIntegrations',
+
+  // Hub
+  'listPublicIntegrations',
+  'getPublicIntegrationById',
+  'getPublicIntegration',
+
   // Bots
   'createBot',
   'getBot',
