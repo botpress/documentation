@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://botpress.com/docs
+
+# Sitemaps
+Sitemap: https://botpress.com/docs/sitemap.xml
