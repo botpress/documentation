@@ -53,7 +53,7 @@ export const ParameterSchema = z
     in: z.enum(['path', 'query']),
     description: z.string(),
     required: z.boolean().optional(),
-    schema: z.discriminatedUnion('type', [
+    schema: z.union([
       z.object({ type: z.literal('string') }),
       z.object({ type: z.literal('boolean') }),
       z.object({ type: z.literal('integer') }),
@@ -62,6 +62,7 @@ export const ParameterSchema = z
         type: z.literal('array'),
         items: z.object({ type: z.literal('string') }).optional(),
       }),
+      z.object({}),
     ]),
   })
   .strict()
