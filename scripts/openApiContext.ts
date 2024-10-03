@@ -43,7 +43,7 @@ const Parameter = z.object({
   required: z.boolean().optional(),
   deprecated: z.boolean().optional(),
   allowEmptyValue: z.boolean().optional(),
-  schema: z.object({ type: z.string() }).optional(),
+  schema: z.object({ type: z.string().optional() }).optional(),
 })
 
 const RequestBody = z
@@ -121,9 +121,9 @@ const Paths = z.record(Operations).transform((paths) => {
     )
   )
 
-  type PathRecord = Record<string, typeof denormalizedOperations[number]>
+  type PathRecord = Record<string, (typeof denormalizedOperations)[number]>
 
-  return denormalizedOperations.reduce((acc: PathRecord, operation: typeof denormalizedOperations[number]) => {
+  return denormalizedOperations.reduce((acc: PathRecord, operation: (typeof denormalizedOperations)[number]) => {
     return { ...acc, [operation.operationId]: operation }
   }, {})
 })
