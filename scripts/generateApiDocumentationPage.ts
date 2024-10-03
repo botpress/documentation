@@ -305,7 +305,7 @@ function getParameterMd({ name, schema, description }: Parameter) {
 }
 
 export function getPropertyType(property: JSONSchemaProperty | Parameter['schema']): string {
-  if (!property?.type) {
+  if (!('type' in property) || !property?.type) {
     return ''
   }
   if (property.type === 'object' && property.additionalProperties) {
