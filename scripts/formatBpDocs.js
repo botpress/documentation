@@ -268,19 +268,19 @@ fs.readFile(inputFilePath, 'utf8', (err, data) => {
 
   // todo 1 : add authentication methods
 
-  // openApiJson.components = openApiJson.components || {};
-  // openApiJson.components.securitySchemes = {
-  //   PATAuth: {
-  //     type: "http",
-  //     scheme: "bearer",
-  //     bearerFormat: "PAT",
-  //   },
-  // };
-  // openApiJson.security = [
-  //   {
-  //     PATAuth: [],
-  //   },
-  // ];
+  openApiJson.components = openApiJson.components || {}
+  openApiJson.components.securitySchemes = {
+    PATAuth: {
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'PAT',
+    },
+  }
+  openApiJson.security = [
+    {
+      PATAuth: [],
+    },
+  ]
 
   for (const path in openApiJson.paths) {
     for (const method in openApiJson.paths[path]) {
