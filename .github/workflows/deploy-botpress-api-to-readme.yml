@@ -3,7 +3,7 @@ name: Generate and Upload Botpress API reference to ReadMe
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   generate_and_upload_to_readme:
