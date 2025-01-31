@@ -18,7 +18,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@botpress/api": "0.66.0",
+    "@botpress/api": "0.68.0",
     "@botpress/webchat": "1.3.11",
     "@heroicons/react": "^2.0.18",
     "@types/user-agents": "^1.0.4",
