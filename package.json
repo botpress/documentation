@@ -1,6 +1,6 @@
 {
   "name": "documentation",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "documentation",
   "keywords": [
     "gatsby"
@@ -24,7 +24,7 @@
     "@types/user-agents": "^1.0.4",
     "@vercel/og": "^0.5.0",
     "classnames": "^2.3.2",
-    "esbuild": "^0.18.10",
+    "esbuild": "^0.25.0",
     "lodash": "^4.17.21",
     "next": "^13.4.6",
     "next-sitemap": "^4.2.3",
