@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@botpress/api':
-    specifier: 0.68.3
-    version: 0.68.3(openapi-types@12.1.3)
+    specifier: 0.75.0
+    version: 0.75.0(openapi-types@12.1.3)
   '@botpress/webchat':
     specifier: 1.3.11
     version: 1.3.11(@types/react@18.0.26)(csstype@3.1.3)
@@ -1417,8 +1417,8 @@ packages:
       js-yaml: 4.1.0
     dev: false
 
-  /@botpress/api@0.68.3(openapi-types@12.1.3):
-    resolution: {integrity: sha512-B2YFylcou65x4KOdbHgAMI1YPjsdLhdbc5fmB5jC+sEV0NnJsJwc0SorOAMBsLARRFuE5L9eV0a8C/mpAs3L5g==}
+  /@botpress/api@0.75.0(openapi-types@12.1.3):
+    resolution: {integrity: sha512-QGwMOb3+ou9go7OKwL/NY9Ai+QrwhTxcRe87cCHj7uIuRbxND1av/HEW2HWn/E8E9+bGt9E8zte47cV35rjElw==}
     dependencies:
       '@bpinternal/opapi': 0.12.1(openapi-types@12.1.3)
     transitivePeerDependencies:
